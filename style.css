@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Blanka';
-  src: url('./blanka/Blanka-Regular.woff2') format('opentype');
+  src: url('./blanka/Blanka-Regular.woff2') format('woff2');
 }
 
 *, *::before, *::after {

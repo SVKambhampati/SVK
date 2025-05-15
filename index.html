@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shreyas Kambhampati | Portfolio</title>
+
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Intro-->
+  <div id="intro-overlay">
+    <div class="intro-logo">SVK</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="#">Shreyas Kambhampati</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <canvas id="dotGrid"></canvas>
+    <div class="container">
+      <h1>Hi, I'm Shreyas Kambhampati</h1>
+      <p>Computer Science Student at Northeastern University</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I’m a senior at Denmark High School with a strong passion for computer science and technology.
+        This fall, I’ll be attending Northeastern University to pursue a B.S. in Computer Science.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <h3>Project One</h3>
+          <p>Project description.</p>
+          <a href="#" target="_blank">View →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul class="skills-list">
+        <li>HTML & CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Python</li>
+        <li>C++</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="container">
+      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a></p>
+      <p>© 2025 Shreyas Kambhampati</p>
+    </div>
+  </footer>
+
+  <!-- Dot-Grid Canvas Script with Twinkle -->
+  <script>
+    const canvas = document.getElementById('dotGrid');
+    const ctx    = canvas.getContext('2d');
+    let cw, ch, offsetX, offsetY;
+
+    const dpr             = window.devicePixelRatio || 1;
+    const NAV_HEIGHT      = 60;
+    const dotRadius       = 2;
+    const dotPadding      = 75;
+    const mouseRadius     = 75;
+    const mouseRadius2    = mouseRadius * mouseRadius;
+    const concaveStrength = 10;
+    const twinkleFreq     = 0.002;
+    const twinkleChance   = 0.4;  
+
+    let dots   = [];
+    let mx = -9999, my = -9999, isDown = false;
+
+    function resizeCanvas() {
+      cw = canvas.width  = window.innerWidth * dpr;
+      ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
+      canvas.style.width  = window.innerWidth + 'px';
+      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(dpr,dpr);
+      updateOffset();
+      initDots();
+    }
+
+    function updateOffset() {
+      const rect = canvas.getBoundingClientRect();
+      offsetX = rect.left;
+      offsetY = rect.top;
+    }
+
+    function initDots() {
+      dots = [];
+      const w = cw / dpr, h = ch / dpr;
+      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
+        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
+          dots.push({
+            sx: x, sy: y,
+            x: x,  y: y,
+            tw: Math.random() < twinkleChance
+          });
+        }
+      }
+    }
+
+    function draw() {
+      const t = Date.now();
+      ctx.clearRect(0,0,cw,ch);
+
+      dots.forEach(d => {
+        
+        const dx = d.x - mx, dy = d.y - my;
+        if (isDown && dx*dx + dy*dy < mouseRadius2) {
+          d.x += dx/30; d.y += dy/30;
+        } else {
+          const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
+          if (dx0||dy0) { d.x-=dx0/20; d.y-=dy0/20; }
+        }
+
+        // concave
+        const cx   = d.x - (cw/dpr)/2;
+        const cy   = d.y - (ch/dpr)/2;
+        const dist = Math.hypot(cx, cy);
+        const mD   = Math.hypot((cw/dpr)/2, (ch/dpr)/2);
+        const conc = Math.pow(dist/mD, 3) * concaveStrength;
+
+        // interaction size
+        const inter = (dx*dx+dy*dy < mouseRadius2)
+          ? (1 - Math.sqrt(dx*dx+dy*dy)/mouseRadius) * 3
+          : 0;
+
+        const radius = dotRadius + conc + inter;
+
+        // twinkle
+        let alpha = 1;
+        if (d.tw) {
+          const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
+          alpha = 0.7 + tw * 0.3;
+        }
+        ctx.globalAlpha = alpha;
+
+        //fill color
+        if (d.tw) {
+
+          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+        } else {
+        
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        }
+
+        // glow on hover
+        if (inter > 0) {
+          ctx.shadowBlur  = 40;
+          ctx.shadowColor = 'rgba(0,240,255,0.7)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+
+      
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, radius, 0, Math.PI*2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      });
+    }
+
+    function animate() {
+      draw();
+      requestAnimationFrame(animate);
+    }
+
+    canvas.onmousemove = e => {
+      isDown = true;
+      mx = e.clientX - offsetX;
+      my = e.clientY - offsetY;
+    };
+    canvas.onmouseout = () => { isDown = false; };
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('scroll', updateOffset);
+    window.onload = () => {
+      resizeCanvas();
+      animate();
+    };
+  </script>
+
+  <!-- Intro Overlay-->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('intro-overlay');
+      const hero    = document.querySelector('.hero');
+      overlay.addEventListener('animationend', e => {
+        if (e.animationName === 'overlayFade') {
+          overlay.remove();
+          hero.classList.add('intro-ready');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

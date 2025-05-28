@@ -11,12 +11,11 @@
     rel="stylesheet"
   />
 
-
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- Intro-->
+  <!-- Intro Overlay -->
   <div id="intro-overlay">
     <div class="intro-logo">SVK</div>
   </div>
@@ -45,14 +44,37 @@
 
   <!-- Main Content -->
   <main class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m a senior at Denmark High School with a strong passion for computer science and technology.
-        This fall, I’ll be attending Northeastern University to pursue a B.S. in Computer Science.
-      </p>
+
+    <!-- About Me -->
+    <section id="about" class="about-section">
+      <div class="about-overview">
+        <h2>About Me</h2>
+        <p>
+          Hey, I’m Shreyas. I’m a rising freshman at Northeastern University, where I’ll be majoring in Computer Science. With hands-on experience in software development, extended reality, and interactive technologies, I’ve interned across research labs, government, and corporate environments. My work spans from developing immersive VR tools to resolving complex data synchronization issues and driving social media engagement for a global tech company. I’m passionate about building solutions that blend technology with impact—especially in accessibility, education, and data visualization. Alongside industry certifications in AWS, Python, Unity, and MySQL, I bring strong programming skills and a drive to keep learning, innovating, and collaborating.
+        </p>
+      </div>
+
+      <div class="roles-grid">
+        <div class="role-card">
+          <img src="icons/web-developer.svg" alt="Web Developer icon" />
+          <h3>Web Developer</h3>
+        </div>
+        <div class="role-card">
+          <img src="icons/backend-developer.svg" alt="Backend Developer icon" />
+          <h3>Backend Developer</h3>
+        </div>
+        <div class="role-card">
+          <img src="icons/devops-engineer.svg" alt="DevOps Engineer icon" />
+          <h3>DevOps Engineer</h3>
+        </div>
+        <div class="role-card">
+          <img src="icons/tinkerer.svg" alt="Tinkerer icon" />
+          <h3>Tinkerer</h3>
+        </div>
+      </div>
     </section>
 
+    <!-- Projects -->
     <section id="projects">
       <h2>Projects</h2>
       <div class="projects-grid">
@@ -64,6 +86,7 @@
       </div>
     </section>
 
+    <!-- Skills -->
     <section id="skills">
       <h2>Skills</h2>
       <ul class="skills-list">
@@ -74,9 +97,10 @@
         <li>C++</li>
       </ul>
     </section>
+
   </main>
 
-  <!-- Footer -->
+  <!-- Footer / Contact -->
   <footer id="contact" class="footer">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
@@ -173,10 +197,8 @@
 
         //fill color
         if (d.tw) {
-
           ctx.fillStyle = `rgba(0,200,255,${alpha})`;
         } else {
-        
           ctx.fillStyle = `rgba(255,255,255,${alpha})`;
         }
 
@@ -188,7 +210,6 @@
           ctx.shadowBlur = 0;
         }
 
-      
         ctx.beginPath();
         ctx.arc(d.x, d.y, radius, 0, Math.PI*2);
         ctx.fill();
@@ -217,7 +238,7 @@
     };
   </script>
 
-  <!-- Intro Overlay-->
+  <!-- Intro Overlay Removal -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');

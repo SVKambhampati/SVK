@@ -118,7 +118,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px) scale(0.98);

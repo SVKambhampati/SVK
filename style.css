@@ -118,7 +118,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center;            /* keeps hero text centered */
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px) scale(0.98);
@@ -175,16 +175,20 @@ section p {
   color: #ddd;
 }
 
-/* About Me */
+/* About Me (left-aligned) */
 .about-section {
   padding: 4rem 0;
+  /* ensure this section’s content is left-aligned */
+  text-align: left;
 }
 
 .about-overview {
   max-width: 700px;
-  margin: 4rem 0;      /* top/bottom spacing, flush left inside the container */
+  /* top/bottom 4rem, left/right 0—flush against the left of its container */
+  margin: 4rem 0;
   padding: 0 1rem;
-  text-align: left;    /* left-aligns heading and paragraph */
+  /* explicit left alignment */
+  text-align: left;
   color: #ddd;
 }
 
@@ -206,7 +210,7 @@ section p {
   border: 1px solid var(--clr-accent);
   border-radius: 8px;
   padding: 2rem 1.5rem;
-  text-align: center;
+  text-align: center;  /* cards stay centered */
   transition: transform 0.2s, background 0.2s;
 }
 

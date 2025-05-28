@@ -175,6 +175,58 @@ section p {
   color: #ddd;
 }
 
+/* About Me */
+.about-section {
+  padding: 4rem 0;
+}
+
+.about-overview {
+  max-width: 700px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  text-align: center;
+  color: #ddd;
+}
+
+.about-overview p {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* Role Cards */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.role-card {
+  background: #111;
+  border: 1px solid var(--clr-accent);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.role-card:hover {
+  transform: translateY(-5px);
+  background: #222;
+}
+
+.role-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.role-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+}
+
 /* Projects */
 .projects-grid {
   display: grid;

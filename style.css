@@ -183,11 +183,11 @@ section p {
 }
 
 .about-overview {
-  max-width: 700px;
-  /* top/bottom 4rem, left/right 0—flush against the left of its container */
-  margin: 4rem 0;
+  max-width: none;
+  /* …and let it fill the parent */
+  width: 100%;
+  margin: 4rem 0;    /* your existing spacing */
   padding: 0 1rem;
-  /* explicit left alignment */
   text-align: left;
   color: #ddd;
 }

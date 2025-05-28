@@ -118,7 +118,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;            /* keeps hero text centered */
+  text-align: center;
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px) scale(0.98);
@@ -175,21 +175,22 @@ section p {
   color: #ddd;
 }
 
-/* About Me (left-aligned) */
+/* About Me (left-aligned, full width) */
 .about-section {
   padding: 4rem 0;
-  /* ensure this section’s content is left-aligned */
-  text-align: left;
 }
 
 .about-overview {
-  max-width: none;
-  /* …and let it fill the parent */
+  /* span the full width of the parent container */
   width: 100%;
-  margin: 4rem 0;    /* your existing spacing */
-  padding: 0 1rem;
-  text-align: left;
+  margin: 4rem 0;    /* top/bottom spacing only */
+  padding: 0;        /* remove horizontal padding */
+  text-align: left;  /* left-align heading & text */
   color: #ddd;
+}
+
+.about-overview h2 {
+  margin-bottom: 1.5rem;
 }
 
 .about-overview p {
@@ -210,7 +211,7 @@ section p {
   border: 1px solid var(--clr-accent);
   border-radius: 8px;
   padding: 2rem 1.5rem;
-  text-align: center;  /* cards stay centered */
+  text-align: center;
   transition: transform 0.2s, background 0.2s;
 }
 

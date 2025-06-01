@@ -12,6 +12,35 @@
   />
 
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Typewriter effect */
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #0af;
+      animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
+      width: 0;
+      display: inline-block;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    /* Scroll fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
 
@@ -34,10 +63,10 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="hero">
+  <header class="hero fade-in">
     <canvas id="dotGrid"></canvas>
     <div class="container">
-      <h1>Hi, I'm Shreyas Kambhampati</h1>
+      <h1 class="typewriter">Hi, I'm Shreyas Kambhampati</h1>
       <p>Computer Science Student at Northeastern University</p>
     </div>
   </header>
@@ -46,7 +75,7 @@
   <main class="container">
 
     <!-- About Me -->
-    <section id="about" class="about-section">
+    <section id="about" class="about-section fade-in">
       <div class="about-overview">
         <h2>About Me</h2>
         <p>
@@ -56,26 +85,22 @@
 
       <div class="roles-grid">
         <div class="role-card">
-          
           <h3>Blank 1</h3>
         </div>
         <div class="role-card">
-        
           <h3>Blank 2</h3>
         </div>
         <div class="role-card">
-          
           <h3>Blank 3</h3>
         </div>
         <div class="role-card">
-          
           <h3>Blank 4</h3>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
-    <section id="projects">
+    <section id="projects" class="fade-in">
       <h2>Projects</h2>
       <div class="projects-grid">
         <article class="project-card">
@@ -87,7 +112,7 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills">
+    <section id="skills" class="fade-in">
       <h2>Skills</h2>
       <ul class="skills-list">
         <li>HTML & CSS</li>
@@ -112,29 +137,29 @@
   <!-- Dot-Grid Canvas Script with Twinkle -->
   <script>
     const canvas = document.getElementById('dotGrid');
-    const ctx    = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
 
-    const dpr             = window.devicePixelRatio || 1;
-    const NAV_HEIGHT      = 60;
-    const dotRadius       = 2;
-    const dotPadding      = 75;
-    const mouseRadius     = 75;
-    const mouseRadius2    = mouseRadius * mouseRadius;
+    const dpr = window.devicePixelRatio || 1;
+    const NAV_HEIGHT = 60;
+    const dotRadius = 2;
+    const dotPadding = 75;
+    const mouseRadius = 75;
+    const mouseRadius2 = mouseRadius * mouseRadius;
     const concaveStrength = 10;
-    const twinkleFreq     = 0.002;
-    const twinkleChance   = 0.4;  
+    const twinkleFreq = 0.002;
+    const twinkleChance = 0.4;
 
-    let dots   = [];
+    let dots = [];
     let mx = -9999, my = -9999, isDown = false;
 
     function resizeCanvas() {
-      cw = canvas.width  = window.innerWidth * dpr;
+      cw = canvas.width = window.innerWidth * dpr;
       ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
-      canvas.style.width  = window.innerWidth + 'px';
+      canvas.style.width = window.innerWidth + 'px';
       canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.scale(dpr,dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
       updateOffset();
       initDots();
     }
@@ -148,11 +173,11 @@
     function initDots() {
       dots = [];
       const w = cw / dpr, h = ch / dpr;
-      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
-        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
+      for (let y = dotRadius; y < h; y += dotRadius * 2 + dotPadding) {
+        for (let x = dotRadius; x < w; x += dotRadius * 2 + dotPadding) {
           dots.push({
             sx: x, sy: y,
-            x: x,  y: y,
+            x: x, y: y,
             tw: Math.random() < twinkleChance
           });
         }
@@ -161,33 +186,29 @@
 
     function draw() {
       const t = Date.now();
-      ctx.clearRect(0,0,cw,ch);
+      ctx.clearRect(0, 0, cw, ch);
 
       dots.forEach(d => {
-        
         const dx = d.x - mx, dy = d.y - my;
-        if (isDown && dx*dx + dy*dy < mouseRadius2) {
-          d.x += dx/30; d.y += dy/30;
+        if (isDown && dx * dx + dy * dy < mouseRadius2) {
+          d.x += dx / 30; d.y += dy / 30;
         } else {
           const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
-          if (dx0||dy0) { d.x-=dx0/20; d.y-=dy0/20; }
+          if (dx0 || dy0) { d.x -= dx0 / 20; d.y -= dy0 / 20; }
         }
 
-        // concave
-        const cx   = d.x - (cw/dpr)/2;
-        const cy   = d.y - (ch/dpr)/2;
+        const cx = d.x - (cw / dpr) / 2;
+        const cy = d.y - (ch / dpr) / 2;
         const dist = Math.hypot(cx, cy);
-        const mD   = Math.hypot((cw/dpr)/2, (ch/dpr)/2);
-        const conc = Math.pow(dist/mD, 3) * concaveStrength;
+        const mD = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
+        const conc = Math.pow(dist / mD, 3) * concaveStrength;
 
-        // interaction size
-        const inter = (dx*dx+dy*dy < mouseRadius2)
-          ? (1 - Math.sqrt(dx*dx+dy*dy)/mouseRadius) * 3
+        const inter = (dx * dx + dy * dy < mouseRadius2)
+          ? (1 - Math.sqrt(dx * dx + dy * dy) / mouseRadius) * 3
           : 0;
 
         const radius = dotRadius + conc + inter;
 
-        // twinkle
         let alpha = 1;
         if (d.tw) {
           const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
@@ -195,23 +216,17 @@
         }
         ctx.globalAlpha = alpha;
 
-        //fill color
-        if (d.tw) {
-          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-        } else {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-        }
+        ctx.fillStyle = d.tw ? `rgba(0,200,255,${alpha})` : `rgba(255,255,255,${alpha})`;
 
-        // glow on hover
         if (inter > 0) {
-          ctx.shadowBlur  = 40;
+          ctx.shadowBlur = 40;
           ctx.shadowColor = 'rgba(0,240,255,0.7)';
         } else {
           ctx.shadowBlur = 0;
         }
 
         ctx.beginPath();
-        ctx.arc(d.x, d.y, radius, 0, Math.PI*2);
+        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
@@ -238,11 +253,28 @@
     };
   </script>
 
+  <!-- Scroll Fade-In Observer -->
+  <script>
+    const faders = document.querySelectorAll(".fade-in");
+    const appearOptions = {
+      threshold: 0,
+      rootMargin: "0px 0px -100px 0px"
+    };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("appear");
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
+
   <!-- Intro Overlay Removal -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
-      const hero    = document.querySelector('.hero');
+      const hero = document.querySelector('.hero');
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
           overlay.remove();

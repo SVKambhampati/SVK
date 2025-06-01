@@ -23,6 +23,16 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* 3D Parallax Hover Effect */
+    .role-card, .project-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .role-card:hover, .project-card:hover {
+      transform: perspective(1000px) rotateY(6deg) rotateX(6deg) scale(1.03);
+      box-shadow: 0 10px 30px rgba(0, 170, 255, 0.25);
+    }
   </style>
 </head>
 <body>

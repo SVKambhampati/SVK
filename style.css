@@ -1,13 +1,8 @@
 /* ========================================================================
-   style.css (with springy easing & updated transitions)
+   style.css (original + glow-flicker additions)
    ======================================================================== */
 
-/* 1) Root variable for spring‐easing */
-:root {
-  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* 2) Global Resets & Typography */
+/* 1) Global Resets & Typography */
 @font-face {
   font-family: 'Blanka';
   src: url('./blanka/Blanka-Regular.woff2') format('woff2');
@@ -35,7 +30,7 @@ html, body {
   margin: 0 auto;
 }
 
-/* 3) Navbar (simple semi-transparent) */
+/* 2) Navbar (simple semi-transparent) */
 .navbar {
   position: fixed;
   top: 0;
@@ -71,14 +66,14 @@ html, body {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s var(--spring-ease);
+  transition: color 0.2s ease-out;
 }
 
 .nav-links a:hover {
   color: #0af;
 }
 
-/* 4) Intro Overlay */
+/* 3) Intro Overlay */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -137,7 +132,7 @@ html, body {
   }
 }
 
-/* 5) Hero Section */
+/* 4) Hero Section */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -179,6 +174,39 @@ html, body {
   margin-bottom: 1.5rem;
 }
 
+/* --------------------------------------------------------------------------
+   5) Glow-Flicker Animation
+   -------------------------------------------------------------------------- */
+
+/* Initial state: no glow yet */
+.glow-flicker {
+  text-shadow: none;
+  opacity: 1;
+  /* no animation until we add .glow-active */
+}
+
+/* Once we add .glow-active, run the flickerGlow keyframes exactly once */
+.glow-flicker.glow-active {
+  animation: flickerGlow 1s ease-out forwards;
+}
+
+/* animates a brief blue-white glow, then returns to none */
+@keyframes flickerGlow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  10%, 30%, 50%, 70% {
+    text-shadow:
+      0 0 8px rgba(0, 200, 255, 0.8),
+      0 0 12px rgba(0, 200, 255, 0.6),
+      0 0 16px rgba(255, 255, 255, 0.4);
+  }
+  20%, 40%, 60%, 80% {
+    text-shadow: none;
+  }
+}
+
+/* 6) Hero Subheading */
 .hero .container p {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   font-size: 1.25rem;
@@ -187,7 +215,7 @@ html, body {
   color: #ccc;
 }
 
-/* 6) Sections & Typography */
+/* 7) Sections & Typography */
 section {
   padding: 4rem 0;
 }
@@ -201,15 +229,15 @@ section p {
   color: #ddd;
 }
 
-/* 7) About Me */
+/* 8) About Me */
 .about-section {
   padding: 4rem 0;
 }
 
 .about-overview {
   width: 100%;
-  margin: 4rem 0;
-  padding: 0;
+  margin: 0 auto 2rem auto;
+  max-width: 800px;
   text-align: left;
   color: #ddd;
 }
@@ -224,7 +252,7 @@ section p {
   letter-spacing: 0.5px;
 }
 
-/* 8) Role Cards (springy transitions) */
+/* 9) Role Cards */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -238,8 +266,7 @@ section p {
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.5s var(--spring-ease),
-              box-shadow 0.5s var(--spring-ease);
+  transition: transform 0.2s ease-out;
   transform-style: preserve-3d;
 }
 
@@ -250,12 +277,10 @@ section p {
 }
 
 .role-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 170, 255, 0.3);
-  background: #222;
+  transform: rotateX(5deg) rotateY(-5deg);
 }
 
-/* 9) Project Cards (springy transitions) */
+/* 10) Project Cards */
 .projects-grid {
   position: relative;
   display: flex;
@@ -279,9 +304,7 @@ section p {
   padding: 1.5rem;
   border-radius: 8px;
   margin-left: -10px;
-  transition: transform 0.5s var(--spring-ease),
-              background 0.3s var(--spring-ease),
-              box-shadow 0.5s var(--spring-ease);
+  transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
 
@@ -302,16 +325,16 @@ section p {
 }
 
 .project-card:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-10px);
   background: #222;
-  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
 .project-card a:hover {
   color: #fff;
 }
 
-/* 10) Skills */
+/* 11) Skills */
 .skills-list {
   list-style: none;
   display: flex;
@@ -326,7 +349,7 @@ section p {
   font-weight: 500;
 }
 
-/* 11) Footer */
+/* 12) Footer */
 .footer {
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
@@ -337,19 +360,18 @@ section p {
 .footer a {
   color: #0af;
   text-decoration: none;
-  transition: color 0.2s var(--spring-ease);
+  transition: color 0.2s ease-out;
 }
 
 .footer a:hover {
   color: #fff;
 }
 
-/* 12) Fade-In On Scroll (springy easing) */
+/* 13) Fade-In On Scroll */
 .fade-in-section {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s var(--spring-ease),
-              transform 0.8s var(--spring-ease);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .fade-in-section.is-visible {

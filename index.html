@@ -58,187 +58,185 @@
   <main class="container">
 
     <!-- ================================================
-         About Me + Role Cards (Both 100% of .container)
+         10 + 9: About Me Section in a Rounded Card that Overlaps
          ================================================ -->
-    <section id="about" class="about-section fade-in-section">
-      <!-- About text now fills 100% of .container, matching the role cards below -->
-      <div class="about-overview">
-        <h2>About Me</h2>
-        <p>
-          Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
-        </p>
-      </div>
-
-      <!-- roles‐grid also fills 100% of the same container, so its left/right edges match the text -->
-      <div class="roles-grid">
-        <div class="role-card"><h3>Python Certified Developer</h3></div>
-        <div class="role-card"><h3>Full-Stack Engineer</h3></div>
-        <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
-        <div class="role-card"><h3>HCI Experience Architect</h3></div>
-      </div>
-    </section>
-
-    <!-- ================================================
-         Projects
-         ================================================ -->
-    <section id="projects" class="fade-in-section">
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <article class="project-card">
-          <h3>EnvisionVR</h3>
+    <div class="section-card">
+      <section id="about" class="about-section fade-in-section">
+        <div class="about-overview">
+          <h2>About Me</h2>
           <p>
-            EnvisionVR is a virtual reality application built to support special-needs students with visual-spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real-time simulations.
+            Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real‐world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
           </p>
-          <a href="project-one.html">View →</a>
-        </article>
-        <article class="project-card">
-          <h3>MovieMind</h3>
-          <p>
-            MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content-based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
-          </p>
-          <a href="project-two.html">View →</a>
-        </article>
-        <article class="project-card">
-          <h3>Project Three</h3>
-          <p>A placeholder for your third project. Describe it here.</p>
-          <a href="project-three.html">View →</a>
-        </article>
-      </div>
-    </section>
+        </div>
+        <div class="roles-grid">
+          <div class="role-card"><h3>Python Certified Developer</h3></div>
+          <div class="role-card"><h3>Full-Stack Engineer</h3></div>
+          <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
+          <div class="role-card"><h3>HCI Experience Architect</h3></div>
+        </div>
+      </section>
+    </div>
 
     <!-- ================================================
-         Skills (Expandable “+ details” List)
+         10 + 9: Projects Section in a Rounded Card that Overlaps
          ================================================ -->
-    <section id="skills" class="fade-in-section">
-      <h2>Programming Languages &amp; Frameworks</h2>
-
-      <ul class="skills-expandable">
-        <!-- Java -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">Java</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
-          </div>
-        </li>
-
-        <!-- Python -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">Python</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Developed the back-end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
-          </div>
-        </li>
-
-        <!-- JavaScript -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">JavaScript</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Wrote client-side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
-          </div>
-        </li>
-
-        <!-- HTML & CSS -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">HTML &amp; CSS</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
-          </div>
-        </li>
-
-        <!-- MySQL -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">MySQL</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
-          </div>
-        </li>
-
-        <!-- C# -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">C#</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
-          </div>
-        </li>
-
-        <!-- XML -->
-        <li class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name">XML</span>
-            <button class="toggle-btn">+ details</button>
-          </div>
-          <div class="skill-details">
-            Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
-          </div>
-        </li>
-      </ul>
-    </section>
+    <div class="section-card">
+      <section id="projects" class="fade-in-section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <h3>EnvisionVR</h3>
+            <p>
+              EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
+            </p>
+            <a href="project-one.html">View →</a>
+          </article>
+          <article class="project-card">
+            <h3>MovieMind</h3>
+            <p>
+              MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content‐based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
+            </p>
+            <a href="project-two.html">View →</a>
+          </article>
+          <article class="project-card">
+            <h3>Project Three</h3>
+            <p>A placeholder for your third project. Describe it here.</p>
+            <a href="project-three.html">View →</a>
+          </article>
+        </div>
+      </section>
+    </div>
 
     <!-- ================================================
-         Redesigned Contact (Compact Card Layout)
+         10 + 9: Skills Section in a Rounded Card that Overlaps
          ================================================ -->
-    <section id="contact" class="fade-in-section">
-      <div class="contact-card">
-        <h2>Contact Me</h2>
-        <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
-
-        <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your Name"
-                required
-              />
+    <div class="section-card">
+      <section id="skills" class="fade-in-section">
+        <h2>Programming Languages &amp; Frameworks</h2>
+        <ul class="skills-expandable">
+          <!-- Java -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Java</span>
+              <button class="toggle-btn">+ details</button>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-              />
+            <div class="skill-details">
+              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
             </div>
-          </div>
+          </li>
+          <!-- Python -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Python</span>
+              <button class="toggle-btn">+ details</button>
+            </div>
+            <div class="skill-details">
+              Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
+            </div>
+          </li>
+          <!-- JavaScript -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">JavaScript</span>
+              <button class="toggle-btn">+ details</button>
+            </div>
+            <div class="skill-details">
+              Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
+            </div>
+          </li>
+          <!-- HTML & CSS -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">HTML &amp; CSS</span>
+              <button class="toggle-btn">+ details</button>
+            </div>
+            <div class="skill-details">
+              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
+            </div>
+          </li>
+          <!-- MySQL -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">MySQL</span>
+              <button class="toggle-btn">+ details</button>
+            </div>
+            <div class="skill-details">
+              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
+            </div>
+          </li>
+          <!-- C# -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">C#</span>
+              <button class="toggle-btn">+ details</button>
+            </div>
+            <div class="skill-details">
+              Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
+            </div>
+          </li>
+          <!-- XML -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">XML</span>
+              <button class="toggle-btn">+ details</button>
+            </div>
+            <div class="skill-details">
+              Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
 
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              placeholder="Write your message…"
-              required
-            ></textarea>
-          </div>
+    <!-- ================================================
+         10 + 9: Contact Section in a Rounded Card that Overlaps
+         ================================================ -->
+    <div class="section-card">
+      <section id="contact" class="fade-in-section">
+        <div class="contact-card">
+          <h2>Contact Me</h2>
+          <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
-          <button type="submit" class="send-btn">Send Message</button>
-        </form>
-      </div>
-    </section>
+          <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Write your message…"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="send-btn">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </div>
 
   </main>
 

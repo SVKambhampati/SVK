@@ -1,27 +1,8 @@
 /* ========================================================================
-   style.css
+   style.css (reverted to previous version)
    ======================================================================== */
 
-/* 1) Define Apple‐style spring easing variable */
-:root {
-  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --clr-bg: #000;
-  --clr-bg-overlay: rgba(0, 0, 0, 0.5);
-  --clr-accent: #0af;
-  --navbar-height: 60px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-/* ===========================================================================
-   Global Resets & Typography
-   =========================================================================== */
-
+/* 1) Global Resets & Typography */
 @font-face {
   font-family: 'Blanka';
   src: url('./blanka/Blanka-Regular.woff2') format('woff2');
@@ -36,7 +17,7 @@
 html, body {
   height: 100%;
   scroll-behavior: smooth;
-  background: var(--clr-bg);
+  background: #000;
   color: #fff;
   font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   overflow-x: hidden;
@@ -49,45 +30,29 @@ html, body {
   margin: 0 auto;
 }
 
-/* ===========================================================================
-   Glassmorphic Navbar
-   =========================================================================== */
-
-nav.navbar {
+/* 2) Navbar (simple semi-transparent) */
+.navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--navbar-height);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-  transition: background 0.4s var(--spring-ease);
+  height: 60px;                /* --navbar-height */
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
 }
 
-nav.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.30);
-}
-
-nav.navbar .container {
+.navbar .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100%;
 }
 
-nav.navbar .logo {
+.logo {
   color: #fff;
   font-size: 1.5rem;
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.3s var(--spring-ease);
-}
-
-nav.navbar .logo:hover {
-  color: var(--clr-accent);
 }
 
 .nav-links {
@@ -98,53 +63,79 @@ nav.navbar .logo:hover {
 }
 
 .nav-links a {
-  position: relative;
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s var(--spring-ease);
-}
-
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background: var(--clr-accent);
-  transition: width 0.4s var(--spring-ease);
+  transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: var(--clr-accent);
+  color: #0af;
 }
 
-.nav-links a:hover::after {
-  width: 100%;
+/* 3) Intro Overlay */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: overlayFade 1s ease-out 1.5s forwards;
 }
 
-/* Glassy panels (for modals or other overlays if needed) */
-.glassy-panel {
-  background: rgba(255, 255, 255, 0.20);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.30);
-  padding: 1.5rem;
+.logo-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.intro-logo {
+  font-family: 'Blanka', sans-serif;
+  font-size: 6rem;
   color: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  transition: background 0.4s var(--spring-ease),
-              border 0.4s var(--spring-ease);
+  opacity: 0;
+  transform: scale(0.8);
+  animation: logoPop 0.8s ease-out 0.3s forwards;
 }
 
-/* ===========================================================================
-   Hero Section & Parallax Layers
-   =========================================================================== */
+.logo-underline {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  height: 6px;
+  width: 0;
+  background: #fff;
+  animation: underlineExpand 1s ease-out 0.8s forwards;
+  border-radius: 3px;
+}
 
+@keyframes logoPop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes underlineExpand {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes overlayFade {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* 4) Hero Section */
 .hero {
   position: relative;
-  height: calc(100vh - var(--navbar-height));
+  height: calc(100vh - 60px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,31 +151,22 @@ nav.navbar .logo:hover {
   transform: translateY(0) scale(1);
 }
 
-.hero-bg {
+#dotGrid {
   position: absolute;
   inset: 0;
   z-index: 0;
-  transform: translateY(0px);
-  transition: transform 0.4s var(--spring-ease);
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 1;
-  transform: translateY(0px);
-  transition: transform 0.4s var(--spring-ease);
 }
 
 .hero .container {
   position: relative;
   z-index: 1;
   transform: translateY(-20px);
-  background: var(--clr-bg-overlay);
+  background: rgba(0, 0, 0, 0.5);
   padding: 3rem 4rem;
   border-radius: 12px;
 }
 
-.hero-copy h1 {
+.hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
@@ -192,7 +174,7 @@ nav.navbar .logo:hover {
   margin-bottom: 1.5rem;
 }
 
-.hero-copy p {
+.hero .container p {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   font-size: 1.25rem;
   line-height: 1.4;
@@ -200,20 +182,7 @@ nav.navbar .logo:hover {
   color: #ccc;
 }
 
-.floating-text {
-  display: inline-block;
-  transform: translateZ(0);
-  transition: transform 0.8s var(--spring-ease);
-}
-
-.floating-text.motion1 {
-  transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
-}
-
-/* ===========================================================================
-   Sections & Typography
-   =========================================================================== */
-
+/* 5) Sections */
 section {
   padding: 4rem 0;
 }
@@ -227,6 +196,7 @@ section p {
   color: #ddd;
 }
 
+/* 6) About Me */
 .about-section {
   padding: 4rem 0;
 }
@@ -249,10 +219,7 @@ section p {
   letter-spacing: 0.5px;
 }
 
-/* ===========================================================================
-   3D Role Cards (with Apple‐style springy hover)
-   =========================================================================== */
-
+/* 7) Role Cards (original four blanks) */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -262,12 +229,11 @@ section p {
 
 .role-card {
   background: #111;
-  border: 1px solid var(--clr-accent);
+  border: 1px solid #0af;
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.5s var(--spring-ease),
-              box-shadow 0.4s var(--spring-ease);
+  transition: transform 0.2s ease-out;
   transform-style: preserve-3d;
 }
 
@@ -278,15 +244,11 @@ section p {
 }
 
 .role-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 170, 255, 0.3);
   background: #222;
+  transform: rotateX(5deg) rotateY(-5deg);
 }
 
-/* ===========================================================================
-   Project Cards (with Apple‐style springy hover)
-   =========================================================================== */
-
+/* 8) Project Cards */
 .projects-grid {
   position: relative;
   display: flex;
@@ -310,9 +272,7 @@ section p {
   padding: 1.5rem;
   border-radius: 8px;
   margin-left: -10px;
-  transition: transform 0.5s var(--spring-ease),
-              background 0.2s var(--spring-ease),
-              box-shadow 0.5s var(--spring-ease);
+  transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
 
@@ -327,25 +287,22 @@ section p {
 }
 
 .project-card a {
-  color: var(--clr-accent);
+  color: #0af;
   text-decoration: none;
   font-weight: 600;
 }
 
 .project-card:hover {
-  transform: translateY(-12px) scale(1.03);
+  transform: translateY(-10px);
   background: #222;
-  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
 .project-card a:hover {
   color: #fff;
 }
 
-/* ===========================================================================
-   Skills Section
-   =========================================================================== */
-
+/* 9) Skills */
 .skills-list {
   list-style: none;
   display: flex;
@@ -360,10 +317,7 @@ section p {
   font-weight: 500;
 }
 
-/* ===========================================================================
-   Footer
-   =========================================================================== */
-
+/* 10) Footer */
 .footer {
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
@@ -372,24 +326,20 @@ section p {
 }
 
 .footer a {
-  color: var(--clr-accent);
+  color: #0af;
   text-decoration: none;
-  transition: color 0.2s var(--spring-ease);
+  transition: color 0.2s;
 }
 
 .footer a:hover {
   color: #fff;
 }
 
-/* ===========================================================================
-   Fade-In On Scroll (with Apple-style easing)
-   =========================================================================== */
-
+/* 11) Fade-In On Scroll */
 .fade-in-section {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s var(--spring-ease),
-              transform 0.8s var(--spring-ease);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .fade-in-section.is-visible {

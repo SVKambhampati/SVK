@@ -1,8 +1,10 @@
 /* ===========================================================
-   style.css (with SVK glow and embedded Contact section)
+   style.css (with SVK glow, full-bleed About + roles, etc.)
    =========================================================== */
 
-/* 1) Global Resets & Typography */
+/* ---------------------------------------------------------------------------
+   1) Global Resets & Typography
+   --------------------------------------------------------------------------- */
 @font-face {
   font-family: 'Blanka';
   src: url('./blanka/Blanka-Regular.woff2') format('woff2');
@@ -30,13 +32,15 @@ html, body {
   margin: 0 auto;
 }
 
-/* 2) Navbar (simple semi-transparent) */
+/* ---------------------------------------------------------------------------
+   2) Navbar (semi-transparent)
+   --------------------------------------------------------------------------- */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 60px;                /* --navbar-height */
   background: rgba(0, 0, 0, 0.7);
   z-index: 10;
 }
@@ -73,7 +77,9 @@ html, body {
   color: #0af;
 }
 
-/* 3) Intro Overlay */
+/* ---------------------------------------------------------------------------
+   3) Intro Overlay
+   --------------------------------------------------------------------------- */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -98,7 +104,7 @@ html, body {
   opacity: 0;
   transform: scale(0.8);
   animation: logoPop 0.8s ease-out 0.3s forwards;
-  text-shadow: none;
+  text-shadow: none;  /* no glow until .glow-active is added */
 }
 
 .logo-underline {
@@ -133,7 +139,9 @@ html, body {
   }
 }
 
-/* 4) SVK Glow Animation */
+/* ---------------------------------------------------------------------------
+   4) SVK Flicker-Glow (applied once via .glow-active)
+   --------------------------------------------------------------------------- */
 .intro-logo.glow-active {
   animation: flickerGlow 1s ease-out forwards;
 }
@@ -153,7 +161,9 @@ html, body {
   }
 }
 
-/* 5) Hero Section */
+/* ---------------------------------------------------------------------------
+   5) Hero Section (Dot Grid & Content)
+   --------------------------------------------------------------------------- */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -203,7 +213,9 @@ html, body {
   color: #ccc;
 }
 
-/* 6) Sections & Typography */
+/* ---------------------------------------------------------------------------
+   6) Sections & Typography
+   --------------------------------------------------------------------------- */
 section {
   padding: 4rem 0;
 }
@@ -217,17 +229,18 @@ section p {
   color: #ddd;
 }
 
-/* 7) About Me */
-.about-section {
-  padding: 4rem 0;
-}
-
+/* ---------------------------------------------------------------------------
+   7) About-Me Full-Bleed Text
+   --------------------------------------------------------------------------- */
+/* 
+  We force .about-overview to span 100vw, then shift it left so its edges align 
+  exactly with the viewport.  We also cap max-width so lines don't get too long.
+*/
 .about-overview {
-  width: 100%;
-  margin: 0 auto 2rem auto;
-  max-width: 800px;
-  text-align: left;
-  color: #ddd;
+  width: 100vw;
+  margin-left: calc((100% - 100vw) / 2);
+  max-width: 800px;       /* Optional: prevents overly long lines */
+  padding: 0 1rem;        /* Optional: adds small side padding inside that full-bleed area */
 }
 
 .about-overview h2 {
@@ -240,15 +253,24 @@ section p {
   letter-spacing: 0.5px;
 }
 
-/* 8) Role Cards */
-.roles-grid {
+/* ---------------------------------------------------------------------------
+   8) Role Cards (Full-Bleed Grid)
+   --------------------------------------------------------------------------- */
+/* 
+  Force roles-grid full-bleed as well, so cards line up under the text.
+*/
+.about-section .roles-grid {
+  width: 100vw;
+  margin-left: calc((100% - 100vw) / 2);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   perspective: 1000px;
+  margin-top: 2rem;     /* Spacing above the row of cards */
+  margin-bottom: 2rem;  /* Spacing below */
 }
 
-.role-card {
+.roles-grid .role-card {
   background: #111;
   border: 1px solid #0af;
   border-radius: 8px;
@@ -258,17 +280,19 @@ section p {
   transform-style: preserve-3d;
 }
 
-.role-card h3 {
+.roles-grid .role-card h3 {
   font-size: 1.125rem;
   font-weight: 600;
   color: #fff;
 }
 
-.role-card:hover {
+.roles-grid .role-card:hover {
   transform: rotateX(5deg) rotateY(-5deg);
 }
 
-/* 9) Project Cards */
+/* ---------------------------------------------------------------------------
+   9) Project Cards (Unchanged)
+   --------------------------------------------------------------------------- */
 .projects-grid {
   position: relative;
   display: flex;
@@ -322,7 +346,9 @@ section p {
   color: #fff;
 }
 
-/* 10) Skills */
+/* ---------------------------------------------------------------------------
+   10) Skills (Unchanged)
+   --------------------------------------------------------------------------- */
 .skills-list {
   list-style: none;
   display: flex;
@@ -337,7 +363,9 @@ section p {
   font-weight: 500;
 }
 
-/* 11) Contact */
+/* ---------------------------------------------------------------------------
+   11) Contact Section (Embedded)
+   --------------------------------------------------------------------------- */
 .contact-container {
   max-width: 600px;
   margin: 2rem auto 4rem auto;
@@ -404,7 +432,9 @@ section p {
   transform: scale(1.02);
 }
 
-/* 12) Footer */
+/* ---------------------------------------------------------------------------
+   12) Footer (Unchanged)
+   --------------------------------------------------------------------------- */
 .footer {
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
@@ -422,7 +452,9 @@ section p {
   color: #fff;
 }
 
-/* 13) Fade-In On Scroll */
+/* ---------------------------------------------------------------------------
+   13) Fade-In On Scroll (Intersection Observer)
+   --------------------------------------------------------------------------- */
 .fade-in-section {
   opacity: 0;
   transform: translateY(40px);

@@ -231,7 +231,7 @@ section p {
 }
 
 /* Projects */
-/* łąc) Stack cards vertically, add left-side line spanning entire height */
+/* Stack cards vertically, add left-side white line spanning entire height */
 .projects-grid {
   position: relative;
   display: flex;
@@ -240,6 +240,7 @@ section p {
   padding-left: 20px;      /* make room for vertical line */
 }
 
+/* Change line color to white */
 .projects-grid::before {
   content: "";
   position: absolute;
@@ -247,20 +248,24 @@ section p {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--clr-accent);
+  background: #fff;       /* ← now white instead of var(--clr-accent) */ 
 }
 
+/* Project card glow + stronger raise on hover */
 .project-card {
   background: #111;
   padding: 1.5rem;
   border-radius: 8px;
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.3s ease, 
+              background 0.2s ease, 
+              box-shadow 0.3s ease;  /* allow box-shadow transition */
   margin-left: -10px;     /* pull card’s left edge toward line */
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);                /* stronger raise */
   background: #222;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3); /* white glow underneath */
 }
 
 .project-card h3 {
@@ -317,15 +322,15 @@ section p {
 }
 
 /* Fade-In On Scroll */
-/* 1a) Initial hidden state with stronger rise */
+/* Initial hidden state with stronger rise */
 .fade-in-section {
   opacity: 0;
-  transform: translateY(40px);           /* ↑ more pronounced rise */
-  transition: opacity 0.8s ease-out,     /* ↑ longer transition */
+  transform: translateY(40px);           /* stronger rise */
+  transition: opacity 0.8s ease-out,     /* longer duration */
               transform 0.8s ease-out;
 }
 
-/* 1b) Visible state */
+/* Visible state */
 .fade-in-section.is-visible {
   opacity: 1;
   transform: translateY(0);

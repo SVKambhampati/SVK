@@ -1,9 +1,10 @@
+<!-- File: project-one.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project One: EnvisionVR</title>
+  <title>Project One Details</title>
 
   <!-- Google Font & main stylesheet -->
   <link
@@ -14,7 +15,7 @@
 
   <!-- Inline CSS for the project‐intro overlay -->
   <style>
-    /* Full‐screen black overlay */
+    /* Full-screen black overlay */
     #project-overlay {
       position: fixed;
       inset: 0;
@@ -23,7 +24,6 @@
       align-items: center;
       justify-content: center;
       z-index: 999;
-      /* Fade‐out after a short delay */
       animation: overlayFade 1s ease-out 1s forwards;
     }
 
@@ -34,11 +34,10 @@
       color: #fff;
       opacity: 0;
       transform: scale(0.8);
-      /* Pop‐in animation */
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
 
-    /* NOTE: overlayFade & logoPop keyframes already exist in style.css */
+    /* Note: overlayFade and logoPop keyframes are already defined in style.css */
   </style>
 </head>
 <body>
@@ -59,65 +58,61 @@
   <main class="container" style="margin-top: 80px;">
     <h1>EnvisionVR</h1>
 
+    <!-- Overview Section -->
     <section>
       <h2>Overview</h2>
       <p>
-        EnvisionVR is a 3D visualization tool designed to help special‐needs students
-        improve spatial processing through immersive VR experiences. Built with Unity
-        and deployed on Oculus Quest, it presents interactive environments that adapt 
-        to each learner’s pace.
+        EnvisionVR is a virtual reality education platform developed by my team and me to assist special-needs students who struggle with visual-spatial reasoning. The application delivers interactive 3D environments that enhance cognitive development and conceptual understanding through immersive, hands-on learning experiences across a range of subjects.
       </p>
     </section>
 
+    <!-- Key Subject Modules -->
     <section>
-      <h2>Key Features</h2>
+      <h2>Key Subject Modules</h2>
       <ul>
-        <li>Immersive 3D scenes that teach geometry concepts</li>
-        <li>Customizable difficulty levels & adaptive feedback</li>
-        <li>Support for hand‐tracking controls (no controllers needed)</li>
-        <li>In‐app analytics dashboard showing user progress over time</li>
+        <li>
+          <strong>Biology:</strong> A guided human anatomy module where students can explore detailed skeletal and organ systems through interactive modeling.
+        </li>
+        <li>
+          <strong>Geography:</strong> An explorable Earth globe with dynamic topographical maps and real-time environmental simulations.
+        </li>
+        <li>
+          <strong>Physics:</strong> A virtual physics lab for conducting experiments like free-fall kinematics with live motion tracking and visualizations.
+        </li>
+        <li>
+          <strong>Astronomy:</strong> A 3D solar system where students can interact with rotating planets, moons, and orbits to learn about space in an engaging way.
+        </li>
       </ul>
     </section>
 
+    <!-- Technologies Used -->
     <section>
       <h2>Technologies</h2>
-      <p>Unity · C# · Oculus SDK · Firebase · Blender (3D assets)</p>
-    </section>
-
-    <section>
-      <h2>Links</h2>
+      <p>
+        We used Unity, Meta SDKs, and C# to design the platform, emphasizing intuitive interfaces and immersive environments.
+      </p>
       <ul>
-        <li><a href="https://github.com/YourUsername/envisionvr" target="_blank" rel="noopener">GitHub Repo</a></li>
-        <li><a href="https://envisionvr-demo.example.com" target="_blank" rel="noopener">Live Demo</a></li>
+        <li>Custom 3D modeling and shader development for realism.</li>
+        <li>Real-time motion tracking and dynamic simulation for interactivity.</li>
+        <li>Performance optimization for smooth rendering and scene transitions.</li>
+        <li>Object-oriented programming for modular development and stability.</li>
+        <li>Integration of physics engines, animation controllers, and event-driven scripting to simulate real-world phenomena.</li>
       </ul>
     </section>
 
+    <!-- Impact Section -->
     <section>
-      <h2>Screenshots</h2>
-      <img 
-        src="images/envisionvr-screenshot-1.png" 
-        alt="EnvisionVR scene showing geometry lesson" 
-        style="max-width:100%; border-radius:8px; margin-top:1rem;"
-      />
-      <!-- Add more <img> tags if you have additional screenshots -->
-    </section>
-
-    <section>
-      <h2>Challenges &amp; Learnings</h2>
+      <h2>Impact</h2>
       <p>
-        Integrating hand‐tracking on the Oculus Quest presented a learning curve—ensuring
-        that interactive objects responded smoothly without latency was challenging. I ended 
-        up optimizing textures and mesh colliders to maintain 90 fps, and I learned how to 
-        profile performance in Unity for VR builds.
+        This project demonstrates how technology can be harnessed to bridge educational gaps, offering transformative tools that make learning more engaging and accessible for all students.
       </p>
     </section>
   </main>
 
-  <!-- 4) Project‐Intro Overlay Removal Script -->
+  <!-- 4) Project-Intro Overlay Removal Script -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('project-overlay');
-
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
           overlay.remove();

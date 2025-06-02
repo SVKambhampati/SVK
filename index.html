@@ -58,10 +58,11 @@
   <main class="container">
 
     <!-- ================================================
-         ABOUT ME (Wrapped in a Rounded “Card” with id="about")
+         ABOUT ME (Wrapped in a Rounded “Card”)
+         – ID moved onto <section>
          ================================================ -->
-    <div class="section-card" id="about">
-      <section class="about-section fade-in-section">
+    <div class="section-card">
+      <section id="about" class="about-section fade-in-section">
         <div class="about-overview">
           <h2>About Me</h2>
           <p>
@@ -78,10 +79,11 @@
     </div>
 
     <!-- ================================================
-         PROJECTS (Wrapped in a Rounded “Card” with id="projects")
+         PROJECTS (Wrapped in a Rounded “Card”)
+         – ID moved onto <section>
          ================================================ -->
-    <div class="section-card" id="projects">
-      <section class="fade-in-section">
+    <div class="section-card">
+      <section id="projects" class="fade-in-section">
         <h2>Projects</h2>
         <div class="projects-grid">
           <article class="project-card">
@@ -108,10 +110,11 @@
     </div>
 
     <!-- ================================================
-         SKILLS (Wrapped in a Rounded “Card” with id="skills")
+         SKILLS (Wrapped in a Rounded “Card”)
+         – ID moved onto <section>
          ================================================ -->
-    <div class="section-card" id="skills">
-      <section class="fade-in-section">
+    <div class="section-card">
+      <section id="skills" class="fade-in-section">
         <h2>Programming Languages &amp; Frameworks</h2>
         <ul class="skills-expandable">
           <!-- Java -->
@@ -189,10 +192,11 @@
     </div>
 
     <!-- ================================================
-         CONTACT (Wrapped in a Rounded “Card” with id="contact")
+         CONTACT (Wrapped in a Rounded “Card”)
+         – ID moved onto <section>
          ================================================ -->
-    <div class="section-card" id="contact">
-      <section class="fade-in-section">
+    <div class="section-card">
+      <section id="contact" class="fade-in-section">
         <div class="contact-card">
           <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
@@ -257,10 +261,187 @@
   <!-- ============================================================
        Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
        ============================================================ -->
-  <!-- (All your existing scripts remain unchanged) -->
   <script>
-    // ... dot-grid canvas animation, overlay removal, fade-in observer,
-    //     3D tilt on .role-card, and toggle‐details for skills ...
+    // Dot-Grid Canvas Animation
+    const canvas = document.getElementById('dotGrid');
+    const ctx    = canvas.getContext('2d');
+    let cw, ch, offsetX, offsetY;
+    const dpr             = window.devicePixelRatio || 1;
+    const NAV_HEIGHT      = 60;
+    const dotRadius       = 2;
+    const dotPadding      = 75;
+    const mouseRadius     = 75;
+    const mouseRadius2    = mouseRadius * mouseRadius;
+    const concaveStrength = 10;
+    const twinkleFreq     = 0.002;
+    const twinkleChance   = 0.4;
+    let dots   = [];
+    let mx = -9999, my = -9999, isDown = false;
+
+    function resizeCanvas() {
+      cw = canvas.width  = window.innerWidth * dpr;
+      ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
+      canvas.style.width  = window.innerWidth + 'px';
+      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(dpr,dpr);
+      updateOffset();
+      initDots();
+    }
+
+    function updateOffset() {
+      const rect = canvas.getBoundingClientRect();
+      offsetX = rect.left;
+      offsetY = rect.top;
+    }
+
+    function initDots() {
+      dots = [];
+      const w = cw / dpr, h = ch / dpr;
+      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
+        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
+          dots.push({
+            sx: x, sy: y,
+            x: x,  y: y,
+            tw: Math.random() < twinkleChance
+          });
+        }
+      }
+    }
+
+    function draw() {
+      const t = Date.now();
+      ctx.clearRect(0,0,cw,ch);
+      dots.forEach(d => {
+        const dx = d.x - mx, dy = d.y - my;
+        if (isDown && dx*dx + dy*dy < mouseRadius2) {
+          d.x += dx / 30;
+          d.y += dy / 30;
+        } else {
+          const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
+          if (dx0 || dy0) {
+            d.x -= dx0 / 20;
+            d.y -= dy0 / 20;
+          }
+        }
+        const cx = d.x - (cw / dpr) / 2;
+        const cy = d.y - (ch / dpr) / 2;
+        const dist = Math.hypot(cx, cy);
+        const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
+        const conc = Math.pow(dist / mD, 3) * concaveStrength;
+        const inter = (dx*dx + dy*dy < mouseRadius2)
+          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
+          : 0;
+        const radius = dotRadius + conc + inter;
+        let alpha = 1;
+        if (d.tw) {
+          const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
+          alpha = 0.7 + tw * 0.3;
+        }
+        ctx.globalAlpha = alpha;
+        if (d.tw) {
+          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+        } else {
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        }
+        if (inter > 0) {
+          ctx.shadowBlur  = 40;
+          ctx.shadowColor = 'rgba(0,240,255,0.7)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      });
+    }
+
+    function animate() {
+      draw();
+      requestAnimationFrame(animate);
+    }
+
+    canvas.onmousemove = e => {
+      isDown = true;
+      mx = e.clientX - offsetX;
+      my = e.clientY - offsetY;
+    };
+    canvas.onmouseout = () => {
+      isDown = false;
+    };
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('scroll', updateOffset);
+    window.onload = () => {
+      resizeCanvas();
+      animate();
+    };
+
+    // Intro Overlay Removal & SVK Glow Trigger
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('intro-overlay');
+      const hero    = document.querySelector('.hero');
+      const svk     = document.querySelector('.intro-logo');
+      overlay.addEventListener('animationend', e => {
+        if (e.animationName === 'overlayFade') {
+          overlay.remove();
+          hero.classList.add('intro-ready');
+          svk.classList.add('glow-active');
+        }
+      });
+    });
+
+    // Fade-In On Scroll (Intersection Observer)
+    document.addEventListener('DOMContentLoaded', function() {
+      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, options);
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+
+    // 3D Tilt on Role Cards
+    document.addEventListener('DOMContentLoaded', () => {
+      const MAX_TILT = 15;
+      document.querySelectorAll('.role-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const dx = (x - cx) / cx;
+          const dy = (y - cy) / cy;
+          const tiltY = dx * MAX_TILT * -1;
+          const tiltX = dy * MAX_TILT;
+          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    });
+
+    // Toggle Details for Skills
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggles = document.querySelectorAll('.toggle-btn');
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const listItem = btn.closest('.skill-item');
+          listItem.classList.toggle('open');
+          btn.textContent = listItem.classList.contains('open') ? '− details' : '+ details';
+        });
+      });
+    });
   </script>
 
 </body>

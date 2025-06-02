@@ -50,21 +50,22 @@
       <div class="about-overview">
         <h2>About Me</h2>
         <p>
-          Hey, I’m Shreyas. I’m a rising freshman at Northeastern University majoring in Computer Science. Throughout high school, I’ve engaged in research and software development internships across labs, government, and corporate environments. My passion lies in building interactive technologies that impact accessibility and education. Whether developing VR tools at UT Dallas or resolving data sync issues for DeKalb County, I push myself to learn new skills—ranging from Python and Unity to web frameworks—and apply them to real-world problems. Outside of coding, I enjoy photography, boxing, and staying up-to-date with the latest in tech. I’m driven by curiosity, a collaborative spirit, and a desire to keep innovating.
+          Hey, I’m Shreyas. I’m a rising freshman at Northeastern University, where I’ll be majoring in Computer Science. With hands-on experience in software development, extended reality, and interactive technologies, I’ve interned across research labs, government, and corporate environments. My work spans from developing immersive VR tools to resolving complex data synchronization issues and driving social media engagement for a global tech company. I’m passionate about building solutions that blend technology with impact—especially in accessibility, education, and data visualization. Alongside industry certifications in AWS, Python, Unity, and MySQL, I bring strong programming skills and a drive to keep learning, innovating, and collaborating.
         </p>
-        <div class="roles-grid">
-          <div class="role-card">
-            <h3>Research Intern</h3>
-          </div>
-          <div class="role-card">
-            <h3>Software Developer Intern</h3>
-          </div>
-          <div class="role-card">
-            <h3>Social Media Intern</h3>
-          </div>
-          <div class="role-card">
-            <h3>Target Tech Associate</h3>
-          </div>
+      </div>
+
+      <div class="roles-grid">
+        <div class="role-card">
+          <h3>Blank 1</h3>
+        </div>
+        <div class="role-card">
+          <h3>Blank 2</h3>
+        </div>
+        <div class="role-card">
+          <h3>Blank 3</h3>
+        </div>
+        <div class="role-card">
+          <h3>Blank 4</h3>
         </div>
       </div>
     </section>
@@ -74,11 +75,10 @@
       <h2>Projects</h2>
       <div class="projects-grid">
         <article class="project-card">
-          <h3>EnvisionVR</h3>
-          <p>3D visualization for special-needs students to improve spatial processing using VR.</p>
+          <h3>Project One</h3>
+          <p>Project description.</p>
           <a href="#" target="_blank">View →</a>
         </article>
-        <!-- Add more <article class="project-card"> elements here as needed -->
       </div>
     </section>
 
@@ -100,7 +100,7 @@
   <footer id="contact" class="footer">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
-      <p>🔗 <a href="https://www.linkedin.com/in/shreyas-kambhampati" target="_blank">LinkedIn</a> | <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a></p>
       <p>© 2025 Shreyas Kambhampati</p>
     </div>
   </footer>
@@ -114,13 +114,12 @@
     const dpr             = window.devicePixelRatio || 1;
     const NAV_HEIGHT      = 60;
     const dotRadius       = 2;
-    const dotPadding      = 12;
-    const concRadius      = 75;
-    const concStrength    = 4;
-    const interRadius     = 20;
-    const interStrength   = 15;
+    const dotPadding      = 75;
+    const mouseRadius     = 75;
+    const mouseRadius2    = mouseRadius * mouseRadius;
+    const concaveStrength = 10;
     const twinkleFreq     = 0.002;
-    const twinkleChance   = 0.4;
+    const twinkleChance   = 0.4;  
 
     let dots   = [];
     let mx = -9999, my = -9999, isDown = false;
@@ -150,37 +149,48 @@
           dots.push({
             sx: x, sy: y,
             x: x,  y: y,
-            ox: x, oy: y,
-            tw: Math.random() < twinkleChance,
-            r: dotRadius
+            tw: Math.random() < twinkleChance
           });
         }
       }
     }
 
     function draw() {
-      ctx.clearRect(0, 0, cw, ch);
       const t = Date.now();
+      ctx.clearRect(0,0,cw,ch);
 
-      dots.forEach((d) => {
-        const dx = (mx - offsetX) - d.sx;
-        const dy = (my - offsetY) - d.sy;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+      dots.forEach(d => {
+        const dx = d.x - mx, dy = d.y - my;
 
-        // concave (when mouse is down)
-        const conc = isDown && dist < concRadius
-          ? concStrength * (1 - dist/concRadius)
+        // If mouse is down and within radius, push dots outward
+        if (isDown && dx*dx + dy*dy < mouseRadius2) {
+          d.x += dx / 30;
+          d.y += dy / 30;
+        } else {
+          // Otherwise ease them back to their original positions
+          const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
+          if (dx0 || dy0) {
+            d.x -= dx0 / 20;
+            d.y -= dy0 / 20;
+          }
+        }
+
+        // Compute distance from center of canvas for concave effect
+        const cx = d.x - (cw / dpr) / 2;
+        const cy = d.y - (ch / dpr) / 2;
+        const dist = Math.hypot(cx, cy);
+        const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
+        const conc = Math.pow(dist / mD, 3) * concaveStrength;
+
+        // Interaction “bubble” around mouse
+        const inter = (dx*dx + dy*dy < mouseRadius2)
+          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
           : 0;
 
-        // interaction
-        const inter = dist < interRadius
-          ? interStrength * (1 - dist/interRadius) * (1 - Math.sqrt(dist*dist)/interRadius)
-          : 0;
+        // Final radius
+        const radius = dotRadius + conc + inter;
 
-        d.x = d.ox - (d.ox - d.sx) * dpr + conc * dx/(dist || 1) + inter * dx/(dist || 1);
-        d.y = d.oy - (d.oy - d.sy) * dpr + conc * dy/(dist || 1) + inter * dy/(dist || 1);
-
-        // twinkle
+        // Twinkle logic
         let alpha = 1;
         if (d.tw) {
           const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
@@ -188,41 +198,49 @@
         }
         ctx.globalAlpha = alpha;
 
-        // fill color
+        // Color: twinkling dots get a bluish tint, others remain white
         if (d.tw) {
-          ctx.fillStyle = '#6df';
+          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
         } else {
-          ctx.fillStyle = '#0af';
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        }
+
+        // Glow effect if within mouse bubble
+        if (inter > 0) {
+          ctx.shadowBlur  = 40;
+          ctx.shadowColor = 'rgba(0,240,255,0.7)';
+        } else {
+          ctx.shadowBlur = 0;
         }
 
         ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r + conc + inter, 0, Math.PI * 2);
+        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
       });
-
-      requestAnimationFrame(draw);
     }
 
-    canvas.addEventListener('pointermove', (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-    });
+    function animate() {
+      draw();
+      requestAnimationFrame(animate);
+    }
 
-    canvas.addEventListener('pointerdown', () => {
+    canvas.onmousemove = e => {
       isDown = true;
-    });
-
-    canvas.addEventListener('pointerup', () => {
+      mx = e.clientX - offsetX;
+      my = e.clientY - offsetY;
+    };
+    canvas.onmouseout = () => {
       isDown = false;
-    });
+    };
 
     window.addEventListener('resize', resizeCanvas);
-
-    // Initialize on load
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('scroll', updateOffset);
+    window.onload = () => {
       resizeCanvas();
-      draw();
-    });
+      animate();
+    };
   </script>
 
   <!-- Intro Overlay Removal -->
@@ -230,7 +248,6 @@
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
-
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
           overlay.remove();
@@ -244,9 +261,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const options = {
-        root: null,                // viewport
+        root: null,
         rootMargin: '0px',
-        threshold: 0.1             // 10% of the element is visible
+        threshold: 0.1
       };
 
       const observer = new IntersectionObserver((entries, observer) => {

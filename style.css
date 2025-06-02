@@ -1,5 +1,5 @@
 /* ===========================================================
-   style.css (Full CSS with Overlapping “Peeking” Cards and Corrected Scroll Position)
+   style.css (Full CSS with Overlapping “Peeking” Cards and Corrected Scroll Offset)
    =========================================================== */
 
 /* --------------------------------------------------------------------------
@@ -30,7 +30,7 @@ html, body {
    2) Centering container for all content (wider)
    -------------------------------------------------------------------------- */
 .container {
-  width: 95%;         /* Increased from 90% to let cards span wider */
+  width: 95%;         /* Increased from 90% so cards span wider */
   max-width: 1400px;  /* Bumped up from 1200px for extra room */
   margin: 0 auto;
 }
@@ -43,7 +43,7 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;                /* navbar height */
+  height: 60px;               /* Navbar height */
   background: rgba(0, 0, 0, 0.7);
   z-index: 10;
 }
@@ -231,13 +231,14 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   8) Rounded “Card” + Overlapping Setup (Ideas 10 & 9) + Scroll Margin Fix
+   8) Rounded “Card” + Overlapping Setup (Ideas 10 & 9)
+      + Scroll Offset Fix via scroll-margin-top
    -------------------------------------------------------------------------- */
-/* Remove default section padding; the card provides it 
-   and ensure headings appear below navbar */
+/* Remove default section padding; the card provides it */
 section {
   padding: 0;
-  scroll-margin-top: calc(60px + 4rem);  /* navbar height + card’s top padding */
+  /* Makes the browser stop 60px below the top of each section */
+  scroll-margin-top: 60px;
 }
 
 /* Each major section is wrapped in .section-card */
@@ -245,19 +246,19 @@ section {
   background: #111;                          /* Slightly lighter than page black */
   border-radius: 12px;                       /* Rounded corners */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);  /* Subtle drop-shadow */
-  margin: 2rem 0;                            /* Vertical spacing from other cards */
-  padding: 4rem 1.5rem;                      /* Internal padding (reduced horizontally to widen cards) */
+  margin: 2rem 0;                            /* Vertical spacing between cards */
+  padding: 4rem 1.5rem;                      /* Internal padding (4rem top + bottom, 1.5rem sides) */
   position: relative;
-  z-index: 1;                                /* So overlapping works in order */
+  z-index: 1;                                /* Ensures overlap stacking */
 }
 
 /* Overlap: every card after the first lifts up by 30px */
 .section-card + .section-card {
-  margin-top: -30px; /* Negative to peek over previous */
-  z-index: 2;        /* Higher stacking so it sits on top */
+  margin-top: -30px; /* Negative so it peeks above the previous card */
+  z-index: 2;        /* Stack higher than the one behind */
 }
 
-/* Reset any section’s own padding, since the card’s padding is handling spacing */
+/* Reset any section’s own padding (card supplies it) */
 .section-card section {
   padding: 0;
 }
@@ -269,7 +270,7 @@ section {
   width: 100%;
   text-align: left;
   color: #ddd;
-  margin-bottom: 2rem;  /* Spacing before role cards */
+  margin-bottom: 2rem;  /* Space before role cards */
 }
 
 .about-overview h2 {
@@ -292,7 +293,7 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   perspective: 1000px;
-  margin-bottom: 2rem;  /* Spacing below cards */
+  margin-bottom: 2rem;  /* Space below cards */
 }
 
 .roles-grid .role-card {

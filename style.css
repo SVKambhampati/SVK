@@ -232,23 +232,24 @@ section.fade-in-section.is-visible {
 
 /* --------------------------------------------------------------------------
    8) Rounded “Card” + Overlapping Setup (Ideas 10 & 9)
-      + Scroll Offset Fix via scroll-margin-top on .section-card
+      + Scroll Offset Fix via scroll-margin-top on <section>
    -------------------------------------------------------------------------- */
 /* Remove default section padding; .section-card provides it */
 section {
   padding: 0;
+  /* Stops 60px above each <section> so that <h2> is visible under the navbar */
+  scroll-margin-top: 60px;
 }
 
-/* Make each “card” itself the scroll anchor, with 60px offset (navbar height) */
+/* Each major section is wrapped in .section-card */
 .section-card {
-  background: #111;                           /* Slightly lighter than page black */
-  border-radius: 12px;                        /* Rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);   /* Subtle drop-shadow */
-  margin: 2rem 0;                             /* Vertical spacing between cards */
-  padding: 4rem 1.5rem;                       /* Internal padding (4rem top+bottom, 1.5rem sides) */
+  background: #111;                          /* Slightly lighter than page black */
+  border-radius: 12px;                       /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);  /* Subtle drop-shadow */
+  margin: 2rem 0;                            /* Vertical spacing between cards */
+  padding: 4rem 1.5rem;                      /* Internal padding (4rem top+bottom, 1.5rem sides) */
   position: relative;
-  z-index: 1;                                 /* Ensures overlap stacking */
-  scroll-margin-top: 60px;                    /* ← Here’s the fix: card’s top will sit 60px below viewport top */
+  z-index: 1;                                /* Ensures overlap stacking */
 }
 
 /* Overlap: every card after the first lifts up by 30px */

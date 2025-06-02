@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project One Details</title>
+  <title>EnvisionVR Details</title>
 
   <!-- Google Font & main stylesheet -->
   <link
@@ -13,9 +13,121 @@
   />
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Inline CSS for the project‐intro overlay -->
+  <!-- Project‐specific styling -->
   <style>
-    /* Full-screen black overlay */
+    /* ---------------------------------------------------------------
+       PROJECT PAGE CONTAINER & TYPOGRAPHY
+       --------------------------------------------------------------- */
+    body {
+      background-color: #000; 
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+    }
+
+    main.container {
+      margin: 0 auto;
+      max-width: 900px;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.25rem;
+      color: #0af; /* accent color */
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0af; /* accent bullet */
+    }
+
+    /* ---------------------------------------------------------------
+       SECTION “CARDS”: Lightly tinted boxes for each major section
+       --------------------------------------------------------------- */
+    section.project-section {
+      background-color: #111;
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    section.project-section + section.project-section {
+      /* add a bit more spacing between sections */
+      margin-top: 1rem;
+    }
+
+    /* ---------------------------------------------------------------
+       SCREENSHOT STYLING
+       --------------------------------------------------------------- */
+    .screenshot {
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    /* ---------------------------------------------------------------
+       “← Home” NAV LINK
+       --------------------------------------------------------------- */
+    nav.navbar {
+      background: transparent; /* keep transparent so it doesn’t conflict */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      z-index: 10;
+    }
+
+    nav.navbar .container {
+      display: flex;
+      align-items: center;
+    }
+
+    nav.navbar .logo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav.navbar .logo:hover {
+      color: #0af;
+    }
+
+    /* ---------------------------------------------------------------
+       PROJECT INTRO OVERLAY REMAINS AS BEFORE
+       --------------------------------------------------------------- */
     #project-overlay {
       position: fixed;
       inset: 0;
@@ -27,7 +139,6 @@
       animation: overlayFade 1s ease-out 1s forwards;
     }
 
-    /* Big “EnvisionVR” text in the center */
     .project-logo {
       font-family: 'Blanka', sans-serif;
       font-size: 5rem;
@@ -37,7 +148,7 @@
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
 
-    /* Note: overlayFade and logoPop keyframes are already defined in style.css */
+    /* Re‐use the overlayFade & logoPop keyframes from style.css */
   </style>
 </head>
 <body>
@@ -54,30 +165,30 @@
     </div>
   </nav>
 
-  <!-- 3) Project One Content -->
-  <main class="container" style="margin-top: 80px;">
+  <!-- 3) Project Content Wrapped in “Cards” -->
+  <main class="container" style="margin-top: 100px;">
     <h1>EnvisionVR</h1>
 
     <!-- Overview Section -->
-    <section>
+    <section class="project-section">
       <h2>Overview</h2>
       <p>
-        EnvisionVR is a virtual reality education platform developed by my team and me to assist special-needs students who struggle with visual-spatial reasoning. The application delivers interactive 3D environments that enhance cognitive development and conceptual understanding through immersive, hands-on learning experiences across a range of subjects.
+        EnvisionVR is a virtual reality education platform developed by my team and me to assist special‐needs students who struggle with visual‐spatial reasoning. The application delivers interactive 3D environments that enhance cognitive development and conceptual understanding through immersive, hands‐on learning experiences across a range of subjects.
       </p>
     </section>
 
     <!-- Key Subject Modules -->
-    <section>
+    <section class="project-section">
       <h2>Key Subject Modules</h2>
       <ul>
         <li>
           <strong>Biology:</strong> A guided human anatomy module where students can explore detailed skeletal and organ systems through interactive modeling.
         </li>
         <li>
-          <strong>Geography:</strong> An explorable Earth globe with dynamic topographical maps and real-time environmental simulations.
+          <strong>Geography:</strong> An explorable Earth globe with dynamic topographical maps and real‐time environmental simulations.
         </li>
         <li>
-          <strong>Physics:</strong> A virtual physics lab for conducting experiments like free-fall kinematics with live motion tracking and visualizations.
+          <strong>Physics:</strong> A virtual physics lab for conducting experiments like free‐fall kinematics with live motion tracking and visualizations.
         </li>
         <li>
           <strong>Astronomy:</strong> A 3D solar system where students can interact with rotating planets, moons, and orbits to learn about space in an engaging way.
@@ -86,22 +197,22 @@
     </section>
 
     <!-- Technologies Used -->
-    <section>
+    <section class="project-section">
       <h2>Technologies</h2>
       <p>
-        We used Unity, Meta SDKs, and C# to design the platform, emphasizing intuitive interfaces and immersive environments.
+        We used Unity, Meta SDKs, and C# to design the platform, emphasizing intuitive interfaces and immersive environments. Below are some technical highlights:
       </p>
       <ul>
         <li>Custom 3D modeling and shader development for realism.</li>
-        <li>Real-time motion tracking and dynamic simulation for interactivity.</li>
+        <li>Real‐time motion tracking and dynamic simulation for interactivity.</li>
         <li>Performance optimization for smooth rendering and scene transitions.</li>
-        <li>Object-oriented programming for modular development and stability.</li>
-        <li>Integration of physics engines, animation controllers, and event-driven scripting to simulate real-world phenomena.</li>
+        <li>Object‐oriented programming for modular development and stability.</li>
+        <li>Integration of physics engines, animation controllers, and event‐driven scripting to simulate real‐world phenomena.</li>
       </ul>
     </section>
 
     <!-- Impact Section -->
-    <section>
+    <section class="project-section">
       <h2>Impact</h2>
       <p>
         This project demonstrates how technology can be harnessed to bridge educational gaps, offering transformative tools that make learning more engaging and accessible for all students.
@@ -109,7 +220,7 @@
     </section>
   </main>
 
-  <!-- 4) Project-Intro Overlay Removal Script -->
+  <!-- 4) Project‐Intro Overlay Removal Script -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('project-overlay');

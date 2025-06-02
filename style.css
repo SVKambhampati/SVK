@@ -1,8 +1,13 @@
 /* ========================================================================
-   style.css (reverted to previous version)
+   style.css (with springy easing & updated transitions)
    ======================================================================== */
 
-/* 1) Global Resets & Typography */
+/* 1) Root variable for spring‐easing */
+:root {
+  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 2) Global Resets & Typography */
 @font-face {
   font-family: 'Blanka';
   src: url('./blanka/Blanka-Regular.woff2') format('woff2');
@@ -30,7 +35,7 @@ html, body {
   margin: 0 auto;
 }
 
-/* 2) Navbar (simple semi-transparent) */
+/* 3) Navbar (simple semi-transparent) */
 .navbar {
   position: fixed;
   top: 0;
@@ -66,14 +71,14 @@ html, body {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color 0.2s var(--spring-ease);
 }
 
 .nav-links a:hover {
   color: #0af;
 }
 
-/* 3) Intro Overlay */
+/* 4) Intro Overlay */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -132,7 +137,7 @@ html, body {
   }
 }
 
-/* 4) Hero Section */
+/* 5) Hero Section */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -182,7 +187,7 @@ html, body {
   color: #ccc;
 }
 
-/* 5) Sections */
+/* 6) Sections & Typography */
 section {
   padding: 4rem 0;
 }
@@ -196,7 +201,7 @@ section p {
   color: #ddd;
 }
 
-/* 6) About Me */
+/* 7) About Me */
 .about-section {
   padding: 4rem 0;
 }
@@ -219,7 +224,7 @@ section p {
   letter-spacing: 0.5px;
 }
 
-/* 7) Role Cards (original four blanks) */
+/* 8) Role Cards (springy transitions) */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -233,7 +238,8 @@ section p {
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.5s var(--spring-ease),
+              box-shadow 0.5s var(--spring-ease);
   transform-style: preserve-3d;
 }
 
@@ -244,11 +250,12 @@ section p {
 }
 
 .role-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 170, 255, 0.3);
   background: #222;
-  transform: rotateX(5deg) rotateY(-5deg);
 }
 
-/* 8) Project Cards */
+/* 9) Project Cards (springy transitions) */
 .projects-grid {
   position: relative;
   display: flex;
@@ -272,7 +279,9 @@ section p {
   padding: 1.5rem;
   border-radius: 8px;
   margin-left: -10px;
-  transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.5s var(--spring-ease),
+              background 0.3s var(--spring-ease),
+              box-shadow 0.5s var(--spring-ease);
   box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
 
@@ -293,16 +302,16 @@ section p {
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.02);
   background: #222;
-  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.4);
 }
 
 .project-card a:hover {
   color: #fff;
 }
 
-/* 9) Skills */
+/* 10) Skills */
 .skills-list {
   list-style: none;
   display: flex;
@@ -317,7 +326,7 @@ section p {
   font-weight: 500;
 }
 
-/* 10) Footer */
+/* 11) Footer */
 .footer {
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
@@ -328,18 +337,19 @@ section p {
 .footer a {
   color: #0af;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s var(--spring-ease);
 }
 
 .footer a:hover {
   color: #fff;
 }
 
-/* 11) Fade-In On Scroll */
+/* 12) Fade-In On Scroll (springy easing) */
 .fade-in-section {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: opacity 0.8s var(--spring-ease),
+              transform 0.8s var(--spring-ease);
 }
 
 .fade-in-section.is-visible {

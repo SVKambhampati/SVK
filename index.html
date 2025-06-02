@@ -34,27 +34,27 @@
       text-align: center;
     }
 
-    /* SVK text */
+    /* SVK text—font size increased */
     .intro-logo {
       font-family: 'Blanka', sans-serif;
-      font-size: 4rem;
+      font-size: 6rem; /* was 4rem */
       color: #fff;
       opacity: 0;
       transform: scale(0.8);
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
 
-    /* Underline element beneath SVK */
+    /* Underline element beneath SVK—thicker */
     .logo-underline {
       position: absolute;
       left: 50%;
-      bottom: -8px;
+      bottom: -12px;        /* shift down slightly */
       transform: translateX(-50%);
-      height: 4px;
+      height: 6px;          /* was 4px */
       width: 0;
       background: #fff;
       animation: underlineExpand 1s ease-out 0.8s forwards;
-      border-radius: 2px;
+      border-radius: 3px;
     }
 
     @keyframes underlineExpand {
@@ -64,7 +64,7 @@
 </head>
 <body>
 
-  <!-- Intro Overlay with SVK text and loading underline -->
+  <!-- Intro Overlay with larger SVK text and thicker loading line -->
   <div id="intro-overlay">
     <div class="logo-container">
       <div class="intro-logo">SVK</div>

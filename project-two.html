@@ -13,7 +13,7 @@
   />
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Project‐specific styling (overlay font and animation) -->
+  <!-- Project‐specific styling (overlay font only) -->
   <style>
     /* Full-screen black overlay */
     #project-overlay {
@@ -27,7 +27,7 @@
       animation: overlayFade 1s ease-out 1s forwards;
     }
 
-    /* Centered MovieMind text */
+    /* Centered “MovieMind” text */
     .project-logo {
       font-family: 'Questrial', sans-serif;
       font-size: 5rem;
@@ -36,33 +36,14 @@
       transform: scale(0.8);
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
-
-    /* Underline loading line beneath MovieMind */
-    .logo-underline {
-      position: absolute;
-      left: 50%;
-      bottom: -8px;
-      transform: translateX(-50%);
-      height: 4px;
-      width: 0;
-      background: #0af;
-      animation: underlineExpand 1s ease-out 0.8s forwards;
-      border-radius: 2px;
-    }
-
-    @keyframes underlineExpand {
-      to { width: 100%; }
-    }
+    /* overlayFade and logoPop keyframes come from style.css */
   </style>
 </head>
 <body>
 
   <!-- 1) Project Intro Overlay -->
   <div id="project-overlay">
-    <div class="logo-container" style="position: relative; text-align: center;">
-      <div class="project-logo">MovieMind</div>
-      <div class="logo-underline"></div>
-    </div>
+    <div class="project-logo">MovieMind</div>
   </div>
 
   <!-- 2) Top Navbar with “← Home” -->
@@ -72,8 +53,8 @@
     </div>
   </nav>
 
-  <!-- 3) Project Two Content -->
-  <main class="container" style="margin-top: 80px;">
+  <!-- 3) Project Two Content (styled like project-one.html) -->
+  <main class="container" style="margin-top: 100px;">
     <h1>MovieMind</h1>
 
     <!-- Overview Section -->
@@ -88,14 +69,16 @@
     <section class="project-section">
       <h2>Project Specifications</h2>
       <ul>
-        <li><strong>Recommendation Methods:</strong>
+        <li>
+          <strong>Recommendation Methods:</strong>
           <ul>
-            <li><strong>Content-Based Filtering:</strong> Analyzes movie metadata like genres, keywords, and cast to suggest similar films.</li>
+            <li><strong>Content-Based Filtering:</strong> Analyzes movie metadata (genres, keywords, cast) to suggest similar films.</li>
             <li><strong>Collaborative Filtering:</strong> Leverages patterns in user ratings to find movies enjoyed by like-minded viewers.</li>
             <li><strong>(Optional) Hybrid Filtering:</strong> Blends both techniques for enhanced accuracy.</li>
           </ul>
         </li>
-        <li><strong>Features:</strong>
+        <li>
+          <strong>Features:</strong>
           <ul>
             <li>Search, rate, and discover movies</li>
             <li>Personalized recommendations</li>
@@ -120,7 +103,7 @@
     </section>
   </main>
 
-  <!-- 4) Project-Intro Overlay Removal Script -->
+  <!-- 4) Project‐Intro Overlay Removal Script -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('project-overlay');

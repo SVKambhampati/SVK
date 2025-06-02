@@ -1,6 +1,6 @@
-/* ========================================================================
-   style.css (original + glow-flicker additions)
-   ======================================================================== */
+/* ===========================================================
+   style.css (with SVK glow and embedded Contact section)
+   =========================================================== */
 
 /* 1) Global Resets & Typography */
 @font-face {
@@ -36,7 +36,7 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;                /* --navbar-height */
+  height: 60px;
   background: rgba(0, 0, 0, 0.7);
   z-index: 10;
 }
@@ -98,6 +98,7 @@ html, body {
   opacity: 0;
   transform: scale(0.8);
   animation: logoPop 0.8s ease-out 0.3s forwards;
+  text-shadow: none;
 }
 
 .logo-underline {
@@ -132,7 +133,27 @@ html, body {
   }
 }
 
-/* 4) Hero Section */
+/* 4) SVK Glow Animation */
+.intro-logo.glow-active {
+  animation: flickerGlow 1s ease-out forwards;
+}
+
+@keyframes flickerGlow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  10%, 30%, 50%, 70% {
+    text-shadow:
+      0 0 8px rgba(0, 200, 255, 0.8),
+      0 0 12px rgba(0, 200, 255, 0.6),
+      0 0 16px rgba(255, 255, 255, 0.4);
+  }
+  20%, 40%, 60%, 80% {
+    text-shadow: none;
+  }
+}
+
+/* 5) Hero Section */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -174,39 +195,6 @@ html, body {
   margin-bottom: 1.5rem;
 }
 
-/* --------------------------------------------------------------------------
-   5) Glow-Flicker Animation
-   -------------------------------------------------------------------------- */
-
-/* Initial state: no glow yet */
-.glow-flicker {
-  text-shadow: none;
-  opacity: 1;
-  /* no animation until we add .glow-active */
-}
-
-/* Once we add .glow-active, run the flickerGlow keyframes exactly once */
-.glow-flicker.glow-active {
-  animation: flickerGlow 1s ease-out forwards;
-}
-
-/* animates a brief blue-white glow, then returns to none */
-@keyframes flickerGlow {
-  0%, 100% {
-    text-shadow: none;
-  }
-  10%, 30%, 50%, 70% {
-    text-shadow:
-      0 0 8px rgba(0, 200, 255, 0.8),
-      0 0 12px rgba(0, 200, 255, 0.6),
-      0 0 16px rgba(255, 255, 255, 0.4);
-  }
-  20%, 40%, 60%, 80% {
-    text-shadow: none;
-  }
-}
-
-/* 6) Hero Subheading */
 .hero .container p {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   font-size: 1.25rem;
@@ -215,7 +203,7 @@ html, body {
   color: #ccc;
 }
 
-/* 7) Sections & Typography */
+/* 6) Sections & Typography */
 section {
   padding: 4rem 0;
 }
@@ -229,7 +217,7 @@ section p {
   color: #ddd;
 }
 
-/* 8) About Me */
+/* 7) About Me */
 .about-section {
   padding: 4rem 0;
 }
@@ -252,7 +240,7 @@ section p {
   letter-spacing: 0.5px;
 }
 
-/* 9) Role Cards */
+/* 8) Role Cards */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -280,7 +268,7 @@ section p {
   transform: rotateX(5deg) rotateY(-5deg);
 }
 
-/* 10) Project Cards */
+/* 9) Project Cards */
 .projects-grid {
   position: relative;
   display: flex;
@@ -334,7 +322,7 @@ section p {
   color: #fff;
 }
 
-/* 11) Skills */
+/* 10) Skills */
 .skills-list {
   list-style: none;
   display: flex;
@@ -347,6 +335,73 @@ section p {
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-weight: 500;
+}
+
+/* 11) Contact */
+.contact-container {
+  max-width: 600px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 1rem;
+}
+
+.contact-container h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.contact-container p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ddd;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-form label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #ddd;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: #111;
+  border: 1px solid #0af;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #0ff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.contact-form button {
+  align-self: flex-start;
+  background: #0af;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease-out, transform 0.2s ease-out;
+}
+
+.contact-form button:hover {
+  background: #3fcfff;
+  transform: scale(1.02);
 }
 
 /* 12) Footer */

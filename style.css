@@ -339,7 +339,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   10) Skills Expandable “+ details” List
+   10) Skills Expandable “+ details” List (use display:none/block)
    -------------------------------------------------------------------------- */
 .skills-expandable {
   list-style: none;
@@ -384,20 +384,16 @@ section p {
 
 /* The hidden details block */
 .skill-details {
-  max-height: 0;
-  overflow: hidden;
+  display: none;
   color: #ccc;
   font-size: 0.95rem;
   line-height: 1.5;
-  opacity: 0;
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
   margin-top: 0.5rem;
 }
 
 /* When .open is added to .skill-item, reveal the .skill-details */
 .skill-item.open .skill-details {
-  max-height: 200px; /* large enough to contain the content */
-  opacity: 1;
+  display: block;
 }
 
 /* --------------------------------------------------------------------------

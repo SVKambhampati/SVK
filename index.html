@@ -33,10 +33,10 @@
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about-anchor">About</a></li>
+        <li><a href="#projects-anchor">Projects</a></li>
+        <li><a href="#skills-anchor">Skills</a></li>
+        <li><a href="#contact-anchor">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -58,11 +58,14 @@
   <main class="container">
 
     <!-- ================================================
-         ABOUT ME (Wrapped in a Rounded “Card”)
-         – ID moved onto <section>
+         ABOUT ME (Rounded Card)
+         – Invisible anchor (#about-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
-      <section id="about" class="about-section fade-in-section">
+      <section class="fade-in-section">
+        <!-- Invisible anchor to force scroll-stop above the heading -->
+        <div id="about-anchor" class="section-anchor"></div>
+
         <div class="about-overview">
           <h2>About Me</h2>
           <p>
@@ -79,11 +82,13 @@
     </div>
 
     <!-- ================================================
-         PROJECTS (Wrapped in a Rounded “Card”)
-         – ID moved onto <section>
+         PROJECTS (Rounded Card)
+         – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
-      <section id="projects" class="fade-in-section">
+      <section class="fade-in-section">
+        <div id="projects-anchor" class="section-anchor"></div>
+
         <h2>Projects</h2>
         <div class="projects-grid">
           <article class="project-card">
@@ -110,11 +115,13 @@
     </div>
 
     <!-- ================================================
-         SKILLS (Wrapped in a Rounded “Card”)
-         – ID moved onto <section>
+         SKILLS (Rounded Card)
+         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
-      <section id="skills" class="fade-in-section">
+      <section class="fade-in-section">
+        <div id="skills-anchor" class="section-anchor"></div>
+
         <h2>Programming Languages &amp; Frameworks</h2>
         <ul class="skills-expandable">
           <!-- Java -->
@@ -192,11 +199,13 @@
     </div>
 
     <!-- ================================================
-         CONTACT (Wrapped in a Rounded “Card”)
-         – ID moved onto <section>
+         CONTACT (Rounded Card)
+         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
-      <section id="contact" class="fade-in-section">
+      <section class="fade-in-section">
+        <div id="contact-anchor" class="section-anchor"></div>
+
         <div class="contact-card">
           <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
@@ -262,7 +271,7 @@
        Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
        ============================================================ -->
   <script>
-    // Dot-Grid Canvas Animation
+    // Dot-Grid Canvas Animation (unchanged)
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;

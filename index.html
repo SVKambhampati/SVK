@@ -281,5 +281,31 @@
     });
   </script>
 
+  <!-- 3D Tilt on Role Cards -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const MAX_TILT = 15;
+
+      document.querySelectorAll('.role-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const dx = (x - cx) / cx;
+          const dy = (y - cy) / cy;
+          const tiltY = dx * MAX_TILT * -1;
+          const tiltX = dy * MAX_TILT;
+          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>

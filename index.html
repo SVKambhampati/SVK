@@ -1,4 +1,4 @@
-isi<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,6 +11,7 @@ isi<!DOCTYPE html>
     rel="stylesheet"
   />
 
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -74,25 +75,25 @@ isi<!DOCTYPE html>
     <section id="projects" class="fade-in-section">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <!-- Card 1 -->
+        <!-- Project One -->
         <article class="project-card">
-          <h3>EnvisionVR</h3>
-          <p>EnvisionVR is a virtual reality application built to support special-needs students with visual-spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real-time simulations..</p>
-          <a href="#" target="_blank">View →</a>
+          <h3>Project One</h3>
+          <p>Project description.</p>
+          <a href="project-one.html">View →</a>
         </article>
 
-        <!-- Card 2 -->
+        <!-- Project Two -->
         <article class="project-card">
           <h3>Project Two</h3>
           <p>Another project description.</p>
-          <a href="#" target="_blank">View →</a>
+          <a href="project-two.html">View →</a>
         </article>
 
-        <!-- Card 3 -->
+        <!-- Project Three -->
         <article class="project-card">
           <h3>Project Three</h3>
           <p>A third project description.</p>
-          <a href="#" target="_blank">View →</a>
+          <a href="project-three.html">View →</a>
         </article>
       </div>
     </section>
@@ -120,7 +121,7 @@ isi<!DOCTYPE html>
     </div>
   </footer>
 
-  <!-- Dot-Grid Canvas Script with Twinkle -->
+  <!-- Dot‐Grid Canvas Script -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -134,7 +135,7 @@ isi<!DOCTYPE html>
     const mouseRadius2    = mouseRadius * mouseRadius;
     const concaveStrength = 10;
     const twinkleFreq     = 0.002;
-    const twinkleChance   = 0.4;  
+    const twinkleChance   = 0.4;
 
     let dots   = [];
     let mx = -9999, my = -9999, isDown = false;
@@ -190,7 +191,7 @@ isi<!DOCTYPE html>
           }
         }
 
-        // Compute distance from center of canvas for concave effect
+        // Compute distance from center for concave effect
         const cx = d.x - (cw / dpr) / 2;
         const cy = d.y - (ch / dpr) / 2;
         const dist = Math.hypot(cx, cy);

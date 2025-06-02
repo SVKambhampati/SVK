@@ -6,14 +6,10 @@
   <title>Shreyas Kambhampati | Portfolio</title>
 
   <!-- Google Font: Plus Jakarta Sans -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* Scroll fade-in */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -24,7 +20,6 @@
       transform: translateY(0);
     }
 
-    /* Role card hover with cursor-based 3D tilt */
     .role-card {
       transition: transform 0.1s ease, box-shadow 0.3s ease;
       transform-style: preserve-3d;
@@ -34,24 +29,53 @@
       box-shadow: 0 10px 30px rgba(0, 170, 255, 0.25);
     }
 
-    /* Project card glow on hover */
     .project-card {
       transition: box-shadow 0.4s ease, transform 0.3s ease;
+      background-color: #111;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      margin-left: 2rem;
     }
     .project-card:hover {
       box-shadow: 0 0 15px rgba(0, 170, 255, 0.4), 0 0 30px rgba(0, 170, 255, 0.2);
       transform: scale(1.02);
     }
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .projects-grid::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10px;
+      width: 2px;
+      height: 100%;
+      background: rgba(0, 170, 255, 0.3);
+    }
+    .project-card::before {
+      content: "";
+      position: absolute;
+      left: -1.1rem;
+      top: 1rem;
+      width: 12px;
+      height: 12px;
+      background: #00aaff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00aaff;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Intro Overlay -->
   <div id="intro-overlay">
     <div class="intro-logo">SVK</div>
   </div>
 
-  <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
@@ -64,7 +88,6 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <header class="hero fade-in">
     <canvas id="dotGrid"></canvas>
     <div class="container">
@@ -73,10 +96,7 @@
     </div>
   </header>
 
-  <!-- Main Content -->
   <main class="container">
-
-    <!-- About Me -->
     <section id="about" class="about-section fade-in">
       <div class="about-overview">
         <h2>About Me</h2>
@@ -84,7 +104,6 @@
           Hey, I’m Shreyas. I’m a rising freshman at Northeastern University, where I’ll be majoring in Computer Science. With hands-on experience in software development, extended reality, and interactive technologies, I’ve interned across research labs, government, and corporate environments. My work spans from developing immersive VR tools to resolving complex data synchronization issues and driving social media engagement for a global tech company. I’m passionate about building solutions that blend technology with impact—especially in accessibility, education, and data visualization. Alongside industry certifications in AWS, Python, Unity, and MySQL, I bring strong programming skills and a drive to keep learning, innovating, and collaborating.
         </p>
       </div>
-
       <div class="roles-grid">
         <div class="role-card">
           <h3>Blank 1</h3>
@@ -101,7 +120,6 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="fade-in">
       <h2>Projects</h2>
       <div class="projects-grid">
@@ -123,7 +141,6 @@
       </div>
     </section>
 
-    <!-- Skills -->
     <section id="skills" class="fade-in">
       <h2>Skills</h2>
       <ul class="skills-list">
@@ -134,10 +151,8 @@
         <li>C++</li>
       </ul>
     </section>
-
   </main>
 
-  <!-- Footer / Contact -->
   <footer id="contact" class="footer">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
@@ -146,7 +161,6 @@
     </div>
   </footer>
 
-  <!-- Dot-Grid Canvas Script with Twinkle -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx = canvas.getContext('2d');
@@ -162,7 +176,6 @@
     const twinkleChance = 0.4;
     let dots = [];
     let mx = -9999, my = -9999, isDown = false;
-
     function resizeCanvas() {
       cw = canvas.width = window.innerWidth * dpr;
       ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
@@ -173,13 +186,11 @@
       updateOffset();
       initDots();
     }
-
     function updateOffset() {
       const rect = canvas.getBoundingClientRect();
       offsetX = rect.left;
       offsetY = rect.top;
     }
-
     function initDots() {
       dots = [];
       const w = cw / dpr, h = ch / dpr;
@@ -189,7 +200,6 @@
         }
       }
     }
-
     function draw() {
       const t = Date.now();
       ctx.clearRect(0, 0, cw, ch);
@@ -206,9 +216,7 @@
         const dist = Math.hypot(cx, cy);
         const mD = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
         const conc = Math.pow(dist / mD, 3) * concaveStrength;
-        const inter = (dx * dx + dy * dy < mouseRadius2)
-          ? (1 - Math.sqrt(dx * dx + dy * dy) / mouseRadius) * 3
-          : 0;
+        const inter = (dx * dx + dy * dy < mouseRadius2) ? (1 - Math.sqrt(dx * dx + dy * dy) / mouseRadius) * 3 : 0;
         const radius = dotRadius + conc + inter;
         let alpha = 1;
         if (d.tw) {
@@ -230,19 +238,16 @@
         ctx.globalAlpha = 1;
       });
     }
-
     function animate() {
       draw();
       requestAnimationFrame(animate);
     }
-
     canvas.onmousemove = e => {
       isDown = true;
       mx = e.clientX - offsetX;
       my = e.clientY - offsetY;
     };
     canvas.onmouseout = () => { isDown = false; };
-
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('scroll', updateOffset);
     window.onload = () => {
@@ -251,13 +256,9 @@
     };
   </script>
 
-  <!-- Scroll Fade-In Observer -->
   <script>
     const faders = document.querySelectorAll(".fade-in");
-    const appearOptions = {
-      threshold: 0,
-      rootMargin: "0px 0px -100px 0px"
-    };
+    const appearOptions = { threshold: 0, rootMargin: "0px 0px -100px 0px" };
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
@@ -268,7 +269,6 @@
     faders.forEach(fader => appearOnScroll.observe(fader));
   </script>
 
-  <!-- Role card cursor parallax (tilt toward cursor) -->
   <script>
     document.querySelectorAll('.role-card').forEach(card => {
       card.addEventListener('mousemove', e => {
@@ -287,7 +287,6 @@
     });
   </script>
 
-  <!-- Intro Overlay Removal -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');

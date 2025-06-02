@@ -233,7 +233,6 @@ section p {
    7) About Me (inside .container, fills 100% of container)
    -------------------------------------------------------------------------- */
 .about-overview {
-  /* Fill 100% of the parent .container width */
   width: 100%;
   text-align: left;
   color: #ddd;
@@ -246,7 +245,7 @@ section p {
 
 .about-overview p {
   line-height: 1.8;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   letter-spacing: 0.5px;
 }
 
@@ -340,20 +339,65 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   10) Skills (inside .container, unchanged)
+   10) Skills Expandable “+ details” List
    -------------------------------------------------------------------------- */
-.skills-list {
+.skills-expandable {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  padding: 0;
+  margin: 0;
 }
 
-.skills-list li {
-  background: #111;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: 500;
+.skill-item {
+  border-bottom: 1px solid #333;
+  padding: 1rem 0;
+}
+
+/* Header row: skill name on left, toggle button on right */
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* The toggle button (“+ details” or “− details”) */
+.toggle-btn {
+  background: none;
+  border: 1px solid #0af;
+  border-radius: 4px;
+  color: #0af;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: #0af;
+  color: #000;
+}
+
+/* The hidden details block */
+.skill-details {
+  max-height: 0;
+  overflow: hidden;
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  margin-top: 0.5rem;
+}
+
+/* When .open is added to .skill-item, reveal the .skill-details */
+.skill-item.open .skill-details {
+  max-height: 200px; /* large enough to contain the content */
+  opacity: 1;
 }
 
 /* --------------------------------------------------------------------------

@@ -237,8 +237,9 @@ section.fade-in-section.is-visible {
 /* Remove default section padding; .section-card provides it */
 section {
   padding: 0;
-  /* Stops 60px above each <section> so that <h2> is visible under the navbar */
-  scroll-margin-top: 60px;
+  /* STOP 124px above each <section> so that <h2> is visible under the navbar:
+     60px (navbar) + 4rem (≈64px card-padding) = 124px total offset */
+  scroll-margin-top: calc(60px + 4rem);
 }
 
 /* Each major section is wrapped in .section-card */

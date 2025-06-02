@@ -34,13 +34,13 @@
       box-shadow: 0 10px 30px rgba(0, 170, 255, 0.25);
     }
 
-    /* Project card simple lift on hover */
+    /* Project card glow on hover */
     .project-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: box-shadow 0.4s ease, transform 0.3s ease;
     }
     .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 15px rgba(0, 170, 255, 0.4), 0 0 30px rgba(0, 170, 255, 0.2);
+      transform: scale(1.02);
     }
   </style>
 </head>
@@ -272,7 +272,7 @@
     faders.forEach(fader => appearOnScroll.observe(fader));
   </script>
 
-  <!-- Role card cursor parallax -->
+  <!-- Role card cursor parallax (tilt toward cursor) -->
   <script>
     document.querySelectorAll('.role-card').forEach(card => {
       card.addEventListener('mousemove', e => {
@@ -281,8 +281,8 @@
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = (centerY - y) / 10;
-        const rotateY = (x - centerX) / 10;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
         card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
       card.addEventListener('mouseleave', () => {

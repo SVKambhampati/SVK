@@ -1,5 +1,5 @@
 /* ===========================================================
-   style.css (with SVK glow, shared‐container About & roles, etc.)
+   style.css (with updated Contact design, SVK glow, etc.)
    =========================================================== */
 
 /* --------------------------------------------------------------------------
@@ -397,72 +397,106 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   11) Contact Section (embedded in index.html)
+   11) Redesigned Contact Section (compact card layout)
    -------------------------------------------------------------------------- */
-.contact-container {
+#contact {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.contact-card {
   max-width: 600px;
-  margin: 2rem auto 4rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem 2rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.contact-container h2 {
-  font-size: 2rem;
+.contact-card h2 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 2rem;
 }
 
-.contact-container p {
+.contact-card p {
   text-align: center;
   margin-bottom: 1.5rem;
   color: #ddd;
+  line-height: 1.5;
 }
 
-.contact-form {
+/* Flex container for Name + Email fields */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+/* Each group (label + input/textarea) */
+.form-group {
+  flex: 1 1 250px; /* Grow/shrink so two fit in one row on desktop */
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
 }
 
-.contact-form label {
+/* Label styling */
+.form-group label {
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #ddd;
+  color: #fff;
+  font-size: 0.95rem;
 }
 
-.contact-form input,
-.contact-form textarea {
+/* Inputs and Textarea */
+.form-group input,
+.form-group textarea {
   background: #111;
   border: 1px solid #0af;
   border-radius: 6px;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1rem;
   color: #fff;
   font-size: 1rem;
   resize: vertical;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #666;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
   outline: none;
   border-color: #0ff;
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
 }
 
-.contact-form button {
-  align-self: flex-start;
+/* The “Send Message” button */
+.send-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
   background: #0af;
   color: #000;
   border: none;
   border-radius: 6px;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.75rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease-out, transform 0.2s ease-out;
 }
 
-.contact-form button:hover {
+.send-btn:hover {
   background: #3fcfff;
-  transform: scale(1.02);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
 }
 
 /* --------------------------------------------------------------------------

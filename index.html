@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <!-- Intro Overlay (SVK with underline) -->
+  <!-- Intro Overlay (SVK with underline and glow animation) -->
   <div id="intro-overlay">
     <div class="logo-container">
       <div class="intro-logo">SVK</div>
@@ -32,7 +32,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="contact.html">Contact</a></li> <!-- now points to contact.html -->
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -41,8 +41,7 @@
   <header class="hero">
     <canvas id="dotGrid"></canvas>
     <div class="container">
-      <!-- Add class="glow-flicker" here; animation triggers once overlay is gone -->
-      <h1 class="glow-flicker">Hi, I’m Shreyas Kambhampati</h1>
+      <h1>Hi, I’m Shreyas Kambhampati</h1>
       <p>Computer Science Student at Northeastern University</p>
     </div>
   </header>
@@ -104,10 +103,33 @@
       </ul>
     </section>
 
+    <!-- Contact -->
+    <section id="contact" class="fade-in-section">
+      <div class="contact-container">
+        <h2>Contact Me</h2>
+        <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
+        <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+          <div>
+            <label for="name">Name</label><br />
+            <input type="text" id="name" name="name" placeholder="Your Name" required />
+          </div>
+          <div>
+            <label for="email">Email</label><br />
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div>
+            <label for="message">Message</label><br />
+            <textarea id="message" name="message" rows="6" placeholder="Write your message…" required></textarea>
+          </div>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer / Contact -->
-  <footer id="contact" class="footer fade-in-section">
+  <!-- Footer -->
+  <footer class="footer fade-in-section">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
       <p>🔗 
@@ -118,7 +140,7 @@
     </div>
   </footer>
 
-  <!-- Dot-Grid Canvas Script (unchanged) -->
+  <!-- Dot-Grid Canvas Script -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -248,20 +270,20 @@
     };
   </script>
 
-  <!-- Intro Overlay Removal & Glow Trigger -->
+  <!-- Intro Overlay Removal & SVK Glow Trigger -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
-      const heading = document.querySelector('.hero h1');
+      const svk     = document.querySelector('.intro-logo');
 
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
           overlay.remove();
           hero.classList.add('intro-ready');
 
-          // As soon as overlay is gone, add .glow-active to trigger the glow animation
-          heading.classList.add('glow-active');
+          // Trigger SVK glow
+          svk.classList.add('glow-active');
         }
       });
     });

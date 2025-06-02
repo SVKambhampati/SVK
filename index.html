@@ -16,30 +16,33 @@
 </head>
 <body>
 
-  <!-- Intro Overlay -->
+  <!-- Intro Overlay (SVK with underline) -->
   <div id="intro-overlay">
-    <div class="intro-logo">SVK</div>
+    <div class="logo-container">
+      <div class="intro-logo">SVK</div>
+      <div class="logo-underline"></div>
+    </div>
   </div>
 
-  <!-- Glassmorphic Navbar -->
+  <!-- Navbar (semi-transparent, no blur) -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
       <ul class="nav-links">
-        <li><a href="#about" class="fancy-link">About</a></li>
-        <li><a href="#projects" class="fancy-link">Projects</a></li>
-        <li><a href="#skills" class="fancy-link">Skills</a></li>
-        <li><a href="#contact" class="fancy-link">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (with dot-grid background as before) -->
   <header class="hero">
-    <canvas id="dotGrid" class="hero-bg"></canvas>
-    <div class="hero-copy">
-      <h1 class="floating-text">Hi, I'm Shreyas Kambhampati</h1>
-      <p class="floating-text">Computer Science Student at Northeastern University</p>
+    <canvas id="dotGrid"></canvas>
+    <div class="container">
+      <h1>Hi, I'm Shreyas Kambhampati</h1>
+      <p>Computer Science Student at Northeastern University</p>
     </div>
   </header>
 
@@ -54,26 +57,11 @@
           Hey, I’m Shreyas. I’m a rising freshman at Northeastern University, where I’ll be majoring in Computer Science. With hands-on experience in software development, extended reality, and interactive technologies, I’ve interned across research labs, government, and corporate environments. My work spans from developing immersive VR tools to resolving complex data synchronization issues and driving social media engagement for a global tech company. I’m passionate about building solutions that blend technology with impact—especially in accessibility, education, and data visualization. Alongside industry certifications in AWS, Python, Unity, and MySQL, I bring strong programming skills and a drive to keep learning, innovating, and collaborating.
         </p>
       </div>
-
       <div class="roles-grid">
-        <div class="role-card">
-          <h3>AWS Certified Cloud Practitioner</h3>
-        </div>
-        <div class="role-card">
-          <h3>Python Certified Developer (PCEP-30-01)</h3>
-        </div>
-        <div class="role-card">
-          <h3>MySQL Developer Certification</h3>
-        </div>
-        <div class="role-card">
-          <h3>Programming for Unity Game Development</h3>
-        </div>
-        <div class="role-card">
-          <h3>Unity & C# Backend Development</h3>
-        </div>
-        <div class="role-card">
-          <h3>Database for Front/Back-End Development</h3>
-        </div>
+        <div class="role-card"><h3>Blank 1</h3></div>
+        <div class="role-card"><h3>Blank 2</h3></div>
+        <div class="role-card"><h3>Blank 3</h3></div>
+        <div class="role-card"><h3>Blank 4</h3></div>
       </div>
     </section>
 
@@ -81,21 +69,16 @@
     <section id="projects" class="fade-in-section">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <!-- Project One -->
         <article class="project-card">
           <h3>EnvisionVR</h3>
           <p>3D visualization for special-needs students to improve spatial processing using VR.</p>
           <a href="project-one.html">View →</a>
         </article>
-
-        <!-- Project Two -->
         <article class="project-card">
           <h3>MovieMind</h3>
           <p>Intelligent movie recommendation system leveraging content-based & collaborative filtering.</p>
           <a href="project-two.html">View →</a>
         </article>
-
-        <!-- Project Three -->
         <article class="project-card">
           <h3>Project Three</h3>
           <p>A placeholder for your third project. Describe it here.</p>
@@ -130,7 +113,7 @@
     </div>
   </footer>
 
-  <!-- Dot‐Grid Canvas Script -->
+  <!-- Dot-Grid Canvas Script -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -187,12 +170,10 @@
       dots.forEach(d => {
         const dx = d.x - mx, dy = d.y - my;
 
-        // If mouse is down and within radius, push dots outward
         if (isDown && dx*dx + dy*dy < mouseRadius2) {
           d.x += dx / 30;
           d.y += dy / 30;
         } else {
-          // Otherwise ease them back to their original positions
           const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
           if (dx0 || dy0) {
             d.x -= dx0 / 20;
@@ -200,22 +181,18 @@
           }
         }
 
-        // Compute distance from center for concave effect
         const cx = d.x - (cw / dpr) / 2;
         const cy = d.y - (ch / dpr) / 2;
         const dist = Math.hypot(cx, cy);
         const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
         const conc = Math.pow(dist / mD, 3) * concaveStrength;
 
-        // Interaction “bubble” around mouse
         const inter = (dx*dx + dy*dy < mouseRadius2)
           ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
           : 0;
 
-        // Final radius
         const radius = dotRadius + conc + inter;
 
-        // Twinkle logic
         let alpha = 1;
         if (d.tw) {
           const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
@@ -223,14 +200,12 @@
         }
         ctx.globalAlpha = alpha;
 
-        // Color: twinkling dots get a bluish tint, others remain white
         if (d.tw) {
           ctx.fillStyle = `rgba(0,200,255,${alpha})`;
         } else {
           ctx.fillStyle = `rgba(255,255,255,${alpha})`;
         }
 
-        // Glow effect if within mouse bubble
         if (inter > 0) {
           ctx.shadowBlur  = 40;
           ctx.shadowColor = 'rgba(0,240,255,0.7)';
@@ -329,18 +304,6 @@
           card.style.transform = 'rotateX(0deg) rotateY(0deg)';
         });
       });
-    });
-  </script>
-
-  <!-- Navbar Scroll Toggle Script -->
-  <script>
-    const nav = document.querySelector('nav.navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
     });
   </script>
 

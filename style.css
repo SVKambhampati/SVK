@@ -15,8 +15,18 @@ html, body {
   background: #000;
   color: #fff;
   font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --clr-bg: #000;
+  --clr-bg-overlay: rgba(0, 0, 0, 0.5);
+  --clr-accent: #0af;
+  --clr-primary: #fff;
+  --navbar-height: 60px;
+}
+
+body {
+  margin-top: var(--navbar-height);
 }
 
 .container {
@@ -25,14 +35,6 @@ html, body {
   margin: 0 auto;
 }
 
-:root {
-  --clr-bg: #000;
-  --clr-bg-overlay: rgba(0, 0, 0, 0.5);
-  --clr-accent: #0af;
-  --navbar-height: 60px;
-}
-
-/* Intro Overlay */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -47,12 +49,12 @@ html, body {
 .intro-logo {
   font-family: 'Blanka', sans-serif;
   font-size: 5rem;
-  color: #fff;
   opacity: 0;
   transform: scale(0.8);
   animation: logoPop 0.8s ease-out 0.3s forwards;
 }
 
+/* Pop the logo in */
 @keyframes logoPop {
   to {
     opacity: 1;
@@ -60,6 +62,7 @@ html, body {
   }
 }
 
+/* Fade out the overlay */
 @keyframes overlayFade {
   to {
     opacity: 0;
@@ -67,7 +70,6 @@ html, body {
   }
 }
 
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -94,10 +96,8 @@ html, body {
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 1.5rem;
-  align-items: center;
 }
 
 .nav-links a {
@@ -111,7 +111,6 @@ html, body {
   color: var(--clr-accent);
 }
 
-/* Hero Section */
 .hero {
   position: relative;
   height: calc(100vh - var(--navbar-height));
@@ -146,7 +145,6 @@ html, body {
 }
 
 .hero .container h1 {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
   line-height: 1.2;
@@ -154,14 +152,12 @@ html, body {
 }
 
 .hero .container p {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   font-size: 1.25rem;
   line-height: 1.4;
   margin-top: 1rem;
   color: #ccc;
 }
 
-/* Sections */
 section {
   padding: 4rem 0;
 }
@@ -175,17 +171,11 @@ section p {
   color: #ddd;
 }
 
-/* About Me (left-aligned, full width) */
-.about-section {
-  padding: 4rem 0;
-}
-
 .about-overview {
-  /* span the full width of the parent container */
   width: 100%;
-  margin: 4rem 0;    /* top/bottom spacing only */
-  padding: 0;        /* remove horizontal padding */
-  text-align: left;  /* left-align heading & text */
+  margin: 4rem 0;
+  padding: 0;
+  text-align: left;
   color: #ddd;
 }
 
@@ -199,7 +189,6 @@ section p {
   letter-spacing: 0.5px;
 }
 
-/* Role Cards */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -220,19 +209,12 @@ section p {
   background: #222;
 }
 
-.role-card img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
-}
-
 .role-card h3 {
   font-size: 1.125rem;
   font-weight: 600;
   color: #fff;
 }
 
-/* Projects */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -271,12 +253,11 @@ section p {
   color: #fff;
 }
 
-/* Skills */
 .skills-list {
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  list-style: none;
 }
 
 .skills-list li {
@@ -286,7 +267,6 @@ section p {
   font-weight: 500;
 }
 
-/* Footer */
 .footer {
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
@@ -302,4 +282,16 @@ section p {
 
 .footer a:hover {
   color: #fff;
+}
+
+/* Fade-in on scroll */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

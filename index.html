@@ -37,92 +37,87 @@
     </div>
   </nav>
 
-  <!-- WRAP ALL SECTIONS INSIDE A SCROLL-SNAP CONTAINER -->
-  <main class="snap-container">
+  <!-- Hero Section (dot-grid background) -->
+  <header class="hero">
+    <canvas id="dotGrid"></canvas>
+    <div class="container">
+      <h1>Hi, I’m Shreyas Kambhampati</h1>
+      <p>Computer Science Student at Northeastern University</p>
+    </div>
+  </header>
 
-    <!-- 1) Hero (100vh snap-section) -->
-    <section id="hero" class="snap-section">
-      <canvas id="dotGrid"></canvas>
-      <div class="container hero-content">
-        <h1>Hi, I’m Shreyas Kambhampati</h1>
-        <p>Computer Science Student at Northeastern University</p>
-      </div>
-    </section>
+  <!-- Main Content -->
+  <main class="container">
 
-    <!-- 2) About (100vh snap-section) -->
-    <section id="about" class="snap-section fade-in-section">
-      <div class="container">
+    <!-- About Me -->
+    <section id="about" class="about-section fade-in-section">
+      <div class="about-overview">
         <h2>About Me</h2>
         <p>
           Hey, I’m Shreyas. I’m a rising freshman at Northeastern University, where I’ll be majoring in Computer Science. With hands-on experience in software development, extended reality, and interactive technologies, I’ve interned across research labs, government, and corporate environments. My work spans from developing immersive VR tools to resolving complex data synchronization issues and driving social media engagement for a global tech company. I’m passionate about building solutions that blend technology with impact—especially in accessibility, education, and data visualization. Alongside industry certifications in AWS, Python, Unity, and MySQL, I bring strong programming skills and a drive to keep learning, innovating, and collaborating.
         </p>
-
-        <div class="roles-grid">
-          <div class="role-card"><h3>Blank 1</h3></div>
-          <div class="role-card"><h3>Blank 2</h3></div>
-          <div class="role-card"><h3>Blank 3</h3></div>
-          <div class="role-card"><h3>Blank 4</h3></div>
-        </div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card"><h3>Blank 1</h3></div>
+        <div class="role-card"><h3>Blank 2</h3></div>
+        <div class="role-card"><h3>Blank 3</h3></div>
+        <div class="role-card"><h3>Blank 4</h3></div>
       </div>
     </section>
 
-    <!-- 3) Projects (100vh snap-section) -->
-    <section id="projects" class="snap-section fade-in-section">
-      <div class="container">
-        <h2>Projects</h2>
-        <div class="projects-grid">
-          <article class="project-card">
-            <h3>EnvisionVR</h3>
-            <p>
-              EnvisionVR is a virtual reality application built to support special-needs students with visual-spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real-time simulations.
-            </p>
-            <a href="project-one.html">View →</a>
-          </article>
-          <article class="project-card">
-            <h3>MovieMind</h3>
-            <p>
-              MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content-based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
-            </p>
-            <a href="project-two.html">View →</a>
-          </article>
-          <article class="project-card">
-            <h3>Project Three</h3>
-            <p>A placeholder for your third project. Describe it here.</p>
-            <a href="project-three.html">View →</a>
-          </article>
-        </div>
+    <!-- Projects -->
+    <section id="projects" class="fade-in-section">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <h3>EnvisionVR</h3>
+          <p>
+            EnvisionVR is a virtual reality application built to support special-needs students with visual-spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real-time simulations.
+          </p>
+          <a href="project-one.html">View →</a>
+        </article>
+        <article class="project-card">
+          <h3>MovieMind</h3>
+          <p>
+            MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content-based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
+          </p>
+          <a href="project-two.html">View →</a>
+        </article>
+        <article class="project-card">
+          <h3>Project Three</h3>
+          <p>A placeholder for your third project. Describe it here.</p>
+          <a href="project-three.html">View →</a>
+        </article>
       </div>
     </section>
 
-    <!-- 4) Skills (100vh snap-section) -->
-    <section id="skills" class="snap-section fade-in-section">
-      <div class="container">
-        <h2>Skills</h2>
-        <ul class="skills-list">
-          <li>HTML & CSS</li>
-          <li>JavaScript</li>
-          <li>React</li>
-          <li>Python</li>
-          <li>C++</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 5) Footer (not snap-aligned; appears once you scroll beyond skills) -->
-    <section id="contact" class="footer-section fade-in-section">
-      <div class="container footer">
-        <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
-        <p>🔗 
-          <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
-          <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
-        </p>
-        <p>© 2025 Shreyas Kambhampati</p>
-      </div>
+    <!-- Skills -->
+    <section id="skills" class="fade-in-section">
+      <h2>Skills</h2>
+      <ul class="skills-list">
+        <li>HTML &amp; CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Python</li>
+        <li>C++</li>
+      </ul>
     </section>
 
   </main>
 
-  <!-- Dot-Grid Canvas Script (unchanged) -->
+  <!-- Footer / Contact -->
+  <footer id="contact" class="footer fade-in-section">
+    <div class="container">
+      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
+      <p>🔗 
+        <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
+        <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
+      </p>
+      <p>© 2025 Shreyas Kambhampati</p>
+    </div>
+  </footer>
+
+  <!-- Dot-Grid Canvas Script -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -266,7 +261,7 @@
     });
   </script>
 
-  <!-- Fade-In On Scroll (same) -->
+  <!-- Fade-In On Scroll -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const options = {
@@ -290,7 +285,7 @@
     });
   </script>
 
-  <!-- 3D Tilt On Role Cards (same) -->
+  <!-- 3D Tilt on Role Cards -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
@@ -306,7 +301,7 @@
           const dy = (y - cy) / cy;
           const tiltY = dx * MAX_TILT * -1;
           const tiltX = dy * MAX_TILT;
-          card.style.transform = `rotateX(${tiltX}deg) rotateY(`${tiltY}deg)`;
+          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
         });
 
         card.addEventListener('mouseleave', () => {

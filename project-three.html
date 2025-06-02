@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Three Details</title>
+
+  <!-- Reuse the same font and CSS as index.html -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Top Navbar with “Home” button -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="index.html">← Home</a>
+    </div>
+  </nav>
+
+  <!-- Project Three Content -->
+  <main class="container" style="margin-top: 80px;">
+    <h1>Project Three</h1>
+
+    <!-- Overview Section -->
+    <section>
+      <h2>Overview</h2>
+      <p>
+        <!-- Replace this with a paragraph summarizing what Project Three does and why you built it. -->
+        Project Three is a machine‐learning‐powered image classifier that can identify different species of plants from photos. I built it using Python, TensorFlow, and a Flask API to serve predictions.
+      </p>
+    </section>
+
+    <!-- Key Features Section -->
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li>Convolutional Neural Network (CNN) trained on a custom dataset of 10,000 plant images</li>
+        <li>Upload a photo in the browser and get instant classification results</li>
+        <li>Real‐time confidence score and top‐5 guesses</li>
+        <li>Mobile camera integration so you can take a photo directly from your phone</li>
+      </ul>
+    </section>
+
+    <!-- Technologies Used Section -->
+    <section>
+      <h2>Technologies</h2>
+      <p>Python · TensorFlow · Keras · Flask · HTML/CSS/JavaScript · Heroku Deployment</p>
+    </section>
+
+    <!-- Links Section -->
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="https://github.com/YourUsername/project-three" target="_blank" rel="noopener">GitHub Repo</a></li>
+        <li><a href="https://project-three-demo.example.com" target="_blank" rel="noopener">Live Demo</a></li>
+      </ul>
+    </section>
+
+    <!-- Screenshots Section (optional) -->
+    <section>
+      <h2>Screenshots</h2>
+      <img 
+        src="images/project-three-screenshot-1.png" 
+        alt="Project Three Screenshot 1" 
+        style="max-width:100%; border-radius:8px; margin-top:1rem;"
+      />
+      <!-- Add more <img> tags as needed -->
+    </section>
+
+    <!-- Challenges & Learnings Section (optional) -->
+    <section>
+      <h2>Challenges &amp; Learnings</h2>
+      <p>
+        <!-- Describe any technical or design challenges you faced and what you learned. -->
+        The biggest challenge was fine-tuning the CNN to avoid overfitting on my dataset. I ended up using data augmentation (rotations, flips) and dropout layers, which improved generalization significantly.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

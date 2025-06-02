@@ -10,55 +10,65 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
     rel="stylesheet"
   />
+
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css"/>
 
   <!-- Loader styling for the SVK overlay -->
   <style>
-    /* Container around logo and loader */
+    /* Full-screen black overlay */
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      animation: overlayFade 1s ease-out 1.5s forwards;
+    }
+
     .logo-container {
       position: relative;
-      width: 120px;
-      height: 120px;
+      display: inline-block;
+      text-align: center;
     }
 
-    /* SVG circle loader */
-    .logo-container .loader {
+    /* SVK text */
+    .intro-logo {
+      font-family: 'Blanka', sans-serif;
+      font-size: 4rem;
+      color: #fff;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: logoPop 0.8s ease-out 0.3s forwards;
+    }
+
+    /* Underline element beneath SVK */
+    .logo-underline {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 120px;
-      height: 120px;
-      transform-origin: center;
-      animation: rotate 1.5s linear infinite;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      height: 4px;
+      width: 0;
+      background: #fff;
+      animation: underlineExpand 1s ease-out 0.8s forwards;
+      border-radius: 2px;
     }
 
-    .logo-container .loader circle {
-      fill: none;
-      stroke: #fff;
-      stroke-width: 6;
-      stroke-linecap: round;
-      /* dasharray makes it look like a loading arc */
-      stroke-dasharray: 283;      /* 2π·r (r=45) ≈ 283 */
-      stroke-dashoffset: 75;      /* adjust to create gap */
-    }
-
-    @keyframes rotate {
-      to { transform: rotate(360deg); }
+    @keyframes underlineExpand {
+      to { width: 100%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Intro Overlay with SVK logo and circular loader -->
+  <!-- Intro Overlay with SVK text and loading underline -->
   <div id="intro-overlay">
     <div class="logo-container">
-      <!-- SVG circle around the logo -->
-      <svg class="loader" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="45"></circle>
-      </svg>
-      <!-- SVK logo text -->
       <div class="intro-logo">SVK</div>
+      <div class="logo-underline"></div>
     </div>
   </div>
 

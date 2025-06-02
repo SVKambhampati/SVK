@@ -2,28 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shreyas Kambhampati | Portfolio</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
+  <!-- Intro Overlay -->
   <div id="intro-overlay">
     <div class="intro-logo">SVK</div>
   </div>
 
+  <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
@@ -36,6 +33,7 @@
     </div>
   </nav>
 
+  <!-- Hero Section -->
   <header class="hero">
     <canvas id="dotGrid"></canvas>
     <div class="container">
@@ -44,80 +42,227 @@
     </div>
   </header>
 
+  <!-- Main Content -->
   <main class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="about-grid">
-        <div class="about-card tilt fade-in">Developer</div>
-        <div class="about-card tilt fade-in">Engineer</div>
-        <div class="about-card tilt fade-in">Researcher</div>
-        <div class="about-card tilt fade-in">Creator</div>
+
+    <!-- About Me -->
+    <section id="about" class="about-section fade-in-section">
+      <div class="about-overview">
+        <h2>About Me</h2>
+        <p>
+          Hey, I’m Shreyas. I’m a rising freshman at Northeastern University majoring in Computer Science. Throughout high school, I’ve engaged in research and software development internships across labs, government, and corporate environments. My passion lies in building interactive technologies that impact accessibility and education. Whether developing VR tools at UT Dallas or resolving data sync issues for DeKalb County, I push myself to learn new skills—ranging from Python and Unity to web frameworks—and apply them to real-world problems. Outside of coding, I enjoy photography, boxing, and staying up-to-date with the latest in tech. I’m driven by curiosity, a collaborative spirit, and a desire to keep innovating.
+        </p>
+        <div class="roles-grid">
+          <div class="role-card">
+            <h3>Research Intern</h3>
+          </div>
+          <div class="role-card">
+            <h3>Software Developer Intern</h3>
+          </div>
+          <div class="role-card">
+            <h3>Social Media Intern</h3>
+          </div>
+          <div class="role-card">
+            <h3>Target Tech Associate</h3>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="projects">
+    <!-- Projects -->
+    <section id="projects" class="fade-in-section">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <article class="project-card fade-in">
-          <h3>Project One</h3>
-          <p>Project description.</p>
+        <article class="project-card">
+          <h3>EnvisionVR</h3>
+          <p>3D visualization for special-needs students to improve spatial processing using VR.</p>
+          <a href="#" target="_blank">View →</a>
         </article>
-        <article class="project-card fade-in">
-          <h3>Project Two</h3>
-          <p>Another cool project description.</p>
-        </article>
-        <article class="project-card fade-in">
-          <h3>Project Three</h3>
-          <p>Yet another interesting project.</p>
-        </article>
-        <article class="project-card fade-in">
-          <h3>Project Four</h3>
-          <p>A new awesome addition to the portfolio.</p>
-        </article>
-        <article class="project-card fade-in">
-          <h3>Project Five</h3>
-          <p>One more great project to showcase.</p>
-        </article>
+        <!-- Add more <article class="project-card"> elements here as needed -->
       </div>
     </section>
 
-    <section id="skills">
+    <!-- Skills -->
+    <section id="skills" class="fade-in-section">
       <h2>Skills</h2>
-      <p>List of skills here.</p>
+      <ul class="skills-list">
+        <li>HTML & CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Python</li>
+        <li>C++</li>
+      </ul>
     </section>
+
   </main>
 
+  <!-- Footer / Contact -->
   <footer id="contact" class="footer">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
-      <p>🔗 <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/shreyas-kambhampati" target="_blank">LinkedIn</a> | <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a></p>
       <p>© 2025 Shreyas Kambhampati</p>
     </div>
   </footer>
 
+  <!-- Dot-Grid Canvas Script with Twinkle -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    const canvas = document.getElementById('dotGrid');
+    const ctx    = canvas.getContext('2d');
+    let cw, ch, offsetX, offsetY;
+
+    const dpr             = window.devicePixelRatio || 1;
+    const NAV_HEIGHT      = 60;
+    const dotRadius       = 2;
+    const dotPadding      = 12;
+    const concRadius      = 75;
+    const concStrength    = 4;
+    const interRadius     = 20;
+    const interStrength   = 15;
+    const twinkleFreq     = 0.002;
+    const twinkleChance   = 0.4;
+
+    let dots   = [];
+    let mx = -9999, my = -9999, isDown = false;
+
+    function resizeCanvas() {
+      cw = canvas.width  = window.innerWidth * dpr;
+      ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
+      canvas.style.width  = window.innerWidth + 'px';
+      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(dpr,dpr);
+      updateOffset();
+      initDots();
+    }
+
+    function updateOffset() {
+      const rect = canvas.getBoundingClientRect();
+      offsetX = rect.left;
+      offsetY = rect.top;
+    }
+
+    function initDots() {
+      dots = [];
+      const w = cw / dpr, h = ch / dpr;
+      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
+        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
+          dots.push({
+            sx: x, sy: y,
+            x: x,  y: y,
+            ox: x, oy: y,
+            tw: Math.random() < twinkleChance,
+            r: dotRadius
+          });
         }
-      });
-    }, { threshold: 0.1 });
+      }
+    }
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    function draw() {
+      ctx.clearRect(0, 0, cw, ch);
+      const t = Date.now();
 
-    // Tilt effect
-    document.querySelectorAll('.tilt').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const { left, top, width, height } = card.getBoundingClientRect();
-        const x = e.clientX - left - width / 2;
-        const y = e.clientY - top - height / 2;
-        card.style.transform = `rotateY(${x / 20}deg) rotateX(${y / -20}deg)`;
+      dots.forEach((d) => {
+        const dx = (mx - offsetX) - d.sx;
+        const dy = (my - offsetY) - d.sy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+
+        // concave (when mouse is down)
+        const conc = isDown && dist < concRadius
+          ? concStrength * (1 - dist/concRadius)
+          : 0;
+
+        // interaction
+        const inter = dist < interRadius
+          ? interStrength * (1 - dist/interRadius) * (1 - Math.sqrt(dist*dist)/interRadius)
+          : 0;
+
+        d.x = d.ox - (d.ox - d.sx) * dpr + conc * dx/(dist || 1) + inter * dx/(dist || 1);
+        d.y = d.oy - (d.oy - d.sy) * dpr + conc * dy/(dist || 1) + inter * dy/(dist || 1);
+
+        // twinkle
+        let alpha = 1;
+        if (d.tw) {
+          const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
+          alpha = 0.7 + tw * 0.3;
+        }
+        ctx.globalAlpha = alpha;
+
+        // fill color
+        if (d.tw) {
+          ctx.fillStyle = '#6df';
+        } else {
+          ctx.fillStyle = '#0af';
+        }
+
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r + conc + inter, 0, Math.PI * 2);
+        ctx.fill();
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+
+      requestAnimationFrame(draw);
+    }
+
+    canvas.addEventListener('pointermove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
+
+    canvas.addEventListener('pointerdown', () => {
+      isDown = true;
+    });
+
+    canvas.addEventListener('pointerup', () => {
+      isDown = false;
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      resizeCanvas();
+      draw();
+    });
+  </script>
+
+  <!-- Intro Overlay Removal -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('intro-overlay');
+      const hero    = document.querySelector('.hero');
+
+      overlay.addEventListener('animationend', e => {
+        if (e.animationName === 'overlayFade') {
+          overlay.remove();
+          hero.classList.add('intro-ready');
+        }
       });
     });
   </script>
+
+  <!-- Fade-In On Scroll -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const options = {
+        root: null,                // viewport
+        rootMargin: '0px',
+        threshold: 0.1             // 10% of the element is visible
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, options);
+
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+
 </body>
 </html>

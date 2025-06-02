@@ -199,10 +199,12 @@ section p {
 }
 
 /* Role Cards */
+/* 3D Parallax Tilt: Add perspective and preserve-3d on the cards container/card itself */
 .roles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
+  perspective: 1000px; /* enable 3D space for children */ 
 }
 
 .role-card {
@@ -211,24 +213,21 @@ section p {
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.2s, background 0.2s;
-}
 
-.role-card:hover {
-  transform: translateY(-5px);
-  background: #222;
-}
-
-.role-card img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
+  /* new: enable smooth 3D rotation */
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .role-card h3 {
   font-size: 1.125rem;
   font-weight: 600;
   color: #fff;
+}
+
+.role-card:hover {
+  background: #222;
 }
 
 /* Projects */
@@ -304,14 +303,12 @@ section p {
 }
 
 /* Fade-In On Scroll */
-/* Initial “hidden” state */
 .fade-in-section {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* When the Intersection Observer adds “.is-visible”, fade in */
 .fade-in-section.is-visible {
   opacity: 1;
   transform: translateY(0);

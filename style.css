@@ -230,15 +230,14 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   7) About Me (inside .container, full‐width of container)
+   7) About Me (inside .container, fills 100% of container)
    -------------------------------------------------------------------------- */
 .about-overview {
-  /* Fills 100% of the .container’s width */
+  /* Fill 100% of the parent .container width */
   width: 100%;
-  max-width: 800px;      /* Prevent overly long lines on very wide screens */
-  margin: 0 auto 2rem auto;
   text-align: left;
   color: #ddd;
+  margin-bottom: 2rem;  /* spacing before the cards */
 }
 
 .about-overview h2 {
@@ -252,18 +251,16 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   8) Role Cards (also inside .container, same width as above text)
+   8) Role Cards (inside .container, same 100% width)
    -------------------------------------------------------------------------- */
 .roles-grid {
-  /* Fills 100% of the .container’s width too */
   width: 100%;
   display: grid;
-  /* auto-fit ensures up to 4 cards side‐by‐side if there's room, each min 200px */
+  /* auto-fit allows up to 4 cards side‐by‐side, each at least 200px wide */
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   perspective: 1000px;
-  margin-top: 2rem;    /* spacing above */
-  margin-bottom: 2rem; /* spacing below */
+  margin-bottom: 2rem;  /* spacing below the cards */
 }
 
 .roles-grid .role-card {
@@ -287,7 +284,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   9) Project Cards (inside .container, no change here)
+   9) Project Cards (inside .container, unchanged)
    -------------------------------------------------------------------------- */
 .projects-grid {
   position: relative;
@@ -343,7 +340,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   10) Skills (inside .container, no change)
+   10) Skills (inside .container, unchanged)
    -------------------------------------------------------------------------- */
 .skills-list {
   list-style: none;
@@ -429,7 +426,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   12) Footer (inside .container, no change)
+   12) Footer (inside .container, unchanged)
    -------------------------------------------------------------------------- */
 .footer {
   background: rgba(0, 0, 0, 0.7);

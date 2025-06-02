@@ -16,7 +16,9 @@
 </head>
 <body>
 
-  <!-- Intro Overlay (SVK with underline and glow animation) -->
+  <!-- ============================================================
+       1) Intro Overlay with SVK + underline + glow-once
+       ============================================================ -->
   <div id="intro-overlay">
     <div class="logo-container">
       <div class="intro-logo">SVK</div>
@@ -24,7 +26,9 @@
     </div>
   </div>
 
-  <!-- Navbar (semi-transparent) -->
+  <!-- ============================================================
+       2) Navbar (Semi-transparent)
+       ============================================================ -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
@@ -37,7 +41,9 @@
     </div>
   </nav>
 
-  <!-- Hero Section (dot-grid background) -->
+  <!-- ============================================================
+       3) Hero Section (Dot-Grid Background)
+       ============================================================ -->
   <header class="hero">
     <canvas id="dotGrid"></canvas>
     <div class="container">
@@ -46,17 +52,30 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- ============================================================
+       4) Main Content
+       ============================================================ -->
   <main class="container">
 
-    <!-- About Me -->
+    <!-- ================================================
+         About Me (Full-Bleed Text + Role Cards)
+         ================================================ -->
     <section id="about" class="about-section fade-in-section">
+      <!-- 
+        We want “About Me” text to span exactly as wide as the row of cards below,
+        so we use .about-overview with a full-bleed override (width:100vw; margin-left:calc((100% - 100vw)/2)).
+      -->
       <div class="about-overview">
         <h2>About Me</h2>
         <p>
           Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
         </p>
       </div>
+
+      <!--
+        The .roles-grid below is also forced to full-bleed, so its left/right edges match
+        exactly with the .about-overview above.
+      -->
       <div class="roles-grid">
         <div class="role-card"><h3>Python Certified Developer</h3></div>
         <div class="role-card"><h3>Full-Stack Engineer</h3></div>
@@ -65,7 +84,9 @@
       </div>
     </section>
 
-    <!-- Projects -->
+    <!-- ================================================
+         Projects
+         ================================================ -->
     <section id="projects" class="fade-in-section">
       <h2>Projects</h2>
       <div class="projects-grid">
@@ -91,7 +112,9 @@
       </div>
     </section>
 
-    <!-- Skills -->
+    <!-- ================================================
+         Skills
+         ================================================ -->
     <section id="skills" class="fade-in-section">
       <h2>Skills</h2>
       <ul class="skills-list">
@@ -103,7 +126,9 @@
       </ul>
     </section>
 
-    <!-- Contact -->
+    <!-- ================================================
+         Contact (embedded in index.html)
+         ================================================ -->
     <section id="contact" class="fade-in-section">
       <div class="contact-container">
         <h2>Contact Me</h2>
@@ -128,7 +153,9 @@
 
   </main>
 
-  <!-- Footer -->
+  <!-- ============================================================
+       5) Footer
+       ============================================================ -->
   <footer class="footer fade-in-section">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
@@ -140,7 +167,9 @@
     </div>
   </footer>
 
-  <!-- Dot-Grid Canvas Script -->
+  <!-- ============================================================
+       6) Dot-Grid Canvas Script
+       ============================================================ -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -270,7 +299,9 @@
     };
   </script>
 
-  <!-- Intro Overlay Removal & SVK Glow Trigger -->
+  <!-- ============================================================
+       7) Intro Overlay Removal & SVK Glow Trigger
+       ============================================================ -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
@@ -282,14 +313,16 @@
           overlay.remove();
           hero.classList.add('intro-ready');
 
-          // Trigger SVK glow
+          // Trigger SVK glow once
           svk.classList.add('glow-active');
         }
       });
     });
   </script>
 
-  <!-- Fade-In On Scroll -->
+  <!-- ============================================================
+       8) Fade-In On Scroll (Intersection Observer)
+       ============================================================ -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
@@ -308,7 +341,9 @@
     });
   </script>
 
-  <!-- 3D Tilt on Role Cards -->
+  <!-- ============================================================
+       9) 3D Tilt on Role Cards
+       ============================================================ -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;

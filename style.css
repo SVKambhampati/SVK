@@ -231,19 +231,19 @@ section p {
 }
 
 /* Projects */
-/* 2a) Stack cards vertically, add left-side line */
+/* łąc) Stack cards vertically, add left-side line spanning entire height */
 .projects-grid {
   position: relative;
   display: flex;
-  flex-direction: column; /* stack */
+  flex-direction: column;  /* stack cards one under another */
   gap: 1.5rem;
-  padding-left: 20px; /* space for vertical line */
+  padding-left: 20px;      /* make room for vertical line */
 }
 
 .projects-grid::before {
   content: "";
   position: absolute;
-  left: 8px; /* align line just left of cards */
+  left: 0;                /* flush with container’s left edge */
   top: 0;
   bottom: 0;
   width: 2px;
@@ -255,7 +255,7 @@ section p {
   padding: 1.5rem;
   border-radius: 8px;
   transition: transform 0.2s, background 0.2s;
-  margin-left: -10px; /* pull left so line appears centered beside card */
+  margin-left: -10px;     /* pull card’s left edge toward line */
 }
 
 .project-card:hover {
@@ -317,12 +317,12 @@ section p {
 }
 
 /* Fade-In On Scroll */
-/* 1a) Initial hidden state with larger rise */
+/* 1a) Initial hidden state with stronger rise */
 .fade-in-section {
   opacity: 0;
-  transform: translateY(40px);           /* ↑ increased from 20px to 40px for stronger rise */ 
-  transition: opacity 0.8s ease-out,     /* ↑ longer duration */
-              transform 0.8s ease-out;   /* ↑ longer duration */
+  transform: translateY(40px);           /* ↑ more pronounced rise */
+  transition: opacity 0.8s ease-out,     /* ↑ longer transition */
+              transform 0.8s ease-out;
 }
 
 /* 1b) Visible state */

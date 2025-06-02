@@ -13,9 +13,112 @@
   />
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Project‐specific styling (overlay font only) -->
+  <!-- Project-specific styling -->
   <style>
-    /* Full-screen black overlay */
+    /* ---------------------------------------------------------------
+       BASIC PAGE RESET & TYPOGRAPHY
+       --------------------------------------------------------------- */
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    main.container {
+      margin: 0 auto;
+      max-width: 900px;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.25rem;
+      color: #0af; /* accent color */
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0af; /* accent bullet */
+    }
+
+    /* ---------------------------------------------------------------
+       SECTION “CARDS”: Lightly tinted boxes for each major section
+       --------------------------------------------------------------- */
+    section.project-section {
+      background-color: #111;
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    section.project-section + section.project-section {
+      margin-top: 1rem;
+    }
+
+    /* ---------------------------------------------------------------
+       NAVBAR & “Home” LINK
+       --------------------------------------------------------------- */
+    nav.navbar {
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      z-index: 10;
+    }
+
+    nav.navbar .container {
+      display: flex;
+      align-items: center;
+    }
+
+    nav.navbar .logo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav.navbar .logo:hover {
+      color: #0af;
+    }
+
+    /* ---------------------------------------------------------------
+       PROJECT INTRO OVERLAY
+       --------------------------------------------------------------- */
     #project-overlay {
       position: fixed;
       inset: 0;
@@ -27,7 +130,6 @@
       animation: overlayFade 1s ease-out 1s forwards;
     }
 
-    /* Centered “MovieMind” text */
     .project-logo {
       font-family: 'Questrial', sans-serif;
       font-size: 5rem;
@@ -36,7 +138,8 @@
       transform: scale(0.8);
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
-    /* overlayFade and logoPop keyframes come from style.css */
+
+    /* overlayFade and logoPop keyframes are defined in style.css */
   </style>
 </head>
 <body>
@@ -53,7 +156,7 @@
     </div>
   </nav>
 
-  <!-- 3) Project Two Content (styled like project-one.html) -->
+  <!-- 3) Project Two Content -->
   <main class="container" style="margin-top: 100px;">
     <h1>MovieMind</h1>
 
@@ -103,7 +206,228 @@
     </section>
   </main>
 
-  <!-- 4) Project‐Intro Overlay Removal Script -->
+  <!-- 4) Project-Intro Overlay Removal Script -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('project-overlay');
+      overlay.addEventListener('animationend', e => {
+        if (e.animationName === 'overlayFade') {
+          overlay.remove();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html><!-- File: project-two.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Two: MovieMind</title>
+
+  <!-- Load Plus Jakarta Sans (for body) and Questrial (for overlay) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Project-specific styling -->
+  <style>
+    /* ---------------------------------------------------------------
+       BASIC PAGE RESET & TYPOGRAPHY
+       --------------------------------------------------------------- */
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    main.container {
+      margin: 0 auto;
+      max-width: 900px;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.25rem;
+      color: #0af; /* accent color */
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0af; /* accent bullet */
+    }
+
+    /* ---------------------------------------------------------------
+       SECTION “CARDS”: Lightly tinted boxes for each major section
+       --------------------------------------------------------------- */
+    section.project-section {
+      background-color: #111;
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    section.project-section + section.project-section {
+      margin-top: 1rem;
+    }
+
+    /* ---------------------------------------------------------------
+       NAVBAR & “Home” LINK
+       --------------------------------------------------------------- */
+    nav.navbar {
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      z-index: 10;
+    }
+
+    nav.navbar .container {
+      display: flex;
+      align-items: center;
+    }
+
+    nav.navbar .logo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav.navbar .logo:hover {
+      color: #0af;
+    }
+
+    /* ---------------------------------------------------------------
+       PROJECT INTRO OVERLAY
+       --------------------------------------------------------------- */
+    #project-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      animation: overlayFade 1s ease-out 1s forwards;
+    }
+
+    .project-logo {
+      font-family: 'Questrial', sans-serif;
+      font-size: 5rem;
+      color: #fff;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: logoPop 0.8s ease-out 0.3s forwards;
+    }
+
+    /* overlayFade and logoPop keyframes are defined in style.css */
+  </style>
+</head>
+<body>
+
+  <!-- 1) Project Intro Overlay -->
+  <div id="project-overlay">
+    <div class="project-logo">MovieMind</div>
+  </div>
+
+  <!-- 2) Top Navbar with “← Home” -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="index.html">← Home</a>
+    </div>
+  </nav>
+
+  <!-- 3) Project Two Content -->
+  <main class="container" style="margin-top: 100px;">
+    <h1>MovieMind</h1>
+
+    <!-- Overview Section -->
+    <section class="project-section">
+      <h2>Overview</h2>
+      <p>
+        With so many films released every year, picking the right one can be overwhelming. MovieMind solves this by learning your preferences and recommending movies tailored to your tastes. Whether you’re into sci-fi thrillers or indie dramas, MovieMind finds your next favorite flick.
+      </p>
+    </section>
+
+    <!-- Project Specifications -->
+    <section class="project-section">
+      <h2>Project Specifications</h2>
+      <ul>
+        <li>
+          <strong>Recommendation Methods:</strong>
+          <ul>
+            <li><strong>Content-Based Filtering:</strong> Analyzes movie metadata (genres, keywords, cast) to suggest similar films.</li>
+            <li><strong>Collaborative Filtering:</strong> Leverages patterns in user ratings to find movies enjoyed by like-minded viewers.</li>
+            <li><strong>(Optional) Hybrid Filtering:</strong> Blends both techniques for enhanced accuracy.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Features:</strong>
+          <ul>
+            <li>Search, rate, and discover movies</li>
+            <li>Personalized recommendations</li>
+            <li>Trending picks for new users</li>
+          </ul>
+        </li>
+        <li><strong>Dataset:</strong> MovieLens 100K</li>
+        <li><strong>Modeling:</strong> TF-IDF for content similarity, SVD for collaborative filtering</li>
+      </ul>
+    </section>
+
+    <!-- Technologies Used -->
+    <section class="project-section">
+      <h2>Technologies Used</h2>
+      <ul>
+        <li><strong>Languages:</strong> Python, HTML, CSS, JavaScript</li>
+        <li><strong>Frameworks:</strong> Flask or FastAPI (backend), Bootstrap or Tailwind (frontend)</li>
+        <li><strong>ML Libraries:</strong> scikit-learn, Surprise, pandas, numpy</li>
+        <li><strong>Database:</strong> SQLite or PostgreSQL</li>
+        <li><strong>Deployment:</strong> Render, Vercel</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- 4) Project-Intro Overlay Removal Script -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('project-overlay');

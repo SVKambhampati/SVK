@@ -1,32 +1,136 @@
+<!-- File: project-two.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project Two Details</title>
+  <title>Project Two: MovieMind</title>
 
-  <!-- Reuse the same font and CSS as index.html -->
+  <!-- Load Plus Jakarta Sans (for body) and Questrial (for overlay) -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- Project‐specific styling (overlay font and animation) -->
+  <style>
+    /* Full-screen black overlay */
+    #project-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      animation: overlayFade 1s ease-out 1s forwards;
+    }
+
+    /* Centered MovieMind text */
+    .project-logo {
+      font-family: 'Questrial', sans-serif;
+      font-size: 5rem;
+      color: #fff;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: logoPop 0.8s ease-out 0.3s forwards;
+    }
+
+    /* Underline loading line beneath MovieMind */
+    .logo-underline {
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      height: 4px;
+      width: 0;
+      background: #0af;
+      animation: underlineExpand 1s ease-out 0.8s forwards;
+      border-radius: 2px;
+    }
+
+    @keyframes underlineExpand {
+      to { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Home button in the nav bar -->
+
+  <!-- 1) Project Intro Overlay -->
+  <div id="project-overlay">
+    <div class="logo-container" style="position: relative; text-align: center;">
+      <div class="project-logo">MovieMind</div>
+      <div class="logo-underline"></div>
+    </div>
+  </div>
+
+  <!-- 2) Top Navbar with “← Home” -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="index.html">← Home</a>
     </div>
   </nav>
 
-  <!-- Main content area, pushed down so nav bar doesn’t overlap -->
+  <!-- 3) Project Two Content -->
   <main class="container" style="margin-top: 80px;">
-    <h1>Project One</h1>
-    <p>
-      <!-- Replace this text with a detailed description of Project One -->
-      Project Two Description.
-    </p>
+    <h1>MovieMind</h1>
+
+    <!-- Overview Section -->
+    <section class="project-section">
+      <h2>Overview</h2>
+      <p>
+        With so many films released every year, picking the right one can be overwhelming. MovieMind solves this by learning your preferences and recommending movies tailored to your tastes. Whether you’re into sci-fi thrillers or indie dramas, MovieMind finds your next favorite flick.
+      </p>
+    </section>
+
+    <!-- Project Specifications -->
+    <section class="project-section">
+      <h2>Project Specifications</h2>
+      <ul>
+        <li><strong>Recommendation Methods:</strong>
+          <ul>
+            <li><strong>Content-Based Filtering:</strong> Analyzes movie metadata like genres, keywords, and cast to suggest similar films.</li>
+            <li><strong>Collaborative Filtering:</strong> Leverages patterns in user ratings to find movies enjoyed by like-minded viewers.</li>
+            <li><strong>(Optional) Hybrid Filtering:</strong> Blends both techniques for enhanced accuracy.</li>
+          </ul>
+        </li>
+        <li><strong>Features:</strong>
+          <ul>
+            <li>Search, rate, and discover movies</li>
+            <li>Personalized recommendations</li>
+            <li>Trending picks for new users</li>
+          </ul>
+        </li>
+        <li><strong>Dataset:</strong> MovieLens 100K</li>
+        <li><strong>Modeling:</strong> TF-IDF for content similarity, SVD for collaborative filtering</li>
+      </ul>
+    </section>
+
+    <!-- Technologies Used -->
+    <section class="project-section">
+      <h2>Technologies Used</h2>
+      <ul>
+        <li><strong>Languages:</strong> Python, HTML, CSS, JavaScript</li>
+        <li><strong>Frameworks:</strong> Flask or FastAPI (backend), Bootstrap or Tailwind (frontend)</li>
+        <li><strong>ML Libraries:</strong> scikit-learn, Surprise, pandas, numpy</li>
+        <li><strong>Database:</strong> SQLite or PostgreSQL</li>
+        <li><strong>Deployment:</strong> Render, Vercel</li>
+      </ul>
+    </section>
   </main>
+
+  <!-- 4) Project-Intro Overlay Removal Script -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('project-overlay');
+      overlay.addEventListener('animationend', e => {
+        if (e.animationName === 'overlayFade') {
+          overlay.remove();
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

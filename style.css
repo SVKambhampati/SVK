@@ -1,5 +1,5 @@
 /* ===========================================================
-   style.css (with updated Contact design, SVK glow, etc.)
+   style.css (with Overlapping “Peeking” + Rounded Cards)
    =========================================================== */
 
 /* --------------------------------------------------------------------------
@@ -217,6 +217,7 @@ html, body {
    6) Sections & Typography
    -------------------------------------------------------------------------- */
 section {
+  /* We will override padding inside .section-card */
   padding: 4rem 0;
 }
 
@@ -230,7 +231,31 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   7) About Me (inside .container, fills 100% of container)
+   7) Rounded “Card” + Overlapping Setup (Ideas 10 & 9)
+   -------------------------------------------------------------------------- */
+.section-card {
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin: 2rem 0;
+  padding: 4rem 2rem;       /* internal vertical/horizontal padding */
+  position: relative;
+  z-index: 1;
+}
+
+/* Each subsequent .section-card overlaps the previous by 30px */
+.section-card + .section-card {
+  margin-top: -30px;
+  z-index: 2;
+}
+
+/* Remove the extra section padding inside each card, since the card already has padding */
+.section-card section {
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   8) About Me Content (inside its card)
    -------------------------------------------------------------------------- */
 .about-overview {
   width: 100%;
@@ -250,7 +275,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   8) Role Cards (inside .container, same 100% width)
+   9) Role Cards (inside .container, same 100% width)
    -------------------------------------------------------------------------- */
 .roles-grid {
   width: 100%;
@@ -283,7 +308,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   9) Project Cards (inside .container, unchanged)
+   10) Project Cards (inside .container, unchanged)
    -------------------------------------------------------------------------- */
 .projects-grid {
   position: relative;
@@ -339,10 +364,10 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   10) Skills Expandable “+ details” List (use display:none/block)
+   11) Skills Expandable “+ details” List
    -------------------------------------------------------------------------- */
 .skills-expandable {
-  list-style: none;
+  list‐style: none;
   padding: 0;
   margin: 0;
 }
@@ -397,20 +422,21 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   11) Redesigned Contact Section (compact card layout)
+   12) Contact Section (compact card layout within its rounded, overlapping card)
    -------------------------------------------------------------------------- */
+/* Remove the 4rem padding on section itself (since card has padding) */
 #contact {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 0;
 }
 
+/* Re‐use .section-card styling above to wrap the entire contact section */
+/* .section-card already applies background, border-radius, margin/padding, etc. */
+
+
 .contact-card {
-  max-width: 600px;
+  /* The section‐card already has padding. We only need inner styling here: */
+  max-width: 100%; /* card already limits width via .container */
   margin: 0 auto;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 2rem 2rem 2.5rem;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 .contact-card h2 {
@@ -500,7 +526,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   12) Footer (inside .container, unchanged)
+   13) Footer (inside .container, unchanged)
    -------------------------------------------------------------------------- */
 .footer {
   background: rgba(0, 0, 0, 0.7);
@@ -520,7 +546,7 @@ section p {
 }
 
 /* --------------------------------------------------------------------------
-   13) Fade‐In On Scroll
+   14) Fade‐In On Scroll
    -------------------------------------------------------------------------- */
 .fade-in-section {
   opacity: 0;

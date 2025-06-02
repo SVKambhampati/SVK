@@ -240,7 +240,6 @@ section p {
   padding-left: 20px;      /* make room for vertical line */
 }
 
-/* Change line color to white */
 .projects-grid::before {
   content: "";
   position: absolute;
@@ -248,24 +247,28 @@ section p {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #fff;       /* ← now white instead of var(--clr-accent) */ 
+  background: #fff;       /* white line */ 
 }
 
-/* Project card glow + stronger raise on hover */
+/* Project card glow + lift + light-blue underglow */
 .project-card {
   background: #111;
   padding: 1.5rem;
   border-radius: 8px;
+  margin-left: -10px;         /* pull card’s left edge toward line */
   transition: transform 0.3s ease, 
               background 0.2s ease, 
-              box-shadow 0.3s ease;  /* allow box-shadow transition */
-  margin-left: -10px;     /* pull card’s left edge toward line */
+              box-shadow 0.3s ease;
+
+  /* Default underglow: soft light-blue */
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
 
 .project-card:hover {
-  transform: translateY(-10px);                /* stronger raise */
+  transform: translateY(-10px);                 
   background: #222;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3); /* white glow underneath */
+  /* Stronger light-blue glow on hover */
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
 .project-card h3 {

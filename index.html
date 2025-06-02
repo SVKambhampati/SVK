@@ -17,7 +17,7 @@
 <body>
 
   <!-- ============================================================
-       1) Intro Overlay with SVK + underline + glow-once
+       1) Intro Overlay with SVK + underline + flicker‐glow
        ============================================================ -->
   <div id="intro-overlay">
     <div class="logo-container">
@@ -27,7 +27,7 @@
   </div>
 
   <!-- ============================================================
-       2) Navbar (Semi-transparent)
+       2) Navbar (Semi‐transparent)
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
@@ -42,7 +42,7 @@
   </nav>
 
   <!-- ============================================================
-       3) Hero Section (Dot-Grid Background)
+       3) Hero Section (Dot‐Grid Background)
        ============================================================ -->
   <header class="hero">
     <canvas id="dotGrid"></canvas>
@@ -53,18 +53,15 @@
   </header>
 
   <!-- ============================================================
-       4) Main Content
+       4) Main Content (All inside a single .container)
        ============================================================ -->
   <main class="container">
 
     <!-- ================================================
-         About Me (Full-Bleed Text + Role Cards)
+         About Me + Role Cards (Both 100% of .container)
          ================================================ -->
     <section id="about" class="about-section fade-in-section">
-      <!-- 
-        We want “About Me” text to span exactly as wide as the row of cards below,
-        so we use .about-overview with a full-bleed override (width:100vw; margin-left:calc((100% - 100vw)/2)).
-      -->
+      <!-- About text fills 100% of the container -->
       <div class="about-overview">
         <h2>About Me</h2>
         <p>
@@ -72,10 +69,7 @@
         </p>
       </div>
 
-      <!--
-        The .roles-grid below is also forced to full-bleed, so its left/right edges match
-        exactly with the .about-overview above.
-      -->
+      <!-- roles‐grid also fills 100% of the same container, so its left/right edges match the text above -->
       <div class="roles-grid">
         <div class="role-card"><h3>Python Certified Developer</h3></div>
         <div class="role-card"><h3>Full-Stack Engineer</h3></div>
@@ -127,7 +121,7 @@
     </section>
 
     <!-- ================================================
-         Contact (embedded in index.html)
+         Contact (Embedded Form)
          ================================================ -->
     <section id="contact" class="fade-in-section">
       <div class="contact-container">

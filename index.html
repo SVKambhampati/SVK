@@ -3,322 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shreyas Kambhampati | Portfolio</title>
+  <title>Project One: EnvisionVR</title>
 
-  <!-- Google Font: Plus Jakarta Sans -->
+  <!-- Google Font & main stylesheet -->
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
     rel="stylesheet"
   />
-
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- Inline CSS for the project‐intro overlay -->
+  <style>
+    /* Full‐screen black overlay */
+    #project-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      /* Fade‐out after a short delay */
+      animation: overlayFade 1s ease-out 1s forwards;
+    }
+
+    /* Big “EnvisionVR” text in the center */
+    .project-logo {
+      font-family: 'Blanka', sans-serif;
+      font-size: 5rem;
+      color: #fff;
+      opacity: 0;
+      transform: scale(0.8);
+      /* Pop‐in animation */
+      animation: logoPop 0.8s ease-out 0.3s forwards;
+    }
+
+    /* NOTE: overlayFade & logoPop keyframes already exist in style.css */
+  </style>
 </head>
 <body>
 
-  <!-- Intro Overlay -->
-  <div id="intro-overlay">
-    <div class="intro-logo">SVK</div>
+  <!-- 1) Project Intro Overlay -->
+  <div id="project-overlay">
+    <div class="project-logo">EnvisionVR</div>
   </div>
 
-  <!-- Navigation -->
+  <!-- 2) Top Navbar with “← Home” -->
   <nav class="navbar">
     <div class="container">
-      <a class="logo" href="#">Shreyas Kambhampati</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <a class="logo" href="index.html">← Home</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <canvas id="dotGrid"></canvas>
-    <div class="container">
-      <h1>Hi, I'm Shreyas Kambhampati</h1>
-      <p>Computer Science Student at Northeastern University</p>
-    </div>
-  </header>
+  <!-- 3) Project One Content -->
+  <main class="container" style="margin-top: 80px;">
+    <h1>EnvisionVR</h1>
 
-  <!-- Main Content -->
-  <main class="container">
-
-    <!-- About Me -->
-    <section id="about" class="about-section fade-in-section">
-      <div class="about-overview">
-        <h2>About Me</h2>
-        <p>
-          Hey, I’m Shreyas. I’m a rising freshman at Northeastern University, where I’ll be majoring in Computer Science. With hands-on experience in software development, extended reality, and interactive technologies, I’ve interned across research labs, government, and corporate environments. My work spans from developing immersive VR tools to resolving complex data synchronization issues and driving social media engagement for a global tech company. I’m passionate about building solutions that blend technology with impact—especially in accessibility, education, and data visualization. Alongside industry certifications in AWS, Python, Unity, and MySQL, I bring strong programming skills and a drive to keep learning, innovating, and collaborating.
-        </p>
-      </div>
-
-      <div class="roles-grid">
-        <div class="role-card">
-          <h3>Blank 1</h3>
-        </div>
-        <div class="role-card">
-          <h3>Blank 2</h3>
-        </div>
-        <div class="role-card">
-          <h3>Blank 3</h3>
-        </div>
-        <div class="role-card">
-          <h3>Blank 4</h3>
-        </div>
-      </div>
+    <section>
+      <h2>Overview</h2>
+      <p>
+        EnvisionVR is a 3D visualization tool designed to help special‐needs students
+        improve spatial processing through immersive VR experiences. Built with Unity
+        and deployed on Oculus Quest, it presents interactive environments that adapt 
+        to each learner’s pace.
+      </p>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="fade-in-section">
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <!-- Project One -->
-        <article class="project-card">
-          <h3>Project One</h3>
-          <p>Project description.</p>
-          <a href="project-one.html">View →</a>
-        </article>
-
-        <!-- Project Two -->
-        <article class="project-card">
-          <h3>Project Two</h3>
-          <p>Another project description.</p>
-          <a href="project-two.html">View →</a>
-        </article>
-
-        <!-- Project Three -->
-        <article class="project-card">
-          <h3>Project Three</h3>
-          <p>A third project description.</p>
-          <a href="project-three.html">View →</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" class="fade-in-section">
-      <h2>Skills</h2>
-      <ul class="skills-list">
-        <li>HTML & CSS</li>
-        <li>JavaScript</li>
-        <li>React</li>
-        <li>Python</li>
-        <li>C++</li>
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li>Immersive 3D scenes that teach geometry concepts</li>
+        <li>Customizable difficulty levels & adaptive feedback</li>
+        <li>Support for hand‐tracking controls (no controllers needed)</li>
+        <li>In‐app analytics dashboard showing user progress over time</li>
       </ul>
     </section>
 
+    <section>
+      <h2>Technologies</h2>
+      <p>Unity · C# · Oculus SDK · Firebase · Blender (3D assets)</p>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="https://github.com/YourUsername/envisionvr" target="_blank" rel="noopener">GitHub Repo</a></li>
+        <li><a href="https://envisionvr-demo.example.com" target="_blank" rel="noopener">Live Demo</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <img 
+        src="images/envisionvr-screenshot-1.png" 
+        alt="EnvisionVR scene showing geometry lesson" 
+        style="max-width:100%; border-radius:8px; margin-top:1rem;"
+      />
+      <!-- Add more <img> tags if you have additional screenshots -->
+    </section>
+
+    <section>
+      <h2>Challenges &amp; Learnings</h2>
+      <p>
+        Integrating hand‐tracking on the Oculus Quest presented a learning curve—ensuring
+        that interactive objects responded smoothly without latency was challenging. I ended 
+        up optimizing textures and mesh colliders to maintain 90 fps, and I learned how to 
+        profile performance in Unity for VR builds.
+      </p>
+    </section>
   </main>
 
-  <!-- Footer / Contact -->
-  <footer id="contact" class="footer">
-    <div class="container">
-      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
-      <p>🔗 <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a></p>
-      <p>© 2025 Shreyas Kambhampati</p>
-    </div>
-  </footer>
-
-  <!-- Dot‐Grid Canvas Script -->
-  <script>
-    const canvas = document.getElementById('dotGrid');
-    const ctx    = canvas.getContext('2d');
-    let cw, ch, offsetX, offsetY;
-
-    const dpr             = window.devicePixelRatio || 1;
-    const NAV_HEIGHT      = 60;
-    const dotRadius       = 2;
-    const dotPadding      = 75;
-    const mouseRadius     = 75;
-    const mouseRadius2    = mouseRadius * mouseRadius;
-    const concaveStrength = 10;
-    const twinkleFreq     = 0.002;
-    const twinkleChance   = 0.4;
-
-    let dots   = [];
-    let mx = -9999, my = -9999, isDown = false;
-
-    function resizeCanvas() {
-      cw = canvas.width  = window.innerWidth * dpr;
-      ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
-      canvas.style.width  = window.innerWidth + 'px';
-      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.scale(dpr,dpr);
-      updateOffset();
-      initDots();
-    }
-
-    function updateOffset() {
-      const rect = canvas.getBoundingClientRect();
-      offsetX = rect.left;
-      offsetY = rect.top;
-    }
-
-    function initDots() {
-      dots = [];
-      const w = cw / dpr, h = ch / dpr;
-      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
-        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
-          dots.push({
-            sx: x, sy: y,
-            x: x,  y: y,
-            tw: Math.random() < twinkleChance
-          });
-        }
-      }
-    }
-
-    function draw() {
-      const t = Date.now();
-      ctx.clearRect(0,0,cw,ch);
-
-      dots.forEach(d => {
-        const dx = d.x - mx, dy = d.y - my;
-
-        // If mouse is down and within radius, push dots outward
-        if (isDown && dx*dx + dy*dy < mouseRadius2) {
-          d.x += dx / 30;
-          d.y += dy / 30;
-        } else {
-          // Otherwise ease them back to their original positions
-          const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
-          if (dx0 || dy0) {
-            d.x -= dx0 / 20;
-            d.y -= dy0 / 20;
-          }
-        }
-
-        // Compute distance from center for concave effect
-        const cx = d.x - (cw / dpr) / 2;
-        const cy = d.y - (ch / dpr) / 2;
-        const dist = Math.hypot(cx, cy);
-        const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
-        const conc = Math.pow(dist / mD, 3) * concaveStrength;
-
-        // Interaction “bubble” around mouse
-        const inter = (dx*dx + dy*dy < mouseRadius2)
-          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
-          : 0;
-
-        // Final radius
-        const radius = dotRadius + conc + inter;
-
-        // Twinkle logic
-        let alpha = 1;
-        if (d.tw) {
-          const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
-          alpha = 0.7 + tw * 0.3;
-        }
-        ctx.globalAlpha = alpha;
-
-        // Color: twinkling dots get a bluish tint, others remain white
-        if (d.tw) {
-          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-        } else {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-        }
-
-        // Glow effect if within mouse bubble
-        if (inter > 0) {
-          ctx.shadowBlur  = 40;
-          ctx.shadowColor = 'rgba(0,240,255,0.7)';
-        } else {
-          ctx.shadowBlur = 0;
-        }
-
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-      });
-    }
-
-    function animate() {
-      draw();
-      requestAnimationFrame(animate);
-    }
-
-    canvas.onmousemove = e => {
-      isDown = true;
-      mx = e.clientX - offsetX;
-      my = e.clientY - offsetY;
-    };
-    canvas.onmouseout = () => {
-      isDown = false;
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('scroll', updateOffset);
-    window.onload = () => {
-      resizeCanvas();
-      animate();
-    };
-  </script>
-
-  <!-- Intro Overlay Removal -->
+  <!-- 4) Project‐Intro Overlay Removal Script -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      const overlay = document.getElementById('intro-overlay');
-      const hero    = document.querySelector('.hero');
+      const overlay = document.getElementById('project-overlay');
+
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
           overlay.remove();
-          hero.classList.add('intro-ready');
         }
-      });
-    });
-  </script>
-
-  <!-- Fade-In On Scroll -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      };
-
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, options);
-
-      document.querySelectorAll('.fade-in-section').forEach(section => {
-        observer.observe(section);
-      });
-    });
-  </script>
-
-  <!-- 3D Tilt on Role Cards -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const MAX_TILT = 15;
-
-      document.querySelectorAll('.role-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const cx = rect.width / 2;
-          const cy = rect.height / 2;
-          const dx = (x - cx) / cx;
-          const dy = (y - cy) / cy;
-          const tiltY = dx * MAX_TILT * -1;
-          const tiltX = dy * MAX_TILT;
-          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-        });
       });
     });
   </script>

@@ -32,7 +32,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li> <!-- now points to contact.html -->
       </ul>
     </div>
   </nav>
@@ -41,7 +41,8 @@
   <header class="hero">
     <canvas id="dotGrid"></canvas>
     <div class="container">
-      <h1>Hi, I’m Shreyas Kambhampati</h1>
+      <!-- Add class="glow-flicker" here; animation triggers once overlay is gone -->
+      <h1 class="glow-flicker">Hi, I’m Shreyas Kambhampati</h1>
       <p>Computer Science Student at Northeastern University</p>
     </div>
   </header>
@@ -58,7 +59,7 @@
         </p>
       </div>
       <div class="roles-grid">
-        <div class="role-card"><h3>Python PCEP Developer</h3></div>
+        <div class="role-card"><h3>Python Certified Developer</h3></div>
         <div class="role-card"><h3>Full-Stack Engineer</h3></div>
         <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
         <div class="role-card"><h3>HCI Experience Architect</h3></div>
@@ -117,7 +118,7 @@
     </div>
   </footer>
 
-  <!-- Dot-Grid Canvas Script -->
+  <!-- Dot-Grid Canvas Script (unchanged) -->
   <script>
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -247,15 +248,20 @@
     };
   </script>
 
-  <!-- Intro Overlay Removal -->
+  <!-- Intro Overlay Removal & Glow Trigger -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
+      const heading = document.querySelector('.hero h1');
+
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
           overlay.remove();
           hero.classList.add('intro-ready');
+
+          // As soon as overlay is gone, add .glow-active to trigger the glow animation
+          heading.classList.add('glow-active');
         }
       });
     });
@@ -264,17 +270,12 @@
   <!-- Fade-In On Scroll -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      };
-
-      const observer = new IntersectionObserver((entries, observer) => {
+      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
       }, options);
@@ -289,7 +290,6 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
-
       document.querySelectorAll('.role-card').forEach(card => {
         card.addEventListener('mousemove', e => {
           const rect = card.getBoundingClientRect();
@@ -303,7 +303,6 @@
           const tiltX = dy * MAX_TILT;
           card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
         });
-
         card.addEventListener('mouseleave', () => {
           card.style.transform = 'rotateX(0deg) rotateY(0deg)';
         });

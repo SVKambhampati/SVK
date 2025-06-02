@@ -13,9 +13,112 @@
   />
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Project‐specific styling (overlay font change only) -->
+  <!-- Project‐specific styling -->
   <style>
-    /* Full-screen black overlay */
+    /* ---------------------------------------------------------------
+       BASIC PAGE RESET & TYPOGRAPHY
+       --------------------------------------------------------------- */
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    main.container {
+      margin: 0 auto;
+      max-width: 900px;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.25rem;
+      color: #0af; /* accent color */
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0af; /* accent bullet */
+    }
+
+    /* ---------------------------------------------------------------
+       SECTION “CARDS”: Lightly tinted boxes for each major section
+       --------------------------------------------------------------- */
+    section.project-section {
+      background-color: #111;
+      border-radius: 8px;
+      padding: 1.5rem 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    section.project-section + section.project-section {
+      margin-top: 1rem;
+    }
+
+    /* ---------------------------------------------------------------
+       NAVBAR & “Home” LINK
+       --------------------------------------------------------------- */
+    nav.navbar {
+      background: transparent; 
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      z-index: 10;
+    }
+
+    nav.navbar .container {
+      display: flex;
+      align-items: center;
+    }
+
+    nav.navbar .logo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav.navbar .logo:hover {
+      color: #0af;
+    }
+
+    /* ---------------------------------------------------------------
+       PROJECT INTRO OVERLAY
+       --------------------------------------------------------------- */
     #project-overlay {
       position: fixed;
       inset: 0;
@@ -27,7 +130,6 @@
       animation: overlayFade 1s ease-out 1s forwards;
     }
 
-    /* Use Questrial for the overlay text */
     .project-logo {
       font-family: 'Questrial', sans-serif;
       font-size: 5rem;
@@ -37,14 +139,14 @@
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
 
-    /* The keyframes “overlayFade” and “logoPop” are already defined in style.css */
+    /* Note: overlayFade and logoPop keyframes are defined in style.css */
   </style>
 </head>
 <body>
 
   <!-- 1) Project Intro Overlay -->
   <div id="project-overlay">
-    <div class="project-logo">E n v i s i o n V R</div>
+    <div class="project-logo">EnvisionVR</div>
   </div>
 
   <!-- 2) Top Navbar with “← Home” -->
@@ -55,7 +157,7 @@
   </nav>
 
   <!-- 3) Project One Content -->
-  <main class="container" style="margin-top: 80px;">
+  <main class="container" style="margin-top: 100px;">
     <h1>EnvisionVR</h1>
 
     <!-- Overview Section -->

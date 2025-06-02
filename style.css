@@ -1,5 +1,5 @@
 /* ===========================================================
-   style.css (Full CSS with Wider Cards via Container & Padding)
+   style.css (Full CSS with Overlapping “Peeking” Cards and Scroll Margin Fix)
    =========================================================== */
 
 /* --------------------------------------------------------------------------
@@ -236,6 +236,7 @@ section.fade-in-section.is-visible {
 /* Remove default section padding; the card provides it */
 section {
   padding: 0;
+  scroll-margin-top: 80px;  /* Ensures section headings appear below navbar */
 }
 
 /* Each major section is wrapped in .section-card */

@@ -42,6 +42,7 @@ ul {
   padding: 1rem 0;
 }
 
+/* Each major block (About, Projects, Skills, Contact) is a “card” */
 .section-card {
   background: #111;
   border-radius: 12px;
@@ -49,10 +50,10 @@ ul {
   padding: 2rem;
 }
 
-/* Invisible anchor sits above headings to offset scroll position */
+/* Invisible anchor sits above headings so navbar links land nicely */
 .section-anchor {
   position: relative;
-  top: -124px; /* height of navbar + some buffer */
+  top: -124px; /* Adjust if navbar height changes */
 }
 
 /* ==========================================================================
@@ -65,10 +66,23 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.25rem; border-bottom: 2px solid #444; padding-bottom: 0.25rem; }
-h3 { font-size: 1.5rem; }
+h1 {
+  font-size: 3rem;
+}
 
+h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+  /* In section-card contexts, we add a bottom border */
+  border-bottom: 2px solid #444;
+  padding-bottom: 0.25rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Paragraph and list styling */
 p, li {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
@@ -204,7 +218,6 @@ p, li {
   animation: underlineFadeIn 1s ease-out 1.3s forwards;
 }
 
-/* Keyframes for main overlay */
 @keyframes overlayFadeMain {
   to {
     opacity: 0;
@@ -236,7 +249,7 @@ p, li {
   gap: 1.5rem;
 }
 
-/* Role card */
+/* Role Card */
 .role-card {
   background: #111;
   border: 2px solid #0af;
@@ -289,6 +302,7 @@ p, li {
 .project-card h3 {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
+  color: #fff;
 }
 
 .project-card p {
@@ -317,7 +331,7 @@ p, li {
 }
 
 /* ==========================================================================
-   PROJECT INTRO OVERLAY (for each project‐one, two, three, four)
+   PROJECT INTRO OVERLAY (for project‐one, two, three, four)
    ========================================================================== */
 #project-overlay {
   position: fixed;
@@ -352,7 +366,7 @@ p, li {
   }
 }
 
-/* PROJECT HEADER */
+/* PROJECT HEADER (used inside each project‐x.html) */
 .project-header {
   background-color: #111;
   padding: 2rem 1.5rem;
@@ -383,7 +397,7 @@ p, li {
   opacity: 0.7;
 }
 
-/* PROJECT MAIN CONTENT */
+/* PROJECT MAIN CONTENT (used inside project‐x.html) */
 .project-main {
   margin: 2rem auto;
   width: 90%;

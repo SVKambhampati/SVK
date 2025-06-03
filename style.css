@@ -27,7 +27,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   2) Centering container for all content (wider)
+   2) Container
    -------------------------------------------------------------------------- */
 .container {
   width: 95%;
@@ -167,7 +167,6 @@ html, body {
 /* --------------------------------------------------------------------------
    6) Hero Section (Dot Grid + Content)
    -------------------------------------------------------------------------- */
-/* — Removed `opacity: 0` and initial `transform` so it’s visible immediately — */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -176,7 +175,6 @@ html, body {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  /* No longer hidden by default */
 }
 
 #dotGrid {
@@ -312,14 +310,14 @@ section.fade-in-section.is-visible {
 /* --------------------------------------------------------------------------
    12) Project Cards (Inside PROJECTS)
    -------------------------------------------------------------------------- */
-/* Added margin-top to push all project cards down slightly */
+/* Only the cards are moved down; headers remain static */
 .projects-grid {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* ← new */
+  margin-top: 1.5rem; /* ← moves all project cards down */
 }
 
 .projects-grid::before {
@@ -374,15 +372,12 @@ section.fade-in-section.is-visible {
 /* --------------------------------------------------------------------------
    13) Skills Expandable “+ details” List (Inside SKILLS)
    -------------------------------------------------------------------------- */
-/* Added margin-top to push entire skills block down slightly */
-.skills-section {
-  margin-top: 1.5rem; /* ← new */
-}
-
+/* Only the cards are moved down; header remains static */
 .skills-expandable {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 1.5rem; /* ← moves all skill cards down */
 }
 
 .skill-item {
@@ -561,7 +556,7 @@ section.fade-in-section.is-visible {
   transform: translateY(0);
 }
 
-/* 2) SKILL ITEM LAYOUT & HOVER STYLES */
+/* 2) SKILL ITEM LAYOUT & HOVER STYLES (unchanged) */
 .skill-item {
   position: relative;
   padding: 1rem 1.25rem;

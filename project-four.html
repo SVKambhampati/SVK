@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StyleForecast | Shreyas Kambhampati</title>
 
+  <!-- Load Plus Jakarta Sans (body) and Questrial (overlay/logo) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
     /* ----------------------------------------
        GLOBAL RESET & TYPOGRAPHY
@@ -83,11 +89,13 @@
       text-align: center;
     }
     .project-header h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
     .project-header p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1rem;
       color: #ccc;
       margin-bottom: 1rem;
@@ -119,6 +127,7 @@
       margin-bottom: 2rem;
     }
     .project-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.75rem;
       color: #fff;
       margin-bottom: 1rem;
@@ -128,6 +137,7 @@
     .project-section p,
     .project-section ul,
     .project-section li {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       color: #ddd;
       line-height: 1.6;
       margin-bottom: 1rem;
@@ -183,12 +193,12 @@
 </head>
 <body>
 
-  <!-- Project Intro Overlay -->
+  <!-- 1) Project Intro Overlay -->
   <div id="project-overlay">
     <div class="project-logo">StyleForecast</div>
   </div>
 
-  <!-- Project Header -->
+  <!-- 2) Project Header -->
   <header class="project-header">
     <h1>StyleForecast</h1>
     <p>
@@ -197,7 +207,7 @@
     <a href="index.html" class="back-link">← Back to Portfolio</a>
   </header>
 
-  <!-- Main Content -->
+  <!-- 3) Main Content -->
   <main class="container project-main fade-in-section">
     <!-- Overview Section -->
     <section class="project-section">
@@ -261,7 +271,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- 4) Footer -->
   <footer class="footer fade-in-section">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
@@ -273,7 +283,7 @@
     </div>
   </footer>
 
-  <!-- Fade-In Script -->
+  <!-- 5) Fade-In Script -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const sections = document.querySelectorAll('.fade-in-section');

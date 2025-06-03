@@ -250,22 +250,13 @@ section {
   z-index: 1;
 }
 
-/* Ensure section titles sit flush and in pure white, plus add an accent underline */
+/* Ensures consistent, larger white font on all section <h2> */
 .section-card h2 {
   margin-top: 0;           /* No extra top margin */
   color: #ffffff;          /* Force header text to pure white */
-  position: relative;      /* Required for ::after to position underline */
+  font-size: 2rem;         /* Increased, consistent size for all section titles */
+  font-weight: 700;
   margin-bottom: 1rem;     /* Space below header before content */
-}
-.section-card h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 40px;             /* Underline length */
-  height: 3px;             /* Underline thickness */
-  background: #0af;        /* Accent blue */
-  border-radius: 2px;
 }
 
 .section-card + .section-card {

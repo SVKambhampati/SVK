@@ -1,121 +1,21 @@
-<!-- File: project-three.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AddressSync Automation</title>
+  <title>AddressSync Automation | Shreyas Kambhampati</title>
 
   <!-- Load Plus Jakarta Sans (for body) and Questrial (for overlay) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
     rel="stylesheet"
   />
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Project‐specific styling -->
+  <!-- PROJECT INTRO OVERLAY CSS -->
   <style>
-    /* ---------------------------------------------------------------
-       BASIC PAGE RESET & TYPOGRAPHY
-       --------------------------------------------------------------- */
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-
-    main.container {
-      margin: 0 auto;
-      max-width: 900px;
-      padding: 2rem 1rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 1.75rem;
-      margin-bottom: 0.75rem;
-      border-bottom: 2px solid #444;
-      padding-bottom: 0.25rem;
-      color: #0af; /* accent color */
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: #ddd;
-    }
-
-    ul {
-      margin-left: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.25rem;
-    }
-
-    ul li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #0af; /* accent bullet */
-    }
-
-    /* ---------------------------------------------------------------
-       SECTION “CARDS”: Lightly tinted boxes for each major section
-       --------------------------------------------------------------- */
-    section.project-section {
-      background-color: #111;
-      border-radius: 8px;
-      padding: 1.5rem 1.5rem 2rem;
-      margin-bottom: 2rem;
-    }
-
-    section.project-section + section.project-section {
-      margin-top: 1rem;
-    }
-
-    /* ---------------------------------------------------------------
-       NAVBAR & “Home” LINK
-       --------------------------------------------------------------- */
-    nav.navbar {
-      background: transparent; 
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 0.75rem 1rem;
-      z-index: 10;
-    }
-
-    nav.navbar .container {
-      display: flex;
-      align-items: center;
-    }
-
-    nav.navbar .logo {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #fff;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    nav.navbar .logo:hover {
-      color: #0af;
-    }
-
     /* ---------------------------------------------------------------
        PROJECT INTRO OVERLAY
        --------------------------------------------------------------- */
@@ -139,82 +39,93 @@
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
 
-    /* Note: overlayFade and logoPop keyframes are defined in style.css */
+    @keyframes overlayFade {
+      to {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    @keyframes logoPop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- 1) Project Intro Overlay -->
   <div id="project-overlay">
-    <div class="project-logo">A d d r e s s S y n c  A u t o m a t i o n</div>
+    <div class="project-logo">AddressSync Automation</div>
   </div>
 
-  <!-- 2) Top Navbar with “← Home” -->
-  <nav class="navbar">
-    <div class="container">
-      <a class="logo" href="index.html">← Home</a>
-    </div>
-  </nav>
-
-  <!-- 3) Project Three Content -->
-  <main class="container" style="margin-top: 100px;">
+  <!-- 2) Top Header (same style as project-four) -->
+  <header class="project-header">
     <h1>AddressSync Automation</h1>
+    <p>
+      AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
+    </p>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </header>
 
+  <!-- 3) Main Content -->
+  <main class="project-main fade-in-section">
     <!-- Overview Section -->
     <section class="project-section">
       <h2>Overview</h2>
       <p>
-        <!-- Briefly describe Project Three here -->
-        AddressSync Automation was developed as part of a software engineering internship with DeKalb County Government. The goal was to enhance operational efficiency by addressing a critical issue: failed FedEx shipments due to mismatched or incomplete shipping addresses across Oracle systems.  The solution automatically syncs address data between Oracle E-Business Suite (EBS) and Oracle Commerce Cloud (OCC). It detects discrepancies in shipping addresses for customer orders, retrieves accurate information from EBS, and updates OCC via REST API calls. This automation replaces error-prone manual correction and significantly reduces shipping failures.  Additionally, the internship involved building an automated FTP pipeline to transfer nightly budget data from Oracle EBS to Oracle PBCS (Planning and Budgeting Cloud Service), increasing reliability and reducing administrative overhead.
+        AddressSync Automation is a backend integration tool designed to keep shipping addresses in sync between Oracle EBS and Oracle Commerce Cloud. By detecting mismatches that cause FedEx delivery failures, the application corrects data before orders ship—saving time, reducing errors, and improving overall efficiency.
       </p>
     </section>
 
-    <!-- Key Features / Modules -->
+    <!-- Key Features -->
     <section class="project-section">
-      <h2>Project Specifications</h2>
+      <h2>Key Features</h2>
       <ul>
-        <li><strong>Feature One:</strong> First major feature here.</li>
-        <li><strong>Feature Two:</strong> Second major feature here.</li>
-        <li><strong>Feature Three:</strong> Describe another feature or module.</li>
-        <li><strong>Feature Four:</strong> Additional.</li>
+        <li>Automated address comparison between EBS and Commerce Cloud</li>
+        <li>Real‐time mismatch detection</li>
+        <li>Automatic correction or flagging of invalid addresses</li>
+        <li>Integration with FedEx API to preempt delivery errors</li>
       </ul>
     </section>
 
     <!-- Technologies Used -->
     <section class="project-section">
-      <h2>Technologies</h2>
+      <h2>Technologies Used</h2>
       <ul>
-        <li><strong>Language / Framework:</strong> List the primary programming language or framework (e.g., React, Node.js).</li>
-        <li><strong>Backend:</strong> Name any backend or database (e.g., Python, Django, MongoDB).</li>
-        <li><strong>Tools:</strong> List supporting tools or libraries (e.g., TensorFlow, Chart.js, Tailwind CSS).</li>
-        <li><strong>Deployment:</strong> Indicate hosting or CI/CD services (e.g., Vercel, Heroku, AWS).</li>
+        <li>Java (backend integration logic)</li>
+        <li>RESTful APIs (FedEx &amp; Commerce Cloud)</li>
+        <li>Oracle EBS PL/SQL scripts (address validation)</li>
+        <li>Spring Boot Framework for service orchestration</li>
       </ul>
     </section>
 
-    <!-- Project Demo / Screenshots (optional) -->
+    <!-- Impact / Conclusion -->
     <section class="project-section">
-      <h2>Demo & Screenshots</h2>
+      <h2>Impact / Conclusion</h2>
       <p>
-        <!-- If you have a live demo or images, describe or embed them here. -->
-        <em>Embed screenshot:</em>
-      </p>
-      <!-- Example placeholder image -->
-      <img src="images/project-three-screenshot.png" alt="Project Three Screenshot" style="max-width: 100%; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);" />
-    </section>
-
-    <!-- Challenges & Learnings -->
-    <section class="project-section">
-      <h2>Challenges &amp; Learnings</h2>
-      <p>
-        <!-- Describe any technical hurdles, design trade-offs, or lessons learned. -->
-        insights about building this project.
+        By automating address synchronization, AddressSync Automation drastically reduces shipping failures and manual data correction efforts. This project highlights skills in enterprise integration, API design, and backend error‐handling strategies.
       </p>
     </section>
   </main>
 
-  <!-- 4) Project‐Intro Overlay Removal Script -->
+  <!-- 4) Footer -->
+  <footer class="footer fade-in-section">
+    <div class="container">
+      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
+      <p>🔗 
+        <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
+        <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
+      </p>
+      <p>© 2025 Shreyas Kambhampati</p>
+    </div>
+  </footer>
+
+  <!-- 5) Overlay Removal & Fade-In Script -->
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('project-overlay');
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
@@ -222,7 +133,21 @@
         }
       });
     });
-  </script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, options);
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </body>
 </html>

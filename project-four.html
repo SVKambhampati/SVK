@@ -3,58 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Four | Shreyas Kambhampati</title>
+  <title>StyleForecast | Shreyas Kambhampati</title>
+
+  <!-- Load Plus Jakarta Sans (for body) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
     rel="stylesheet"
   />
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Project‐specific tweaks (if any) */
+    .project-header {
+      background: #111;
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .project-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .project-header p {
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+    .back-link {
+      color: #0af;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    .project-main {
+      margin: 2rem auto;
+      max-width: 900px;
+      padding: 0 1rem;
+    }
+    .project-section {
+      background-color: #111;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .project-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.25rem;
+    }
+    .project-section p,
+    .project-section ul,
+    .project-section li {
+      color: #ddd;
+      line-height: 1.6;
+    }
+    .project-section ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-section ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+    .project-section ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0af;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- 1) Top Navbar / “← Back” Link -->
   <header class="project-header">
-    <div class="container">
-      <h1>Project Four</h1>
-      <p>A placeholder project description.</p>
-      <a href="index.html" class="back-link">← Back to Portfolio</a>
-    </div>
+    <h1>StyleForecast</h1>
+    <p>A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe.</p>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
   </header>
 
-  <main class="project-main container fade-in-section">
+  <!-- 2) Main Content -->
+  <main class="project-main fade-in-section">
+    <!-- Overview Section -->
     <section class="project-section">
       <h2>Overview</h2>
       <p>
-        This is a placeholder for Project Four. You can replace this content
-        with the real project summary, the tools used, your contributions, and
-        the outcome of the project. This section should give the visitor a
-        clear understanding of what the project was about.
+        StyleForecast is a smart wardrobe assistant that helps users decide what to wear each day by analyzing current weather conditions. Built using Python, Flask, and SQLite, the app allows users to manage their digital wardrobe, then suggests ideal outfits based on live weather data pulled from the OpenWeatherMap API.
+      </p>
+      <p>
+        A custom recommendation algorithm matches clothing categories (e.g., jackets, shorts) with local temperature, precipitation, and other weather metrics. The result is a seamless and practical fashion planning experience that adapts to climate and personal style.
       </p>
     </section>
 
+    <!-- Project Specifications -->
     <section class="project-section">
-      <h2>Technologies Used</h2>
+      <h2>Project Specifications</h2>
       <ul>
-        <li>HTML5 & CSS3</li>
-        <li>JavaScript</li>
-        <li>Optional: Python / Flask / React</li>
+        <li>
+          <strong>User Features:</strong>
+          <ul>
+            <li>Add and manage wardrobe items with categories and images</li>
+            <li>Receive daily outfit suggestions based on weather</li>
+            <li>View real-time local weather within the app</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Backend Logic:</strong>
+          <ul>
+            <li>Weather data pulled via OpenWeatherMap API</li>
+            <li>Outfit recommendation algorithm selects items based on temperature ranges, weather types, and clothing tags</li>
+            <li>Wardrobe stored in a lightweight SQLite database</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Frontend:</strong>
+          <ul>
+            <li>Clean and responsive UI built with HTML, CSS, and JavaScript</li>
+            <li>Simple dashboard for managing clothes and viewing recommendations</li>
+          </ul>
+        </li>
       </ul>
     </section>
 
+    <!-- Technologies Used -->
     <section class="project-section">
-      <h2>Challenges & Learnings</h2>
-      <p>
-        Discuss any challenges you faced during the development process and how
-        you overcame them. Mention key technical or creative takeaways from the
-        project.
-      </p>
+      <h2>Technologies Used</h2>
+      <ul>
+        <li><strong>Backend:</strong> Python, Flask</li>
+        <li><strong>Database:</strong> SQLite</li>
+        <li><strong>Weather API:</strong> OpenWeatherMap API</li>
+        <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+        <li><strong>Additional:</strong> Jinja Templates (Flask), Bootstrap (optional)</li>
+      </ul>
     </section>
 
+    <!-- Impact / Conclusion -->
     <section class="project-section">
-      <h2>Screenshots or Media</h2>
-      <p>You can embed images, videos, or links to a live demo here.</p>
+      <h2>Impact / Conclusion</h2>
+      <p>
+        StyleForecast bridges the gap between functionality and personalization in daily fashion. It enhances user experience by taking the guesswork out of outfit planning and promotes smart, weather-aware clothing decisions. This project demonstrates end-to-end development skills including API integration, algorithm design, and user-focused interface development.
+      </p>
     </section>
   </main>
 
-  <footer class="footer">
+  <!-- 3) Footer -->
+  <footer class="footer fade-in-section">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
       <p>🔗 
@@ -65,6 +165,7 @@
     </div>
   </footer>
 
+  <!-- 4) Fade-In Script for This Page -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const sections = document.querySelectorAll('.fade-in-section');

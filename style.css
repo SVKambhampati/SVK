@@ -3,7 +3,7 @@
 }
 
 /* =====================================================================================
-   1) ORIGINAL SVK STYLE RULES (copied verbatim from SVK style (2).css)
+   1) ORIGINAL SVK STYLE RULES (copied verbatim from your existing style.css)
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -678,3 +678,34 @@ section.fade-in-section.is-visible {
 .skill-item.open .toggle-btn .icon {
   animation: icon-bounce 0.3s ease-out forwards;
 }
+
+/* =====================================================================================
+   3) PROJECT PAGE SPECIFIC HOVER EFFECTS (for Overview / Key Subject Modules / etc.)
+   ===================================================================================== */
+
+/* Each “project-section” on your project-detail pages (e.g. Overview, Key Subject Modules) */
+.project-section {
+  background-color: #111;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.project-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+}
+
+/* Inside a typical project-page HTML you might have:
+   <section class="project-section">
+     <h2>Overview</h2>
+     <p>…</p>
+   </section>
+   <section class="project-section">
+     <h2>Key Subject Modules</h2>
+     <ul>…</ul>
+   </section>
+   etc.
+   The above CSS will cause each of those blocks to gently lift and glow when hovered.
+*/

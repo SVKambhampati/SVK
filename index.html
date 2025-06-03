@@ -119,81 +119,101 @@
       </section>
     </div>
 
-    <!-- ================================================
-         SKILLS (Rounded Card)
-         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
-         ================================================ -->
+   <!-- ================================================
+     SKILLS (Rounded Card)
+     ================================================ -->
     <div class="section-card">
-      <section class="fade-in-section">
+      <section class="fade-in-section" id="skills-section">
+        <!-- Invisible anchor so navbar links stop above the heading -->
         <div id="skills-anchor" class="section-anchor"></div>
-
+    
         <h2>Programming Languages &amp; Frameworks</h2>
         <ul class="skills-expandable">
           <!-- Java -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Java</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
+              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third-party libraries.
             </div>
           </li>
+    
           <!-- Python -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Python</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
+              Developed the back-end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
             </div>
           </li>
+    
           <!-- JavaScript -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">JavaScript</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
+              Wrote client-side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
             </div>
           </li>
+    
           <!-- HTML & CSS -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">HTML &amp; CSS</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
+              Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
+    
           <!-- MySQL -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">MySQL</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
+              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
             </div>
           </li>
+    
           <!-- C# -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">C#</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
             </div>
           </li>
+    
           <!-- XML -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">XML</span>
-              <button class="toggle-btn">+ details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
@@ -202,7 +222,6 @@
         </ul>
       </section>
     </div>
-
     <!-- ================================================
          CONTACT (Rounded Card)
          – Invisible anchor (#contact-anchor) sits 124px above the <h2>

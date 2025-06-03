@@ -126,6 +126,14 @@
       border-radius: 8px;
       padding: 1.5rem;
       margin-bottom: 2rem;
+      /* ════════════════════════════════
+         Lift + white glow on hover
+         ════════════════════════════════ */
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .project-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
     }
     .project-section h2 {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -156,7 +164,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      color: #0af;
+      color: #fff;
     }
 
     /* ----------------------------------------

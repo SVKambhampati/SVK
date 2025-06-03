@@ -312,12 +312,14 @@ section.fade-in-section.is-visible {
 /* --------------------------------------------------------------------------
    12) Project Cards (Inside PROJECTS)
    -------------------------------------------------------------------------- */
+/* Added margin-top to push all project cards down slightly */
 .projects-grid {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
+  margin-top: 1.5rem; /* ← new */
 }
 
 .projects-grid::before {
@@ -372,6 +374,11 @@ section.fade-in-section.is-visible {
 /* --------------------------------------------------------------------------
    13) Skills Expandable “+ details” List (Inside SKILLS)
    -------------------------------------------------------------------------- */
+/* Added margin-top to push entire skills block down slightly */
+.skills-section {
+  margin-top: 1.5rem; /* ← new */
+}
+
 .skills-expandable {
   list-style: none;
   padding: 0;

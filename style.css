@@ -239,21 +239,33 @@ section {
   scroll-margin-top: calc(60px + 4rem);
 }
 
-/* -------------------------------
-   Modified Section-Card Padding & Heading
-   ------------------------------- */
+/* ↓↓↓ Modified padding here ↓↓↓ */
 .section-card {
   background: #111;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   margin: 2rem 0;
-  padding: 2rem 1.5rem; /* was 4rem before, now 2rem so headers sit higher */
+  padding: 2rem 1.5rem; /* Reduced top padding from 4rem to 2rem */
   position: relative;
   z-index: 1;
 }
 
+/* Ensure section titles sit flush and in pure white, plus add an accent underline */
 .section-card h2 {
-  margin-top: 0;  /* ensure the <h2> is flush with that 2rem padding */
+  margin-top: 0;           /* No extra top margin */
+  color: #ffffff;          /* Force header text to pure white */
+  position: relative;      /* Required for ::after to position underline */
+  margin-bottom: 1rem;     /* Space below header before content */
+}
+.section-card h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;             /* Underline length */
+  height: 3px;             /* Underline thickness */
+  background: #0af;        /* Accent blue */
+  border-radius: 2px;
 }
 
 .section-card + .section-card {
@@ -324,9 +336,9 @@ section {
   display: grid;
   /* Force single-column so cards stack vertically */
   grid-template-columns: 1fr;
-  gap: 1.5rem;           /* keeps the larger gap between cards */
-  margin-top: 1.5rem;    /* ← added: pushes all cards lower under “Projects” */
-  padding-left: 20px;    /* room for the left-side vertical line */
+  gap: 2.5rem;           /* Increased gap between stacked cards */
+  margin-top: 1.5rem;    /* Push cards lower under the “Projects” header */
+  padding-left: 20px;    /* Room for left-side vertical line */
   position: relative;
 }
 

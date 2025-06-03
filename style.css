@@ -239,23 +239,29 @@ section {
   scroll-margin-top: calc(60px + 4rem);
 }
 
+/* ↓↓↓ Modified padding here ↓↓↓ */
 .section-card {
   background: #111;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   margin: 2rem 0;
-  padding: 4rem 1.5rem;
+  padding: 2rem 1.5rem; /* Reduced top padding from 4rem to 2rem */
   position: relative;
   z-index: 1;
+}
+
+.section-card section {
+  padding: 0;
+}
+
+/* Prevent extra top margin on <h2> so it sits flush */
+.section-card h2 {
+  margin-top: 0;
 }
 
 .section-card + .section-card {
   margin-top: -30px;
   z-index: 2;
-}
-
-.section-card section {
-  padding: 0;
 }
 
 /* ----------------------------------------
@@ -315,10 +321,10 @@ section {
    ---------------------------------------- */
 .projects-grid {
   display: grid;
-  /* Force a single-column layout so cards stack vertically */
+  /* Force single-column so cards stack vertically */
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding-left: 20px;  /* Keeps the left-side vertical line */
+  padding-left: 20px;  /* Room for left-side vertical line */
   position: relative;
 }
 

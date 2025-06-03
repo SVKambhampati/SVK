@@ -1,4 +1,9 @@
-<!-- Add this inside <head> of each project-page (replace your existing <style> … </style> if you have one) -->
+<!-- …inside <head> of project-one.html… -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
+  rel="stylesheet"
+/>
+
 <style>
   /* ----------------------------------------
      GLOBAL RESET & TYPOGRAPHY
@@ -110,18 +115,11 @@
     max-width: 900px;
   }
 
-  /* Each section now lifts on hover */
   .project-section {
     background: #111;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 2rem;
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-  .project-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
   }
   .project-section h2 {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -175,7 +173,7 @@
   }
 
   /* ----------------------------------------
-     FADE-IN OBSERVER (optional: if you keep your fade-in script)
+     FADE-IN OBSERVER (if you keep your fade-in script)
      ---------------------------------------- */
   .fade-in-section {
     opacity: 0;
@@ -185,5 +183,19 @@
   .fade-in-section.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+
+  /* ========================================
+     ↴ NEW: HOVER EFFECT ON EACH .project-section
+     ======================================== */
+  .project-section {
+    /* add a smooth transition */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .project-section:hover {
+    /* lift it up 5px + intensify shadow */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
   }
 </style>

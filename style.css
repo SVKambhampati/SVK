@@ -324,7 +324,7 @@ section {
   display: grid;
   /* Force single-column so cards stack vertically */
   grid-template-columns: 1fr;
-  gap: 2.5rem;           /* keeps the larger gap between cards */
+  gap: 1.5rem;           /* keeps the larger gap between cards */
   margin-top: 1.5rem;    /* ← added: pushes all cards lower under “Projects” */
   padding-left: 20px;    /* room for the left-side vertical line */
   position: relative;

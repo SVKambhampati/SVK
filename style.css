@@ -315,10 +315,10 @@ section {
    ---------------------------------------- */
 .projects-grid {
   display: grid;
-  /* auto-fit ensures as many 280px-wide columns as fit the container */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Force a single-column layout so cards stack vertically */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-  padding-left: 20px;  /* Room for left-side vertical line */
+  padding-left: 20px;  /* Keeps the left-side vertical line */
   position: relative;
 }
 

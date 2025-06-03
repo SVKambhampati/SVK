@@ -2,23 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MovieMind | Shreyas Kambhampati</title>
 
-  <!-- Load Plus Jakarta Sans (for body) and Questrial (for overlay) -->
+  <!-- Load Plus Jakarta Sans (body) & Questrial (overlay/logo) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
     rel="stylesheet"
   />
 
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- PROJECT INTRO OVERLAY CSS -->
   <style>
-    /* ---------------------------------------------------------------
+    /* ----------------------------------------
+       GLOBAL RESET & TYPOGRAPHY
+       ---------------------------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    ul {
+      list-style: none;
+    }
+
+    /* ----------------------------------------
+       CONTAINER
+       ---------------------------------------- */
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* ----------------------------------------
        PROJECT INTRO OVERLAY
-       --------------------------------------------------------------- */
+       ---------------------------------------- */
     #project-overlay {
       position: fixed;
       inset: 0;
@@ -29,7 +59,6 @@
       z-index: 999;
       animation: overlayFade 1s ease-out 1s forwards;
     }
-
     .project-logo {
       font-family: 'Questrial', sans-serif;
       font-size: 5rem;
@@ -38,40 +67,149 @@
       transform: scale(0.8);
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
-
     @keyframes overlayFade {
       to {
         opacity: 0;
         pointer-events: none;
       }
     }
-
     @keyframes logoPop {
       to {
         opacity: 1;
         transform: scale(1);
       }
     }
+
+    /* ----------------------------------------
+       PROJECT HEADER
+       ---------------------------------------- */
+    .project-header {
+      background: #111;
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+    .project-header h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .project-header p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .back-link {
+      display: inline-block;
+      color: #0af;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+    }
+    .back-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ----------------------------------------
+       MAIN CONTENT
+       ---------------------------------------- */
+    .project-main {
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 900px;
+    }
+    .project-section {
+      background: #111;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .project-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.75rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #444;
+      padding-bottom: 0.25rem;
+    }
+    .project-section p,
+    .project-section ul,
+    .project-section li {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #ddd;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .project-section ul {
+      margin-left: 1.25rem;
+    }
+    .project-section ul li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-section ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0af;
+    }
+
+    /* ----------------------------------------
+       FOOTER
+       ---------------------------------------- */
+    .footer {
+      background: #111;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: #aaa;
+    }
+    .footer a {
+      color: #0af;
+      transition: opacity 0.2s ease;
+    }
+    .footer a:hover {
+      opacity: 0.7;
+    }
+
+    /* ----------------------------------------
+       FADE-IN OBSERVER
+       ---------------------------------------- */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
 
-  <!-- 1) Project Intro Overlay -->
+  <!-- ▷ Project Intro Overlay ▷ -->
   <div id="project-overlay">
     <div class="project-logo">MovieMind</div>
   </div>
 
-  <!-- 2) Top Header (same style as project-four) -->
+  <!-- ▷ Top Header ▷ -->
   <header class="project-header">
     <h1>MovieMind</h1>
     <p>
-      A personalized movie recommendation system that learns your tastes using content‐based and collaborative filtering, delivering film suggestions you’ll love.
+      A personalized movie recommendation system that learns your tastes using content‐based and collaborative filtering.
     </p>
     <a href="index.html" class="back-link">← Back to Portfolio</a>
   </header>
 
-  <!-- 3) Main Content -->
-  <main class="project-main fade-in-section">
+  <!-- ▷ Main Content ▷ -->
+  <main class="container project-main fade-in-section">
     <!-- Overview Section -->
     <section class="project-section">
       <h2>Overview</h2>
@@ -130,7 +268,7 @@
     </section>
   </main>
 
-  <!-- 4) Footer -->
+  <!-- ▷ Footer ▷ -->
   <footer class="footer fade-in-section">
     <div class="container">
       <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
@@ -142,19 +280,10 @@
     </div>
   </footer>
 
-  <!-- 5) Overlay Removal & Fade-In Script -->
+  <!-- ▷ Fade-In Script ▷ -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const overlay = document.getElementById('project-overlay');
-      overlay.addEventListener('animationend', e => {
-        if (e.animationName === 'overlayFade') {
-          overlay.remove();
-        }
-      });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+    document.addEventListener('DOMContentLoaded', function () {
+      const sections = document.querySelectorAll('.fade-in-section');
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -162,10 +291,9 @@
             obs.unobserve(entry.target);
           }
         });
-      }, options);
-      document.querySelectorAll('.fade-in-section').forEach(section => {
-        observer.observe(section);
-      });
+      }, { threshold: 0.1 });
+
+      sections.forEach(section => observer.observe(section));
     });
   </script>
 </body>

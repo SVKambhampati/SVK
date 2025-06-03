@@ -273,10 +273,6 @@ section.fade-in-section.is-visible {
   margin-bottom: 2rem;
 }
 
-.about-overview h2 {
-  /* Already covered by .section-card h2 */
-}
-
 .about-overview p {
   line-height: 1.8;
   margin-bottom: 1.5rem;
@@ -419,16 +415,24 @@ section.fade-in-section.is-visible {
   color: #000;
 }
 
+/* Slide-Down Skill-Details */
 .skill-details {
-  display: none;
-  color: #ccc;
-  font-size: 0.95rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-20px);
+  transition:
+    max-height 0.5s var(--spring-ease),
+    opacity     0.3s ease-out,
+    transform   0.5s var(--spring-ease);
+  color: #ddd;
+  margin-top: 0.75rem;
   line-height: 1.5;
-  margin-top: 0.5rem;
 }
 
 .skill-item.open .skill-details {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* --------------------------------------------------------------------------
@@ -436,7 +440,7 @@ section.fade-in-section.is-visible {
    -------------------------------------------------------------------------- */
 .contact-card h2 {
   /* Already white and large via .section-card h2 */
-  text-align: center; /* ← center “Contact Me” */
+  text-align: center; /* center the “Contact Me” heading */
 }
 
 .contact-card p {
@@ -639,14 +643,20 @@ section.fade-in-section.is-visible {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.5s var(--spring-ease), opacity 0.3s ease-out;
+  transform: translateY(-20px);
+  transition:
+    max-height 0.5s var(--spring-ease),
+    opacity     0.3s ease-out,
+    transform   0.5s var(--spring-ease);
   color: #ddd;
   margin-top: 0.75rem;
   line-height: 1.5;
   z-index: 1;
 }
+
 .skill-item.open .skill-details {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Icon Bounce Animation */

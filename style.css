@@ -1,194 +1,88 @@
-/* ==========================================================================
-   GLOBAL RESET & TYPOGRAPHY
-   ========================================================================== */
-* {
+/* =====================================================================================
+   1) ORIGINAL SVK STYLE RULES (copied verbatim from SVK style (2).css)
+   ===================================================================================== */
+
+/* --------------------------------------------------------------------------
+   1) Global Resets & Typography
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Blanka';
+  src: url('./blanka/Blanka-Regular.woff2') format('woff2');
+}
+
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 html, body {
-  width: 100%;
   height: 100%;
-  background-color: #000;
-  color: #fff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   scroll-behavior: smooth;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-}
-
-/* ==========================================================================
-   ROOT VARIABLES
-   ========================================================================== */
-:root {
-  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* ==========================================================================
-   CONTAINERS & LAYOUT
-   ========================================================================== */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 0;
-}
-
-/* Each major block (About, Projects, Skills, Contact) is a “card” */
-.section-card {
-  background: #111;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  padding: 2rem;
-}
-
-/* Invisible anchor sits above headings so navbar links land nicely */
-.section-anchor {
-  position: relative;
-  top: -124px; /* Adjust if navbar height changes */
-}
-
-/* ==========================================================================
-   TYPE STYLES
-   ========================================================================== */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
+  background: #000;
   color: #fff;
-  margin-bottom: 1rem;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-  font-size: 3rem;
+/* --------------------------------------------------------------------------
+   2) Centering container for all content (wider)
+   -------------------------------------------------------------------------- */
+.container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-h2 {
-  font-size: 2.25rem;
-  margin-bottom: 1rem;
-  /* In section-card contexts, we add a bottom border */
-  border-bottom: 2px solid #444;
-  padding-bottom: 0.25rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-/* Paragraph and list styling */
-p, li {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1rem;
-  color: #ddd;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* ==========================================================================
-   NAVBAR
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   3) Navbar (semi-transparent)
+   -------------------------------------------------------------------------- */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-  padding: 0.75rem 1rem;
-  z-index: 1000;
+  height: 60px;               /* Navbar height */
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
 }
 
 .navbar .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
 }
 
-.navbar .logo {
-  font-size: 1.25rem;
-  font-weight: 600;
+.logo {
   color: #fff;
-  transition: color 0.2s ease;
-}
-
-.navbar .logo:hover {
-  color: #0af;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .nav-links {
+  list-style: none;
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
-.nav-links li a {
+.nav-links a {
   color: #fff;
-  font-size: 1rem;
+  text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease-out;
 }
 
-.nav-links li a:hover {
+.nav-links a:hover {
   color: #0af;
 }
 
-/* ==========================================================================
-   HERO SECTION (DOT-GRID BACKGROUND)
-   ========================================================================== */
-.hero {
-  position: relative;
-  height: calc(100vh - 60px); /* minus navbar height */
-  overflow: hidden;
-}
-
-#dotGrid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.hero .container {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  margin-top: 100px; /* push content below navbar */
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.hero p {
-  font-size: 1.25rem;
-  color: #ccc;
-}
-
-/* ==========================================================================
-   FADE-IN SECTIONS (INTERSECTION OBSERVER)
-   ========================================================================== */
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ==========================================================================
-   OVERLAYS
-   ========================================================================== */
-/* Intro overlay for the main site */
+/* --------------------------------------------------------------------------
+   4) Intro Overlay
+   -------------------------------------------------------------------------- */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -196,161 +90,49 @@ p, li {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-  animation: overlayFadeMain 1s ease-out 1s forwards;
+  z-index: 999;
+  animation: overlayFade 1s ease-out 1.5s forwards;
+}
+
+.logo-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
 }
 
 .intro-logo {
-  font-family: 'Questrial', sans-serif;
+  font-family: 'Blanka', sans-serif;
   font-size: 6rem;
   color: #fff;
   opacity: 0;
   transform: scale(0.8);
-  animation: logoPopMain 0.8s ease-out 0.3s forwards;
+  animation: logoPop 0.8s ease-out 0.3s forwards;
+  text-shadow: none;
 }
 
 .logo-underline {
-  width: 60px;
-  height: 4px;
-  background: #0af;
-  margin-top: 0.5rem;
-  opacity: 0;
-  animation: underlineFadeIn 1s ease-out 1.3s forwards;
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  height: 6px;
+  width: 0;
+  background: #fff;
+  animation: underlineExpand 1s ease-out 0.8s forwards;
+  border-radius: 3px;
 }
 
-@keyframes overlayFadeMain {
-  to {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-@keyframes logoPopMain {
+@keyframes logoPop {
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
-@keyframes underlineFadeIn {
+
+@keyframes underlineExpand {
   to {
-    opacity: 1;
+    width: 100%;
   }
-}
-
-/* ==========================================================================
-   SECTION: ABOUT ME / ROLES
-   ========================================================================== */
-.about-overview {
-  margin-bottom: 2rem;
-}
-
-.roles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Role Card */
-.role-card {
-  background: #111;
-  border: 2px solid #0af;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.5s var(--spring-ease), box-shadow 0.3s ease;
-  transform-style: preserve-3d;
-}
-
-.role-card h3 {
-  font-size: 1.25rem;
-  color: #fff;
-  margin: 0;
-}
-
-.role-card:hover {
-  box-shadow: 0 8px 20px rgba(0, 170, 255, 0.5);
-}
-
-/* 3D tilt on hover */
-.role-card {
-  transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-}
-.role-card:hover {
-  transform: perspective(600px) rotateX(4deg) rotateY(-4deg);
-}
-
-/* ==========================================================================
-   SECTION: PROJECTS / PROJECT CARDS
-   ========================================================================== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card {
-  background: #111;
-  border: 2px solid rgba(0, 170, 255, 0.2);
-  border-radius: 12px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.5s var(--spring-ease), box-shadow 0.3s ease;
-}
-
-.project-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: #fff;
-}
-
-.project-card p {
-  flex-grow: 1;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #ddd;
-}
-
-.project-card a {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #0af;
-  align-self: start;
-  transition: color 0.2s ease;
-}
-
-.project-card a:hover {
-  color: #66d9ff;
-}
-
-/* Raise + underglow on hover */
-.project-card:hover {
-  box-shadow: 0 12px 30px rgba(0, 170, 255, 0.5);
-  transform: translateY(-4px);
-}
-
-/* ==========================================================================
-   PROJECT INTRO OVERLAY (for project‐one, two, three, four)
-   ========================================================================== */
-#project-overlay {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  animation: overlayFade 1s ease-out 1s forwards;
-}
-
-.project-logo {
-  font-family: 'Questrial', sans-serif;
-  font-size: 5rem;
-  color: #fff;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: logoPop 0.8s ease-out 0.3s forwards;
 }
 
 @keyframes overlayFade {
@@ -359,187 +141,408 @@ p, li {
     pointer-events: none;
   }
 }
-@keyframes logoPop {
-  to {
-    opacity: 1;
-    transform: scale(1);
+
+/* --------------------------------------------------------------------------
+   5) SVK Flicker-Glow (once via .glow-active)
+   -------------------------------------------------------------------------- */
+.intro-logo.glow-active {
+  animation: flickerGlow 1s ease-out forwards;
+}
+
+@keyframes flickerGlow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  10%, 30%, 50%, 70% {
+    text-shadow:
+      0 0 8px rgba(0, 200, 255, 0.8),
+      0 0 12px rgba(0, 200, 255, 0.6),
+      0 0 16px rgba(255, 255, 255, 0.4);
+  }
+  20%, 40%, 60%, 80% {
+    text-shadow: none;
   }
 }
 
-/* PROJECT HEADER (used inside each project‐x.html) */
-.project-header {
-  background-color: #111;
-  padding: 2rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+/* --------------------------------------------------------------------------
+   6) Hero Section (Dot Grid + Content)
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-}
-.project-header h1 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.project-header p {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1rem;
-  color: #ccc;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-}
-.back-link {
-  display: inline-block;
-  color: #0af;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: opacity 0.2s ease;
-}
-.back-link:hover {
-  opacity: 0.7;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* PROJECT MAIN CONTENT (used inside project‐x.html) */
-.project-main {
-  margin: 2rem auto;
-  width: 90%;
-  max-width: 900px;
+.hero.intro-ready {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
-.project-section {
-  background-color: #111;
-  border-radius: 8px;
-  padding: 1.5rem;
+
+#dotGrid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+  transform: translateY(-20px);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 3rem 4rem;
+  border-radius: 12px;
+}
+
+.hero .container h1 {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.hero .container p {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+/* --------------------------------------------------------------------------
+   7) Fade-In On Scroll
+   -------------------------------------------------------------------------- */
+section.fade-in-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+section.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   8) Invisible Anchor (to stop scroll above the heading)
+   -------------------------------------------------------------------------- */
+.section-anchor {
+  display: block;
+  position: relative;
+  /* 60px (navbar) + 4rem (≈64px card top padding) = 124px */
+  top: -124px;
+  height: 0;
+  visibility: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   9) Rounded “Card” + Overlapping Setup (Ideas 9 & 10)
+   -------------------------------------------------------------------------- */
+.section-card {
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin: 2rem 0;
+  padding: 4rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-card + .section-card {
+  margin-top: -30px;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   10) ABOUT ME Content (Inside ABOUT ME card)
+   -------------------------------------------------------------------------- */
+.about-overview {
+  width: 100%;
+  text-align: left;
+  color: #ddd;
   margin-bottom: 2rem;
 }
-.project-section h2 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.75rem;
-  color: #fff;
-  margin-bottom: 1rem;
+
+.about-overview h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2.25rem;         /* ensure consistency */
   border-bottom: 2px solid #444;
   padding-bottom: 0.25rem;
 }
-.project-section p,
-.project-section ul,
-.project-section li {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  color: #ddd;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+
+.about-overview p {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
 }
-.project-section ul {
-  margin-left: 1.25rem;
+
+/* --------------------------------------------------------------------------
+   11) Role Cards (Inside ABOUT ME)
+   -------------------------------------------------------------------------- */
+.roles-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  perspective: 1000px;
+  margin-bottom: 2rem;
 }
-.project-section ul li {
+
+.roles-grid .role-card {
+  background: #111;
+  border: 1px solid #0af;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+
+.roles-grid .role-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.roles-grid .role-card:hover {
+  transform: rotateX(5deg) rotateY(-5deg);
+}
+
+/* --------------------------------------------------------------------------
+   12) Project Cards (Inside PROJECTS)
+   -------------------------------------------------------------------------- */
+.projects-grid {
   position: relative;
-  padding-left: 1.25rem;
-  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 20px;
 }
-.project-section ul li::before {
-  content: "•";
+
+.projects-grid::before {
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
-  color: #0af;
+  bottom: 0;
+  width: 2px;
+  background: #fff;
 }
 
-/* ==========================================================================
-   CONTACT SECTION
-   ========================================================================== */
-.contact-card {
-  background-color: #111;
+.project-card {
+  background: #111;
+  padding: 1.5rem;
   border-radius: 8px;
-  padding: 2rem 1.5rem;
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
+  margin-left: -10px;
+  transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
-.contact-card h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+
+.project-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
   color: #fff;
 }
-.contact-card p {
+
+.project-card p {
+  margin-bottom: 1rem;
+  color: #ccc;
   font-size: 1rem;
-  color: #ddd;
-  margin-bottom: 1.5rem;
+  line-height: 1.5;
 }
-.contact-form {
+
+.project-card a {
+  color: #0af;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  background: #222;
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+}
+
+.project-card a:hover {
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   13) Skills Expandable “+ details” List (Inside SKILLS)
+   -------------------------------------------------------------------------- */
+.skills-expandable {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-item {
+  border-bottom: 1px solid #333;
+  padding: 1rem 0;
+}
+
+.skill-header {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.skill-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.toggle-btn {
+  background: none;
+  border: 1px solid #0af;
+  border-radius: 4px;
+  color: #0af;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: #0af;
+  color: #000;
+}
+
+.skill-details {
+  display: none;
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.skill-item.open .skill-details {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   14) Redesigned Contact Section (Inside CONTACT card)
+   -------------------------------------------------------------------------- */
+#contact-anchor + .contact-card h2 {
+  margin-top: 0; /* No extra gap beyond what the invisible anchor provided */
+}
+
+.contact-card h2 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  font-size: 2rem;
+}
+
+.contact-card p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ddd;
+  line-height: 1.5;
+}
+
 .form-row {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 1.25rem;
 }
+
 .form-group {
-  flex: 1;
+  flex: 1 1 250px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
+
 .form-group label {
-  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #ccc;
+  color: #fff;
+  font-size: 0.95rem;
 }
+
 .form-group input,
 .form-group textarea {
-  width: 100%;
-  background-color: #111;
-  border: 2px solid #0af;
+  background: #111;
+  border: 1px solid #0af;
   border-radius: 6px;
-  padding: 0.75rem;
+  padding: 0.6rem 1rem;
+  color: #fff;
   font-size: 1rem;
-  color: #ddd;
   resize: vertical;
-  transition: border-color 0.2s ease;
 }
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #666;
+}
+
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #66d9ff;
   outline: none;
+  border-color: #0ff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
 }
+
 .send-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
   background: #0af;
   color: #000;
-  font-weight: 700;
   border: none;
   border-radius: 6px;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.75rem;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  align-self: flex-start;
-  transition: background 0.2s ease;
-}
-.send-btn:hover {
-  background: #66d9ff;
+  transition: background 0.3s ease-out, transform 0.2s ease-out;
 }
 
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
+.send-btn:hover {
+  background: #3fcfff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15) Footer (unchanged, inside pure-black background)
+   -------------------------------------------------------------------------- */
 .footer {
-  background-color: #111;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
-  margin-top: 2rem;
-  font-size: 0.875rem;
+  text-align: center;
   color: #aaa;
 }
+
 .footer a {
   color: #0af;
-  transition: opacity 0.2s ease;
+  text-decoration: none;
+  transition: color 0.2s ease-out;
 }
+
 .footer a:hover {
-  opacity: 0.7;
+  color: #fff;
 }
 
-/* ==========================================================================
-   SKILLS SECTION (ISOLATED & UPDATED)
-   ========================================================================== */
 
-/* 1) FADE-IN & STAGGERED APPEARANCE */
+/* =====================================================================================
+   2) APPENDED SKILLS SECTION UPDATES (fade-in, hover, accordion)
+   ===================================================================================== */
+
+/* 1) FADE-IN & STAGGERED APPEARANCE FOR SKILLS */
 .skills-section .skill-item {
   opacity: 0;
   transform: translateY(20px);
@@ -557,9 +560,7 @@ p, li {
   transform: translateY(0);
 }
 
-/* ==========================================================================
-   2) SKILL ITEM LAYOUT & HOVER STYLES
-   ========================================================================== */
+/* 2) SKILL ITEM LAYOUT & HOVER STYLES (unchanged from earlier example) */
 .skill-item {
   position: relative;
   padding: 1rem 1.25rem;
@@ -637,9 +638,7 @@ p, li {
   transition: transform 0.3s ease-out;
 }
 
-/* ==========================================================================
-   3) ACCORDION EXPANSION FOR .skill-details
-   ========================================================================== */
+/* 3) ACCORDION EXPANSION FOR .skill-details */
 .skill-details {
   max-height: 0;
   opacity: 0;

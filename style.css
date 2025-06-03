@@ -1,5 +1,5 @@
 /* =====================================================================================
-   1) ORIGINAL SVK STYLE RULES (copied verbatim from SVK style (2).css)
+   ORIGINAL SVK STYLE RULES (unchanged except where noted)
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -235,7 +235,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   9) Rounded “Card” + Overlapping Setup (Ideas 9 & 10)
+   9) Rounded “Card” + Overlapping Setup
    -------------------------------------------------------------------------- */
 .section-card {
   background: #111;
@@ -253,7 +253,18 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   10) ABOUT ME Content (Inside ABOUT ME card)
+   10) Section-Card <h2> HEADINGS (all same size & white)
+   -------------------------------------------------------------------------- */
+.section-card h2 {
+  font-size: 2.25rem;       /* consistent large font size */
+  color: #fff;              /* force white color */
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #444;
+  padding-bottom: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   11) ABOUT ME Content (Inside ABOUT ME card)
    -------------------------------------------------------------------------- */
 .about-overview {
   width: 100%;
@@ -263,10 +274,7 @@ section.fade-in-section.is-visible {
 }
 
 .about-overview h2 {
-  margin-bottom: 1.5rem;
-  font-size: 2.25rem;
-  border-bottom: 2px solid #444;
-  padding-bottom: 0.25rem;
+  /* Already set by .section-card h2 above */
 }
 
 .about-overview p {
@@ -276,7 +284,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   11) Role Cards (Inside ABOUT ME)
+   12) Role Cards (Inside ABOUT ME)
    -------------------------------------------------------------------------- */
 .roles-grid {
   width: 100%;
@@ -308,16 +316,15 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   12) Project Cards (Inside PROJECTS)
+   13) Project Cards (Inside PROJECTS)
    -------------------------------------------------------------------------- */
-/* Only the cards are moved down; headers remain static */
 .projects-grid {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* ← moves all project cards down */
+  margin-top: 1.5rem; /* ← move all project cards down */
 }
 
 .projects-grid::before {
@@ -370,14 +377,13 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   13) Skills Expandable “+ details” List (Inside SKILLS)
+   14) Skills Expandable “+ details” List (Inside SKILLS)
    -------------------------------------------------------------------------- */
-/* Only the cards are moved down; header remains static */
 .skills-expandable {
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-top: 1.5rem; /* ← moves all skill cards down */
+  margin-top: 1.5rem; /* ← move all skill cards down */
 }
 
 .skill-item {
@@ -426,16 +432,10 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   14) Redesigned Contact Section (Inside CONTACT card)
+   15) Redesigned Contact Section (Inside CONTACT card)
    -------------------------------------------------------------------------- */
-#contact-anchor + .contact-card h2 {
-  margin-top: 0; /* No extra gap beyond what the invisible anchor provided */
-}
-
 .contact-card h2 {
-  text-align: center;
-  margin-bottom: 0.75rem;
-  font-size: 2rem;
+  /* Already set by .section-card h2 above */
 }
 
 .contact-card p {
@@ -514,7 +514,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   15) Footer (unchanged, inside pure-black background)
+   16) Footer (unchanged, inside pure-black background)
    -------------------------------------------------------------------------- */
 .footer {
   background: rgba(0, 0, 0, 0.7);
@@ -556,7 +556,7 @@ section.fade-in-section.is-visible {
   transform: translateY(0);
 }
 
-/* 2) SKILL ITEM LAYOUT & HOVER STYLES (unchanged) */
+/* 2) SKILL ITEM LAYOUT & HOVER STYLES */
 .skill-item {
   position: relative;
   padding: 1rem 1.25rem;

@@ -301,8 +301,9 @@ section.fade-in-section.is-visible {
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
   transform-style: preserve-3d;
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
 
 .roles-grid .role-card h3 {
@@ -312,7 +313,9 @@ section.fade-in-section.is-visible {
 }
 
 .roles-grid .role-card:hover {
-  transform: rotateX(5deg) rotateY(-5deg);
+  /* slight lift + 3D tilt + glow */
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -367,7 +370,7 @@ section.fade-in-section.is-visible {
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   background: #222;
   box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }

@@ -324,7 +324,7 @@ section {
   display: grid;
   /* Force single-column so cards stack vertically */
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 2.0rem;
   padding-left: 20px;  /* Room for left-side vertical line */
   position: relative;
 }

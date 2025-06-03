@@ -1,121 +1,21 @@
-<!-- File: project-one.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project One Details</title>
+  <title>EnvisionVR | Shreyas Kambhampati</title>
 
   <!-- Load Plus Jakarta Sans (for body) and Questrial (for overlay) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
     rel="stylesheet"
   />
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Project‐specific styling -->
+  <!-- PROJECT INTRO OVERLAY CSS -->
   <style>
-    /* ---------------------------------------------------------------
-       BASIC PAGE RESET & TYPOGRAPHY
-       --------------------------------------------------------------- */
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-
-    main.container {
-      margin: 0 auto;
-      max-width: 900px;
-      padding: 2rem 1rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 800;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 1.75rem;
-      margin-bottom: 0.75rem;
-      border-bottom: 2px solid #444;
-      padding-bottom: 0.25rem;
-      color: #0af; /* accent color */
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: #ddd;
-    }
-
-    ul {
-      margin-left: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.25rem;
-    }
-
-    ul li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #0af; /* accent bullet */
-    }
-
-    /* ---------------------------------------------------------------
-       SECTION “CARDS”: Lightly tinted boxes for each major section
-       --------------------------------------------------------------- */
-    section.project-section {
-      background-color: #111;
-      border-radius: 8px;
-      padding: 1.5rem 1.5rem 2rem;
-      margin-bottom: 2rem;
-    }
-
-    section.project-section + section.project-section {
-      margin-top: 1rem;
-    }
-
-    /* ---------------------------------------------------------------
-       NAVBAR & “Home” LINK
-       --------------------------------------------------------------- */
-    nav.navbar {
-      background: transparent; 
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 0.75rem 1rem;
-      z-index: 10;
-    }
-
-    nav.navbar .container {
-      display: flex;
-      align-items: center;
-    }
-
-    nav.navbar .logo {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #fff;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    nav.navbar .logo:hover {
-      color: #0af;
-    }
-
     /* ---------------------------------------------------------------
        PROJECT INTRO OVERLAY
        --------------------------------------------------------------- */
@@ -139,27 +39,39 @@
       animation: logoPop 0.8s ease-out 0.3s forwards;
     }
 
-    /* Note: overlayFade and logoPop keyframes are defined in style.css */
+    @keyframes overlayFade {
+      to {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    @keyframes logoPop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- 1) Project Intro Overlay -->
   <div id="project-overlay">
-    <div class="project-logo">E n v i s i o n V R</div>
+    <div class="project-logo">EnvisionVR</div>
   </div>
 
-  <!-- 2) Top Navbar with “← Home” -->
-  <nav class="navbar">
-    <div class="container">
-      <a class="logo" href="index.html">← Home</a>
-    </div>
-  </nav>
-
-  <!-- 3) Project One Content -->
-  <main class="container" style="margin-top: 100px;">
+  <!-- 2) Top Header (same style as project-four) -->
+  <header class="project-header">
     <h1>EnvisionVR</h1>
+    <p>
+      EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
+    </p>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </header>
 
+  <!-- 3) Main Content -->
+  <main class="project-main fade-in-section">
     <!-- Overview Section -->
     <section class="project-section">
       <h2>Overview</h2>
@@ -189,16 +101,13 @@
 
     <!-- Technologies Used -->
     <section class="project-section">
-      <h2>Technologies</h2>
-      <p>
-        We used Unity, Meta SDKs, and C# to design the platform, emphasizing intuitive interfaces and immersive environments.
-      </p>
+      <h2>Technologies Used</h2>
       <ul>
-        <li>Custom 3D modeling and shader development for realism.</li>
-        <li>Real‐time motion tracking and dynamic simulation for interactivity.</li>
-        <li>Performance optimization for smooth rendering and scene transitions.</li>
-        <li>Object‐oriented programming for modular development and stability.</li>
-        <li>Integration of physics engines, animation controllers, and event‐driven scripting to simulate real‐world phenomena.</li>
+        <li>Unity</li>
+        <li>Meta SDKs</li>
+        <li>C#</li>
+        <li>Custom 3D modeling &amp; shaders</li>
+        <li>Real‐time motion tracking &amp; dynamic simulation</li>
       </ul>
     </section>
 
@@ -211,9 +120,21 @@
     </section>
   </main>
 
-  <!-- 4) Project‐Intro Overlay Removal Script -->
+  <!-- 4) Footer (same as elsewhere) -->
+  <footer class="footer fade-in-section">
+    <div class="container">
+      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
+      <p>🔗 
+        <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
+        <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
+      </p>
+      <p>© 2025 Shreyas Kambhampati</p>
+    </div>
+  </footer>
+
+  <!-- 5) Overlay Removal & Fade-In Script -->
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('project-overlay');
       overlay.addEventListener('animationend', e => {
         if (e.animationName === 'overlayFade') {
@@ -221,7 +142,22 @@
         }
       });
     });
-  </script>
 
+    // Re‐use your existing fade‐in observer on this page
+    document.addEventListener('DOMContentLoaded', function() {
+      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, options);
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </body>
 </html>

@@ -68,6 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: 3rem; }
 h2 { font-size: 2.25rem; border-bottom: 2px solid #444; padding-bottom: 0.25rem; }
 h3 { font-size: 1.5rem; }
+
 p, li {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
@@ -194,6 +195,15 @@ p, li {
   animation: logoPopMain 0.8s ease-out 0.3s forwards;
 }
 
+.logo-underline {
+  width: 60px;
+  height: 4px;
+  background: #0af;
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: underlineFadeIn 1s ease-out 1.3s forwards;
+}
+
 /* Keyframes for main overlay */
 @keyframes overlayFadeMain {
   to {
@@ -205,6 +215,11 @@ p, li {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+@keyframes underlineFadeIn {
+  to {
+    opacity: 1;
   }
 }
 
@@ -507,27 +522,30 @@ p, li {
 }
 
 /* ==========================================================================
-   SKILLS SECTION (Step 2 Updates)
+   SKILLS SECTION (ISOLATED & UPDATED)
    ========================================================================== */
-/* Fade-In & Staggered Appearance */
-#skills-section .skill-item {
+
+/* 1) FADE-IN & STAGGERED APPEARANCE */
+.skills-section .skill-item {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-#skills-section .skill-item:nth-child(1) { transition-delay: 0.1s; }
-#skills-section .skill-item:nth-child(2) { transition-delay: 0.2s; }
-#skills-section .skill-item:nth-child(3) { transition-delay: 0.3s; }
-#skills-section .skill-item:nth-child(4) { transition-delay: 0.4s; }
-#skills-section .skill-item:nth-child(5) { transition-delay: 0.5s; }
-#skills-section .skill-item:nth-child(6) { transition-delay: 0.6s; }
-#skills-section .skill-item:nth-child(7) { transition-delay: 0.7s; }
+.skills-section .skill-item:nth-child(1) { transition-delay: 0.1s; }
+.skills-section .skill-item:nth-child(2) { transition-delay: 0.2s; }
+.skills-section .skill-item:nth-child(3) { transition-delay: 0.3s; }
+.skills-section .skill-item:nth-child(4) { transition-delay: 0.4s; }
+.skills-section .skill-item:nth-child(5) { transition-delay: 0.5s; }
+.skills-section .skill-item:nth-child(6) { transition-delay: 0.6s; }
+.skills-section .skill-item:nth-child(7) { transition-delay: 0.7s; }
 #skills-section.is-visible .skill-item {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Skill Item Layout & Hover Effects */
+/* ==========================================================================
+   2) SKILL ITEM LAYOUT & HOVER STYLES
+   ========================================================================== */
 .skill-item {
   position: relative;
   padding: 1rem 1.25rem;
@@ -574,7 +592,7 @@ p, li {
   width: 100%;
 }
 
-/* Header Flex Layout */
+/* Header Flex Container */
 .skill-header {
   display: flex;
   justify-content: space-between;
@@ -605,7 +623,9 @@ p, li {
   transition: transform 0.3s ease-out;
 }
 
-/* Accordion Expansion */
+/* ==========================================================================
+   3) ACCORDION EXPANSION FOR .skill-details
+   ========================================================================== */
 .skill-details {
   max-height: 0;
   opacity: 0;
@@ -620,7 +640,7 @@ p, li {
   opacity: 1;
 }
 
-/* Icon Bounce (when open) */
+/* Icon Bounce Animation */
 @keyframes icon-bounce {
   0%   { transform: scale(1) rotate(0deg); }
   50%  { transform: scale(1.2) rotate(45deg); }

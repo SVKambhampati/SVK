@@ -59,13 +59,10 @@
 
     <!-- ================================================
          ABOUT ME (Rounded Card)
-         – Invisible anchor (#about-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
-        <!-- Invisible anchor to force scroll-stop above the heading -->
         <div id="about-anchor" class="section-anchor"></div>
-
         <div class="about-overview">
           <h2>About Me</h2>
           <p>
@@ -83,12 +80,10 @@
 
     <!-- ================================================
          PROJECTS (Rounded Card)
-         – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
         <div id="projects-anchor" class="section-anchor"></div>
-
         <h2>Projects</h2>
         <div class="projects-grid">
           <article class="project-card">
@@ -123,18 +118,15 @@
       </section>
     </div>
 
-   <!-- ================================================
+    <!-- ================================================
          SKILLS (Rounded Card)
-         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
+      <!-- Notice: both id="skills-section" and class="fade-in-section skills-section" -->
       <section id="skills-section" class="fade-in-section skills-section">
-        <!-- Invisible anchor so navbar links stop above the heading -->
         <div id="skills-anchor" class="section-anchor"></div>
-    
         <h2>Programming Languages &amp; Frameworks</h2>
         <ul class="skills-expandable">
-          <!-- Java -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Java</span>
@@ -146,8 +138,6 @@
               Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third-party libraries.
             </div>
           </li>
-    
-          <!-- Python -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Python</span>
@@ -159,8 +149,6 @@
               Developed the back-end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
             </div>
           </li>
-    
-          <!-- JavaScript -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">JavaScript</span>
@@ -172,8 +160,6 @@
               Wrote client-side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
             </div>
           </li>
-    
-          <!-- HTML & CSS -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">HTML &amp; CSS</span>
@@ -185,8 +171,6 @@
               Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
-    
-          <!-- MySQL -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">MySQL</span>
@@ -198,8 +182,6 @@
               Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
             </div>
           </li>
-    
-          <!-- C# -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">C#</span>
@@ -211,8 +193,6 @@
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
             </div>
           </li>
-    
-          <!-- XML -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">XML</span>
@@ -230,51 +210,28 @@
 
     <!-- ================================================
          CONTACT (Rounded Card)
-         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
         <div id="contact-anchor" class="section-anchor"></div>
-
         <div class="contact-card">
           <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
-
           <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Your Name"
-                  required
-                />
+                <input type="text" id="name" name="name" placeholder="Your Name" required />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="you@example.com"
-                  required
-                />
+                <input type="email" id="email" name="email" placeholder="you@example.com" required />
               </div>
             </div>
-
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Write your message…"
-                required
-              ></textarea>
+              <textarea id="message" name="message" rows="5" placeholder="Write your message…" required></textarea>
             </div>
-
             <button type="submit" class="send-btn">Send Message</button>
           </form>
         </div>
@@ -298,8 +255,7 @@
   </footer>
 
   <!-- ============================================================
-       Scripts (dot-grid, overlay removal, fade-in, tilt cards,
-       accordion toggle for Skills)
+       Scripts (dot-grid, overlay removal, fade-in, tilt cards, accordion toggle)
        ============================================================ -->
   <script>
     // 1) Dot-Grid Canvas Animation

@@ -167,6 +167,7 @@ html, body {
 /* --------------------------------------------------------------------------
    6) Hero Section (Dot Grid + Content)
    -------------------------------------------------------------------------- */
+/* — Removed `opacity: 0` and initial `transform` so it’s visible immediately — */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -175,14 +176,7 @@ html, body {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px) scale(0.98);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.hero.intro-ready {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  /* No longer hidden by default */
 }
 
 #dotGrid {
@@ -272,7 +266,7 @@ section.fade-in-section.is-visible {
 
 .about-overview h2 {
   margin-bottom: 1.5rem;
-  font-size: 2.25rem;         /* ensure consistency */
+  font-size: 2.25rem;
   border-bottom: 2px solid #444;
   padding-bottom: 0.25rem;
 }
@@ -560,7 +554,7 @@ section.fade-in-section.is-visible {
   transform: translateY(0);
 }
 
-/* 2) SKILL ITEM LAYOUT & HOVER STYLES (unchanged from earlier example) */
+/* 2) SKILL ITEM LAYOUT & HOVER STYLES */
 .skill-item {
   position: relative;
   padding: 1rem 1.25rem;

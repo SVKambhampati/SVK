@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shreyas Kambhampati | Portfolio</title>
 
-  <!-- Google Font: Plus Jakarta Sans & Questrial -->
+  <!-- Google Font: Plus Jakarta Sans -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Questrial&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
     rel="stylesheet"
   />
 
@@ -59,12 +59,15 @@
 
     <!-- ================================================
          ABOUT ME (Rounded Card)
+         – Invisible anchor (#about-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
+        <!-- Invisible anchor to force scroll-stop above the heading -->
         <div id="about-anchor" class="section-anchor"></div>
+
+        <h2>About Me</h2>
         <div class="about-overview">
-          <h2>About Me</h2>
           <p>
             Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
           </p>
@@ -80,10 +83,12 @@
 
     <!-- ================================================
          PROJECTS (Rounded Card)
+         – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
         <div id="projects-anchor" class="section-anchor"></div>
+
         <h2>Projects</h2>
         <div class="projects-grid">
           <article class="project-card">
@@ -120,13 +125,15 @@
 
     <!-- ================================================
          SKILLS (Rounded Card)
+         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
-      <!-- Notice: both id="skills-section" and class="fade-in-section skills-section" -->
       <section id="skills-section" class="fade-in-section skills-section">
         <div id="skills-anchor" class="section-anchor"></div>
+
         <h2>Skills &amp; Tools</h2>
         <ul class="skills-expandable">
+          <!-- Java -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Java</span>
@@ -138,6 +145,7 @@
               Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third-party libraries.
             </div>
           </li>
+          <!-- Python -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Python</span>
@@ -149,6 +157,7 @@
               Developed the back-end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
             </div>
           </li>
+          <!-- JavaScript -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">JavaScript</span>
@@ -160,6 +169,7 @@
               Wrote client-side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
             </div>
           </li>
+          <!-- HTML & CSS -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">HTML &amp; CSS</span>
@@ -171,6 +181,7 @@
               Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
+          <!-- MySQL -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">MySQL</span>
@@ -182,6 +193,7 @@
               Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
             </div>
           </li>
+          <!-- C# -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">C#</span>
@@ -193,6 +205,7 @@
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
             </div>
           </li>
+          <!-- XML -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">XML</span>
@@ -210,28 +223,51 @@
 
     <!-- ================================================
          CONTACT (Rounded Card)
+         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
         <div id="contact-anchor" class="section-anchor"></div>
+
+        <h2>Contact Me</h2>
         <div class="contact-card">
-          <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
+
           <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
               </div>
             </div>
+
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" placeholder="Write your message…" required></textarea>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Write your message…"
+                required
+              ></textarea>
             </div>
+
             <button type="submit" class="send-btn">Send Message</button>
           </form>
         </div>
@@ -255,10 +291,10 @@
   </footer>
 
   <!-- ============================================================
-       Scripts (dot-grid, overlay removal, fade-in, tilt cards, accordion toggle)
+       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
        ============================================================ -->
   <script>
-    // 1) Dot-Grid Canvas Animation
+    // Dot-Grid Canvas Animation (unchanged)
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
@@ -375,13 +411,13 @@
       animate();
     };
 
-    // 2) Intro Overlay Removal & SVK Glow Trigger
+    // Intro Overlay Removal & SVK Glow Trigger
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
       const svk     = document.querySelector('.intro-logo');
       overlay.addEventListener('animationend', e => {
-        if (e.animationName === 'overlayFadeMain') {
+        if (e.animationName === 'overlayFade') {
           overlay.remove();
           hero.classList.add('intro-ready');
           svk.classList.add('glow-active');
@@ -389,22 +425,23 @@
       });
     });
 
-    // 3) Fade-In Observer (for every .fade-in-section, including #skills-section)
+    // Fade-In On Scroll (Intersection Observer)
     document.addEventListener('DOMContentLoaded', function() {
-      const fadeSections = document.querySelectorAll('.fade-in-section');
-      const fadeObserver = new IntersectionObserver((entries, observer) => {
+      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1 });
-
-      fadeSections.forEach(section => fadeObserver.observe(section));
+      }, options);
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+      });
     });
 
-    // 4) 3D Tilt on Role Cards
+    // 3D Tilt on Role Cards
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
       document.querySelectorAll('.role-card').forEach(card => {
@@ -426,36 +463,26 @@
       });
     });
 
-    // 5) Accordion Toggle Logic for Skills Section
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggleButtons = document.querySelectorAll('.toggle-btn');
-      toggleButtons.forEach(btn => {
+    // Toggle Details for Skills (with slide-down animation)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
 
           if (listItem.classList.contains('open')) {
             // Collapse
-            listItem.classList.remove('open');
-            btn.innerHTML = '<span class="icon">+</span> details';
-            details.style.maxHeight = '0px';
+            details.style.maxHeight = '0';
             details.style.opacity   = '0';
-          }
-          else {
+            details.style.transform = 'translateY(-20px)';
+            btn.innerHTML = '<span class="icon">+</span> details';
+            listItem.classList.remove('open');
+          } else {
             // Expand
-            listItem.classList.add('open');
-            btn.innerHTML = '<span class="icon">−</span> details';
             details.style.maxHeight = details.scrollHeight + 'px';
             details.style.opacity   = '1';
-
-            const newIcon = btn.querySelector('.icon');
-            newIcon.style.animation = 'none';
-            newIcon.offsetWidth; // Force reflow
-            newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
+            details.style.transform = 'translateY(0)';
+            btn.innerHTML = '<span class="icon">−</span> details';
+            listItem.classList.add('open');
           }
-        });
-      });
-    });
-  </script>
-</body>
-</html>
+       

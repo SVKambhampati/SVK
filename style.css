@@ -1,5 +1,5 @@
 /* =====================================================================================
-   ORIGINAL SVK STYLE RULES (unchanged except where noted)
+   1) ORIGINAL SVK STYLE RULES (copied verbatim from SVK style (2).css)
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -274,7 +274,7 @@ section.fade-in-section.is-visible {
 }
 
 .about-overview h2 {
-  /* Already set by .section-card h2 above */
+  /* Already covered by .section-card h2 */
 }
 
 .about-overview p {
@@ -324,7 +324,7 @@ section.fade-in-section.is-visible {
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* ← move all project cards down */
+  margin-top: 1.5rem; /* ← moves all project cards down */
 }
 
 .projects-grid::before {
@@ -383,7 +383,7 @@ section.fade-in-section.is-visible {
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-top: 1.5rem; /* ← move all skill cards down */
+  margin-top: 1.5rem; /* ← moves all skill cards down */
 }
 
 .skill-item {
@@ -435,7 +435,8 @@ section.fade-in-section.is-visible {
    15) Redesigned Contact Section (Inside CONTACT card)
    -------------------------------------------------------------------------- */
 .contact-card h2 {
-  /* Already set by .section-card h2 above */
+  /* Already white and large via .section-card h2 */
+  text-align: center; /* ← center “Contact Me” */
 }
 
 .contact-card p {
@@ -532,7 +533,6 @@ section.fade-in-section.is-visible {
 .footer a:hover {
   color: #fff;
 }
-
 
 /* =====================================================================================
    2) APPENDED SKILLS SECTION UPDATES (fade-in, hover, accordion)

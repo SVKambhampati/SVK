@@ -440,13 +440,16 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   15) Redesigned Contact Section (Inside CONTACT card)
+   15) Center “Contact Me” Header
    -------------------------------------------------------------------------- */
-.contact-card h2 {
-  /* Already white and large via .section-card h2 */
-  text-align: center; /* center the “Contact Me” heading */
+/* Since the <h2> is a sibling of .contact-card, we target the h2 directly */
+#contact-anchor + h2 {
+  text-align: center;
 }
 
+/* --------------------------------------------------------------------------
+   16) Redesigned Contact Section (Inside CONTACT card)
+   -------------------------------------------------------------------------- */
 .contact-card p {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -523,7 +526,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   16) Footer (unchanged, inside pure-black background)
+   17) Footer (unchanged, inside pure-black background)
    -------------------------------------------------------------------------- */
 .footer {
   background: rgba(0, 0, 0, 0.7);

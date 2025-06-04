@@ -712,7 +712,7 @@ body.light-mode .toggle-switch label::after {
   background: #fff;      /* knob remains white when on */
 }
 
-/* Light-mode hero: simple white background */
+/* Light-mode hero: simple white box, slightly more transparent */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
@@ -721,10 +721,9 @@ body.light-mode .hero .container {
   margin: 0 auto;
   transform: translateY(-20px);
 
-  /* Simple white background, no blur */
-  background: rgba(255, 255, 255, 0.9);
+  /* Simple white background, more translucent */
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
-  border: 1px solid rgba(200, 200, 200, 0.5);
   padding: 0.75rem 1.5rem;
   text-align: center;
 }

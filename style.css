@@ -1,6 +1,6 @@
-/* =====================================================================================
-   SVK style (3).css  — UPDATED only for Navbar to keep toggle next to “Contact”
-   ===================================================================================== */
+/* ========================================================================
+   SVK style (3).css  — with Navbar Toggle and “light-mode” support
+   ======================================================================== */
 
 /* --------------------------------------------------------------------------
    1) Global Resets & Typography
@@ -26,6 +26,15 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* --------------------------------------------------------------------------
    2) Container
    -------------------------------------------------------------------------- */
@@ -35,9 +44,9 @@ html, body {
   margin: 0 auto;
 }
 
-/* =====================================================================================
-   3) NAVBAR (Semi‐transparent)
-   ===================================================================================== */
+/* ========================================================================
+   3) NAVBAR + TOGGLE (keep them side by side, no wrapping)
+   ======================================================================== */
 .navbar {
   position: fixed;
   top: 0;
@@ -60,46 +69,34 @@ html, body {
   color: #fff;
   font-size: 1.5rem;
   font-weight: 600;
-  text-decoration: none;
 }
 
-/* --------------------------------------------------------------------------
-   4) NAV‐RIGHT (group .nav-links + .toggle-switch)
-        — make sure they never wrap, so the toggle stays next to “Contact”
-   -------------------------------------------------------------------------- */
+/* Group nav-links + toggle-switch */
 .nav-right {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  flex-wrap: nowrap;      /* ← Prevent wrapping under the links */
+  flex-wrap: nowrap; /* ← Prevent wrapping so toggle sits next to “Contact” */
 }
 
-/* Nav‐links */
+/* Nav-links */
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  white-space: nowrap;    /* ← Ensure long text doesn’t wrap */
+  white-space: nowrap; /* Prevent link text wrapping */
 }
 
 .nav-links a {
   color: #fff;
-  text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease-out;
   padding-bottom: 2px;
+  transition: color 0.2s ease-out;
 }
 
-/* Highlight the “active” nav link */
 .nav-links a.nav-active {
   color: #0af;
   border-bottom: 2px solid #0af;
-}
-
-.nav-links a:not(.nav-active) {
-  color: #fff;
-  border-bottom: none;
 }
 
 .nav-links a:hover {
@@ -107,13 +104,12 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   5) THEME TOGGLE SWITCH (white/black)
+   4) THEME TOGGLE SWITCH (white/black)
    -------------------------------------------------------------------------- */
 .toggle-switch {
   position: relative;
   width: 50px;
   height: 24px;
-  /* No extra margin-left here—now sits flush next to “Contact” */
 }
 
 .toggle-switch input {
@@ -128,7 +124,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;   /* track is white when off */
+  background-color: #fff;   /* off-mode track is white */
   border: 1px solid #ccc;
   border-radius: 12px;
   cursor: pointer;
@@ -142,23 +138,25 @@ html, body {
   left: 2px;
   width: 20px;
   height: 20px;
-  background: #000;          /* knob is black when off */
+  background: #000;         /* knob is black when off */
   border-radius: 50%;
   transition: transform 0.3s ease-out, background 0.3s ease-out;
 }
 
+/* when checked (light-mode on), track becomes black */
 .toggle-switch input:checked + label {
-  background-color: #000;    /* track black when on */
+  background-color: #000;
 }
 
+/* when checked, move knob to the right and invert its color */
 .toggle-switch input:checked + label::after {
   transform: translateX(26px);
-  background: #fff;          /* knob white when on */
+  background: #fff;
 }
 
-/* =====================================================================================
-   6) INTRO OVERLAY
-   ===================================================================================== */
+/* ========================================================================
+   5) INTRO OVERLAY
+   ======================================================================== */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -183,7 +181,6 @@ html, body {
   opacity: 0;
   transform: scale(0.8);
   animation: logoPop 0.8s ease-out 0.3s forwards;
-  text-shadow: none;
 }
 
 .logo-underline {
@@ -218,9 +215,9 @@ html, body {
   }
 }
 
-/* =====================================================================================
-   7) SVK FLICKER‐GLOW
-   ===================================================================================== */
+/* ========================================================================
+   6) SVK FLICKER-GLOW
+   ======================================================================== */
 .intro-logo.glow-active {
   animation: flickerGlow 1s ease-out forwards;
 }
@@ -240,16 +237,15 @@ html, body {
   }
 }
 
-/* =====================================================================================
-   8) HERO SECTION (Dot Grid + Content)
-   ===================================================================================== */
+/* ========================================================================
+   7) HERO SECTION (Dot Grid + Content)
+   ======================================================================== */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
 
@@ -270,7 +266,7 @@ html, body {
 
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 3rem; /* increased */
+  font-size: 3rem; /* increased from 2.5rem */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -285,9 +281,9 @@ html, body {
   color: #ccc;
 }
 
-/* =====================================================================================
-   9) FADE‐IN ON SCROLL
-   ===================================================================================== */
+/* ========================================================================
+   8) FADE-IN ON SCROLL
+   ======================================================================== */
 section.fade-in-section {
   opacity: 0;
   transform: translateY(40px);
@@ -299,20 +295,20 @@ section.fade-in-section.is-visible {
   transform: translateY(0);
 }
 
-/* =====================================================================================
-   10) INVISIBLE ANCHOR (stop scroll above the <h2>)
-   ===================================================================================== */
+/* ========================================================================
+   9) INVISIBLE ANCHOR (stop scroll above the <h2>)
+   ======================================================================== */
 .section-anchor {
   display: block;
   position: relative;
-  top: -124px; /* 60px (navbar) + 64px (≈ card top padding) */
+  top: -124px; /* 60px (navbar) + 64px ≈ card top padding */
   height: 0;
   visibility: hidden;
 }
 
-/* =====================================================================================
-   11) SECTION CARDS (Rounded Containers)
-   ===================================================================================== */
+/* ========================================================================
+   10) SECTION CARDS (Rounded Containers)
+   ======================================================================== */
 .section-card {
   background: #111;
   border-radius: 12px;
@@ -328,9 +324,9 @@ section.fade-in-section.is-visible {
   z-index: 2;
 }
 
-/* =====================================================================================
-   12) SECTION HEADINGS (uniform font size & white)
-   ===================================================================================== */
+/* ========================================================================
+   11) SECTION HEADINGS (uniform font size & white)
+   ======================================================================== */
 .section-card h2 {
   font-size: 2.25rem;
   color: #fff;
@@ -339,9 +335,9 @@ section.fade-in-section.is-visible {
   padding-bottom: 0.25rem;
 }
 
-/* =====================================================================================
-   13) ABOUT ME CONTENT
-   ===================================================================================== */
+/* ========================================================================
+   12) ABOUT ME CONTENT
+   ======================================================================== */
 .about-overview {
   width: 100%;
   text-align: left;
@@ -355,9 +351,9 @@ section.fade-in-section.is-visible {
   letter-spacing: 0.5px;
 }
 
-/* =====================================================================================
-   14) ROLE CARDS (3D Parallax + Hover)
-   ===================================================================================== */
+/* ========================================================================
+   13) ROLE CARDS (3D Parallax + Hover)
+   ======================================================================== */
 .roles-grid {
   width: 100%;
   display: grid;
@@ -367,7 +363,7 @@ section.fade-in-section.is-visible {
   margin-bottom: 2rem;
 }
 
-.roles-grid .role-card {
+.role-card {
   background: #111;
   border: 1px solid #0af;
   border-radius: 8px;
@@ -378,27 +374,27 @@ section.fade-in-section.is-visible {
   box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
 }
 
-.roles-grid .role-card h3 {
+.role-card h3 {
   font-size: 1.125rem;
   font-weight: 600;
   color: #fff;
 }
 
-.roles-grid .role-card:hover {
+.role-card:hover {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
   box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
-/* =====================================================================================
-   15) PROJECT CARDS (vertical stack + underglow)
-   ===================================================================================== */
+/* ========================================================================
+   14) PROJECT CARDS (vertical stack + underglow)
+   ======================================================================== */
 .projects-grid {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* push cards down a bit */
+  margin-top: 1.5rem; /* push cards down slightly */
 }
 
 .projects-grid::before {
@@ -408,7 +404,7 @@ section.fade-in-section.is-visible {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #fff; /* underglow line (white) */
+  background: #fff; /* underglow line */
 }
 
 .project-card {
@@ -435,8 +431,8 @@ section.fade-in-section.is-visible {
 
 .project-card a {
   color: #0af;
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .project-card:hover {
@@ -449,9 +445,9 @@ section.fade-in-section.is-visible {
   color: #fff;
 }
 
-/* =====================================================================================
-   16) SKILLS & TOOLS SECTION (Accordion + animations)
-   ===================================================================================== */
+/* ========================================================================
+   15) SKILLS & TOOLS SECTION (Accordion + animations)
+   ======================================================================== */
 .skills-expandable {
   list-style: none;
   padding: 0;
@@ -578,7 +574,7 @@ section.fade-in-section.is-visible {
 }
 
 /* =====================================================================================
-   17) CONTACT SECTION
+   16) CONTACT SECTION
    ===================================================================================== */
 /* Center the “Contact Me” header */
 #contact-anchor + h2 {
@@ -661,7 +657,7 @@ section.fade-in-section.is-visible {
 }
 
 /* =====================================================================================
-   18) FOOTER
+   17) FOOTER
    ===================================================================================== */
 .footer {
   background: rgba(0, 0, 0, 0.7);
@@ -672,7 +668,6 @@ section.fade-in-section.is-visible {
 
 .footer a {
   color: #0af;
-  text-decoration: none;
   transition: color 0.2s ease-out;
 }
 
@@ -681,11 +676,137 @@ section.fade-in-section.is-visible {
 }
 
 /* =====================================================================================
-   19) LIGHT‐MODE OVERRIDES
+   18) LIGHT-MODE OVERRIDES
    ===================================================================================== */
-/* … (leave your existing light‐mode rules exactly as they were) … */
+body.light-mode {
+  background: #fafafa;
+  color: #111;
+}
+
+body.light-mode .navbar {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body.light-mode .navbar .logo,
+body.light-mode .nav-links a {
+  color: #111;
+}
+
+body.light-mode .nav-links a.nav-active {
+  color: #007acc;
+  border-bottom: 2px solid #007acc;
+}
+
+body.light-mode .toggle-switch label {
+  background-color: #111; /* track is dark in light-mode */
+}
+
+body.light-mode .toggle-switch label::after {
+  background: #fff;      /* knob remains white when on */
+}
+
+body.light-mode .hero .container {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body.light-mode .hero .container h1,
+body.light-mode .hero .container p {
+  color: #111;
+}
+
+body.light-mode .section-card {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body.light-mode .section-card h2 {
+  color: #111;
+  border-bottom: 2px solid #ccc;
+}
+
+body.light-mode .about-overview p,
+body.light-mode .project-card p,
+body.light-mode .contact-card p {
+  color: #333;
+}
+
+body.light-mode .role-card {
+  background: #f5f5f5;
+  border-color: #007acc;
+  box-shadow: 0 4px 15px rgba(0, 122, 204, 0.2);
+}
+
+body.light-mode .role-card h3 {
+  color: #111;
+}
+
+body.light-mode .role-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 122, 204, 0.4);
+}
+
+body.light-mode .project-card {
+  background: #f5f5f5;
+  box-shadow: 0 4px 15px rgba(0, 122, 204, 0.2);
+}
+
+body.light-mode .project-card h3 {
+  color: #111;
+}
+
+body.light-mode .project-card p {
+  color: #333;
+}
+
+body.light-mode .project-card:hover {
+  background: #e0e0e0;
+  box-shadow: 0 10px 30px rgba(0, 122, 204, 0.4);
+}
+
+body.light-mode .skills-expandable .skill-item {
+  background: #f5f5f5;
+}
+
+body.light-mode .skill-name {
+  color: #111;
+}
+
+body.light-mode .skill-details {
+  color: #333;
+}
+
+body.light-mode .contact-card {
+  background: #f5f5f5;
+}
+
+body.light-mode .contact-card h2,
+body.light-mode .contact-card p {
+  color: #111;
+}
+
+body.light-mode .contact-form input,
+body.light-mode .contact-form textarea {
+  background: #fff;
+  color: #111;
+  border-color: #007acc;
+}
+
+body.light-mode .send-btn {
+  background: #007acc;
+  color: #fff;
+}
+
+body.light-mode .send-btn:hover {
+  background: #005fa3;
+}
 
 /* =====================================================================================
-   20) PROJECT PAGE HOVER EFFECTS (unchanged)
+   19) SPRING EASE VARIABLE
    ===================================================================================== */
-/* … (your existing project‐page hover rules) … */
+:root {
+  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =====================================================================================
+   20) PROJECT PAGE HOVER EFFECTS
+   ===================================================================================== */
+/* (if you have separate project-one/​two/​three pages, include similar CSS there) */
+/* …your existing project-page hover rules… */

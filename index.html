@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shreyas Kambhampati | Portfolio</title>
 
   <!-- Google Font: Plus Jakarta Sans -->
@@ -11,11 +11,8 @@
     rel="stylesheet"
   />
 
-  <!-- Blanka Font for Intro Logo -->
-  <link rel="stylesheet" href="blanka.css" />
-
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
@@ -30,7 +27,7 @@
   </div>
 
   <!-- ============================================================
-       2) Navbar (Semi-transparent) with Toggle Switch
+       2) Navbar (Semi-transparent)
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
@@ -42,7 +39,7 @@
           <li><a href="#skills-anchor">Skills</a></li>
           <li><a href="#contact-anchor">Contact</a></li>
         </ul>
-        <!-- THEME TOGGLE SWITCH -->
+        <!-- Theme toggle -->
         <div class="toggle-switch">
           <input type="checkbox" id="theme-toggle" />
           <label for="theme-toggle"></label>
@@ -73,6 +70,7 @@
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
+        <!-- Invisible anchor to force scroll-stop above the heading -->
         <div id="about-anchor" class="section-anchor"></div>
 
         <div class="about-overview">
@@ -124,7 +122,7 @@
           <article class="project-card">
             <h3>StyleForecast</h3>
             <p>
-              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
+              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and your digital wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
             </p>
             <a href="project-four.html">View →</a>
           </article>
@@ -133,7 +131,7 @@
     </div>
 
     <!-- ================================================
-         SKILLS & TOOLS (Rounded Card)
+         SKILLS (Rounded Card)
          – Invisible anchor (#skills-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
@@ -187,7 +185,7 @@
               </button>
             </div>
             <div class="skill-details">
-              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
+              Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
           <!-- MySQL -->
@@ -242,7 +240,12 @@
           <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
-          <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+          <!-- Formspree form -->
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mwpbpblk"
+            method="POST"
+          >
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -277,6 +280,9 @@
               ></textarea>
             </div>
 
+            <!-- Honeypot field to reduce spam -->
+            <input type="text" name="_gotcha" style="display:none" />
+
             <button type="submit" class="send-btn">Send Message</button>
           </form>
         </div>
@@ -300,13 +306,10 @@
   </footer>
 
   <!-- ============================================================
-       SCRIPTS
-       (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
+       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details, theme toggle)
        ============================================================ -->
   <script>
-    /******************************************************************
-     * 1) Dot-Grid Canvas Animation (now respects light-mode)
-     ******************************************************************/
+    // Dot-Grid Canvas Animation (unchanged)
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
@@ -356,10 +359,6 @@
     function draw() {
       const t = Date.now();
       ctx.clearRect(0,0,cw,ch);
-
-      // Check if light-mode is active
-      const isLight = document.body.classList.contains('light-mode');
-
       dots.forEach(d => {
         const dx = d.x - mx, dy = d.y - my;
         if (isDown && dx*dx + dy*dy < mouseRadius2) {
@@ -387,16 +386,11 @@
           alpha = 0.7 + tw * 0.3;
         }
         ctx.globalAlpha = alpha;
-
-        // If twinkle, always blue; otherwise white or black in light-mode
         if (d.tw) {
           ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-        } else if (isLight) {
-          ctx.fillStyle = `rgba(0,0,0,${alpha})`;   // black dots in light-mode
         } else {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`; // white dots by default
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
         }
-
         if (inter > 0) {
           ctx.shadowBlur  = 40;
           ctx.shadowColor = 'rgba(0,240,255,0.7)';
@@ -432,9 +426,7 @@
       animate();
     };
 
-    /******************************************************************
-     * 2) Intro Overlay Removal & SVK Glow Trigger
-     ******************************************************************/
+    // Intro Overlay Removal & SVK Glow Trigger
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
@@ -448,9 +440,7 @@
       });
     });
 
-    /******************************************************************
-     * 3) Fade-In On Scroll (Intersection Observer)
-     ******************************************************************/
+    // Fade-In On Scroll (Intersection Observer)
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
       const observer = new IntersectionObserver((entries, obs) => {
@@ -466,9 +456,7 @@
       });
     });
 
-    /******************************************************************
-     * 4) 3D Tilt on Role Cards
-     ******************************************************************/
+    // 3D Tilt on Role Cards
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
       document.querySelectorAll('.role-card').forEach(card => {
@@ -490,16 +478,15 @@
       });
     });
 
-    /******************************************************************
-     * 5) Accordion Toggle for Skills & Tools
-     ******************************************************************/
+    // Toggle Details for Skills
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
-          // Toggle `.open` class
+          const icon     = btn.querySelector('.icon');
+
           if (listItem.classList.contains('open')) {
             listItem.classList.remove('open');
             btn.innerHTML = '<span class="icon">+</span> details';
@@ -510,23 +497,20 @@
             btn.innerHTML = '<span class="icon">−</span> details';
             details.style.maxHeight = details.scrollHeight + 'px';
             details.style.opacity   = '1';
-            // bounce icon
             const newIcon = btn.querySelector('.icon');
             newIcon.style.animation = 'none';
-            newIcon.offsetWidth; // force reflow
+            newIcon.offsetWidth;
             newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
           }
         });
       });
     });
 
-    /******************************************************************
-     * 6) Theme Toggle (Light/Dark)
-     ******************************************************************/
-    document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle Logic
+    document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.getElementById('theme-toggle');
-      toggle.addEventListener('change', function() {
-        document.body.classList.toggle('light-mode');
+      toggle.addEventListener('change', () => {
+        document.body.classList.toggle('light-mode', toggle.checked);
       });
     });
   </script>

@@ -3,7 +3,7 @@
 }
 
 /* =====================================================================================
-   1) ORIGINAL SVK STYLE + NAV‐ACTIVE RULES
+   1) DARK MODE (DEFAULT) STYLES
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -47,7 +47,7 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;               /* Navbar height */
+  height: 60px;
   background: rgba(0, 0, 0, 0.7);
   z-index: 10;
 }
@@ -87,7 +87,6 @@ html, body {
   border-bottom: 2px solid #0af;
 }
 
-/* Ensure non‐active links remain white */
 .nav-links a:not(.nav-active) {
   color: #fff;
   border-bottom: none;
@@ -97,21 +96,55 @@ html, body {
   color: #0af;
 }
 
-/* THEME TOGGLE BUTTON */
-#theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #fff;
-  transition: transform 0.2s ease-out;
+/* --------------------------------------------------------------------------
+   4) Theme Toggle Switch Styles
+   -------------------------------------------------------------------------- */
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
 }
-#theme-toggle:hover {
-  transform: scale(1.1);
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+}
+
+.toggle-switch label::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease-out;
+}
+
+.toggle-switch input:checked + label {
+  background-color: #0af;
+}
+
+.toggle-switch input:checked + label::after {
+  transform: translateX(26px);
 }
 
 /* --------------------------------------------------------------------------
-   4) Intro Overlay
+   5) Intro Overlay
    -------------------------------------------------------------------------- */
 #intro-overlay {
   position: fixed;
@@ -173,7 +206,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   5) SVK Flicker-Glow (once via .glow-active)
+   6) SVK Flicker-Glow (once via .glow-active)
    -------------------------------------------------------------------------- */
 .intro-logo.glow-active {
   animation: flickerGlow 1s ease-out forwards;
@@ -195,7 +228,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   6) Hero Section (Dot Grid + Content)
+   7) Hero Section (Dot Grid + Content)
    -------------------------------------------------------------------------- */
 .hero {
   position: relative;
@@ -222,10 +255,9 @@ html, body {
   border-radius: 12px;
 }
 
-/* Increased hero h1 font-size to 3rem */
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 3rem;
+  font-size: 3rem; /* Increased from 2.5rem to 3rem */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -241,7 +273,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   7) Fade-In On Scroll
+   8) Fade-In On Scroll
    -------------------------------------------------------------------------- */
 section.fade-in-section {
   opacity: 0;
@@ -255,7 +287,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   8) Invisible Anchor (to stop scroll above the heading)
+   9) Invisible Anchor (to stop scroll above the heading)
    -------------------------------------------------------------------------- */
 .section-anchor {
   display: block;
@@ -267,7 +299,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   9) Rounded “Card” + Overlapping Setup
+   10) Rounded “Card” + Overlapping Setup
    -------------------------------------------------------------------------- */
 .section-card {
   background: #111;
@@ -285,7 +317,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   10) Section-Card <h2> HEADINGS (all same size & white)
+   11) Section-Card <h2> HEADINGS (all same size & white)
    -------------------------------------------------------------------------- */
 .section-card h2 {
   font-size: 2.25rem;       /* consistent large font size */
@@ -296,7 +328,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   11) ABOUT ME Content (Inside ABOUT ME card)
+   12) ABOUT ME Content (Inside ABOUT ME card)
    -------------------------------------------------------------------------- */
 .about-overview {
   width: 100%;
@@ -312,7 +344,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   12) Role Cards (Inside ABOUT ME)
+   13) Role Cards (Inside ABOUT ME)
    -------------------------------------------------------------------------- */
 .roles-grid {
   width: 100%;
@@ -341,13 +373,12 @@ section.fade-in-section.is-visible {
 }
 
 .roles-grid .role-card:hover {
-  /* slight lift + 3D tilt + glow */
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
   box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
 /* --------------------------------------------------------------------------
-   13) Project Cards (Inside PROJECTS)
+   14) Project Cards (Inside PROJECTS)
    -------------------------------------------------------------------------- */
 .projects-grid {
   position: relative;
@@ -355,7 +386,7 @@ section.fade-in-section.is-visible {
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* ← moves all project cards down */
+  margin-top: 1.5rem; /* moves project cards down */
 }
 
 .projects-grid::before {
@@ -407,17 +438,13 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   14) Skills Expandable “+ details” List (Inside SKILLS & TOOLS)
+   15) Skills Expandable “+ details” List (Inside SKILLS & TOOLS)
    -------------------------------------------------------------------------- */
-
-/* We removed any “.skills-section .skill-item { opacity: 0; … }” rules so that
-   each skill-item is visible immediately. Below are the restored “cool” styles. */
-
 .skills-expandable {
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-top: 1.5rem; /* ← moves all skill cards down */
+  margin-top: 1.5rem; /* moves skills down */
 }
 
 .skill-item {
@@ -539,15 +566,14 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   15) Center “Contact Me” Header
+   16) Center “Contact Me” Header
    -------------------------------------------------------------------------- */
-/* Since the <h2> is a sibling of .contact-card, we target the h2 directly */
 #contact-anchor + h2 {
   text-align: center;
 }
 
 /* --------------------------------------------------------------------------
-   16) Redesigned Contact Section (Inside CONTACT card)
+   17) Redesigned Contact Section (Inside CONTACT card)
    -------------------------------------------------------------------------- */
 .contact-card p {
   text-align: center;
@@ -625,7 +651,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   17) Footer (unchanged, inside pure-black background)
+   18) Footer (unchanged, inside pure-black background)
    -------------------------------------------------------------------------- */
 .footer {
   background: rgba(0, 0, 0, 0.7);
@@ -664,7 +690,7 @@ body.light-mode .navbar {
   background: rgba(255, 255, 255, 0.9);
 }
 
-body.light-mode .navbar .logo {
+body.light-mode .logo {
   color: #111;
 }
 
@@ -681,24 +707,19 @@ body.light-mode .nav-links a:hover {
   color: #0066cc;
 }
 
-body.light-mode #theme-toggle {
-  color: #111;
+/* Toggle-switch label/dot colors */
+body.light-mode .toggle-switch label {
+  background-color: #ccc;
+}
+body.light-mode .toggle-switch input:checked + label {
+  background-color: #0066cc;
 }
 
 /* --------------------------------------------------------------------------
-   Overlay should remain black when toggling (no override needed)
-   -------------------------------------------------------------------------- */
-body.light-mode #intro-overlay,
-body.light-mode .intro-logo,
-body.light-mode .logo-underline {
-  /* keep overlay black/dark so the same effect persists */
-}
-
-/* --------------------------------------------------------------------------
-   Hero Section in Light Mode
+   Hero Section in Light Mode (transparent background behind the text)
    -------------------------------------------------------------------------- */
 body.light-mode .hero .container {
-  background: rgba(255, 255, 255, 0.9);
+  background: transparent; /* <-- was white, now fully transparent */
 }
 
 body.light-mode .hero .container h1 {
@@ -708,8 +729,6 @@ body.light-mode .hero .container h1 {
 body.light-mode .hero .container p {
   color: #555;
 }
-
-/* Dot‐grid can remain same (white dots) – optional to invert, but not required */
 
 /* --------------------------------------------------------------------------
    Section Cards (general) in Light Mode

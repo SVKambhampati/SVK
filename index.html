@@ -28,16 +28,19 @@
 
   <!-- ============================================================
        2) Navbar (Semi-transparent)
+       Add a theme‐toggle button on the right
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
       <ul class="nav-links">
-        <li><a href="#about-anchor">About</a></li>
-        <li><a href="#projects-anchor">Projects</a></li>
-        <li><a href="#skills-anchor">Skills &amp; Tools</a></li>
-        <li><a href="#contact-anchor">Contact</a></li>
+        <li><a href="#about-anchor" class="">About</a></li>
+        <li><a href="#projects-anchor" class="">Projects</a></li>
+        <li><a href="#skills-anchor" class="">Skills</a></li>
+        <li><a href="#contact-anchor" class="">Contact</a></li>
       </ul>
+      <!-- THEME TOGGLE BUTTON -->
+      <button id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
     </div>
   </nav>
 
@@ -59,7 +62,7 @@
 
     <!-- ================================================
          ABOUT ME (Rounded Card)
-         – Invisible anchor (#about-anchor) sits −124px above the <h2>
+         – Invisible anchor (#about-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
@@ -83,7 +86,7 @@
 
     <!-- ================================================
          PROJECTS (Rounded Card)
-         – Invisible anchor (#projects-anchor) sits −124px above the <h2>
+         – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
@@ -107,93 +110,117 @@
           </article>
           <article class="project-card">
             <h3>AddressSync Automation</h3>
-            <p>AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.</p>
+            <p>
+              AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
+            </p>
             <a href="project-three.html">View →</a>
           </article>
           <article class="project-card">
             <h3>StyleForecast</h3>
-            <p>A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.</p>
+            <p>
+              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
+            </p>
             <a href="project-four.html">View →</a>
           </article>
         </div>
       </section>
     </div>
 
-    <!-- ================================================
-         SKILLS & TOOLS (Rounded Card)
-         – Invisible anchor (#skills-anchor) sits −124px above the <h2>
-         ================================================ -->
+   <!-- ================================================
+     SKILLS (Rounded Card)
+     ================================================ -->
     <div class="section-card">
-      <section class="fade-in-section">
+      <section class="fade-in-section" id="skills-section">
+        <!-- Invisible anchor so navbar links stop above the heading -->
         <div id="skills-anchor" class="section-anchor"></div>
-
+    
         <h2>Skills &amp; Tools</h2>
-        <ul class="skills-expandable skills-section">
+        <ul class="skills-expandable">
           <!-- Java -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Java</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
+              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third-party libraries.
             </div>
           </li>
+    
           <!-- Python -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Python</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
+              Developed the back-end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
             </div>
           </li>
+    
           <!-- JavaScript -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">JavaScript</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
+              Wrote client-side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
             </div>
           </li>
+    
           <!-- HTML & CSS -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">HTML &amp; CSS</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
+              Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
+    
           <!-- MySQL -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">MySQL</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
-              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
+              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
             </div>
           </li>
+    
           <!-- C# -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">C#</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
             </div>
           </li>
+    
           <!-- XML -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">XML</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
@@ -205,14 +232,14 @@
 
     <!-- ================================================
          CONTACT (Rounded Card)
-         – Invisible anchor (#contact-anchor) sits −124px above the <h2>
+         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
         <div id="contact-anchor" class="section-anchor"></div>
 
-        <h2>Contact Me</h2>
         <div class="contact-card">
+          <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
           <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
@@ -274,9 +301,11 @@
 
   <!-- ============================================================
        Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
+       + Theme Toggle JS
        ============================================================ -->
   <script>
-    // Dot-Grid Canvas Animation (unchanged)
+    // -------------------------------------------------------------------------
+    // Dot‐Grid Canvas Animation (unchanged)
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
@@ -393,6 +422,7 @@
       animate();
     };
 
+    // -------------------------------------------------------------------------
     // Intro Overlay Removal & SVK Glow Trigger
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
@@ -407,7 +437,8 @@
       });
     });
 
-    // Fade-In On Scroll (Intersection Observer)
+    // -------------------------------------------------------------------------
+    // Fade‐In On Scroll (Intersection Observer) for sections
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
       const observer = new IntersectionObserver((entries, obs) => {
@@ -423,6 +454,7 @@
       });
     });
 
+    // -------------------------------------------------------------------------
     // 3D Tilt on Role Cards
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
@@ -445,35 +477,54 @@
       });
     });
 
+    // -------------------------------------------------------------------------
     // Toggle Details for Skills
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
-          listItem.classList.toggle('open');
-          btn.textContent = listItem.classList.contains('open') ?
-            '− details' : '+ details';
+          const details  = listItem.querySelector('.skill-details');
+          const icon     = btn.querySelector('.icon');
+
+          // Collapse if already open
+          if (listItem.classList.contains('open')) {
+            listItem.classList.remove('open');
+            btn.innerHTML = '<span class="icon">+</span> details';
+            details.style.maxHeight = '0px';
+            details.style.opacity   = '0';
+          }
+          else {
+            // Expand
+            listItem.classList.add('open');
+            btn.innerHTML = '<span class="icon">−</span> details';
+            details.style.maxHeight = details.scrollHeight + 'px';
+            details.style.opacity   = '1';
+
+            // Bounce icon
+            const newIcon = btn.querySelector('.icon');
+            newIcon.style.animation = 'none';
+            newIcon.offsetWidth; // reflow
+            newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
+          }
         });
       });
     });
-  </script>
 
-  <!-- ============================================================
-       6) Active‐Link IntersectionObserver for Navbar
-       ============================================================ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const anchors = document.querySelectorAll('.section-anchor');
+    // -------------------------------------------------------------------------
+    //  IntersectionObserver + “Scrollspy” → add .nav-active to navbar links
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section.fade-in-section, .section-card');
       const navLinks = document.querySelectorAll('.nav-links a');
 
-      const obsCallback = (entries) => {
+      const options = { root: null, rootMargin: '0px', threshold: 0.3 };
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const id = entry.target.id; // e.g. "about-anchor"
-
+            // Find matching nav-link by href="#<section-id>"
+            const id = entry.target.id;
             navLinks.forEach(link => {
-              if (link.getAttribute('href') === `#${id}`) {
+              if (link.getAttribute('href') === '#' + id) {
                 link.classList.add('nav-active');
               } else {
                 link.classList.remove('nav-active');
@@ -481,14 +532,44 @@
             });
           }
         });
-      };
+      }, options);
 
-      const observer = new IntersectionObserver(obsCallback, {
-        root: null,
-        threshold: 0.1
+      sections.forEach(sec => {
+        // Only observe those with an id that corresponds to a nav-link
+        const id = sec.id;
+        if (id) observer.observe(sec);
       });
+    });
 
-      anchors.forEach(anchor => observer.observe(anchor));
+    // -------------------------------------------------------------------------
+    //  DARK / LIGHT MODE TOGGLE
+    //  
+    //  1) Check localStorage for “theme” (if “light”, add .light-mode to <body>)
+    //  2) Clicking #theme-toggle toggles body.light-mode and updates localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const userPref = localStorage.getItem('theme'); // “light” or “dark”
+
+      // 1) On load, apply stored preference
+      if (userPref === 'light') {
+        document.body.classList.add('light-mode');
+        toggleBtn.textContent = '☀️';
+      } else {
+        document.body.classList.remove('light-mode');
+        toggleBtn.textContent = '🌙';
+      }
+
+      // 2) On click, toggle and store preference
+      toggleBtn.addEventListener('click', () => {
+        const isLight = document.body.classList.toggle('light-mode');
+        if (isLight) {
+          localStorage.setItem('theme', 'light');
+          toggleBtn.textContent = '☀️';
+        } else {
+          localStorage.setItem('theme', 'dark');
+          toggleBtn.textContent = '🌙';
+        }
+      });
     });
   </script>
 </body>

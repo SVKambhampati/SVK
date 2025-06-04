@@ -42,7 +42,7 @@
           <li><a href="#skills-anchor">Skills</a></li>
           <li><a href="#contact-anchor">Contact</a></li>
         </ul>
-        <!-- THEME TOGGLE SWITCH (input + label must be adjacent) -->
+        <!-- THEME TOGGLE SWITCH -->
         <div class="toggle-switch">
           <input type="checkbox" id="theme-toggle" />
           <label for="theme-toggle"></label>
@@ -73,7 +73,6 @@
          ================================================ -->
     <div class="section-card">
       <section class="fade-in-section">
-        <!-- Invisible anchor to force scroll-stop above the heading -->
         <div id="about-anchor" class="section-anchor"></div>
 
         <div class="about-overview">
@@ -306,7 +305,7 @@
        ============================================================ -->
   <script>
     /******************************************************************
-     * 1) Dot-Grid Canvas Animation
+     * 1) Dot-Grid Canvas Animation (now respects light-mode)
      ******************************************************************/
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -357,6 +356,10 @@
     function draw() {
       const t = Date.now();
       ctx.clearRect(0,0,cw,ch);
+
+      // Check if light-mode is active
+      const isLight = document.body.classList.contains('light-mode');
+
       dots.forEach(d => {
         const dx = d.x - mx, dy = d.y - my;
         if (isDown && dx*dx + dy*dy < mouseRadius2) {
@@ -384,11 +387,16 @@
           alpha = 0.7 + tw * 0.3;
         }
         ctx.globalAlpha = alpha;
+
+        // If twinkle, always blue; otherwise white or black in light-mode
         if (d.tw) {
           ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+        } else if (isLight) {
+          ctx.fillStyle = `rgba(0,0,0,${alpha})`;   // black dots in light-mode
         } else {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`; // white dots by default
         }
+
         if (inter > 0) {
           ctx.shadowBlur  = 40;
           ctx.shadowColor = 'rgba(0,240,255,0.7)';

@@ -3,7 +3,7 @@
 }
 
 /* =====================================================================================
-   1) ORIGINAL SVK STYLE RULES (with hero h1 increased to 3rem)
+   1) ORIGINAL SVK STYLE RULES (with nav-active styles inserted)
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -78,6 +78,19 @@ html, body {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease-out;
+  padding-bottom: 2px;
+}
+
+/* Highlight the “active” nav link */
+.nav-links a.nav-active {
+  color: #0af;
+  border-bottom: 2px solid #0af;
+}
+
+/* Ensure non-active links remain white */
+.nav-links a:not(.nav-active) {
+  color: #fff;
+  border-bottom: none;
 }
 
 .nav-links a:hover {
@@ -196,10 +209,10 @@ html, body {
   border-radius: 12px;
 }
 
-/* ====== UPDATED HERO FONT-SIZE ====== */
+/* Increased hero h1 font-size to 3rem */
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 3rem; /* was previously 2.8rem */
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;

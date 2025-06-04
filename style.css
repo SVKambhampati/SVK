@@ -1,5 +1,5 @@
 /* ========================================================================
-   SVK style (3).css  — with Navbar Toggle and “light-mode” support
+   SVK style (3).css  — with Navbar Toggle, Light‐Mode, and Glassmorphism
    ======================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -238,7 +238,7 @@ a {
 }
 
 /* ========================================================================
-   7) HERO SECTION (Dot Grid + Centered Content)
+   7) HERO SECTION (Dot Grid + Centered Content with Glassmorphism)
    ======================================================================== */
 .hero {
   position: relative;
@@ -255,7 +255,7 @@ a {
   z-index: 0;
 }
 
-/* Dark mode: Container is fully transparent / no white box */
+/* Dark-mode: Container with glass effect (semi-transparent + blur) */
 .hero .container {
   position: relative;
   z-index: 1;
@@ -263,14 +263,19 @@ a {
   max-width: 900px;
   margin: 0 auto;
   transform: translateY(-20px);
-  background: rgba(255, 255, 255, 0);
-  padding: 0;
+
+  /* Glassmorphism for dark mode */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
   text-align: center;
 }
 
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 3rem; /* desired size */
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -710,7 +715,7 @@ body.light-mode .toggle-switch label::after {
   background: #fff;      /* knob remains white when on */
 }
 
-/* Light-mode hero: small, glossy white background and padding */
+/* Light-mode hero: glassmorphism */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
@@ -719,19 +724,13 @@ body.light-mode .hero .container {
   margin: 0 auto;
   transform: translateY(-20px);
 
-  /* glossy gradient and slight transparency */
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.75) 60%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
+  /* Glassmorphism for light mode */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 0.75rem 1.5rem;
   text-align: center;
-  border-radius: 8px;
-
-  /* subtle drop-shadow */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Hero text turns dark in light mode */

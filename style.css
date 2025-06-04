@@ -255,7 +255,7 @@ a {
   z-index: 0;
 }
 
-/* Dark-mode: Container with glass effect (semi-transparent + blur) */
+/* Dark-mode: Container with darker glass effect */
 .hero .container {
   position: relative;
   z-index: 1;
@@ -264,8 +264,8 @@ a {
   margin: 0 auto;
   transform: translateY(-20px);
 
-  /* Glassmorphism for dark mode */
-  background: rgba(255, 255, 255, 0.05);
+  /* Dark-mode glassmorphism: darker, semi-transparent */
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -715,7 +715,7 @@ body.light-mode .toggle-switch label::after {
   background: #fff;      /* knob remains white when on */
 }
 
-/* Light-mode hero: glassmorphism */
+/* Light-mode hero: glassmorphism, less visible */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
@@ -724,11 +724,11 @@ body.light-mode .hero .container {
   margin: 0 auto;
   transform: translateY(-20px);
 
-  /* Glassmorphism for light mode */
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
+  /* Lighter, more translucent glass for light mode */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.75rem 1.5rem;
   text-align: center;
 }

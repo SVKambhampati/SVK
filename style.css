@@ -1,7 +1,6 @@
 /* ============================================================
    style.css
-   Full stylesheet for svk-eta site, with “Hi, I’m Shreyas Kambhampati”
-   increased from 2.5rem to 3rem on larger screens.
+   Full stylesheet for svk-eta site
    ============================================================ */
 
 /* ─────────────────────────────────────────────────────────────
@@ -106,12 +105,6 @@ ul {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-}
-/* Increase hero h1 to 3rem on larger screens */
-@media (min-width: 768px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
 }
 .hero p {
   font-size: 1rem;

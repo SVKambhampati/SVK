@@ -28,28 +28,26 @@
 
   <!-- ============================================================
        2) Navbar (Semi-transparent)
-       Toggle‐switch is immediately to the right of the logo
+       Toggle‐switch is now immediately to the right of the nav links
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
       <!-- Logo on the far left -->
-      <div class="nav-left">
-        <a class="logo" href="#">Shreyas Kambhampati</a>
+      <a class="logo" href="#">Shreyas Kambhampati</a>
 
-        <!-- THEME TOGGLE SWITCH (white/black) -->
-        <div class="toggle-switch">
-          <input type="checkbox" id="theme-switch" />
-          <label for="theme-switch"></label>
-        </div>
-      </div>
-
-      <!-- Navigation links on the right -->
+      <!-- Navigation links in the center/right -->
       <ul class="nav-links">
         <li><a href="#about-anchor">About</a></li>
         <li><a href="#projects-anchor">Projects</a></li>
         <li><a href="#skills-anchor">Skills</a></li>
         <li><a href="#contact-anchor">Contact</a></li>
       </ul>
+
+      <!-- THEME TOGGLE SWITCH (white/black) immediately after nav-links -->
+      <div class="toggle-switch">
+        <input type="checkbox" id="theme-switch" />
+        <label for="theme-switch"></label>
+      </div>
     </div>
   </nav>
 
@@ -313,7 +311,7 @@
        ============================================================ -->
   <script>
     // =====================================================================
-    // 1) Dot‐Grid Canvas Animation (with only white→black swap, blue stays blue)
+    // 1) Dot‐Grid Canvas Animation (only white→black swap, blue stays blue)
     // =====================================================================
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -389,18 +387,19 @@
         ctx.globalAlpha = alpha;
 
         // In light mode: 
-        //   - If twinkle (d.tw), always draw blueish twinkle
+        //   - If twinkle (d.tw), still draw cyan twinkle
         //   - Else (normally-white), draw black
         // In dark mode: 
-        //   - If twinkle, draw cyan
+        //   - If twinkle, draw cyan with glow
         //   - Else draw white
         if (lightMode) {
           if (d.tw) {
             ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+            ctx.shadowBlur = 0;
           } else {
             ctx.fillStyle = `rgba(0,0,0,${alpha})`;
+            ctx.shadowBlur = 0;
           }
-          ctx.shadowBlur = 0;
         } else {
           if (d.tw) {
             ctx.fillStyle = `rgba(0,200,255,${alpha})`;
@@ -418,7 +417,7 @@
           }
         }
 
-        // Compute “concave” and “interactive” radius variations
+        // Compute concave + interactive radius shifts
         const cx = d.x - (cw / dpr) / 2;
         const cy = d.y - (ch / dpr) / 2;
         const dist = Math.hypot(cx, cy);

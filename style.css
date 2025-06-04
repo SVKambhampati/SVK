@@ -3,7 +3,7 @@
 }
 
 /* =====================================================================================
-   1) ORIGINAL SVK STYLE RULES (copied verbatim from your existing style.css)
+   1) ORIGINAL SVK STYLE RULES (with hero h1 increased to 3rem)
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -196,9 +196,10 @@ html, body {
   border-radius: 12px;
 }
 
+/* ====== UPDATED HERO FONT-SIZE ====== */
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 2.8rem;
+  font-size: 3rem; /* was previously 2.8rem */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -366,7 +367,6 @@ section.fade-in-section.is-visible {
   color: #0af;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
 }
 
 .project-card:hover {

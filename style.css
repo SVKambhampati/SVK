@@ -1,5 +1,5 @@
 /* ========================================================================
-   SVK style (3).css  — Full stylesheet with Glassmorphic Project Cards
+   SVK style (3).css  — Updated: Glassmorphic Role Cards + Intensified Underglow
    ======================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -69,14 +69,14 @@ a {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  flex-wrap: nowrap; /* Prevent wrapping so toggle sits next to “Contact” */
+  flex-wrap: nowrap;
 }
 /* Nav-links */
 .nav-links {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  white-space: nowrap; /* Prevent link text wrapping */
+  white-space: nowrap;
 }
 .nav-links a {
   color: #fff;
@@ -111,7 +111,7 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;   /* off-mode track is white */
+  background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 12px;
   cursor: pointer;
@@ -124,15 +124,13 @@ a {
   left: 2px;
   width: 20px;
   height: 20px;
-  background: #000;         /* knob is black when off */
+  background: #000;
   border-radius: 50%;
   transition: transform 0.3s ease-out, background 0.3s ease-out;
 }
-/* when checked (light-mode on), track becomes black */
 .toggle-switch input:checked + label {
   background-color: #000;
 }
-/* when checked, move knob to the right and invert its color */
 .toggle-switch input:checked + label::after {
   transform: translateX(26px);
   background: #fff;
@@ -237,7 +235,6 @@ a {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  /* Remove upward shift so content is truly centered */
   transform: none;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 8px;
@@ -279,7 +276,7 @@ section.fade-in-section.is-visible {
 .section-anchor {
   display: block;
   position: relative;
-  top: -124px; /* 60px (navbar) + 64px ≈ card top padding */
+  top: -124px;
   height: 0;
   visibility: hidden;
 }
@@ -328,7 +325,7 @@ section.fade-in-section.is-visible {
 }
 
 /* ========================================================================
-   13) ROLE CARDS (3D Parallax + Hover)
+   13) ROLE CARDS (Glassmorphism + Intensified Underglow)
    ======================================================================== */
 .roles-grid {
   width: 100%;
@@ -339,14 +336,19 @@ section.fade-in-section.is-visible {
   margin-bottom: 2rem;
 }
 .role-card {
-  background: #111;
-  border: 1px solid #0af;
+  background: rgba(255, 255, 255, 0.05);   /* translucent, frosted glass */
+  backdrop-filter: blur(8px);              /* blur behind */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* light outline */
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  transition:
+    transform 0.3s ease-out,
+    box-shadow 0.3s ease-out,
+    background 0.3s ease;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
+  /* Intensified underglow */
+  box-shadow: 0 8px 30px rgba(0, 170, 255, 0.6);
 }
 .role-card h3 {
   font-size: 1.125rem;
@@ -355,7 +357,8 @@ section.fade-in-section.is-visible {
 }
 .role-card:hover {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+  /* Stronger glow on hover */
+  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.8);
 }
 
 /* ========================================================================
@@ -366,10 +369,9 @@ section.fade-in-section.is-visible {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding-left: 20px; /* space for the side line */
-  margin-top: 1.5rem; /* push cards down slightly */
+  padding-left: 20px;
+  margin-top: 1.5rem;
 }
-/* Dark-mode side line remains white */
 .projects-grid::before {
   content: "";
   position: absolute;
@@ -379,48 +381,40 @@ section.fade-in-section.is-visible {
   width: 2px;
   background: #fff;
 }
-
-/* Glassmorphic Project Card */
 .project-card {
-  background: rgba(255, 255, 255, 0.05);   /* translucent, frosted glass */
-  backdrop-filter: blur(8px);              /* blur behind */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* light outline */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 1.5rem;
-  margin-left: -10px;                      /* align over the side line */
+  margin-left: -10px;
   transition:
     transform 0.3s ease,
     background 0.3s ease,
     box-shadow 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
-
 .project-card h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
   color: #fff;
 }
-
 .project-card p {
   margin-bottom: 1rem;
   color: #ddd;
   font-size: 1rem;
   line-height: 1.5;
 }
-
 .project-card a {
   color: #0af;
   font-weight: 600;
   text-decoration: none;
 }
-
-/* Hover state: deepen glass and lift card */
 .project-card:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
-
 .project-card a:hover {
   color: #fff;
 }
@@ -432,7 +426,7 @@ section.fade-in-section.is-visible {
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-top: 1.5rem; /* push skills down a bit */
+  margin-top: 1.5rem;
 }
 .skill-item {
   position: relative;
@@ -458,8 +452,6 @@ section.fade-in-section.is-visible {
 .skill-item:hover::before {
   width: 100%;
 }
-
-/* Underline Sweep on .skill-name */
 .skill-name {
   position: relative;
   font-size: 1.125rem;
@@ -481,16 +473,12 @@ section.fade-in-section.is-visible {
 .skill-item:hover .skill-name::after {
   width: 100%;
 }
-
-/* Header Flex Container */
 .skill-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1;
 }
-
-/* Toggle Button */
 .toggle-btn {
   background: none;
   border: none;
@@ -512,8 +500,6 @@ section.fade-in-section.is-visible {
   display: inline-block;
   transition: transform 0.3s ease-out;
 }
-
-/* Slide-Down Skill-Details */
 .skill-details {
   max-height: 0;
   opacity: 0;
@@ -531,10 +517,8 @@ section.fade-in-section.is-visible {
 .skill-item.open .skill-details {
   opacity: 1;
   transform: translateY(0);
-  max-height: 400px; /* ensure tall enough for any content */
+  max-height: 400px;
 }
-
-/* Icon Bounce Animation */
 @keyframes icon-bounce {
   0%   { transform: scale(1) rotate(0deg); }
   50%  { transform: scale(1.2) rotate(45deg); }
@@ -547,7 +531,6 @@ section.fade-in-section.is-visible {
 /* =====================================================================================
    16) CONTACT SECTION
    ===================================================================================== */
-/* Center the “Contact Me” header and paragraph */
 .contact-card h2 {
   text-align: center;
   margin-bottom: 1rem;
@@ -558,8 +541,6 @@ section.fade-in-section.is-visible {
   color: #ddd;
   line-height: 1.5;
 }
-
-/* Default label color (dark mode) */
 .contact-form .form-group label {
   color: #fff;
   transition: color 0.2s ease;
@@ -654,10 +635,10 @@ body.light-mode .nav-links a.nav-active {
   border-bottom: 2px solid #007acc;
 }
 body.light-mode .toggle-switch label {
-  background-color: #111; /* track is dark in light-mode */
+  background-color: #111;
 }
 body.light-mode .toggle-switch label::after {
-  background: #fff;      /* knob remains white when on */
+  background: #fff;
 }
 
 /* Light-mode hero: simple white box, more translucent (no border) */
@@ -691,21 +672,22 @@ body.light-mode .project-card p,
 body.light-mode .contact-card p {
   color: #333;
 }
-/* Role cards in light mode */
+/* Role cards in light mode (glass + lighter) */
 body.light-mode .role-card {
-  background: #f5f5f5;
-  border-color: #007acc;
-  box-shadow: 0 4px 15px rgba(0, 122, 204, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 122, 204, 0.4);
 }
 body.light-mode .role-card h3 {
   color: #111;
 }
 body.light-mode .role-card:hover {
-  box-shadow: 0 10px 30px rgba(0, 122, 204, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 122, 204, 0.6);
 }
-/* PROJECT CARDS: change the side line to black */
+/* PROJECT CARDS: change the side line to black + maintain glass */
 body.light-mode .projects-grid::before {
-  background: #000; /* black line in light mode */
+  background: #000;
 }
 body.light-mode .project-card {
   background: rgba(255, 255, 255, 0.1);
@@ -762,4 +744,3 @@ body.light-mode .send-btn:hover {
    20) PROJECT PAGE HOVER EFFECTS
    ===================================================================================== */
 /* If you have separate project-one/two/three pages, include similar CSS there */
-/* …(same as before)… */

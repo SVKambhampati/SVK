@@ -238,7 +238,7 @@ a {
 }
 
 /* ========================================================================
-   7) HERO SECTION (Dot Grid + Content)
+   7) HERO SECTION (Dot Grid + Centered Content)
    ======================================================================== */
 .hero {
   position: relative;
@@ -255,13 +255,17 @@ a {
   z-index: 0;
 }
 
+/* UPDATED: Center the text and remove the white box */
 .hero .container {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;        /* center horizontally */
   transform: translateY(-20px);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem 3rem;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0); /* fully transparent */
+  padding: 0;            /* no extra white box */
+  text-align: center;    /* center the contents */
 }
 
 .hero .container h1 {

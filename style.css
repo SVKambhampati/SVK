@@ -1,5 +1,6 @@
 /* ========================================================================
-   SVK style (3).css  — Navbar Toggle and Light‐Mode support (no glassmorphism)
+   SVK style (3).css  — Navbar Toggle and Light-Mode support (no glassmorphism)
+   Updated: Dark-mode hero box darker
    ======================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -238,7 +239,7 @@ a {
 }
 
 /* ========================================================================
-   7) HERO SECTION (Dot Grid + Centered Content, no glass)
+   7) HERO SECTION (Dot Grid + Centered Content, darker dark-mode box)
    ======================================================================== */
 .hero {
   position: relative;
@@ -255,7 +256,7 @@ a {
   z-index: 0;
 }
 
-/* Dark-mode: Container is transparent without glass effect */
+/* Dark-mode: Container with a darker semi-transparent box */
 .hero .container {
   position: relative;
   z-index: 1;
@@ -264,9 +265,10 @@ a {
   margin: 0 auto;
   transform: translateY(-20px);
 
-  /* No glassmorphism: fully transparent background */
-  background: transparent;
-  padding: 0;
+  /* Darker semi-transparent box */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
   text-align: center;
 }
 
@@ -712,7 +714,8 @@ body.light-mode .toggle-switch label::after {
   background: #fff;      /* knob remains white when on */
 }
 
-/* Light-mode hero: simple white box, slightly more transparent */
+/* Light-mode hero: simple white box, more translucent
+   (no border) */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
@@ -721,7 +724,7 @@ body.light-mode .hero .container {
   margin: 0 auto;
   transform: translateY(-20px);
 
-  /* Simple white background, more translucent */
+  /* Simple white background, more translucent, no border */
   background: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
   padding: 0.75rem 1.5rem;

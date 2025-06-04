@@ -41,6 +41,7 @@ html, body {
 
 /* --------------------------------------------------------------------------
    3) Navbar (semi-transparent)
+   Toggle‐switch is now on the right end, after nav links
    -------------------------------------------------------------------------- */
 .navbar {
   position: fixed;
@@ -59,6 +60,7 @@ html, body {
   height: 100%;
 }
 
+/* Logo on the left */
 .logo {
   color: #fff;
   font-size: 1.5rem;
@@ -66,6 +68,7 @@ html, body {
   text-decoration: none;
 }
 
+/* Center/right: nav links */
 .nav-links {
   list-style: none;
   display: flex;
@@ -97,12 +100,13 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   4) Theme Toggle Switch Styles
+   4) Theme Toggle Switch Styles (white/black)
    -------------------------------------------------------------------------- */
 .toggle-switch {
   position: relative;
   width: 50px;
   height: 24px;
+  margin-left: 1rem;
 }
 
 .toggle-switch input {
@@ -117,7 +121,8 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background-color: #fff;   /* track is white when off */
+  border: 1px solid #ccc;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease-out;
@@ -130,17 +135,18 @@ html, body {
   left: 2px;
   width: 20px;
   height: 20px;
-  background: #fff;
+  background: #000;          /* knob is black when off */
   border-radius: 50%;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, background 0.3s ease-out;
 }
 
 .toggle-switch input:checked + label {
-  background-color: #0af;
+  background-color: #000;    /* track black when on */
 }
 
 .toggle-switch input:checked + label::after {
   transform: translateX(26px);
+  background: #fff;          /* knob white when on */
 }
 
 /* --------------------------------------------------------------------------
@@ -250,14 +256,14 @@ html, body {
   position: relative;
   z-index: 1;
   transform: translateY(-20px);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 3rem 4rem;
+  background: rgba(0, 0, 0, 0.5);  /* dark mode: semi‐opaque */
+  padding: 2rem 3rem;               /* reduced padding */
   border-radius: 12px;
 }
 
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 3rem; /* Increased from 2.5rem to 3rem */
+  font-size: 3rem; /* increased from 2.5rem to 3rem */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -690,36 +696,38 @@ body.light-mode .navbar {
   background: rgba(255, 255, 255, 0.9);
 }
 
+/* Logo text remains dark */
 body.light-mode .logo {
   color: #111;
 }
 
+/* Nav‐links become dark, active highlight becomes blue */
 body.light-mode .nav-links a {
   color: #111;
 }
-
 body.light-mode .nav-links a.nav-active {
   color: #0066cc;
   border-bottom-color: #0066cc;
 }
-
 body.light-mode .nav-links a:hover {
   color: #0066cc;
 }
 
-/* Toggle-switch label/dot colors */
+/* Toggle‐switch track and knob colors for light mode */
 body.light-mode .toggle-switch label {
-  background-color: #ccc;
+  background-color: #000;   /* track black when on */
 }
-body.light-mode .toggle-switch input:checked + label {
-  background-color: #0066cc;
+body.light-mode .toggle-switch input:checked + label::after {
+  background: #fff;         /* knob white when on */
 }
 
 /* --------------------------------------------------------------------------
-   Hero Section in Light Mode (transparent background behind the text)
+   Hero Section in Light Mode (smaller, semi‐transparent white box)
    -------------------------------------------------------------------------- */
 body.light-mode .hero .container {
-  background: transparent; /* <-- was white, now fully transparent */
+  background: rgba(255,255,255,0.4); /* small, translucent white */
+  padding: 1.5rem 2.5rem;             /* reduced padding */
+  border-radius: 8px;
 }
 
 body.light-mode .hero .container h1 {

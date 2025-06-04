@@ -42,7 +42,7 @@
           <li><a href="#skills-anchor">Skills</a></li>
           <li><a href="#contact-anchor">Contact</a></li>
         </ul>
-        <!-- THEME TOGGLE SWITCH -->
+        <!-- THEME TOGGLE SWITCH (input + label must be adjacent) -->
         <div class="toggle-switch">
           <input type="checkbox" id="theme-toggle" />
           <label for="theme-toggle"></label>
@@ -491,7 +491,7 @@
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
-          // Toggle `.open`
+          // Toggle `.open` class
           if (listItem.classList.contains('open')) {
             listItem.classList.remove('open');
             btn.innerHTML = '<span class="icon">+</span> details';

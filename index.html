@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shreyas Kambhampati | Portfolio</title>
 
   <!-- Google Font: Plus Jakarta Sans -->
@@ -11,8 +11,11 @@
     rel="stylesheet"
   />
 
+  <!-- Blanka Font for Intro Logo -->
+  <link rel="stylesheet" href="blanka.css" />
+
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -27,14 +30,11 @@
   </div>
 
   <!-- ============================================================
-       2) Navbar (Semi-transparent)
+       2) Navbar (Semi-transparent) with Toggle Switch
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
-      <!-- Left side: Logo -->
       <a class="logo" href="#">Shreyas Kambhampati</a>
-
-      <!-- Right side: group nav-links + toggle into a single flex container -->
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#about-anchor">About</a></li>
@@ -42,14 +42,9 @@
           <li><a href="#skills-anchor">Skills</a></li>
           <li><a href="#contact-anchor">Contact</a></li>
         </ul>
-
-        <!-- Theme toggle switch (no extra margin!) -->
+        <!-- THEME TOGGLE SWITCH -->
         <div class="toggle-switch">
-          <input
-            type="checkbox"
-            id="theme-toggle"
-            aria-label="Toggle light/dark mode"
-          />
+          <input type="checkbox" id="theme-toggle" />
           <label for="theme-toggle"></label>
         </div>
       </div>
@@ -122,12 +117,16 @@
           </article>
           <article class="project-card">
             <h3>AddressSync Automation</h3>
-            <p>AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.</p>
+            <p>
+              AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
+            </p>
             <a href="project-three.html">View →</a>
           </article>
           <article class="project-card">
             <h3>StyleForecast</h3>
-            <p>A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.</p>
+            <p>
+              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
+            </p>
             <a href="project-four.html">View →</a>
           </article>
         </div>
@@ -156,7 +155,6 @@
               Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
             </div>
           </li>
-
           <!-- Python -->
           <li class="skill-item">
             <div class="skill-header">
@@ -169,7 +167,6 @@
               Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
             </div>
           </li>
-
           <!-- JavaScript -->
           <li class="skill-item">
             <div class="skill-header">
@@ -182,7 +179,6 @@
               Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
             </div>
           </li>
-
           <!-- HTML & CSS -->
           <li class="skill-item">
             <div class="skill-header">
@@ -195,7 +191,6 @@
               Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
-
           <!-- MySQL -->
           <li class="skill-item">
             <div class="skill-header">
@@ -208,7 +203,6 @@
               Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
             </div>
           </li>
-
           <!-- C# -->
           <li class="skill-item">
             <div class="skill-header">
@@ -221,7 +215,6 @@
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
             </div>
           </li>
-
           <!-- XML -->
           <li class="skill-item">
             <div class="skill-header">
@@ -308,10 +301,13 @@
   </footer>
 
   <!-- ============================================================
-       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
+       SCRIPTS
+       (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
        ============================================================ -->
   <script>
-    // Dot-Grid Canvas Animation (unchanged)
+    /******************************************************************
+     * 1) Dot-Grid Canvas Animation
+     ******************************************************************/
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
@@ -428,7 +424,9 @@
       animate();
     };
 
-    // Intro Overlay Removal & SVK Glow Trigger
+    /******************************************************************
+     * 2) Intro Overlay Removal & SVK Glow Trigger
+     ******************************************************************/
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
@@ -442,7 +440,9 @@
       });
     });
 
-    // Fade-In On Scroll (Intersection Observer)
+    /******************************************************************
+     * 3) Fade-In On Scroll (Intersection Observer)
+     ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
       const observer = new IntersectionObserver((entries, obs) => {
@@ -458,7 +458,9 @@
       });
     });
 
-    // 3D Tilt on Role Cards
+    /******************************************************************
+     * 4) 3D Tilt on Role Cards
+     ******************************************************************/
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
       document.querySelectorAll('.role-card').forEach(card => {
@@ -480,15 +482,16 @@
       });
     });
 
-    // Toggle Details for Skills (Accordion)
+    /******************************************************************
+     * 5) Accordion Toggle for Skills & Tools
+     ******************************************************************/
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
-          const icon     = btn.querySelector('.icon');
-
+          // Toggle `.open`
           if (listItem.classList.contains('open')) {
             listItem.classList.remove('open');
             btn.innerHTML = '<span class="icon">+</span> details';
@@ -499,58 +502,25 @@
             btn.innerHTML = '<span class="icon">−</span> details';
             details.style.maxHeight = details.scrollHeight + 'px';
             details.style.opacity   = '1';
-
-            // Bounce the icon
+            // bounce icon
             const newIcon = btn.querySelector('.icon');
             newIcon.style.animation = 'none';
-            newIcon.offsetWidth; /* reflow */
+            newIcon.offsetWidth; // force reflow
             newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
           }
         });
       });
     });
 
-    // Highlight Navbar Link for Section in View
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('.section-card');
-      const navLinks = document.querySelectorAll('.nav-links a');
-      const options  = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.3
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const id = entry.target.querySelector('h2')?.innerText.toLowerCase();
-          // Map “About Me” -> “about”, “Projects” -> “projects”, etc.
-          if (entry.isIntersecting) {
-            navLinks.forEach(link => {
-              link.classList.remove('nav-active');
-              const href = link.getAttribute('href').substring(1); // e.g. "about-anchor"
-              if (href.startsWith(id)) {
-                link.classList.add('nav-active');
-              }
-            });
-          }
-        });
-      }, options);
-
-      sections.forEach(section => observer.observe(section));
-    });
-
-    // Light/Dark Mode Toggle Logic
-    document.addEventListener('DOMContentLoaded', () => {
+    /******************************************************************
+     * 6) Theme Toggle (Light/Dark)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
-      toggle.addEventListener('change', () => {
-        if (toggle.checked) {
-          document.body.classList.add('light-mode');
-        } else {
-          document.body.classList.remove('light-mode');
-        }
+      toggle.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
       });
     });
   </script>
-
 </body>
 </html>

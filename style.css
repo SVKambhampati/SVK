@@ -41,7 +41,7 @@ html, body {
 
 /* --------------------------------------------------------------------------
    3) Navbar (semi-transparent)
-   Toggle‐switch is now on the right end, after nav links
+   Toggle‐switch now sits immediately after nav-links with no extra gap
    -------------------------------------------------------------------------- */
 .navbar {
   position: fixed;
@@ -106,7 +106,7 @@ html, body {
   position: relative;
   width: 50px;
   height: 24px;
-  margin-left: 1rem;
+  /* margin-left: 1rem;  ← removed so that it sits flush with the last nav‐link */
 }
 
 .toggle-switch input {

@@ -1,6 +1,6 @@
 /* ========================================================================
    SVK style (3).css  — Navbar Toggle and Light-Mode support (no glassmorphism)
-   Updated: Dark-mode hero box darker
+   Updated: Hero content vertically centered (no upward shift)
    ======================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -263,7 +263,9 @@ a {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  transform: translateY(-20px);
+
+  /* Remove upward shift so content is truly centered */
+  transform: none;
 
   /* Darker semi-transparent box */
   background: rgba(0, 0, 0, 0.7);
@@ -714,8 +716,7 @@ body.light-mode .toggle-switch label::after {
   background: #fff;      /* knob remains white when on */
 }
 
-/* Light-mode hero: simple white box, more translucent
-   (no border) */
+/* Light-mode hero: simple white box, more translucent (no border) */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;

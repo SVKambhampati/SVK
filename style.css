@@ -255,22 +255,22 @@ a {
   z-index: 0;
 }
 
-/* UPDATED: Center the text and remove the white box in default (dark) mode */
+/* Dark mode: Container is fully transparent / no white box */
 .hero .container {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 900px;
-  margin: 0 auto;        /* center horizontally */
+  margin: 0 auto;
   transform: translateY(-20px);
-  background: rgba(255, 255, 255, 0); /* fully transparent in dark mode */
-  padding: 0;            /* no extra white box */
-  text-align: center;    /* center the contents */
+  background: rgba(255, 255, 255, 0);
+  padding: 0;
+  text-align: center;
 }
 
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  font-size: 3rem; /* your desired size */
+  font-size: 3rem; /* desired size */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -401,7 +401,7 @@ section.fade-in-section.is-visible {
   margin-top: 1.5rem; /* push cards down slightly */
 }
 
-/* Default dark-mode line (white) */
+/* Default dark-mode side line: white */
 .projects-grid::before {
   content: "";
   position: absolute;
@@ -409,7 +409,7 @@ section.fade-in-section.is-visible {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #fff; /* white line in dark mode */
+  background: #fff;
 }
 
 .project-card {
@@ -581,14 +581,22 @@ section.fade-in-section.is-visible {
 /* =====================================================================================
    16) CONTACT SECTION
    ===================================================================================== */
-/* Center the “Contact Me” header */
-#contact-anchor + h2 {
+/* Center the “Contact Me” header and paragraph */
+.contact-card h2 {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-/* In light mode, labels become black */
+.contact-card p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+/* Default label color (dark mode) */
 .contact-form .form-group label {
-  color: #fff; /* default */
+  color: #fff;
   transition: color 0.2s ease;
 }
 
@@ -702,14 +710,17 @@ body.light-mode .toggle-switch label::after {
   background: #fff;      /* knob remains white when on */
 }
 
-/* Adjust the hero’s white box: small, subtle white background with minimal padding */
+/* Light-mode hero: small, subtle white background and padding */
 body.light-mode .hero .container {
-  background: rgba(255, 255, 255, 0.8); /* light mode: semi-opaque white */
-  padding: 1rem 2rem;                   /* smaller box around text */
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.75rem 1.5rem;   /* decreased width and padding */
+  width: auto;
+  max-width: 700px;          /* narrower than before */
+  margin: 0 auto;
   text-align: center;
 }
 
-/* In light mode, the hero text becomes dark */
+/* Hero text turns dark in light mode */
 body.light-mode .hero .container h1,
 body.light-mode .hero .container p {
   color: #111;
@@ -769,7 +780,7 @@ body.light-mode .project-card:hover {
   box-shadow: 0 10px 30px rgba(0, 122, 204, 0.4);
 }
 
-/* SKILLS & TOOLS: dark background replaced by light */
+/* SKILLS & TOOLS: light background */
 body.light-mode .skills-expandable .skill-item {
   background: #f5f5f5;
 }

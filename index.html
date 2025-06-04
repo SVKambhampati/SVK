@@ -28,25 +28,30 @@
 
   <!-- ============================================================
        2) Navbar (Semi-transparent)
-       Toggle‐switch is now immediately to the right of the nav links
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
-      <!-- Logo on the far left -->
+      <!-- Left side: Logo -->
       <a class="logo" href="#">Shreyas Kambhampati</a>
 
-      <!-- Navigation links in the center/right -->
-      <ul class="nav-links">
-        <li><a href="#about-anchor">About</a></li>
-        <li><a href="#projects-anchor">Projects</a></li>
-        <li><a href="#skills-anchor">Skills</a></li>
-        <li><a href="#contact-anchor">Contact</a></li>
-      </ul>
+      <!-- Right side: group nav-links + toggle into a single flex container -->
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#about-anchor">About</a></li>
+          <li><a href="#projects-anchor">Projects</a></li>
+          <li><a href="#skills-anchor">Skills</a></li>
+          <li><a href="#contact-anchor">Contact</a></li>
+        </ul>
 
-      <!-- THEME TOGGLE SWITCH (white/black) immediately after nav-links -->
-      <div class="toggle-switch">
-        <input type="checkbox" id="theme-switch" />
-        <label for="theme-switch"></label>
+        <!-- Theme toggle switch (no extra margin!) -->
+        <div class="toggle-switch">
+          <input
+            type="checkbox"
+            id="theme-toggle"
+            aria-label="Toggle light/dark mode"
+          />
+          <label for="theme-toggle"></label>
+        </div>
       </div>
     </div>
   </nav>
@@ -117,30 +122,26 @@
           </article>
           <article class="project-card">
             <h3>AddressSync Automation</h3>
-            <p>
-              AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
-            </p>
+            <p>AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.</p>
             <a href="project-three.html">View →</a>
           </article>
           <article class="project-card">
             <h3>StyleForecast</h3>
-            <p>
-              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
-            </p>
+            <p>A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.</p>
             <a href="project-four.html">View →</a>
           </article>
         </div>
       </section>
     </div>
 
-   <!-- ================================================
-     SKILLS (Rounded Card)
-     ================================================ -->
+    <!-- ================================================
+         SKILLS & TOOLS (Rounded Card)
+         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
+         ================================================ -->
     <div class="section-card">
-      <section class="fade-in-section" id="skills-section">
-        <!-- Invisible anchor so navbar links stop above the heading -->
+      <section class="fade-in-section">
         <div id="skills-anchor" class="section-anchor"></div>
-    
+
         <h2>Skills &amp; Tools</h2>
         <ul class="skills-expandable">
           <!-- Java -->
@@ -152,10 +153,10 @@
               </button>
             </div>
             <div class="skill-details">
-              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third-party libraries.
+              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
             </div>
           </li>
-    
+
           <!-- Python -->
           <li class="skill-item">
             <div class="skill-header">
@@ -165,10 +166,10 @@
               </button>
             </div>
             <div class="skill-details">
-              Developed the back-end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
+              Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
             </div>
           </li>
-    
+
           <!-- JavaScript -->
           <li class="skill-item">
             <div class="skill-header">
@@ -178,10 +179,10 @@
               </button>
             </div>
             <div class="skill-details">
-              Wrote client-side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
+              Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
             </div>
           </li>
-    
+
           <!-- HTML & CSS -->
           <li class="skill-item">
             <div class="skill-header">
@@ -191,10 +192,10 @@
               </button>
             </div>
             <div class="skill-details">
-              Crafted responsive, mobile-friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
+              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
             </div>
           </li>
-    
+
           <!-- MySQL -->
           <li class="skill-item">
             <div class="skill-header">
@@ -204,10 +205,10 @@
               </button>
             </div>
             <div class="skill-details">
-              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real-time outfit recommendations.
+              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
             </div>
           </li>
-    
+
           <!-- C# -->
           <li class="skill-item">
             <div class="skill-header">
@@ -220,7 +221,7 @@
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
             </div>
           </li>
-    
+
           <!-- XML -->
           <li class="skill-item">
             <div class="skill-header">
@@ -307,12 +308,10 @@
   </footer>
 
   <!-- ============================================================
-       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details, and theme toggle)
+       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
        ============================================================ -->
   <script>
-    // =====================================================================
-    // 1) Dot‐Grid Canvas Animation (only white→black swap, blue stays blue)
-    // =====================================================================
+    // Dot-Grid Canvas Animation (unchanged)
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
@@ -348,11 +347,11 @@
     function initDots() {
       dots = [];
       const w = cw / dpr, h = ch / dpr;
-      for (let y = dotRadius; y < h; y += dotRadius * 2 + dotPadding) {
-        for (let x = dotRadius; x < w; x += dotRadius * 2 + dotPadding) {
+      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
+        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
           dots.push({
             sx: x, sy: y,
-            x: x, y: y,
+            x: x,  y: y,
             tw: Math.random() < twinkleChance
           });
         }
@@ -362,12 +361,9 @@
     function draw() {
       const t = Date.now();
       ctx.clearRect(0,0,cw,ch);
-      const lightMode = document.body.classList.contains('light-mode');
-
       dots.forEach(d => {
-        // Mouse interaction / concave repulsion
         const dx = d.x - mx, dy = d.y - my;
-        if (isDown && dx * dx + dy * dy < mouseRadius2) {
+        if (isDown && dx*dx + dy*dy < mouseRadius2) {
           d.x += dx / 30;
           d.y += dy / 30;
         } else {
@@ -377,62 +373,37 @@
             d.y -= dy0 / 20;
           }
         }
-
-        // Twinkle alpha
+        const cx = d.x - (cw / dpr) / 2;
+        const cy = d.y - (ch / dpr) / 2;
+        const dist = Math.hypot(cx, cy);
+        const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
+        const conc = Math.pow(dist / mD, 3) * concaveStrength;
+        const inter = (dx*dx + dy*dy < mouseRadius2)
+          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
+          : 0;
+        const radius = dotRadius + conc + inter;
         let alpha = 1;
         if (d.tw) {
           const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
           alpha = 0.7 + tw * 0.3;
         }
         ctx.globalAlpha = alpha;
-
-        // In light mode: 
-        //   - If twinkle (d.tw), still draw cyan twinkle
-        //   - Else (normally-white), draw black
-        // In dark mode: 
-        //   - If twinkle, draw cyan with glow
-        //   - Else draw white
-        if (lightMode) {
-          if (d.tw) {
-            ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-            ctx.shadowBlur = 0;
-          } else {
-            ctx.fillStyle = `rgba(0,0,0,${alpha})`;
-            ctx.shadowBlur = 0;
-          }
+        if (d.tw) {
+          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
         } else {
-          if (d.tw) {
-            ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-            // twinkle shadow
-            const dist2 = dx*dx + dy*dy;
-            if (isDown && dist2 < mouseRadius2) {
-              ctx.shadowBlur  = 40;
-              ctx.shadowColor = 'rgba(0,240,255,0.7)';
-            } else {
-              ctx.shadowBlur = 0;
-            }
-          } else {
-            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            ctx.shadowBlur = 0;
-          }
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
         }
-
-        // Compute concave + interactive radius shifts
-        const cx = d.x - (cw / dpr) / 2;
-        const cy = d.y - (ch / dpr) / 2;
-        const dist = Math.hypot(cx, cy);
-        const mD   = Math.hypot((cw / dpr)/2, (ch / dpr)/2);
-        const conc = Math.pow(dist / mD, 3) * concaveStrength;
-        const inter = (dx*dx + dy*dy < mouseRadius2)
-          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
-          : 0;
-        const radius = dotRadius + conc + inter;
-
+        if (inter > 0) {
+          ctx.shadowBlur  = 40;
+          ctx.shadowColor = 'rgba(0,240,255,0.7)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
         ctx.beginPath();
         ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
         ctx.fill();
-        ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
       });
     }
 
@@ -457,9 +428,7 @@
       animate();
     };
 
-    // =====================================================================
-    // 2) Intro Overlay Removal & SVK Glow Trigger
-    // =====================================================================
+    // Intro Overlay Removal & SVK Glow Trigger
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
@@ -473,9 +442,7 @@
       });
     });
 
-    // =====================================================================
-    // 3) Fade‐In On Scroll (Intersection Observer) for sections
-    // =====================================================================
+    // Fade-In On Scroll (Intersection Observer)
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
       const observer = new IntersectionObserver((entries, obs) => {
@@ -491,9 +458,7 @@
       });
     });
 
-    // =====================================================================
-    // 4) 3D Tilt on Role Cards
-    // =====================================================================
+    // 3D Tilt on Role Cards
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
       document.querySelectorAll('.role-card').forEach(card => {
@@ -515,90 +480,77 @@
       });
     });
 
-    // =====================================================================
-    // 5) Toggle Details for Skills (slide‐down)
-    // =====================================================================
+    // Toggle Details for Skills (Accordion)
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
+          const icon     = btn.querySelector('.icon');
+
           if (listItem.classList.contains('open')) {
             listItem.classList.remove('open');
             btn.innerHTML = '<span class="icon">+</span> details';
             details.style.maxHeight = '0px';
             details.style.opacity   = '0';
-          }
-          else {
+          } else {
             listItem.classList.add('open');
             btn.innerHTML = '<span class="icon">−</span> details';
             details.style.maxHeight = details.scrollHeight + 'px';
             details.style.opacity   = '1';
+
+            // Bounce the icon
             const newIcon = btn.querySelector('.icon');
             newIcon.style.animation = 'none';
-            newIcon.offsetWidth;
+            newIcon.offsetWidth; /* reflow */
             newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
           }
         });
       });
     });
 
-    // =====================================================================
-    // 6) IntersectionObserver “Scrollspy” → add .nav-active to navbar links
-    // =====================================================================
-    document.addEventListener('DOMContentLoaded', function() {
-      const sections = document.querySelectorAll('section.fade-in-section, .section-card');
+    // Highlight Navbar Link for Section in View
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.section-card');
       const navLinks = document.querySelectorAll('.nav-links a');
+      const options  = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+      };
 
-      const options = { root: null, rootMargin: '0px', threshold: 0.3 };
-      const observer = new IntersectionObserver(entries => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && entry.target.id) {
+          const id = entry.target.querySelector('h2')?.innerText.toLowerCase();
+          // Map “About Me” -> “about”, “Projects” -> “projects”, etc.
+          if (entry.isIntersecting) {
             navLinks.forEach(link => {
-              link.classList.toggle(
-                'nav-active',
-                link.getAttribute('href') === '#' + entry.target.id
-              );
+              link.classList.remove('nav-active');
+              const href = link.getAttribute('href').substring(1); // e.g. "about-anchor"
+              if (href.startsWith(id)) {
+                link.classList.add('nav-active');
+              }
             });
           }
         });
       }, options);
 
-      sections.forEach(sec => {
-        const id = sec.id;
-        if (id) observer.observe(sec);
-      });
+      sections.forEach(section => observer.observe(section));
     });
 
-    // =====================================================================
-    // 7) DARK / LIGHT MODE TOGGLE (using a checkbox switch)
-    // =====================================================================
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggleCheckbox = document.getElementById('theme-switch');
-      const storedTheme = localStorage.getItem('theme'); // "light" or "dark"
-
-      // 1) On load, apply stored preference
-      if (storedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        toggleCheckbox.checked = true;
-      } else {
-        document.body.classList.remove('light-mode');
-        toggleCheckbox.checked = false;
-      }
-
-      // 2) On change, toggle and store preference
-      toggleCheckbox.addEventListener('change', () => {
-        const isLight = toggleCheckbox.checked;
-        if (isLight) {
+    // Light/Dark Mode Toggle Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('theme-toggle');
+      toggle.addEventListener('change', () => {
+        if (toggle.checked) {
           document.body.classList.add('light-mode');
-          localStorage.setItem('theme', 'light');
         } else {
           document.body.classList.remove('light-mode');
-          localStorage.setItem('theme', 'dark');
         }
       });
     });
   </script>
+
 </body>
 </html>

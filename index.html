@@ -28,23 +28,28 @@
 
   <!-- ============================================================
        2) Navbar (Semi-transparent)
-       Includes a “toggle switch” for Light/Dark Mode
+       Toggle‐switch is immediately to the right of the logo
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
-      <a class="logo" href="#">Shreyas Kambhampati</a>
+      <!-- Logo on the far left -->
+      <div class="nav-left">
+        <a class="logo" href="#">Shreyas Kambhampati</a>
+
+        <!-- THEME TOGGLE SWITCH (white/black) -->
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-switch" />
+          <label for="theme-switch"></label>
+        </div>
+      </div>
+
+      <!-- Navigation links on the right -->
       <ul class="nav-links">
         <li><a href="#about-anchor">About</a></li>
         <li><a href="#projects-anchor">Projects</a></li>
         <li><a href="#skills-anchor">Skills</a></li>
         <li><a href="#contact-anchor">Contact</a></li>
       </ul>
-
-      <!-- THEME TOGGLE SLIDER -->
-      <div class="toggle-switch">
-        <input type="checkbox" id="theme-switch" />
-        <label for="theme-switch"></label>
-      </div>
     </div>
   </nav>
 
@@ -308,7 +313,7 @@
        ============================================================ -->
   <script>
     // =====================================================================
-    // 1) Dot‐Grid Canvas Animation (with inversion for light mode)
+    // 1) Dot‐Grid Canvas Animation (with only white→black swap, blue stays blue)
     // =====================================================================
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
@@ -375,7 +380,7 @@
           }
         }
 
-        // Determine color and twinkle
+        // Twinkle alpha
         let alpha = 1;
         if (d.tw) {
           const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
@@ -383,21 +388,37 @@
         }
         ctx.globalAlpha = alpha;
 
-        // If in light mode, draw black dots; else draw white
+        // In light mode: 
+        //   - If twinkle (d.tw), always draw blueish twinkle
+        //   - Else (normally-white), draw black
+        // In dark mode: 
+        //   - If twinkle, draw cyan
+        //   - Else draw white
         if (lightMode) {
-          ctx.fillStyle = d.tw ? `rgba(0,0,0,${alpha})` : `rgba(0,0,0,${alpha})`;
-          ctx.shadowBlur  = 0; 
-        } else {
-          ctx.fillStyle = d.tw ? `rgba(0,200,255,${alpha})` : `rgba(255,255,255,${alpha})`;
-          if (d.tw && dx*dx + dy*dy < mouseRadius2) {
-            ctx.shadowBlur  = 40;
-            ctx.shadowColor = 'rgba(0,240,255,0.7)';
+          if (d.tw) {
+            ctx.fillStyle = `rgba(0,200,255,${alpha})`;
           } else {
+            ctx.fillStyle = `rgba(0,0,0,${alpha})`;
+          }
+          ctx.shadowBlur = 0;
+        } else {
+          if (d.tw) {
+            ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+            // twinkle shadow
+            const dist2 = dx*dx + dy*dy;
+            if (isDown && dist2 < mouseRadius2) {
+              ctx.shadowBlur  = 40;
+              ctx.shadowColor = 'rgba(0,240,255,0.7)';
+            } else {
+              ctx.shadowBlur = 0;
+            }
+          } else {
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
             ctx.shadowBlur = 0;
           }
         }
 
-        // Draw circle
+        // Compute “concave” and “interactive” radius variations
         const cx = d.x - (cw / dpr) / 2;
         const cy = d.y - (ch / dpr) / 2;
         const dist = Math.hypot(cx, cy);
@@ -504,7 +525,6 @@
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
-          const icon     = btn.querySelector('.icon');
           if (listItem.classList.contains('open')) {
             listItem.classList.remove('open');
             btn.innerHTML = '<span class="icon">+</span> details';

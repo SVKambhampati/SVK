@@ -1,347 +1,399 @@
 :root {
   --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Glassmorphism colors for dark mode (default): */
+  --card-bg-dark: rgba(17, 17, 17, 0.7);
+  --card-border-dark: rgba(255, 255, 255, 0.1);
+
+  /* Glassmorphism colors for light mode: */
+  --card-bg-light: rgba(255, 255, 255, 0.3);
+  --card-border-light: rgba(0, 0, 0, 0.1);
+
+  /* Text colors */
+  --text-primary-dark: #fff;
+  --text-secondary-dark: #ddd;
+  --text-primary-light: #111;
+  --text-secondary-light: #333;
+
+  /* Accent color */
+  --accent-color: #0af;
 }
 
-/* =====================================================================================
-   1) ORIGINAL SVK STYLE + NAV‐ACTIVE RULES
-   ===================================================================================== */
-
-/* --------------------------------------------------------------------------
-   1) Global Resets & Typography
-   -------------------------------------------------------------------------- */
-@font-face {
-  font-family: 'Blanka';
-  src: url('./blanka/Blanka-Regular.woff2') format('woff2');
+body {
+  background-color: #000;
+  color: var(--text-primary-dark);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-*, *::before, *::after {
+/* ======================================================
+   DARK/LIGHT MODE STYLES
+   ====================================================== */
+body.light-mode {
+  background-color: #f5f5f5;
+  color: var(--text-primary-light);
+}
+
+body.light-mode .section-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+body.light-mode .role-card,
+body.light-mode .project-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+body.light-mode .hero .container {
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--text-primary-light);
+}
+
+body.light-mode .nav-links a {
+  color: var(--text-primary-light);
+}
+
+body.light-mode .nav-links a.nav-active {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+body.light-mode .project-card a,
+body.light-mode .nav-links a:hover,
+body.light-mode .role-card:hover {
+  color: var(--accent-color);
+}
+
+body.light-mode input,
+body.light-mode textarea {
+  background: #fff;
+  color: #111;
+  border-color: #aaa;
+}
+
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+  color: #888;
+}
+
+/* ======================================================
+   MAIN RESET & TYPOGRAPHY
+   ====================================================== */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  scroll-behavior: smooth;
-  background: #000;
-  color: #fff;
-  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+a {
+  text-decoration: none;
 }
 
-/* --------------------------------------------------------------------------
-   2) Container
-   -------------------------------------------------------------------------- */
+ul {
+  list-style: none;
+}
+
+/* ======================================================
+   CONTAINER
+   ====================================================== */
 .container {
-  width: 95%;
-  max-width: 1400px;
+  width: 90%;
+  max-width: 900px;
   margin: 0 auto;
+  padding-top: 60px; /* ensure content sits below fixed navbar */
 }
 
-/* --------------------------------------------------------------------------
-   3) Navbar (semi-transparent)
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   NAVBAR & ACTIVE-LINK
+   ====================================================== */
 .navbar {
+  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;               /* Navbar height */
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 10;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 100;
+  transition: background 0.3s ease;
+}
+
+body.light-mode .navbar {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .navbar .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
+  width: 100%;
 }
 
 .logo {
-  color: #fff;
   font-size: 1.5rem;
   font-weight: 600;
-  text-decoration: none;
+  color: var(--text-primary-dark);
+  transition: color 0.3s ease;
+}
+
+body.light-mode .logo {
+  color: var(--text-primary-light);
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 1.5rem;
-  align-items: center;
 }
 
 .nav-links a {
-  color: #fff;
-  text-decoration: none;
+  color: var(--text-primary-dark);
+  font-size: 1rem;
   font-weight: 500;
-  transition: color 0.2s ease-out;
   padding-bottom: 2px;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+  border-bottom: 2px solid transparent;
 }
 
-/* Highlight the “active” nav link */
-.nav-links a.nav-active {
-  color: #0af;
-  border-bottom: 2px solid #0af;
-}
-
-/* Ensure non‐active links remain white */
-.nav-links a:not(.nav-active) {
-  color: #fff;
-  border-bottom: none;
+body.light-mode .nav-links a {
+  color: var(--text-primary-light);
 }
 
 .nav-links a:hover {
-  color: #0af;
+  color: var(--accent-color);
 }
 
-/* --------------------------------------------------------------------------
-   4) Intro Overlay
-   -------------------------------------------------------------------------- */
-#intro-overlay {
-  position: fixed;
-  inset: 0;
-  background: #000;
+.nav-links a.nav-active {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+/* ======================================================
+   THEME TOGGLE SWITCH
+   ====================================================== */
+.theme-toggle {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 999;
-  animation: overlayFade 1s ease-out 1.5s forwards;
+  margin-left: 1rem;
 }
 
-.logo-container {
-  position: relative;
-  display: inline-block;
-  text-align: center;
-}
-
-.intro-logo {
-  font-family: 'Blanka', sans-serif;
-  font-size: 6rem;
-  color: #fff;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: logoPop 0.8s ease-out 0.3s forwards;
-  text-shadow: none;
-}
-
-.logo-underline {
-  position: absolute;
-  left: 50%;
-  bottom: -12px;
-  transform: translateX(-50%);
-  height: 6px;
+.theme-toggle input[type="checkbox"] {
+  height: 0;
   width: 0;
+  visibility: hidden;
+}
+
+.theme-toggle .toggle-label {
+  width: 40px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+body.light-mode .theme-toggle .toggle-label {
+  background: #666;
+}
+
+.theme-toggle .toggle-label::after {
+  content: "";
+  width: 18px;
+  height: 18px;
   background: #fff;
-  animation: underlineExpand 1s ease-out 0.8s forwards;
-  border-radius: 3px;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s ease;
 }
 
-@keyframes logoPop {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.theme-toggle input:checked + .toggle-label::after {
+  transform: translateX(20px);
 }
 
-@keyframes underlineExpand {
-  to {
-    width: 100%;
-  }
+.theme-toggle input:checked + .toggle-label {
+  background: var(--accent-color);
 }
 
-@keyframes overlayFade {
-  to {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   5) SVK Flicker-Glow (once via .glow-active)
-   -------------------------------------------------------------------------- */
-.intro-logo.glow-active {
-  animation: flickerGlow 1s ease-out forwards;
-}
-
-@keyframes flickerGlow {
-  0%, 100% {
-    text-shadow: none;
-  }
-  10%, 30%, 50%, 70% {
-    text-shadow:
-      0 0 8px rgba(0, 200, 255, 0.8),
-      0 0 12px rgba(0, 200, 255, 0.6),
-      0 0 16px rgba(255, 255, 255, 0.4);
-  }
-  20%, 40%, 60%, 80% {
-    text-shadow: none;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   6) Hero Section (Dot Grid + Content)
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   HERO SECTION (Dot-Grid Background + Glassmorphic Container)
+   ====================================================== */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  overflow: hidden;
 }
 
 #dotGrid {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   z-index: 0;
 }
 
 .hero .container {
   position: relative;
   z-index: 1;
-  transform: translateY(-20px);
-  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
   padding: 3rem 4rem;
   border-radius: 12px;
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease;
 }
 
-/* Increased hero h1 font-size to 3rem */
-.hero .container h1 {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+.hero h1 {
   font-size: 3rem;
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
+  color: var(--text-primary-dark);
+  margin-bottom: 0.5rem;
 }
 
-.hero .container p {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+body.light-mode .hero h1 {
+  color: var(--text-primary-light);
+}
+
+.hero p {
   font-size: 1.25rem;
-  line-height: 1.4;
-  margin-top: 1rem;
   color: #ccc;
 }
 
-/* --------------------------------------------------------------------------
-   7) Fade-In On Scroll
-   -------------------------------------------------------------------------- */
-section.fade-in-section {
+body.light-mode .hero p {
+  color: var(--text-secondary-light);
+}
+
+/* ======================================================
+   FADE-IN OBSERVER (make sections visible)
+   ====================================================== */
+.fade-in-section {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-section.fade-in-section.is-visible {
+.fade-in-section.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* --------------------------------------------------------------------------
-   8) Invisible Anchor (to stop scroll above the heading)
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   INVISIBLE ANCHOR (offset scroll under fixed navbar)
+   ====================================================== */
 .section-anchor {
   display: block;
-  position: relative;
-  /* 60px (navbar) + 4rem (≈64px card top padding) = 124px */
-  top: -124px;
-  height: 0;
+  height: 124px;       /* 60px navbar + 64px spacing */
+  margin-top: -124px;
   visibility: hidden;
 }
 
-/* --------------------------------------------------------------------------
-   9) Rounded “Card” + Overlapping Setup
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   GLASSMORPHIC “SECTION-CARD” WRAPPERS
+   ====================================================== */
 .section-card {
-  background: #111;
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  margin: 2rem 0;
-  padding: 4rem 1.5rem;
-  position: relative;
-  z-index: 1;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.section-card + .section-card {
-  margin-top: -30px;
-  z-index: 2;
+body.light-mode .section-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
 }
 
-/* --------------------------------------------------------------------------
-   10) Section-Card <h2> HEADINGS (all same size & white)
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   SECTION-HEADINGS (All large & white in dark, dark in light)
+   ====================================================== */
 .section-card h2 {
-  font-size: 2.25rem;       /* consistent large font size */
-  color: #fff;              /* force white color */
+  font-size: 2.25rem;
+  color: var(--text-primary-dark);
   margin-bottom: 1rem;
   border-bottom: 2px solid #444;
   padding-bottom: 0.25rem;
 }
 
-/* --------------------------------------------------------------------------
-   11) ABOUT ME Content (Inside ABOUT ME card)
-   -------------------------------------------------------------------------- */
-.about-overview {
-  width: 100%;
-  text-align: left;
-  color: #ddd;
-  margin-bottom: 2rem;
+body.light-mode .section-card h2 {
+  color: var(--text-primary-light);
+  border-bottom-color: #bbb;
 }
 
+/* ======================================================
+   ABOUT OVERVIEW TEXT
+   ====================================================== */
 .about-overview p {
-  line-height: 1.8;
+  color: var(--text-secondary-dark);
+  font-size: 1rem;
+  line-height: 1.6;
   margin-bottom: 1.5rem;
-  letter-spacing: 0.5px;
 }
 
-/* --------------------------------------------------------------------------
-   12) Role Cards (Inside ABOUT ME)
-   -------------------------------------------------------------------------- */
+body.light-mode .about-overview p {
+  color: var(--text-secondary-light);
+}
+
+/* ======================================================
+   ROLE CARDS (Glassmorphic)
+   ====================================================== */
 .roles-grid {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  perspective: 1000px;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-.roles-grid .role-card {
-  background: #111;
-  border: 1px solid #0af;
+.role-card {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
   border-radius: 8px;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1rem;
   text-align: center;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
+  transition:
+    transform 0.5s var(--spring-ease),
+    box-shadow 0.5s var(--spring-ease),
+    background 0.3s ease,
+    border-color 0.3s ease;
+  color: var(--text-primary-dark);
+  backdrop-filter: blur(8px);
 }
 
-.roles-grid .role-card h3 {
+body.light-mode .role-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+  color: var(--text-primary-light);
+}
+
+.role-card h3 {
   font-size: 1.125rem;
-  font-weight: 600;
-  color: #fff;
 }
 
-.roles-grid .role-card:hover {
-  /* slight lift + 3D tilt + glow */
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+.role-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 170, 255, 0.5);
 }
 
-/* --------------------------------------------------------------------------
-   13) Project Cards (Inside PROJECTS)
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   PROJECT CARDS (Glassmorphic)
+   ====================================================== */
 .projects-grid {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* ← moves all project cards down */
+  margin-top: 1.5rem; /* move all project cards down */
+  position: relative;
 }
 
 .projects-grid::before {
@@ -351,59 +403,76 @@ section.fade-in-section.is-visible {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #fff;
+  background: var(--text-primary-dark);
+  transition: background 0.3s ease;
+}
+
+body.light-mode .projects-grid::before {
+  background: var(--text-primary-light);
 }
 
 .project-card {
-  background: #111;
+  background: var(--card-bg-dark);
+  border-radius: 12px;
   padding: 1.5rem;
-  border-radius: 8px;
   margin-left: -10px;
-  transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
+  transition:
+    transform 0.5s var(--spring-ease),
+    box-shadow 0.5s var(--spring-ease),
+    background 0.3s ease,
+    border-color 0.3s ease;
+  border: 1px solid var(--card-border-dark);
+  backdrop-filter: blur(8px);
+}
+
+body.light-mode .project-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
 }
 
 .project-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: #fff;
+  color: var(--text-primary-dark);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+body.light-mode .project-card h3 {
+  color: var(--text-primary-light);
 }
 
 .project-card p {
-  margin-bottom: 1rem;
-  color: #ccc;
+  color: var(--text-secondary-dark);
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+body.light-mode .project-card p {
+  color: var(--text-secondary-light);
 }
 
 .project-card a {
-  color: #0af;
-  text-decoration: none;
+  color: var(--accent-color);
   font-weight: 600;
+  transition: opacity 0.2s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  background: #222;
-  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 170, 255, 0.6);
 }
 
 .project-card a:hover {
-  color: #fff;
+  opacity: 0.7;
 }
 
-/* --------------------------------------------------------------------------
-   14) Skills Expandable “+ details” List (Inside SKILLS & TOOLS)
-   -------------------------------------------------------------------------- */
-
-/* We removed any “.skills-section .skill-item { opacity: 0; … }” rules so that
-   each skill-item is visible immediately. Below are the restored “cool” styles. */
-
+/* ======================================================
+   SKILLS & TOOLS (Accordion)
+   ====================================================== */
 .skills-expandable {
   list-style: none;
   padding: 0;
-  margin: 0;
-  margin-top: 1.5rem; /* ← moves all skill cards down */
+  margin-top: 1.5rem; /* move all skill cards down */
 }
 
 .skill-item {
@@ -413,8 +482,23 @@ section.fade-in-section.is-visible {
   cursor: pointer;
   overflow: hidden;
   border-radius: 6px;
-  background: #111;
-  transition: background 0.3s ease;
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+body.light-mode .skill-item {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+  color: var(--text-primary-light);
+}
+
+.skill-item:hover {
+  background: rgba(0, 170, 255, 0.1);
 }
 
 .skill-item::before {
@@ -438,8 +522,12 @@ section.fade-in-section.is-visible {
   position: relative;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary-dark);
   z-index: 1;
+}
+
+body.light-mode .skill-name {
+  color: var(--text-primary-light);
 }
 
 .skill-name::after {
@@ -449,7 +537,7 @@ section.fade-in-section.is-visible {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background: #0af;
+  background: var(--accent-color);
   transition: width 0.3s ease-out;
   z-index: 1;
 }
@@ -458,7 +546,6 @@ section.fade-in-section.is-visible {
   width: 100%;
 }
 
-/* Header Flex Container */
 .skill-header {
   display: flex;
   justify-content: space-between;
@@ -466,13 +553,11 @@ section.fade-in-section.is-visible {
   z-index: 1;
 }
 
-/* Toggle Button */
 .toggle-btn {
   background: none;
   border: none;
-  color: #0af;
+  color: var(--accent-color);
   font-size: 0.95rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -491,7 +576,6 @@ section.fade-in-section.is-visible {
   transition: transform 0.3s ease-out;
 }
 
-/* Slide-Down Skill-Details */
 .skill-details {
   max-height: 0;
   opacity: 0;
@@ -501,10 +585,14 @@ section.fade-in-section.is-visible {
     max-height 0.5s var(--spring-ease),
     opacity     0.3s ease-out,
     transform   0.5s var(--spring-ease);
-  color: #ddd;
+  color: var(--text-secondary-dark);
   margin-top: 0.75rem;
   line-height: 1.5;
   z-index: 1;
+}
+
+body.light-mode .skill-details {
+  color: var(--text-secondary-light);
 }
 
 .skill-item.open .skill-details {
@@ -513,7 +601,6 @@ section.fade-in-section.is-visible {
   max-height: 400px; /* must be large enough to fit content */
 }
 
-/* Icon Bounce Animation */
 @keyframes icon-bounce {
   0%   { transform: scale(1) rotate(0deg); }
   50%  { transform: scale(1.2) rotate(45deg); }
@@ -524,22 +611,43 @@ section.fade-in-section.is-visible {
   animation: icon-bounce 0.3s ease-out forwards;
 }
 
-/* --------------------------------------------------------------------------
-   15) Center “Contact Me” Header
-   -------------------------------------------------------------------------- */
-/* Since the <h2> is a sibling of .contact-card, we target the h2 directly */
-#contact-anchor + h2 {
-  text-align: center;
+/* ======================================================
+   CONTACT FORM (Glassmorphic)
+   ====================================================== */
+.contact-card {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--card-border-dark);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  margin: 0 auto;
+  max-width: 600px;
+  backdrop-filter: blur(8px);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* --------------------------------------------------------------------------
-   16) Redesigned Contact Section (Inside CONTACT card)
-   -------------------------------------------------------------------------- */
+body.light-mode .contact-card {
+  background: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
+}
+
+#contact-anchor + h2 {
+  text-align: center;
+  color: var(--text-primary-dark);
+}
+
+body.light-mode #contact-anchor + h2 {
+  color: var(--text-primary-light);
+}
+
 .contact-card p {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #ddd;
+  color: var(--text-secondary-dark);
   line-height: 1.5;
+}
+
+body.light-mode .contact-card p {
+  color: var(--text-secondary-light);
 }
 
 .form-row {
@@ -558,24 +666,44 @@ section.fade-in-section.is-visible {
 .form-group label {
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #fff;
+  color: var(--text-primary-dark);
   font-size: 0.95rem;
+}
+
+body.light-mode .form-group label {
+  color: var(--text-primary-light);
 }
 
 .form-group input,
 .form-group textarea {
   background: #111;
-  border: 1px solid #0af;
+  border: 1px solid var(--accent-color);
   border-radius: 6px;
   padding: 0.6rem 1rem;
   color: #fff;
   font-size: 1rem;
   resize: vertical;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+body.light-mode .form-group input,
+body.light-mode .form-group textarea {
+  background: #fff;
+  border: 1px solid #aaa;
+  color: #111;
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: #666;
+}
+
+body.light-mode .form-group input::placeholder,
+body.light-mode .form-group textarea::placeholder {
+  color: #888;
 }
 
 .form-group input:focus,
@@ -588,7 +716,7 @@ section.fade-in-section.is-visible {
 .send-btn {
   display: inline-block;
   margin-top: 0.75rem;
-  background: #0af;
+  background: var(--accent-color);
   color: #000;
   border: none;
   border-radius: 6px;
@@ -596,7 +724,9 @@ section.fade-in-section.is-visible {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease-out, transform 0.2s ease-out;
+  transition:
+    background 0.3s ease-out,
+    transform 0.2s ease-out;
 }
 
 .send-btn:hover {
@@ -604,43 +734,52 @@ section.fade-in-section.is-visible {
   transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
-  .form-row {
-    flex-direction: column;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   17) Footer (unchanged, inside pure-black background)
-   -------------------------------------------------------------------------- */
+/* ======================================================
+   FOOTER
+   ====================================================== */
 .footer {
   background: rgba(0, 0, 0, 0.7);
   padding: 2rem 0;
   text-align: center;
+  font-size: 0.875rem;
   color: #aaa;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode .footer {
+  background: rgba(255, 255, 255, 0.7);
+  color: #555;
 }
 
 .footer a {
-  color: #0af;
-  text-decoration: none;
-  transition: color 0.2s ease-out;
+  color: var(--accent-color);
+  transition: opacity 0.2s ease;
 }
 
 .footer a:hover {
-  color: #fff;
+  opacity: 0.7;
 }
 
-/* =====================================================================================
-   3) PROJECT PAGE SPECIFIC HOVER EFFECTS (for Overview / Key Subject Modules / etc.)
-   ===================================================================================== */
-
-/* Each “project-section” on your project-detail pages (e.g. Overview, Key Subject Modules) */
+/* ======================================================
+   PROJECT-PAGE HOVER EFFECT (for project detail pages)
+   ====================================================== */
 .project-section {
-  background-color: #111;
+  background-color: var(--card-bg-dark);
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  transition:
+    transform 0.3s ease-out,
+    box-shadow 0.3s ease-out,
+    background 0.3s ease,
+    border-color 0.3s ease;
+  border: 1px solid var(--card-border-dark);
+  backdrop-filter: blur(8px);
+}
+
+body.light-mode .project-section {
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--card-border-light);
 }
 
 .project-section:hover {
@@ -648,15 +787,65 @@ section.fade-in-section.is-visible {
   box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
 }
 
-/* Inside a typical project-page HTML you might have:
-   <section class="project-section">
-     <h2>Overview</h2>
-     <p>…</p>
-   </section>
-   <section class="project-section">
-     <h2>Key Subject Modules</h2>
-     <ul>…</ul>
-   </section>
-   etc.
-   The above CSS will cause each of those blocks to gently lift and glow when hovered.
-*/
+/* ======================================================
+   KEYFRAMES for Intro Overlay & Icon Bounce (unchanged)
+   ====================================================== */
+@keyframes logoPop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes underlineExpand {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes overlayFade {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes flickerGlow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  10%, 30%, 50%, 70% {
+    text-shadow:
+      0 0 8px rgba(0, 200, 255, 0.8),
+      0 0 12px rgba(0, 200, 255, 0.6),
+      0 0 16px rgba(255, 255, 255, 0.4);
+  }
+  20%, 40%, 60%, 80% {
+    text-shadow: none;
+  }
+}
+
+.intro-logo {
+  font-family: 'Blanka', sans-serif;
+  font-size: 6rem;
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: logoPop 0.8s ease-out 0.3s forwards;
+}
+
+.logo-underline {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  height: 6px;
+  width: 0;
+  background: #fff;
+  animation: underlineExpand 1s ease-out 0.8s forwards;
+  border-radius: 3px;
+}
+
+.intro-logo.glow-active {
+  animation: flickerGlow 1s ease-out forwards;
+}

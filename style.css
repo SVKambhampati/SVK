@@ -3,7 +3,7 @@
 }
 
 /* =====================================================================================
-   1) ORIGINAL SVK STYLE + NAVâ€ACTIVE RULES
+   1) ORIGINAL SVK STYLE + NAV‐ACTIVE RULES
    ===================================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -81,13 +81,13 @@ html, body {
   padding-bottom: 2px;
 }
 
-/* Highlight the â€œactiveâ€ nav link */
+/* Highlight the “active” nav link */
 .nav-links a.nav-active {
   color: #0af;
   border-bottom: 2px solid #0af;
 }
 
-/* Ensure nonâ€active links remain white */
+/* Ensure non‐active links remain white */
 .nav-links a:not(.nav-active) {
   color: #fff;
   border-bottom: none;
@@ -246,14 +246,14 @@ section.fade-in-section.is-visible {
 .section-anchor {
   display: block;
   position: relative;
-  /* 60px (navbar) + 4rem (â‰ˆ64px card top padding) = 124px */
+  /* 60px (navbar) + 4rem (≈64px card top padding) = 124px */
   top: -124px;
   height: 0;
   visibility: hidden;
 }
 
 /* --------------------------------------------------------------------------
-   9) Rounded â€œCardâ€ + Overlapping Setup
+   9) Rounded “Card” + Overlapping Setup
    -------------------------------------------------------------------------- */
 .section-card {
   background: #111;
@@ -341,7 +341,7 @@ section.fade-in-section.is-visible {
   flex-direction: column;
   gap: 1.5rem;
   padding-left: 20px;
-  margin-top: 1.5rem; /* â† moves all project cards down */
+  margin-top: 1.5rem; /* ← moves all project cards down */
 }
 
 .projects-grid::before {
@@ -393,17 +393,17 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   14) Skills Expandable â€œ+ detailsâ€ List (Inside SKILLS & TOOLS)
+   14) Skills Expandable “+ details” List (Inside SKILLS & TOOLS)
    -------------------------------------------------------------------------- */
 
-/* We removed any â€œ.skills-section .skill-item { opacity: 0; â€¦ }â€ rules so that
-   each skill-item is visible immediately. Below are the restored â€œcoolâ€ styles. */
+/* We removed any “.skills-section .skill-item { opacity: 0; … }” rules so that
+   each skill-item is visible immediately. Below are the restored “cool” styles. */
 
 .skills-expandable {
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-top: 1.5rem; /* â† moves all skill cards down */
+  margin-top: 1.5rem; /* ← moves all skill cards down */
 }
 
 .skill-item {
@@ -525,7 +525,7 @@ section.fade-in-section.is-visible {
 }
 
 /* --------------------------------------------------------------------------
-   15) Center â€œContact Meâ€ Header
+   15) Center “Contact Me” Header
    -------------------------------------------------------------------------- */
 /* Since the <h2> is a sibling of .contact-card, we target the h2 directly */
 #contact-anchor + h2 {
@@ -634,7 +634,7 @@ section.fade-in-section.is-visible {
    3) PROJECT PAGE SPECIFIC HOVER EFFECTS (for Overview / Key Subject Modules / etc.)
    ===================================================================================== */
 
-/* Each â€œproject-sectionâ€ on your project-detail pages (e.g. Overview, Key Subject Modules) */
+/* Each “project-section” on your project-detail pages (e.g. Overview, Key Subject Modules) */
 .project-section {
   background-color: #111;
   border-radius: 8px;
@@ -651,11 +651,11 @@ section.fade-in-section.is-visible {
 /* Inside a typical project-page HTML you might have:
    <section class="project-section">
      <h2>Overview</h2>
-     <p>â€¦</p>
+     <p>…</p>
    </section>
    <section class="project-section">
      <h2>Key Subject Modules</h2>
-     <ul>â€¦</ul>
+     <ul>…</ul>
    </section>
    etc.
    The above CSS will cause each of those blocks to gently lift and glow when hovered.

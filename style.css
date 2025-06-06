@@ -302,7 +302,7 @@ body.light-mode .hero p {
 .section-card {
   background: var(--card-bg-dark);
   border: 1px solid var(--card-border-dark);
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 2rem 1.5rem;
   margin-bottom: 2rem;
   backdrop-filter: blur(8px);

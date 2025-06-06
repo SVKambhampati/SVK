@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
   <!-- ============================================================
        1) Intro Overlay with SVK + underline + flicker-glow
        ============================================================ -->
@@ -27,7 +26,7 @@
   </div>
 
   <!-- ============================================================
-       2) Navbar (Semi-transparent)
+       2) Navbar (Semi-transparent) + Dark/Light Toggle
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
@@ -38,6 +37,10 @@
         <li><a href="#skills-anchor">Skills &amp; Tools</a></li>
         <li><a href="#contact-anchor">Contact</a></li>
       </ul>
+      <div class="theme-toggle">
+        <input type="checkbox" id="toggle-theme" />
+        <label for="toggle-theme" class="toggle-label"></label>
+      </div>
     </div>
   </nav>
 
@@ -58,10 +61,10 @@
   <main class="container">
 
     <!-- ================================================
-         ABOUT ME (Rounded Card)
-         – Invisible anchor (#about-anchor) sits −124px above the <h2>
+         ABOUT ME (Glassmorphic “Card”)
+         – Invisible anchor (#about-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card">
+    <div class="section-card glass-card">
       <section class="fade-in-section">
         <!-- Invisible anchor to force scroll-stop above the heading -->
         <div id="about-anchor" class="section-anchor"></div>
@@ -73,44 +76,44 @@
           </p>
         </div>
         <div class="roles-grid">
-          <div class="role-card"><h3>Python Certified Developer</h3></div>
-          <div class="role-card"><h3>Full-Stack Engineer</h3></div>
-          <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
-          <div class="role-card"><h3>HCI Experience Architect</h3></div>
+          <div class="role-card glass-card"><h3>Python Certified Developer</h3></div>
+          <div class="role-card glass-card"><h3>Full-Stack Engineer</h3></div>
+          <div class="role-card glass-card"><h3>AWS Cloud Practitioner</h3></div>
+          <div class="role-card glass-card"><h3>HCI Experience Architect</h3></div>
         </div>
       </section>
     </div>
 
     <!-- ================================================
-         PROJECTS (Rounded Card)
-         – Invisible anchor (#projects-anchor) sits −124px above the <h2>
+         PROJECTS (Glassmorphic “Card”)
+         – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card">
+    <div class="section-card glass-card">
       <section class="fade-in-section">
         <div id="projects-anchor" class="section-anchor"></div>
 
         <h2>Projects</h2>
         <div class="projects-grid">
-          <article class="project-card">
+          <article class="project-card glass-card">
             <h3>EnvisionVR</h3>
             <p>
               EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
             </p>
             <a href="project-one.html">View →</a>
           </article>
-          <article class="project-card">
+          <article class="project-card glass-card">
             <h3>MovieMind</h3>
             <p>
               MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content‐based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
             </p>
             <a href="project-two.html">View →</a>
           </article>
-          <article class="project-card">
+          <article class="project-card glass-card">
             <h3>AddressSync Automation</h3>
             <p>AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.</p>
             <a href="project-three.html">View →</a>
           </article>
-          <article class="project-card">
+          <article class="project-card glass-card">
             <h3>StyleForecast</h3>
             <p>A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.</p>
             <a href="project-four.html">View →</a>
@@ -120,10 +123,10 @@
     </div>
 
     <!-- ================================================
-         SKILLS & TOOLS (Rounded Card)
-         – Invisible anchor (#skills-anchor) sits −124px above the <h2>
+         SKILLS & TOOLS (Glassmorphic “Card”)
+         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card">
+    <div class="section-card glass-card">
       <section class="fade-in-section">
         <div id="skills-anchor" class="section-anchor"></div>
 
@@ -204,10 +207,10 @@
     </div>
 
     <!-- ================================================
-         CONTACT (Rounded Card)
-         – Invisible anchor (#contact-anchor) sits −124px above the <h2>
+         CONTACT (Glassmorphic “Card”)
+         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card">
+    <div class="section-card glass-card">
       <section class="fade-in-section">
         <div id="contact-anchor" class="section-anchor"></div>
 
@@ -215,7 +218,12 @@
         <div class="contact-card">
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
-          <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+          <!-- Formspree contact form -->
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mwpbpblk"
+            method="POST"
+          >
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -273,7 +281,8 @@
   </footer>
 
   <!-- ============================================================
-       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details)
+       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details,
+       dark/light toggle, active-link IntersectionObserver)
        ============================================================ -->
   <script>
     // Dot-Grid Canvas Animation (unchanged)
@@ -445,24 +454,35 @@
       });
     });
 
-    // Toggle Details for Skills
+    // Toggle Details for Skills (unchanged)
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
-          listItem.classList.toggle('open');
-          btn.textContent = listItem.classList.contains('open') ?
-            '− details' : '+ details';
+          const details  = listItem.querySelector('.skill-details');
+          const icon     = btn.querySelector('.icon');
+
+          if (listItem.classList.contains('open')) {
+            listItem.classList.remove('open');
+            btn.innerHTML = '<span class="icon">+</span> details';
+            details.style.maxHeight = '0px';
+            details.style.opacity   = '0';
+          } else {
+            listItem.classList.add('open');
+            btn.innerHTML = '<span class="icon">−</span> details';
+            details.style.maxHeight = details.scrollHeight + 'px';
+            details.style.opacity   = '1';
+            const newIcon = btn.querySelector('.icon');
+            newIcon.style.animation = 'none';
+            newIcon.offsetWidth;
+            newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
+          }
         });
       });
     });
-  </script>
 
-  <!-- ============================================================
-       6) Active‐Link IntersectionObserver for Navbar
-       ============================================================ -->
-  <script>
+    // Active-Link IntersectionObserver for Navbar
     document.addEventListener('DOMContentLoaded', () => {
       const anchors = document.querySelectorAll('.section-anchor');
       const navLinks = document.querySelectorAll('.nav-links a');
@@ -489,6 +509,28 @@
       });
 
       anchors.forEach(anchor => observer.observe(anchor));
+    });
+
+    // Dark/Light Mode Toggle Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('toggle-theme');
+      const body   = document.body;
+
+      // Check for saved preference in localStorage
+      if (localStorage.getItem('theme') === 'light') {
+        body.classList.add('light-mode');
+        toggle.checked = true;
+      }
+
+      toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          body.classList.add('light-mode');
+          localStorage.setItem('theme', 'light');
+        } else {
+          body.classList.remove('light-mode');
+          localStorage.setItem('theme', 'dark');
+        }
+      });
     });
   </script>
 </body>

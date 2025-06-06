@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shreyas Kambhampati | Portfolio</title>
 
   <!-- Google Font: Plus Jakarta Sans -->
@@ -11,10 +11,14 @@
     rel="stylesheet"
   />
 
+  <!-- Blanka Font for Intro Logo -->
+  <link rel="stylesheet" href="blanka.css" />
+
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- ============================================================
        1) Intro Overlay with SVK + underline + flicker-glow
        ============================================================ -->
@@ -26,20 +30,23 @@
   </div>
 
   <!-- ============================================================
-       2) Navbar (Semi-transparent) + Dark/Light Toggle
+       2) Navbar (Semi-transparent) with Toggle Switch
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
       <a class="logo" href="#">Shreyas Kambhampati</a>
-      <ul class="nav-links">
-        <li><a href="#about-anchor">About</a></li>
-        <li><a href="#projects-anchor">Projects</a></li>
-        <li><a href="#skills-anchor">Skills &amp; Tools</a></li>
-        <li><a href="#contact-anchor">Contact</a></li>
-      </ul>
-      <div class="theme-toggle">
-        <input type="checkbox" id="toggle-theme" />
-        <label for="toggle-theme" class="toggle-label"></label>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#about-anchor">About</a></li>
+          <li><a href="#projects-anchor">Projects</a></li>
+          <li><a href="#skills-anchor">Skills</a></li>
+          <li><a href="#contact-anchor">Contact</a></li>
+        </ul>
+        <!-- THEME TOGGLE SWITCH -->
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-toggle" />
+          <label for="theme-toggle"></label>
+        </div>
       </div>
     </div>
   </nav>
@@ -61,12 +68,11 @@
   <main class="container">
 
     <!-- ================================================
-         ABOUT ME (Glassmorphic “Card”)
+         ABOUT ME (Rounded Card)
          – Invisible anchor (#about-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card glass-card">
+    <div class="section-card">
       <section class="fade-in-section">
-        <!-- Invisible anchor to force scroll-stop above the heading -->
         <div id="about-anchor" class="section-anchor"></div>
 
         <div class="about-overview">
@@ -76,46 +82,50 @@
           </p>
         </div>
         <div class="roles-grid">
-          <div class="role-card glass-card"><h3>Python Certified Developer</h3></div>
-          <div class="role-card glass-card"><h3>Full-Stack Engineer</h3></div>
-          <div class="role-card glass-card"><h3>AWS Cloud Practitioner</h3></div>
-          <div class="role-card glass-card"><h3>HCI Experience Architect</h3></div>
+          <div class="role-card"><h3>Python Certified Developer</h3></div>
+          <div class="role-card"><h3>Full-Stack Engineer</h3></div>
+          <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
+          <div class="role-card"><h3>HCI Experience Architect</h3></div>
         </div>
       </section>
     </div>
 
     <!-- ================================================
-         PROJECTS (Glassmorphic “Card”)
+         PROJECTS (Rounded Card)
          – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card glass-card">
+    <div class="section-card">
       <section class="fade-in-section">
         <div id="projects-anchor" class="section-anchor"></div>
 
         <h2>Projects</h2>
         <div class="projects-grid">
-          <article class="project-card glass-card">
+          <article class="project-card">
             <h3>EnvisionVR</h3>
             <p>
               EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
             </p>
             <a href="project-one.html">View →</a>
           </article>
-          <article class="project-card glass-card">
+          <article class="project-card">
             <h3>MovieMind</h3>
             <p>
               MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content‐based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
             </p>
             <a href="project-two.html">View →</a>
           </article>
-          <article class="project-card glass-card">
+          <article class="project-card">
             <h3>AddressSync Automation</h3>
-            <p>AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.</p>
+            <p>
+              AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
+            </p>
             <a href="project-three.html">View →</a>
           </article>
-          <article class="project-card glass-card">
+          <article class="project-card">
             <h3>StyleForecast</h3>
-            <p>A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.</p>
+            <p>
+              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
+            </p>
             <a href="project-four.html">View →</a>
           </article>
         </div>
@@ -123,20 +133,22 @@
     </div>
 
     <!-- ================================================
-         SKILLS & TOOLS (Glassmorphic “Card”)
+         SKILLS & TOOLS (Rounded Card)
          – Invisible anchor (#skills-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card glass-card">
+    <div class="section-card">
       <section class="fade-in-section">
         <div id="skills-anchor" class="section-anchor"></div>
 
         <h2>Skills &amp; Tools</h2>
-        <ul class="skills-expandable skills-section">
+        <ul class="skills-expandable">
           <!-- Java -->
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Java</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
@@ -146,7 +158,9 @@
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">Python</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
@@ -156,7 +170,9 @@
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">JavaScript</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
@@ -166,7 +182,9 @@
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">HTML &amp; CSS</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
@@ -176,7 +194,9 @@
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">MySQL</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
@@ -186,7 +206,9 @@
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">C#</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
@@ -196,7 +218,9 @@
           <li class="skill-item">
             <div class="skill-header">
               <span class="skill-name">XML</span>
-              <button class="toggle-btn"><span class="icon">+</span> details</button>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
             </div>
             <div class="skill-details">
               Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
@@ -207,23 +231,18 @@
     </div>
 
     <!-- ================================================
-         CONTACT (Glassmorphic “Card”)
+         CONTACT (Rounded Card)
          – Invisible anchor (#contact-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card glass-card">
+    <div class="section-card">
       <section class="fade-in-section">
         <div id="contact-anchor" class="section-anchor"></div>
 
-        <h2>Contact Me</h2>
         <div class="contact-card">
+          <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
-          <!-- Formspree contact form -->
-          <form
-            class="contact-form"
-            action="https://formspree.io/f/mwpbpblk"
-            method="POST"
-          >
+          <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -281,11 +300,13 @@
   </footer>
 
   <!-- ============================================================
-       Scripts (dot-grid, overlay removal, fade-in, tilt cards, toggle details,
-       dark/light toggle, active-link IntersectionObserver)
+       SCRIPTS
+       (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
        ============================================================ -->
   <script>
-    // Dot-Grid Canvas Animation (unchanged)
+    /******************************************************************
+     * 1) Dot-Grid Canvas Animation (now respects light-mode)
+     ******************************************************************/
     const canvas = document.getElementById('dotGrid');
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
@@ -335,6 +356,10 @@
     function draw() {
       const t = Date.now();
       ctx.clearRect(0,0,cw,ch);
+
+      // Check if light-mode is active
+      const isLight = document.body.classList.contains('light-mode');
+
       dots.forEach(d => {
         const dx = d.x - mx, dy = d.y - my;
         if (isDown && dx*dx + dy*dy < mouseRadius2) {
@@ -362,11 +387,16 @@
           alpha = 0.7 + tw * 0.3;
         }
         ctx.globalAlpha = alpha;
+
+        // If twinkle, always blue; otherwise white or black in light-mode
         if (d.tw) {
           ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+        } else if (isLight) {
+          ctx.fillStyle = `rgba(0,0,0,${alpha})`;   // black dots in light-mode
         } else {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`; // white dots by default
         }
+
         if (inter > 0) {
           ctx.shadowBlur  = 40;
           ctx.shadowColor = 'rgba(0,240,255,0.7)';
@@ -402,7 +432,9 @@
       animate();
     };
 
-    // Intro Overlay Removal & SVK Glow Trigger
+    /******************************************************************
+     * 2) Intro Overlay Removal & SVK Glow Trigger
+     ******************************************************************/
     window.addEventListener('DOMContentLoaded', () => {
       const overlay = document.getElementById('intro-overlay');
       const hero    = document.querySelector('.hero');
@@ -416,7 +448,9 @@
       });
     });
 
-    // Fade-In On Scroll (Intersection Observer)
+    /******************************************************************
+     * 3) Fade-In On Scroll (Intersection Observer)
+     ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
       const observer = new IntersectionObserver((entries, obs) => {
@@ -432,7 +466,9 @@
       });
     });
 
-    // 3D Tilt on Role Cards
+    /******************************************************************
+     * 4) 3D Tilt on Role Cards
+     ******************************************************************/
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
       document.querySelectorAll('.role-card').forEach(card => {
@@ -454,15 +490,16 @@
       });
     });
 
-    // Toggle Details for Skills (unchanged)
+    /******************************************************************
+     * 5) Accordion Toggle for Skills & Tools
+     ******************************************************************/
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
           const details  = listItem.querySelector('.skill-details');
-          const icon     = btn.querySelector('.icon');
-
+          // Toggle `.open` class
           if (listItem.classList.contains('open')) {
             listItem.classList.remove('open');
             btn.innerHTML = '<span class="icon">+</span> details';
@@ -473,63 +510,23 @@
             btn.innerHTML = '<span class="icon">−</span> details';
             details.style.maxHeight = details.scrollHeight + 'px';
             details.style.opacity   = '1';
+            // bounce icon
             const newIcon = btn.querySelector('.icon');
             newIcon.style.animation = 'none';
-            newIcon.offsetWidth;
+            newIcon.offsetWidth; // force reflow
             newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
           }
         });
       });
     });
 
-    // Active-Link IntersectionObserver for Navbar
-    document.addEventListener('DOMContentLoaded', () => {
-      const anchors = document.querySelectorAll('.section-anchor');
-      const navLinks = document.querySelectorAll('.nav-links a');
-
-      const obsCallback = (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id; // e.g. "about-anchor"
-
-            navLinks.forEach(link => {
-              if (link.getAttribute('href') === `#${id}`) {
-                link.classList.add('nav-active');
-              } else {
-                link.classList.remove('nav-active');
-              }
-            });
-          }
-        });
-      };
-
-      const observer = new IntersectionObserver(obsCallback, {
-        root: null,
-        threshold: 0.1
-      });
-
-      anchors.forEach(anchor => observer.observe(anchor));
-    });
-
-    // Dark/Light Mode Toggle Logic
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById('toggle-theme');
-      const body   = document.body;
-
-      // Check for saved preference in localStorage
-      if (localStorage.getItem('theme') === 'light') {
-        body.classList.add('light-mode');
-        toggle.checked = true;
-      }
-
-      toggle.addEventListener('change', () => {
-        if (toggle.checked) {
-          body.classList.add('light-mode');
-          localStorage.setItem('theme', 'light');
-        } else {
-          body.classList.remove('light-mode');
-          localStorage.setItem('theme', 'dark');
-        }
+    /******************************************************************
+     * 6) Theme Toggle (Light/Dark)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('theme-toggle');
+      toggle.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
       });
     });
   </script>

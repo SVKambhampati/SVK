@@ -34,6 +34,7 @@ ul {
 
 /* ---------------------------------------------------------------
    FONTS: @font-face pointing to /assets/fonts/blanka/
+   (this path must match exactly where your Blanka .woff / .woff2 files live)
    --------------------------------------------------------------- */
 @font-face {
   font-family: 'Blanka';
@@ -41,6 +42,13 @@ ul {
        url('../assets/fonts/blanka/Blanka-Regular.woff')  format('woff');
   font-weight: normal;
   font-style: normal;
+}
+
+/* ---------------------------------------------------------------
+   SPRING EASING VARIABLE
+   --------------------------------------------------------------- */
+:root {
+  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ---------------------------------------------------------------
@@ -58,8 +66,6 @@ ul {
   justify-content: space-between;
   align-items: center;
 }
-
-/* .logo on the left */
 .navbar .logo {
   font-size: 1rem;
   font-weight: 600;
@@ -69,8 +75,6 @@ ul {
 .navbar .logo:hover {
   color: #0af;
 }
-
-/* Nav links on the right */
 .nav-links {
   display: flex;
   gap: 1.5rem;
@@ -108,7 +112,7 @@ ul {
   text-align: center;
 }
 .hero-title {
-  font-size: 3rem; /* slightly increased from 2.5rem */
+  font-size: 3rem; /* you’d asked to bump from 2.5rem to 3rem */
   font-weight: 800;
   color: #fff;
   margin-bottom: 0.5rem;
@@ -150,8 +154,6 @@ ul {
   opacity: 0;
   animation: underlineFade 0.8s ease-out 0.8s forwards;
 }
-
-/* Keyframes for overlay fade & logo/underline animations */
 @keyframes overlayFade {
   to {
     opacity: 0;
@@ -171,8 +173,7 @@ ul {
 }
 
 /* ---------------------------------------------------------------
-   MAIN “SECTION‐CARD” WRAPPERS (Glassmorphism style removed 
-   as per request; keep them dark in dark mode)
+   MAIN “SECTION‐CARD” WRAPPERS
    --------------------------------------------------------------- */
 .section-card {
   background-color: #111;
@@ -213,7 +214,7 @@ ul {
 }
 
 /* ---------------------------------------------------------------
-   ROLE CARDS (Glassmorphism removed; dark background instead)
+   ROLE CARDS
    --------------------------------------------------------------- */
 .roles-grid {
   display: grid;
@@ -240,12 +241,12 @@ ul {
 }
 
 /* ---------------------------------------------------------------
-   PROJECT CARDS (Dark background + stronger underglow on hover)
+   PROJECT CARDS
    --------------------------------------------------------------- */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem; /* more space between stacked cards */
+  gap: 2rem;
 }
 .project-card {
   background-color: #111;
@@ -281,7 +282,7 @@ ul {
 }
 
 /* ---------------------------------------------------------------
-   SKILLS & TOOLS (Accordion‐style accordion)
+   SKILLS & TOOLS (Accordion‐style)
    --------------------------------------------------------------- */
 .skills-expandable {
   margin-top: 1rem;
@@ -326,12 +327,12 @@ ul {
   margin-top: 0.5rem;
 }
 .skill-item.open .skill-details {
-  max-height: 300px; /* large enough to fit the content */
+  max-height: 300px;
   opacity: 1;
 }
 
 /* ---------------------------------------------------------------
-   CONTACT FORM (Centered on large screens)
+   CONTACT FORM
    --------------------------------------------------------------- */
 .contact-card {
   background-color: #111;
@@ -435,11 +436,4 @@ ul {
 .fade-in-section.is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ---------------------------------------------------------------
-   SPRING EASING VARIABLE
-   --------------------------------------------------------------- */
-:root {
-  --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

@@ -525,31 +525,6 @@
       });
     });
   </script>
-  <script>
-    // For every card, listen for mouse movement and tilt toward the pointer
-    document.querySelectorAll('.role-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;         // cursor X within card
-        const y = e.clientY - rect.top;          // cursor Y within card
-        const cx = rect.width  / 2;
-        const cy = rect.height / 2;
-        const dx = (x - cx) / cx;                // normalize -1 to 1
-        const dy = (y - cy) / cy;                // normalize -1 to 1
-    
-        const maxTilt = 10;                      // max degrees tilt
-        const tiltX   = (dy * maxTilt);          // positive = tilts down
-        const tiltY   = (-dx * maxTilt);         // positive = tilts right
-    
-        card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-      });
-    
-      // Reset when mouse leaves
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-      });
-    });
-    </script>
   
 </body>
 </html>

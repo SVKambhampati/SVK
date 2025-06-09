@@ -14,11 +14,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* ─── Global Base (replace solid black + overlay with your grain image) ───────────────── */
 html, body {
   height: 100%;
   scroll-behavior: smooth;
-  background: #000;
-  /* remove all background-image, size, position lines */
+  /* use your grain background as the page background */
+  background: url('black-bg.jpg') repeat;
   color: #fff;
   font-family: 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
@@ -764,27 +765,6 @@ body.light-mode .send-btn:hover {
 body.light-mode::before {
   display: none;
 }
-/* ─── Realistic Film-Grain Overlay ───────────────────────────────────────── */
-/* ─── Film-Grain Overlay ─────────────────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
-  pointer-events: none;
-
-  /* this URL is relative to where style.css lives */
-  background: url('black-bg.jpg') repeat;
-  mix-blend-mode: overlay;
-  opacity: 0.15;
-  z-index: 9999;
-}
-
-/* disable in light mode */
-body.light-mode::before {
-  display: none;
-}
-/* ─────────────────────────────────────────────────────────────────────────── */
-/* ─────────────────────────────────────────────────────────────────────────── */
 
 /* =====================================================================================
    19) SPRING EASE VARIABLE

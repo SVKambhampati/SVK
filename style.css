@@ -326,10 +326,7 @@ section.fade-in-section.is-visible {
 }
 
 /* ========================================================================
-   13) ROLE CARDS (Glassmorphism + Static Three-Color Outline + Matched Glow)
-   ======================================================================== */
-/* ========================================================================
-   13) ROLE CARDS (Glassmorphism + Colored Underglow Only)
+   13) ROLE CARDS (Dark Glass + Colored Underglow)
    ======================================================================== */
 .roles-grid {
   width: 100%;
@@ -342,38 +339,37 @@ section.fade-in-section.is-visible {
 
 .role-card {
   position: relative;
-  overflow: visible;               /* allow glow to show outside */
-  
-  /* keep the card itself dark */
-  background: #111;
+  overflow: visible;               /* let the glow extend */
+
+  /* dark glass background */
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
   border-radius: 2rem;             /* extra-rounded corners */
   padding: 2rem 1.5rem;
   text-align: center;
   transform-style: preserve-3d;
   transition: transform 0.3s ease-out;
-  
-  /* no border—only glow */
-  border: none;
+  /* no border here */
 }
 
 .role-card::after {
   content: '';
   position: absolute;
   top: -12px; left: -12px; right: -12px; bottom: -12px;
-  border-radius: calc(2rem + 12px);  
+  border-radius: calc(2rem + 12px);
   background: conic-gradient(
     rgb(70, 90, 210),    /* Blue/Purple */
     rgb(215, 80, 125),   /* Reddish-Pink */
     rgb(80, 200, 220),   /* Cyan/Light Blue */
-    rgb(70, 90, 210)     /* loop back */
+    rgb(70, 90, 210)
   );
-  filter: blur(20px);             /* soft, multi-colored glow */
-  z-index: -1;                    /* behind the card itself */
+  filter: blur(20px);             /* soft, colored glow */
+  z-index: -1;                    /* behind the card */
 }
 
 .role-card:hover {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  /* glow remains the same colors */
+  /* underglow remains as is */
 }
 /* ========================================================================
    14) PROJECT CARDS (vertical stack + glassmorphism)

@@ -804,6 +804,13 @@ body.light-mode::before {
   display: none;
 }
 
+/* ─── REMOVE ANY ACCIDENTAL BODY OVERLAY SPIN ───────────────────────────── */
+body::before {
+  /* remove or override any spinning grain overlay */
+  display: none !important;
+  animation: none !important;
+}
+
 /* =====================================================================================
    19) SPRING EASE VARIABLE
    ===================================================================================== */

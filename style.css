@@ -375,6 +375,46 @@ section.fade-in-section.is-visible {
     0 12px 40px rgba(0, 170, 255, 0.6);
 }
 
+/* ─── 13b) ROLE CARDS: Color-Cycling Glow ───────────────────────────────── */
+.role-card {
+  /* add this */
+  border: 2px solid transparent;           /* start with no visible outline */
+  animation: glow-cycle 6s ease-in-out infinite;
+}
+
+.role-card:hover {
+  /* pause the cycle on hover if you like, otherwise omit this */
+  animation-play-state: paused;
+}
+
+/* keyframes to cycle through four glow colors */
+@keyframes glow-cycle {
+  0%, 100% {
+    border-color: rgba(0,170,255,0.8);
+    box-shadow:
+      0 0 8px rgba(0,170,255,0.7),
+      0 8px 30px rgba(0,170,255,0.5);
+  }
+  25% {
+    border-color: rgba(255,85,255,0.8);
+    box-shadow:
+      0 0 8px rgba(255,85,255,0.7),
+      0 8px 30px rgba(255,85,255,0.5);
+  }
+  50% {
+    border-color: rgba(170,255,0,0.8);
+    box-shadow:
+      0 0 8px rgba(170,255,0,0.7),
+      0 8px 30px rgba(170,255,0,0.5);
+  }
+  75% {
+    border-color: rgba(0,255,170,0.8);
+    box-shadow:
+      0 0 8px rgba(0,255,170,0.7),
+      0 8px 30px rgba(0,255,170,0.5);
+  }
+}
+
 /* ========================================================================
    14) PROJECT CARDS (vertical stack + glassmorphism)
    ======================================================================== */

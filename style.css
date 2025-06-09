@@ -336,30 +336,43 @@ section.fade-in-section.is-visible {
   perspective: 1000px;
   margin-bottom: 2rem;
 }
+/* 13) ROLE CARDS — now with glowing outline */
 .role-card {
-  background: rgba(255, 255, 255, 0.05);   /* translucent, frosted glass */
-  backdrop-filter: blur(8px);              /* blur behind */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* light outline */
+  position: relative;               /* for the outline to sit correctly */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
+  transform-style: preserve-3d;
   transition:
     transform 0.3s ease-out,
     box-shadow 0.3s ease-out,
     background 0.3s ease;
-  transform-style: preserve-3d;
-  /* Intensified underglow */
-  box-shadow: 0 8px 30px rgba(0, 170, 255, 0.6);
+
+  /* ↓ glowing outline ↓ */
+  border: 2px solid rgba(0, 170, 255, 0.8);
+  box-shadow:
+    /* soft glow */
+    0 0 8px rgba(0, 170, 255, 0.8),
+    0 0 16px rgba(0, 170, 255, 0.6),
+    /* original underglow */
+    0 8px 30px rgba(0, 170, 255, 0.5);
 }
+
 .role-card h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #fff;
+  /* keep your existing text styles */
 }
+
+/* on hover: intensify the glow */
 .role-card:hover {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  /* Stronger glow on hover */
-  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.8);
+  box-shadow:
+    /* brighter, tighter glow */
+    0 0 12px rgba(0, 170, 255, 1),
+    0 0 24px rgba(0, 170, 255, 0.8),
+    /* stronger underglow */
+    0 12px 40px rgba(0, 170, 255, 0.6);
 }
 
 /* ========================================================================

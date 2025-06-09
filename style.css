@@ -375,53 +375,44 @@ section.fade-in-section.is-visible {
     0 12px 40px rgba(0, 170, 255, 0.6);
 }
 
-/* ─── 13c) ROLE CARDS: Continuous Rotating Multicolor Outline ───────────────── */
+/* ─── 13d) ROLE CARDS: Conic-Gradient Rotating Outline ───────────────────── */
 
-/* 1) Ensure the card itself is a stacking context */
+/* ensure cards can show an absolutely-positioned outline */
 .role-card {
   position: relative;
-  overflow: visible;               /* allow the glow to show outside */
-  
-  /* keep your existing glassmorphic styles… */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border-radius: 8px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease-out;
+  overflow: visible;
 }
 
-/* 2) The rotating outline pseudo-element */
+/* the rotating border pseudo-element */
 .role-card::before {
   content: '';
   position: absolute;
-  inset: -4px;                     /* thickness of the outline */
-  border-radius: calc(8px + 4px);  /* card radius + outline */
+  top: -4px; left: -4px; right: -4px; bottom: -4px;
+  border-radius: calc(8px + 4px);   /* match your card’s radius + outline */
   background: conic-gradient(
     #0d1b2a,  /* very dark blue */
-    #1e40af,  /* medium blue */
-    #3b82f6,  /* bright blue */
-    #ffffff,  /* white */
-    #4c1d95,  /* purple */
-    #2e1065,  /* dark purple */
-    #0d1b2a   /* loop back to start */
+    #1e40af,
+    #3b82f6,
+    #ffffff,
+    #4c1d95,
+    #2e1065,
+    #0d1b2a   /* loop back */
   );
-  z-index: -1;                     /* behind the card’s content */
-  animation: spin 8s linear infinite;
+  z-index: -1;                       /* behind the card itself */
+  transform-origin: center center;
+  animation: rotate-outline 6s linear infinite;
 }
 
-/* 3) Spin keyframes */
-@keyframes spin {
+/* keep your hover transform, outline continues spinning */
+.role-card:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
+}
+
+/* spin keyframes */
+@keyframes rotate-outline {
   to {
     transform: rotate(360deg);
   }
-}
-
-/* 4) (Optional) keep your hover transform intact */
-.role-card:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  /* outline keeps spinning */
 }
 /* ========================================================================
    14) PROJECT CARDS (vertical stack + glassmorphism)

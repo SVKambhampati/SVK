@@ -751,20 +751,21 @@ body.light-mode .send-btn:hover {
 body.light-mode::before {
   display: none;
 }
-/* ─── Film-Grain Overlay (using black-bg.jpg) ───────────────────────────── */
+/* ─── Film-Grain Overlay ─────────────────────────────────────────────────── */
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   pointer-events: none;
-  background: url('./images/black-bg.jpg') repeat;
-  mix-blend-mode: overlay;    /* blends the grain with the dark bg */
-  opacity: 0.15;              /* tweak between 0.05–0.2 */
-  z-index: 9999;
+  background: url('./images/black-bg.jpg') repeat !important;
+  /* or if css is in /css/: url('../images/black-bg.jpg') */
+  mix-blend-mode: overlay;
+  opacity: 0.15 !important;
+  z-index: 9999 !important;
 }
-
+/* disable in light mode */
 body.light-mode::before {
-  display: none;              /* disable grain in light mode */
+  display: none !important;
 }
 /* ─────────────────────────────────────────────────────────────────────────── */
 /* ─────────────────────────────────────────────────────────────────────────── */

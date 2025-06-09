@@ -751,6 +751,26 @@ body.light-mode .send-btn:hover {
   background: #005fa3;
 }
 
+/* ─── Grain Overlay (CSS-only) ───────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 3px 3px;
+  background-position: 0 0, 1px 1px;
+  z-index: 9999;
+}
+
+/* Disable grain in light mode */
+body.light-mode::before {
+  display: none;
+}
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 /* =====================================================================================
    19) SPRING EASE VARIABLE
    ===================================================================================== */

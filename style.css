@@ -326,7 +326,7 @@ section.fade-in-section.is-visible {
 }
 
 /* ========================================================================
-   13) ROLE CARDS (Dark Glass + Colored Underglow)
+   13) ROLE CARDS (Solid Black Cards + Colored Underglow)
    ======================================================================== */
 .roles-grid {
   width: 100%;
@@ -339,17 +339,15 @@ section.fade-in-section.is-visible {
 
 .role-card {
   position: relative;
-  overflow: visible;               /* let the glow extend */
-
-  /* dark glass background */
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
+  overflow: visible;               /* allow glow to extend */
+  
+  /* solid black background (no glassmorphism) */
+  background: #000;
   border-radius: 2rem;             /* extra-rounded corners */
   padding: 2rem 1.5rem;
   text-align: center;
   transform-style: preserve-3d;
   transition: transform 0.3s ease-out;
-  /* no border here */
 }
 
 .role-card::after {
@@ -363,13 +361,13 @@ section.fade-in-section.is-visible {
     rgb(80, 200, 220),   /* Cyan/Light Blue */
     rgb(70, 90, 210)
   );
-  filter: blur(20px);             /* soft, colored glow */
+  filter: blur(20px);             /* soft, colored halo */
   z-index: -1;                    /* behind the card */
 }
 
 .role-card:hover {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  /* underglow remains as is */
+  /* underglow remains unchanged on hover */
 }
 /* ========================================================================
    14) PROJECT CARDS (vertical stack + glassmorphism)

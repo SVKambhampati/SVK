@@ -650,14 +650,14 @@ body.light-mode .hero {
   justify-content: center;
 }
 
-/* Light-mode hero: simple white box, more translucent (no border) */
+/* Light-mode hero: simple white box, more translucent (no border), same vertical position as dark mode */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
   width: auto;
   max-width: 700px;
   margin: 0 auto;
-  transform: translateY(-20px);
+  /* transform: translateY(-20px);  ← removed to match dark mode */
   background: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
   padding: 0.75rem 1.5rem;

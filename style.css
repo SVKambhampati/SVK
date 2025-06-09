@@ -797,15 +797,20 @@ body::before {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
 }
 
-/* ─── Remove Glow from Role Cards ────────────────────────────────────────── */
+/* ─── Remove Glow from Role Cards (preserve tilt) ───────────────────────── */
 .role-card {
-  /* remove any box-shadow-based glow */
+  /* kill any glow from box-shadow */
   box-shadow: none !important;
 }
 
-/* if you have a pseudo-element underglow, hide it too */
+/* hide the colored halo pseudo if you added one */
 .role-card::after {
   display: none !important;
+}
+
+/* keep your hover tilt exactly as is */
+.role-card:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
 }
 /* ───────────────────────────────────────────────────────────────────────── */
 

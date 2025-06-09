@@ -14,7 +14,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* ─── Global Base (replace solid black + overlay with your grain image) ───────────────── */
 html, body {
   height: 100%;
   scroll-behavior: smooth;
@@ -233,8 +232,8 @@ a {
 .hero .container {
   position: relative;
   z-index: 1;
-  width: 80%;
-  max-width: 750px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
   transform: none;
   background: rgba(0, 0, 0, 0.7);
@@ -326,46 +325,40 @@ section.fade-in-section.is-visible {
 }
 
 /* ========================================================================
-   13) ROLE CARDS (Dark Gray + White Text + Gradient Outline + Tilt)
+   13) ROLE CARDS (Glassmorphism + Intensified Underglow)
    ======================================================================== */
 .roles-grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  perspective: 1000px;  /* 3D perspective for tilt */
+  perspective: 1000px;
   margin-bottom: 2rem;
 }
-
 .role-card {
-  position: relative;
-  overflow: visible;               /* allow outline to show */
-  
-  /* base appearance */
-  background: #333;                /* dark gray */
-  color: #fff;                     /* white text */
-  border-radius: 2rem;             /* extra-rounded corners */
+  background: rgba(255, 255, 255, 0.05);   /* translucent, frosted glass */
+  backdrop-filter: blur(8px);              /* blur behind */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* light outline */
+  border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
-  
-  /* tilt setup */
+  transition:
+    transform 0.3s ease-out,
+    box-shadow 0.3s ease-out,
+    background 0.3s ease;
   transform-style: preserve-3d;
-  transition: transform 0.1s ease-out;
-  will-change: transform;
-  
-  /* gradient outline */
-  border: 4px solid transparent;
-  border-image: conic-gradient(
-    rgb(70, 90, 210),    /* Blue/Purple */
-    rgb(215, 80, 125),   /* Reddish-Pink */
-    rgb(80, 200, 220),   /* Cyan/Light Blue */
-    rgb(70, 90, 210)     /* loop back */
-  ) 1;
+  /* Intensified underglow */
+  box-shadow: 0 8px 30px rgba(0, 170, 255, 0.6);
 }
-
+.role-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+}
 .role-card:hover {
-  /* 3D hover tilt */
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
+  /* Stronger glow on hover */
+  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.8);
 }
 
 /* ========================================================================
@@ -628,8 +621,6 @@ section.fade-in-section.is-visible {
    ===================================================================================== */
 body.light-mode {
   background: #fafafa;
-  /* kill the grain in light mode */
-  background-image: none;
   color: #111;
 }
 body.light-mode .navbar {
@@ -650,35 +641,24 @@ body.light-mode .toggle-switch label::after {
   background: #fff;
 }
 
-/* ─── Light-mode Hero Centering & Styling ───────────────────────────────── */
-
-/* Center the hero content */
-body.light-mode .hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Light-mode hero: simple white box, more translucent (no border), same vertical position as dark mode */
+/* Light-mode hero: simple white box, more translucent (no border) */
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
   width: auto;
   max-width: 700px;
   margin: 0 auto;
-  /* transform: translateY(-20px);  ← removed to match dark mode */
+  transform: translateY(-20px);
   background: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
   text-align: center;
 }
-
 /* Hero text turns dark in light mode */
 body.light-mode .hero .container h1,
 body.light-mode .hero .container p {
   color: #111;
 }
-
 body.light-mode .section-card {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -751,69 +731,6 @@ body.light-mode .send-btn {
 }
 body.light-mode .send-btn:hover {
   background: #005fa3;
-}
-
-/* Disable grain in light mode */
-body.light-mode::before {
-  display: none;
-}
-
-/* ─── REMOVE ANY ACCIDENTAL BODY OVERLAY SPIN ───────────────────────────── */
-body::before {
-  /* remove or override any spinning grain overlay */
-  display: none !important;
-  animation: none !important;
-}
-
-/* ─── 13) ROLE CARDS OVERRIDE (Solid Black + Colored Underglow) ─────────── */
-
-/* 1) Remove any glassmorphic or backdrop-filter leftovers */
-.role-card {
-  background: #000 !important;
-  backdrop-filter: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 2rem !important;   /* keep corners rounded */
-}
-
-/* 2) Re-apply the underglow via a pseudo */
-.role-card::after {
-  content: '';
-  position: absolute;
-  top: -12px; left: -12px; right: -12px; bottom: -12px;
-  border-radius: calc(2rem + 12px) !important;
-  background: conic-gradient(
-    rgb(70, 90, 210),    /* Blue/Purple */
-    rgb(215, 80, 125),   /* Reddish-Pink */
-    rgb(80, 200, 220),   /* Cyan/Light Blue */
-    rgb(70, 90, 210)
-  ) !important;
-  filter: blur(20px) !important;
-  z-index: -1 !important;
-}
-
-/* 3) Ensure hover transform only (no glow change) */
-.role-card:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
-}
-
-/* ─── ROLE CARDS: Regular Light Grey Cards ───────────────────────────────── */
-.role-card {
-  background: #f0f0f0 !important;    /* solid light grey */
-  color: #111 !important;            /* dark text for contrast */
-  backdrop-filter: none !important;  /* remove glass blur */
-  border: none !important;           /* remove any borders or outlines */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important; /* subtle drop-shadow */
-}
-
-.role-card::before,
-.role-card::after {
-  display: none !important;          /* kill any pseudo-element effects */
-}
-
-/* preserve hover tilt */
-.role-card:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
 }
 
 /* =====================================================================================

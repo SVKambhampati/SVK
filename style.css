@@ -327,34 +327,46 @@ section.fade-in-section.is-visible {
 
 /* ─── 13) ROLE CARDS OVERRIDE (Solid Black + Colored Underglow) ─────────── */
 
-/* 1) Remove any glassmorphic or backdrop-filter leftovers */
-.role-card {
-  background: #000 !important;
-  backdrop-filter: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 2rem !important;   /* keep corners rounded */
+.roles-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  perspective: 1000px;
+  margin-bottom: 2rem;
 }
 
-/* 2) Re-apply the underglow via a pseudo */
+.role-card {
+  position: relative;
+  overflow: visible;               /* allow glow to extend */
+  
+  /* solid black background (no glassmorphism) */
+  background: #000;
+  border-radius: 2rem;             /* extra-rounded corners */
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
 .role-card::after {
   content: '';
   position: absolute;
   top: -12px; left: -12px; right: -12px; bottom: -12px;
-  border-radius: calc(2rem + 12px) !important;
+  border-radius: calc(2rem + 12px);
   background: conic-gradient(
     rgb(70, 90, 210),    /* Blue/Purple */
     rgb(215, 80, 125),   /* Reddish-Pink */
     rgb(80, 200, 220),   /* Cyan/Light Blue */
     rgb(70, 90, 210)
-  ) !important;
-  filter: blur(20px) !important;
-  z-index: -1 !important;
+  );
+  filter: blur(20px);             /* soft, colored halo */
+  z-index: -1;                    /* behind the card */
 }
 
-/* 3) Ensure hover transform only (no glow change) */
 .role-card:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
+  /* underglow remains unchanged on hover */
 }
 /* ========================================================================
    14) PROJECT CARDS (vertical stack + glassmorphism)
@@ -751,6 +763,38 @@ body::before {
   /* remove or override any spinning grain overlay */
   display: none !important;
   animation: none !important;
+}
+
+/* ─── 13) ROLE CARDS OVERRIDE (Solid Black + Colored Underglow) ─────────── */
+
+/* 1) Remove any glassmorphic or backdrop-filter leftovers */
+.role-card {
+  background: #000 !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 2rem !important;   /* keep corners rounded */
+}
+
+/* 2) Re-apply the underglow via a pseudo */
+.role-card::after {
+  content: '';
+  position: absolute;
+  top: -12px; left: -12px; right: -12px; bottom: -12px;
+  border-radius: calc(2rem + 12px) !important;
+  background: conic-gradient(
+    rgb(70, 90, 210),    /* Blue/Purple */
+    rgb(215, 80, 125),   /* Reddish-Pink */
+    rgb(80, 200, 220),   /* Cyan/Light Blue */
+    rgb(70, 90, 210)
+  ) !important;
+  filter: blur(20px) !important;
+  z-index: -1 !important;
+}
+
+/* 3) Ensure hover transform only (no glow change) */
+.role-card:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
 }
 
 /* =====================================================================================

@@ -430,24 +430,22 @@ section.fade-in-section.is-visible {
   overflow: visible;
 }
 
-/* the rotating border pseudo-element */
 .role-card::before {
   content: '';
   position: absolute;
   top: -4px; left: -4px; right: -4px; bottom: -4px;
-  border-radius: calc(8px + 4px);   /* match your card’s radius + outline */
+  border-radius: calc(8px + 4px);
   background: conic-gradient(
-    #0d1b2a,  /* very dark blue */
+    #0d1b2a,
     #1e40af,
     #3b82f6,
     #ffffff,
     #4c1d95,
     #2e1065,
-    #0d1b2a   /* loop back */
+    #0d1b2a
   );
-  z-index: -1;                       /* behind the card itself */
-  transform-origin: center center;
-  animation: rotate-outline 6s linear infinite;
+  z-index: -1;
+  /* no animation line here */
 }
 
 /* keep your hover transform, outline continues spinning */

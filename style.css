@@ -797,24 +797,24 @@ body::before {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
 }
 
-/* ─── Add Gradient Outline to Role Cards ───────────────────────────────── */
+/* ─── ROLE CARDS: Regular Light Grey Cards ───────────────────────────────── */
 .role-card {
-  /* outline thickness and reset any previous border */
-  border: 4px solid transparent !important;
-  /* use your three colors in a conic-gradient for the border */
-  border-image: conic-gradient(
-    rgb(70, 90, 210),    /* Blue/Purple */
-    rgb(215, 80, 125),   /* Reddish-Pink */
-    rgb(80, 200, 220),   /* Cyan/Light Blue */
-    rgb(70, 90, 210)     /* loop back */
-  ) 1 !important;
+  background: #f0f0f0 !important;    /* solid light grey */
+  color: #111 !important;            /* dark text for contrast */
+  backdrop-filter: none !important;  /* remove glass blur */
+  border: none !important;           /* remove any borders or outlines */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important; /* subtle drop-shadow */
 }
 
-/* preserve your hover tilt exactly as before */
+.role-card::before,
+.role-card::after {
+  display: none !important;          /* kill any pseudo-element effects */
+}
+
+/* preserve hover tilt */
 .role-card:hover {
   transform: translateY(-5px) rotateX(5deg) rotateY(-5deg) !important;
 }
-/* ───────────────────────────────────────────────────────────────────────── */
 
 /* =====================================================================================
    19) SPRING EASE VARIABLE

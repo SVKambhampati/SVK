@@ -327,40 +327,78 @@ section.fade-in-section.is-visible {
 /* ========================================================================
    13) ROLE CARDS (Glassmorphism + Intensified Underglow)
    ======================================================================== */
-.roles-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  perspective: 1000px;
-  margin-bottom: 2rem;
-}
+/* ————————————————————————————————
+   13) ROLE CARDS (Glassmorphism + Custom Gradient Glow)
+   ———————————————————————————————— */
 .role-card {
-  background: rgba(255, 255, 255, 0.05);   /* translucent, frosted glass */
-  backdrop-filter: blur(8px);              /* blur behind */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* light outline */
+  /* glass look still intact */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+
+  /* gradient outline instead of plain border */
+  border: 1px solid transparent;
+  border-image: 
+    linear-gradient(
+      45deg,
+      rgb(70, 90, 210)    0%,
+      rgb(215, 80, 125)  50%,
+      rgb(80, 200, 220) 100%
+    ) 1;
+
   border-radius: 8px;
   padding: 2rem 1.5rem;
   text-align: center;
+  color: #fff;
+
+  /* base glow (under-glow) */
+  box-shadow:
+    0 4px 15px rgba(70,  90, 210, 0.4),
+    0 4px 15px rgba(215, 80, 125, 0.4),
+    0 4px 15px rgba(80, 200, 220, 0.4);
+
   transition:
     transform 0.3s ease-out,
-    box-shadow 0.3s ease-out,
-    background 0.3s ease;
-  transform-style: preserve-3d;
-  /* Intensified underglow */
-  box-shadow: 0 8px 30px rgba(0, 170, 255, 0.6);
-}
-.role-card h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #fff;
-}
-.role-card:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  /* Stronger glow on hover */
-  box-shadow: 0 12px 40px rgba(0, 170, 255, 0.8);
+    box-shadow 0.3s ease-out;
 }
 
+.role-card:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
+
+  /* intensified glow on hover */
+  box-shadow:
+    0 12px 40px rgba(70,  90, 210, 0.8),
+    0 12px 40px rgba(215, 80, 125, 0.8),
+    0 12px 40px rgba(80, 200, 220, 0.8);
+}
+
+/* Light mode adjustments */
+body.light-mode .role-card {
+  /* keep the same gradient outline in light mode: */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid transparent;
+  border-image:
+    linear-gradient(
+      45deg,
+      rgb(70, 90, 210)    0%,
+      rgb(215, 80, 125)  50%,
+      rgb(80, 200, 220) 100%
+    ) 1;
+
+  /* softer glow on the lighter background */
+  box-shadow:
+    0 4px 15px rgba(70,  90, 210, 0.3),
+    0 4px 15px rgba(215, 80, 125, 0.3),
+    0 4px 15px rgba(80, 200, 220, 0.3);
+}
+
+body.light-mode .role-card:hover {
+  /* hover glow in light mode */
+  box-shadow:
+    0 12px 40px rgba(70,  90, 210, 0.6),
+    0 12px 40px rgba(215, 80, 125, 0.6),
+    0 12px 40px rgba(80, 200, 220, 0.6);
+}
 /* ========================================================================
    14) PROJECT CARDS (vertical stack + glassmorphism)
    ======================================================================== */

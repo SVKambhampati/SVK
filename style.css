@@ -325,32 +325,45 @@ section.fade-in-section.is-visible {
 }
 
 /* ========================================================================
-   13) ROLE CARDS (Glassmorphism + Intensified Underglow)
-   ======================================================================== */
-/* ————————————————————————————————
    13) ROLE CARDS (Glassmorphism + Custom Gradient Glow)
-   ———————————————————————————————— */
+   ======================================================================== */
+
+/* Container for all your cards: makes them sit side by side */
+.roles-grid {
+  display: flex;
+  flex-wrap: wrap;           /* wrap onto new lines on narrow viewports */
+  justify-content: center;   /* center the row */
+  gap: 1.5rem;               /* space between cards */
+  margin-bottom: 2rem;       /* keeps your existing spacing */
+  perspective: 1000px;       /* preserves your 3D hover effect */
+}
+
+/* Glassmorphic cards with gradient outline & multicolor glow */
 .role-card {
-  /* glass look still intact */
+  /* flex sizing */
+  flex: 1 1 200px;    /* at least 200px wide, but will grow equally */
+  max-width: 300px;   /* caps how big each card can get */
+
+  /* glass look */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
 
-  /* gradient outline instead of plain border */
+  /* gradient outline */
   border: 1px solid transparent;
-  border-image: 
+  border-image:
     linear-gradient(
       45deg,
-      rgb(70, 90, 210)    0%,
-      rgb(215, 80, 125)  50%,
-      rgb(80, 200, 220) 100%
+      rgb(70,  90, 210)  0%,
+      rgb(215, 80, 125) 50%,
+      rgb(80, 200, 220)100%
     ) 1;
-
   border-radius: 8px;
+
   padding: 2rem 1.5rem;
   text-align: center;
   color: #fff;
 
-  /* base glow (under-glow) */
+  /* base multicolor under-glow */
   box-shadow:
     0 4px 15px rgba(70,  90, 210, 0.4),
     0 4px 15px rgba(215, 80, 125, 0.4),
@@ -373,19 +386,21 @@ section.fade-in-section.is-visible {
 
 /* Light mode adjustments */
 body.light-mode .role-card {
-  /* keep the same gradient outline in light mode: */
+  /* slightly brighter background */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
+
+  /* same gradient outline */
   border: 1px solid transparent;
   border-image:
     linear-gradient(
       45deg,
-      rgb(70, 90, 210)    0%,
-      rgb(215, 80, 125)  50%,
-      rgb(80, 200, 220) 100%
+      rgb(70,  90, 210)  0%,
+      rgb(215, 80, 125) 50%,
+      rgb(80, 200, 220)100%
     ) 1;
 
-  /* softer glow on the lighter background */
+  /* softer glow */
   box-shadow:
     0 4px 15px rgba(70,  90, 210, 0.3),
     0 4px 15px rgba(215, 80, 125, 0.3),

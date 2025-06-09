@@ -391,30 +391,28 @@ section.fade-in-section.is-visible {
   transition: transform 0.3s ease-out;
 }
 
-/* 2) The rotating outline pseudo-element */
+
+.role-card {
+  position: relative;
+  overflow: visible;
+}
+
 .role-card::before {
   content: '';
   position: absolute;
-  inset: -4px;                     /* thickness of the outline */
-  border-radius: calc(8px + 4px);  /* card radius + outline */
+  top: -4px; left: -4px; right: -4px; bottom: -4px;
+  border-radius: calc(8px + 4px);
   background: conic-gradient(
-    #0d1b2a,  /* very dark blue */
-    #1e40af,  /* medium blue */
-    #3b82f6,  /* bright blue */
-    #ffffff,  /* white */
-    #4c1d95,  /* purple */
-    #2e1065,  /* dark purple */
-    #0d1b2a   /* loop back to start */
+    #0d1b2a,
+    #1e40af,
+    #3b82f6,
+    #ffffff,
+    #4c1d95,
+    #2e1065,
+    #0d1b2a
   );
-  z-index: -1;                     /* behind the card’s content */
-  animation: spin 8s linear infinite;
-}
-
-/* 3) Spin keyframes */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  z-index: -1;
+  /* no animation here */
 }
 
 /* 4) (Optional) keep your hover transform intact */

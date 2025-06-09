@@ -17,14 +17,16 @@
 html, body {
   height: 100%;
   scroll-behavior: smooth;
-  /* ↓ replace your current background declarations with: */
   background-color: #000;
   background-image:
-    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+  radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 2px 2px;
   background-position: 0 0, 1px 1px;
-  /* …other existing properties (color, font-family, etc.) remain the same… */
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 ul {
   list-style: none;
@@ -623,8 +625,8 @@ section.fade-in-section.is-visible {
    18) LIGHT-MODE OVERRIDES
    ===================================================================================== */
 body.light-mode {
-  /* wipe out the grain and switch to your light background */
-  background-color: #fafafa;
+  background: #fafafa;
+  /* kill the grain in light mode */
   background-image: none;
   color: #111;
 }

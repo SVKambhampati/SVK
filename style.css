@@ -325,60 +325,47 @@ section.fade-in-section.is-visible {
   letter-spacing: 0.5px;
 }
 
-/* ─── 13) ROLE CARDS OVERRIDE (Solid Black + Colored Underglow) ─────────── */
-
+/* ========================================================================
+   13) ROLE CARDS (Dark Gray + White Text + Gradient Outline + Tilt)
+   ======================================================================== */
 .roles-grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  perspective: 1000px;
+  perspective: 1000px;  /* 3D perspective for tilt */
   margin-bottom: 2rem;
 }
 
 .role-card {
   position: relative;
-  overflow: visible;               /* allow glow to extend */
+  overflow: visible;               /* allow outline to show */
   
-  /* solid black background (no glassmorphism) */
-  background: #000;
+  /* base appearance */
+  background: #333;                /* dark gray */
+  color: #fff;                     /* white text */
   border-radius: 2rem;             /* extra-rounded corners */
   padding: 2rem 1.5rem;
   text-align: center;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease-out;
-}
-
-.role-card::after {
-  content: '';
-  position: absolute;
-  top: -12px; left: -12px; right: -12px; bottom: -12px;
-  border-radius: calc(2rem + 12px);
-  background: conic-gradient(
-    rgb(70, 90, 210),    /* Blue/Purple */
-    rgb(215, 80, 125),   /* Reddish-Pink */
-    rgb(80, 200, 220),   /* Cyan/Light Blue */
-    rgb(70, 90, 210)
-  );
-  filter: blur(20px);             /* soft, colored halo */
-  z-index: -1;                    /* behind the card */
-}
-
-.role-card:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
-  /* underglow remains unchanged on hover */
-}
-
-/* ─── Role Cards: Dark Gray + White Text + 3D Tilt Setup ────────────────── */
-.role-card {
-  background: #333;               /* dark gray */
-  color: #fff;                    /* white font */
-  border-radius: 0.75rem;         /* tweak as you like */
-  padding: 2rem 1.5rem;
-  perspective: 1000px;            /* enable 3D */
+  
+  /* tilt setup */
   transform-style: preserve-3d;
   transition: transform 0.1s ease-out;
   will-change: transform;
+  
+  /* gradient outline */
+  border: 4px solid transparent;
+  border-image: conic-gradient(
+    rgb(70, 90, 210),    /* Blue/Purple */
+    rgb(215, 80, 125),   /* Reddish-Pink */
+    rgb(80, 200, 220),   /* Cyan/Light Blue */
+    rgb(70, 90, 210)     /* loop back */
+  ) 1;
+}
+
+.role-card:hover {
+  /* 3D hover tilt */
+  transform: translateY(-5px) rotateX(5deg) rotateY(-5deg);
 }
 
 /* ========================================================================

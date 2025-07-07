@@ -215,6 +215,9 @@ a {
 /* ========================================================================
    7) HERO SECTION (Dot Grid + Centered Content, darker dark-mode box)
    ======================================================================== */
+/* ========================================================================
+   7) HERO SECTION (Balatro Shader + Centered Content)
+   ======================================================================== */
 .hero {
   position: relative;
   height: calc(100vh - 60px);
@@ -223,24 +226,29 @@ a {
   justify-content: center;
   overflow: hidden;
 }
-#dotGrid {
+
+#balatroCanvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
+  display: block;
 }
-/* Dark-mode: Container with a darker semi-transparent box */
+
 .hero .container {
   position: relative;
   z-index: 1;
   width: 80%;
   max-width: 700px;
   margin: 0 auto;
-  transform: none;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 8px;
   padding: 1rem 1.5rem;
   text-align: center;
 }
+
 .hero .container h1 {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   font-size: 3rem;
@@ -249,6 +257,7 @@ a {
   margin-bottom: 1.5rem;
   color: #fff;
 }
+
 .hero .container p {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   font-size: 1.25rem;
@@ -256,6 +265,7 @@ a {
   margin-top: 1rem;
   color: #ccc;
 }
+
 
 /* ========================================================================
    8) FADE-IN ON SCROLL

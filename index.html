@@ -1,535 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shreyas Kambhampati | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyas Kambhampati | Portfolio</title>
 
-<!-- Google Font: Plus Jakarta Sans -->
-<link
-href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
-rel="stylesheet"
-/>
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Blanka Font for Intro Logo -->
   <link rel="stylesheet" href="blanka.css" />
 
   <!-- Main stylesheet -->
-<link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- ============================================================
-      1) Intro Overlay with SVK + underline + flicker-glow
-      ============================================================ -->
-<div id="intro-overlay">
-<div class="logo-container">
-<div class="intro-logo">SVK</div>
-<div class="logo-underline"></div>
-</div>
-</div>
+  <!-- ============================================================
+       1) Intro Overlay with SVK + underline + flicker-glow
+       ============================================================ -->
+  <div id="intro-overlay">
+    <div class="logo-container">
+      <div class="intro-logo">SVK</div>
+      <div class="logo-underline"></div>
+    </div>
+  </div>
 
-<!-- ============================================================
-      2) Navbar (Semi-transparent) with Toggle Switch
-      ============================================================ -->
-<nav class="navbar">
-<div class="container">
-<a class="logo" href="#">Shreyas Kambhampati</a>
-<div class="nav-right">
-<ul class="nav-links">
-<li><a href="#about-anchor">About</a></li>
-<li><a href="#projects-anchor">Projects</a></li>
-<li><a href="#skills-anchor">Skills</a></li>
-<li><a href="#contact-anchor">Contact</a></li>
-</ul>
-<!-- THEME TOGGLE SWITCH -->
-<div class="toggle-switch">
-<input type="checkbox" id="theme-toggle" />
-<label for="theme-toggle"></label>
-</div>
-</div>
-</div>
-</nav>
+  <!-- ============================================================
+       2) Navbar (Semi-transparent) with Toggle Switch
+       ============================================================ -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="#">Shreyas Kambhampati</a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#about-anchor">About</a></li>
+          <li><a href="#projects-anchor">Projects</a></li>
+          <li><a href="#skills-anchor">Skills</a></li>
+          <li><a href="#contact-anchor">Contact</a></li>
+        </ul>
+        <!-- THEME TOGGLE SWITCH -->
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-toggle" />
+          <label for="theme-toggle"></label>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-<!-- ============================================================
-      3) Hero Section (Dot-Grid Background)
-      ============================================================ -->
-<header class="hero">
-<canvas id="dotGrid"></canvas>
-<div class="container">
-<h1>Hi, I’m Shreyas Kambhampati</h1>
-<p>Computer Science Student at Northeastern University</p>
-</div>
-</header>
+  <!-- ============================================================
+       3) Hero Section (Dot-Grid Background)
+       ============================================================ -->
+  <header class="hero">
+    <canvas id="dotGrid"></canvas>
+    <div class="container">
+      <h1>Hi, I’m Shreyas Kambhampati</h1>
+      <p>Computer Science Student at Northeastern University</p>
+    </div>
+  </header>
 
-<!-- ============================================================
-      4) Main Content (All inside a single .container)
-      ============================================================ -->
-<main class="container">
+  <!-- ============================================================
+       4) Main Content (All inside a single .container)
+       ============================================================ -->
+  <main class="container">
 
-<!-- ================================================
-        ABOUT ME (Rounded Card)
-        – Invisible anchor (#about-anchor) sits 124px above the <h2>
-        ================================================ -->
-<div class="section-card">
-<section class="fade-in-section">
-<div id="about-anchor" class="section-anchor"></div>
+    <!-- ================================================
+         ABOUT ME (Rounded Card)
+         – Invisible anchor (#about-anchor) sits 124px above the <h2>
+         ================================================ -->
+    <div class="section-card">
+      <section class="fade-in-section">
+        <div id="about-anchor" class="section-anchor"></div>
 
-<div class="about-overview">
-<h2>About Me</h2>
-<p>
-Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
-</p>
-</div>
-<div class="roles-grid">
-<div class="role-card"><h3>Python Certified Developer</h3></div>
-<div class="role-card"><h3>Full-Stack Engineer</h3></div>
-<div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
-<div class="role-card"><h3>HCI Experience Architect</h3></div>
-</div>
-</section>
-</div>
+        <div class="about-overview">
+          <h2>About Me</h2>
+          <p>
+            Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
+          </p>
+        </div>
+        <div class="roles-grid">
+          <div class="role-card"><h3>Python Certified Developer</h3></div>
+          <div class="role-card"><h3>Full-Stack Engineer</h3></div>
+          <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
+          <div class="role-card"><h3>HCI Experience Architect</h3></div>
+        </div>
+      </section>
+    </div>
 
-<!-- ================================================
-        PROJECTS (Rounded Card)
-        – Invisible anchor (#projects-anchor) sits 124px above the <h2>
-        ================================================ -->
-<div class="section-card">
-<section class="fade-in-section">
-<div id="projects-anchor" class="section-anchor"></div>
+    <!-- ================================================
+         PROJECTS (Rounded Card)
+         – Invisible anchor (#projects-anchor) sits 124px above the <h2>
+         ================================================ -->
+    <div class="section-card">
+      <section class="fade-in-section">
+        <div id="projects-anchor" class="section-anchor"></div>
 
-<h2>Projects</h2>
-<div class="projects-grid">
-<article class="project-card">
-<h3>EnvisionVR</h3>
-<p>
-EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
-</p>
-<a href="project-one.html">View →</a>
-</article>
-<article class="project-card">
-<h3>MovieMind</h3>
-<p>
-MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content‐based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
-</p>
-<a href="project-two.html">View →</a>
-</article>
-<article class="project-card">
-<h3>AddressSync Automation</h3>
-<p>
-AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
-</p>
-<a href="project-three.html">View →</a>
-</article>
-<article class="project-card">
-<h3>StyleForecast</h3>
-<p>
-A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
-</p>
-<a href="project-four.html">View →</a>
-</article>
-</div>
-</section>
-</div>
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <h3>EnvisionVR</h3>
+            <p>
+              EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
+            </p>
+            <a href="project-one.html">View →</a>
+          </article>
+          <article class="project-card">
+            <h3>MovieMind</h3>
+            <p>
+              MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content‐based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
+            </p>
+            <a href="project-two.html">View →</a>
+          </article>
+          <article class="project-card">
+            <h3>AddressSync Automation</h3>
+            <p>
+              AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
+            </p>
+            <a href="project-three.html">View →</a>
+          </article>
+          <article class="project-card">
+            <h3>StyleForecast</h3>
+            <p>
+              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
+            </p>
+            <a href="project-four.html">View →</a>
+          </article>
+        </div>
+      </section>
+    </div>
 
-<!-- ================================================
-        SKILLS & TOOLS (Rounded Card)
-        – Invisible anchor (#skills-anchor) sits 124px above the <h2>
-        ================================================ -->
-<div class="section-card">
-<section class="fade-in-section">
-<div id="skills-anchor" class="section-anchor"></div>
+    <!-- ================================================
+         SKILLS & TOOLS (Rounded Card)
+         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
+         ================================================ -->
+    <div class="section-card">
+      <section class="fade-in-section">
+        <div id="skills-anchor" class="section-anchor"></div>
 
-<h2>Skills &amp; Tools</h2>
-<ul class="skills-expandable">
-<!-- Java -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">Java</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
-</div>
-</li>
-<!-- Python -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">Python</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
-</div>
-</li>
-<!-- JavaScript -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">JavaScript</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
-</div>
-</li>
-<!-- HTML & CSS -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">HTML &amp; CSS</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
-</div>
-</li>
-<!-- MySQL -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">MySQL</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
-</div>
-</li>
-<!-- C# -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">C#</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
-</div>
-</li>
-<!-- XML -->
-<li class="skill-item">
-<div class="skill-header">
-<span class="skill-name">XML</span>
-<button class="toggle-btn">
-<span class="icon">+</span> details
-</button>
-</div>
-<div class="skill-details">
-Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
-</div>
-</li>
-</ul>
-</section>
-</div>
+        <h2>Skills &amp; Tools</h2>
+        <ul class="skills-expandable">
+          <!-- Java -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Java</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
+            </div>
+          </li>
+          <!-- Python -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Python</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
+            </div>
+          </li>
+          <!-- JavaScript -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">JavaScript</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
+            </div>
+          </li>
+          <!-- HTML & CSS -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">HTML &amp; CSS</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
+            </div>
+          </li>
+          <!-- MySQL -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">MySQL</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
+            </div>
+          </li>
+          <!-- C# -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">C#</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
+            </div>
+          </li>
+          <!-- XML -->
+          <li class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">XML</span>
+              <button class="toggle-btn">
+                <span class="icon">+</span> details
+              </button>
+            </div>
+            <div class="skill-details">
+              Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
 
-<!-- ================================================
-        CONTACT (Rounded Card)
-        – Invisible anchor (#contact-anchor) sits 124px above the <h2>
-        ================================================ -->
-<div class="section-card">
-<section class="fade-in-section">
-<div id="contact-anchor" class="section-anchor"></div>
+    <!-- ================================================
+         CONTACT (Rounded Card)
+         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
+         ================================================ -->
+    <div class="section-card">
+      <section class="fade-in-section">
+        <div id="contact-anchor" class="section-anchor"></div>
 
-<div class="contact-card">
-<h2>Contact Me</h2>
-<p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
+        <div class="contact-card">
+          <h2>Contact Me</h2>
+          <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
-<form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-<div class="form-row">
-<div class="form-group">
-<label for="name">Name</label>
-<input
-type="text"
-id="name"
-name="name"
-placeholder="Your Name"
-required
-/>
-</div>
-<div class="form-group">
-<label for="email">Email</label>
-<input
-type="email"
-id="email"
-name="email"
-placeholder="you@example.com"
-required
-/>
-</div>
-</div>
+          <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
 
-<div class="form-group">
-<label for="message">Message</label>
-<textarea
-id="message"
-name="message"
-rows="5"
-placeholder="Write your message…"
-required
-></textarea>
-</div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Write your message…"
+                required
+              ></textarea>
+            </div>
 
-<button type="submit" class="send-btn">Send Message</button>
-</form>
-</div>
-</section>
-</div>
+            <button type="submit" class="send-btn">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </div>
 
-</main>
+  </main>
 
-<!-- ============================================================
-      5) Footer
-      ============================================================ -->
-<footer class="footer fade-in-section">
-<div class="container">
-<p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
-<p>🔗 
-<a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
-<a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
-</p>
-<p>© 2025 Shreyas Kambhampati</p>
-</div>
-</footer>
+  <!-- ============================================================
+       5) Footer
+       ============================================================ -->
+  <footer class="footer fade-in-section">
+    <div class="container">
+      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
+      <p>🔗 
+        <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
+        <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
+      </p>
+      <p>© 2025 Shreyas Kambhampati</p>
+    </div>
+  </footer>
 
-<!-- ============================================================
-      SCRIPTS
-      (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
-      ============================================================ -->
-<script>
-/******************************************************************
-    * 1) Dot-Grid Canvas Animation (now respects light-mode)
-    ******************************************************************/
-const canvas = document.getElementById('dotGrid');
-const ctx    = canvas.getContext('2d');
-let cw, ch, offsetX, offsetY;
-const dpr             = window.devicePixelRatio || 1;
-const NAV_HEIGHT      = 60;
-const dotRadius       = 2;
-const dotPadding      = 75;
-const mouseRadius     = 75;
-const mouseRadius2    = mouseRadius * mouseRadius;
-const concaveStrength = 10;
-const twinkleFreq     = 0.002;
-const twinkleChance   = 0.4;
-let dots   = [];
-let mx = -9999, my = -9999, isDown = false;
+  <!-- ============================================================
+       SCRIPTS
+       (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
+       ============================================================ -->
+  <script>
+    /******************************************************************
+     * 1) Dot-Grid Canvas Animation (now respects light-mode)
+     ******************************************************************/
+    const canvas = document.getElementById('dotGrid');
+    const ctx    = canvas.getContext('2d');
+    let cw, ch, offsetX, offsetY;
+    const dpr             = window.devicePixelRatio || 1;
+    const NAV_HEIGHT      = 60;
+    const dotRadius       = 2;
+    const dotPadding      = 75;
+    const mouseRadius     = 75;
+    const mouseRadius2    = mouseRadius * mouseRadius;
+    const concaveStrength = 10;
+    const twinkleFreq     = 0.002;
+    const twinkleChance   = 0.4;
+    let dots   = [];
+    let mx = -9999, my = -9999, isDown = false;
 
-function resizeCanvas() {
-cw = canvas.width  = window.innerWidth * dpr;
-ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
-canvas.style.width  = window.innerWidth + 'px';
-canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
-ctx.setTransform(1,0,0,1,0,0);
-ctx.scale(dpr,dpr);
-updateOffset();
-initDots();
-}
+    function resizeCanvas() {
+      cw = canvas.width  = window.innerWidth * dpr;
+      ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
+      canvas.style.width  = window.innerWidth + 'px';
+      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(dpr,dpr);
+      updateOffset();
+      initDots();
+    }
 
-function updateOffset() {
-const rect = canvas.getBoundingClientRect();
-offsetX = rect.left;
-offsetY = rect.top;
-}
+    function updateOffset() {
+      const rect = canvas.getBoundingClientRect();
+      offsetX = rect.left;
+      offsetY = rect.top;
+    }
 
-function initDots() {
-dots = [];
-const w = cw / dpr, h = ch / dpr;
-for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
-for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
-dots.push({
-sx: x, sy: y,
-x: x,  y: y,
-tw: Math.random() < twinkleChance
-});
-}
-}
-}
+    function initDots() {
+      dots = [];
+      const w = cw / dpr, h = ch / dpr;
+      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
+        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
+          dots.push({
+            sx: x, sy: y,
+            x: x,  y: y,
+            tw: Math.random() < twinkleChance
+          });
+        }
+      }
+    }
 
-function draw() {
-const t = Date.now();
-ctx.clearRect(0,0,cw,ch);
+    function draw() {
+      const t = Date.now();
+      ctx.clearRect(0,0,cw,ch);
 
-// Check if light-mode is active
-const isLight = document.body.classList.contains('light-mode');
+      // Check if light-mode is active
+      const isLight = document.body.classList.contains('light-mode');
 
-dots.forEach(d => {
-const dx = d.x - mx, dy = d.y - my;
-if (isDown && dx*dx + dy*dy < mouseRadius2) {
-d.x += dx / 30;
-d.y += dy / 30;
-} else {
-const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
-if (dx0 || dy0) {
-d.x -= dx0 / 20;
-d.y -= dy0 / 20;
-}
-}
-const cx = d.x - (cw / dpr) / 2;
-const cy = d.y - (ch / dpr) / 2;
-const dist = Math.hypot(cx, cy);
-const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
-const conc = Math.pow(dist / mD, 3) * concaveStrength;
-const inter = (dx*dx + dy*dy < mouseRadius2)
-? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
-: 0;
-const radius = dotRadius + conc + inter;
-let alpha = 1;
-if (d.tw) {
-const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
-alpha = 0.7 + tw * 0.3;
-}
-ctx.globalAlpha = alpha;
+      dots.forEach(d => {
+        const dx = d.x - mx, dy = d.y - my;
+        if (isDown && dx*dx + dy*dy < mouseRadius2) {
+          d.x += dx / 30;
+          d.y += dy / 30;
+        } else {
+          const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
+          if (dx0 || dy0) {
+            d.x -= dx0 / 20;
+            d.y -= dy0 / 20;
+          }
+        }
+        const cx = d.x - (cw / dpr) / 2;
+        const cy = d.y - (ch / dpr) / 2;
+        const dist = Math.hypot(cx, cy);
+        const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
+        const conc = Math.pow(dist / mD, 3) * concaveStrength;
+        const inter = (dx*dx + dy*dy < mouseRadius2)
+          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
+          : 0;
+        const radius = dotRadius + conc + inter;
+        let alpha = 1;
+        if (d.tw) {
+          const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
+          alpha = 0.7 + tw * 0.3;
+        }
+        ctx.globalAlpha = alpha;
 
-// If twinkle, always blue; otherwise white or black in light-mode
-if (d.tw) {
-ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-} else if (isLight) {
-ctx.fillStyle = `rgba(0,0,0,${alpha})`;   // black dots in light-mode
-} else {
-ctx.fillStyle = `rgba(255,255,255,${alpha})`; // white dots by default
-}
+        // If twinkle, always blue; otherwise white or black in light-mode
+        if (d.tw) {
+          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+        } else if (isLight) {
+          ctx.fillStyle = `rgba(0,0,0,${alpha})`;   // black dots in light-mode
+        } else {
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`; // white dots by default
+        }
 
-if (inter > 0) {
-ctx.shadowBlur  = 40;
-ctx.shadowColor = 'rgba(0,240,255,0.7)';
-} else {
-ctx.shadowBlur = 0;
-}
-ctx.beginPath();
-ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
-ctx.fill();
-ctx.shadowBlur = 0;
-ctx.globalAlpha = 1;
-});
-}
+        if (inter > 0) {
+          ctx.shadowBlur  = 40;
+          ctx.shadowColor = 'rgba(0,240,255,0.7)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      });
+    }
 
-function animate() {
-draw();
-requestAnimationFrame(animate);
-}
+    function animate() {
+      draw();
+      requestAnimationFrame(animate);
+    }
 
-canvas.onmousemove = e => {
-isDown = true;
-mx = e.clientX - offsetX;
-my = e.clientY - offsetY;
-};
-canvas.onmouseout = () => {
-isDown = false;
-};
+    canvas.onmousemove = e => {
+      isDown = true;
+      mx = e.clientX - offsetX;
+      my = e.clientY - offsetY;
+    };
+    canvas.onmouseout = () => {
+      isDown = false;
+    };
 
-window.addEventListener('resize', resizeCanvas);
-window.addEventListener('scroll', updateOffset);
-window.onload = () => {
-resizeCanvas();
-animate();
-};
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('scroll', updateOffset);
+    window.onload = () => {
+      resizeCanvas();
+      animate();
+    };
 
-/******************************************************************
-    * 2) Intro Overlay Removal & SVK Glow Trigger
-    ******************************************************************/
-window.addEventListener('DOMContentLoaded', () => {
-const overlay = document.getElementById('intro-overlay');
-const hero    = document.querySelector('.hero');
-const svk     = document.querySelector('.intro-logo');
-overlay.addEventListener('animationend', e => {
-if (e.animationName === 'overlayFade') {
-overlay.remove();
-hero.classList.add('intro-ready');
-svk.classList.add('glow-active');
-}
-});
-});
+    /******************************************************************
+     * 2) Intro Overlay Removal & SVK Glow Trigger
+     ******************************************************************/
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('intro-overlay');
+      const hero    = document.querySelector('.hero');
+      const svk     = document.querySelector('.intro-logo');
+      overlay.addEventListener('animationend', e => {
+        if (e.animationName === 'overlayFade') {
+          overlay.remove();
+          hero.classList.add('intro-ready');
+          svk.classList.add('glow-active');
+        }
+      });
+    });
 
-/******************************************************************
-    * 3) Fade-In On Scroll (Intersection Observer)
-    ******************************************************************/
-document.addEventListener('DOMContentLoaded', function() {
-const options = { root: null, rootMargin: '0px', threshold: 0.1 };
-const observer = new IntersectionObserver((entries, obs) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('is-visible');
-obs.unobserve(entry.target);
-}
-});
-}, options);
-document.querySelectorAll('.fade-in-section').forEach(section => {
-observer.observe(section);
-});
-});
+    /******************************************************************
+     * 3) Fade-In On Scroll (Intersection Observer)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, options);
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
 
-/******************************************************************
-    * 4) 3D Tilt on Role Cards
-    ******************************************************************/
-document.addEventListener('DOMContentLoaded', () => {
-const MAX_TILT = 15;
-document.querySelectorAll('.role-card').forEach(card => {
-card.addEventListener('mousemove', e => {
-const rect = card.getBoundingClientRect();
-const x = e.clientX - rect.left;
-const y = e.clientY - rect.top;
-const cx = rect.width / 2;
-const cy = rect.height / 2;
-const dx = (x - cx) / cx;
-const dy = (y - cy) / cy;
-const tiltY = dx * MAX_TILT * -1;
-const tiltX = dy * MAX_TILT;
-card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-});
-card.addEventListener('mouseleave', () => {
-card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-});
-});
-});
+    /******************************************************************
+     * 4) 3D Tilt on Role Cards
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const MAX_TILT = 15;
+      document.querySelectorAll('.role-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const dx = (x - cx) / cx;
+          const dy = (y - cy) / cy;
+          const tiltY = dx * MAX_TILT * -1;
+          const tiltX = dy * MAX_TILT;
+          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    });
 
-/******************************************************************
-    * 5) Accordion Toggle for Skills & Tools
-    ******************************************************************/
-document.addEventListener('DOMContentLoaded', () => {
-const toggles = document.querySelectorAll('.toggle-btn');
-toggles.forEach(btn => {
-btn.addEventListener('click', () => {
-const listItem = btn.closest('.skill-item');
-const details  = listItem.querySelector('.skill-details');
-// Toggle `.open` class
-if (listItem.classList.contains('open')) {
-listItem.classList.remove('open');
-btn.innerHTML = '<span class="icon">+</span> details';
-details.style.maxHeight = '0px';
-details.style.opacity   = '0';
-} else {
-listItem.classList.add('open');
-btn.innerHTML = '<span class="icon">−</span> details';
-details.style.maxHeight = details.scrollHeight + 'px';
-details.style.opacity   = '1';
-// bounce icon
-const newIcon = btn.querySelector('.icon');
-newIcon.style.animation = 'none';
-newIcon.offsetWidth; // force reflow
-newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
-}
-});
-});
-});
+    /******************************************************************
+     * 5) Accordion Toggle for Skills & Tools
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggles = document.querySelectorAll('.toggle-btn');
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const listItem = btn.closest('.skill-item');
+          const details  = listItem.querySelector('.skill-details');
+          // Toggle `.open` class
+          if (listItem.classList.contains('open')) {
+            listItem.classList.remove('open');
+            btn.innerHTML = '<span class="icon">+</span> details';
+            details.style.maxHeight = '0px';
+            details.style.opacity   = '0';
+          } else {
+            listItem.classList.add('open');
+            btn.innerHTML = '<span class="icon">−</span> details';
+            details.style.maxHeight = details.scrollHeight + 'px';
+            details.style.opacity   = '1';
+            // bounce icon
+            const newIcon = btn.querySelector('.icon');
+            newIcon.style.animation = 'none';
+            newIcon.offsetWidth; // force reflow
+            newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
+          }
+        });
+      });
+    });
 
-/******************************************************************
-    * 6) Theme Toggle (Light/Dark)
-    ******************************************************************/
-document.addEventListener('DOMContentLoaded', function() {
-const toggle = document.getElementById('theme-toggle');
-toggle.addEventListener('change', function() {
-document.body.classList.toggle('light-mode');
-});
-});
-</script>
-  
+    /******************************************************************
+     * 6) Theme Toggle (Light/Dark)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('theme-toggle');
+      toggle.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
+      });
+    });
+  </script>
 </body>
 </html>

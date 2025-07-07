@@ -530,5 +530,22 @@
       });
     });
   </script>
+  <script type="module">
+    import { mountBalatro } from './balatro.js';
+  
+    const canvas = document.getElementById('balatroCanvas');
+    mountBalatro(canvas, {
+      color1: '#DE443B',
+      color2: '#006BB4',
+      color3: '#162325',
+      contrast: 3.5,
+      lighting: 0.4,
+      spinAmount: 0.25,
+      pixelFilter: 745.0,
+      spinEase: 1.0,
+      isRotate: false,
+      mouseInteraction: true,
+    });
+  </script>
 </body>
 </html>

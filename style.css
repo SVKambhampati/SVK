@@ -331,11 +331,12 @@ section.fade-in-section.is-visible {
 /* Container for all your cards: makes them sit side by side */
 .roles-grid {
   display: flex;
-  flex-wrap: wrap;           /* wrap onto new lines on narrow viewports */
-  justify-content: center;   /* center the row */
-  gap: 1.5rem;               /* space between cards */
-  margin-bottom: 2rem;       /* keeps your existing spacing */
-  perspective: 1000px;       /* preserves your 3D hover effect */
+  flex-wrap: nowrap; /* prevent wrapping */
+  justify-content: center;
+  gap: 1.5rem;
+  overflow-x: auto; /* horizontal scroll if needed */
+  margin-bottom: 2rem;
+  perspective: 1000px;
 }
 
 /* Glassmorphic cards with gradient outline & multicolor glow */

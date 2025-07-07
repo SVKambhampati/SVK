@@ -324,7 +324,7 @@
 
     function resizeCanvas() {
       cw = canvas.width  = window.innerWidth * dpr;
-      ch = canvas.height = (window.innerHeight - NAV_HEIGHT) * dpr;
+      ch = canvas.height = window.innerHeight * dpr;
       canvas.style.width  = window.innerWidth + 'px';
       canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
       ctx.setTransform(1,0,0,1,0,0);

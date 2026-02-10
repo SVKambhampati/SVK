@@ -91,6 +91,78 @@
     </div>
 
     <!-- ================================================
+         EXPERIENCE (Vertical Timeline, newest → oldest)
+         – Invisible anchor (#experience-anchor) sits 124px above the <h2>
+         ================================================ -->
+    <div class="section-card">
+      <section class="fade-in-section">
+        <div id="experience-anchor" class="section-anchor"></div>
+
+        <h2>Experience</h2>
+
+        <div class="experience-timeline">
+          <!-- Experience 1: Newest / Current -->
+          <article class="timeline-item fade-in-section">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <header class="timeline-header">
+                <h3>Computer Science Student</h3>
+                <span class="timeline-meta">Northeastern University · 2024 — Present</span>
+                <span class="timeline-badge">Current</span>
+              </header>
+              <p class="timeline-summary">
+                Combining coursework, projects, and lab experience to build full‑stack applications, explore human–computer interaction, and deepen my understanding of scalable systems.
+              </p>
+              <ul class="timeline-details">
+                <li>Lead and collaborate on software projects that blend backend engineering with polished user experiences.</li>
+                <li>Apply concepts from algorithms, data structures, and systems to real‑world problems.</li>
+                <li>Work with tools like Python, Java, JavaScript, and cloud platforms to ship production‑quality code.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Experience 2 -->
+          <article class="timeline-item fade-in-section">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <header class="timeline-header">
+                <h3>Software / XR Projects</h3>
+                <span class="timeline-meta">Research & Personal Projects · 2022 — 2024</span>
+              </header>
+              <p class="timeline-summary">
+                Built immersive and data‑driven applications, from VR learning environments to recommendation systems and automation tools.
+              </p>
+              <ul class="timeline-details">
+                <li>Developed EnvisionVR to help special‑needs students visualize complex concepts in 3D.</li>
+                <li>Created MovieMind and StyleForecast to personalize recommendations using real datasets.</li>
+                <li>Automated data flows and error handling for shipping and ecommerce tooling.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Experience 3: Older -->
+          <article class="timeline-item fade-in-section">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <header class="timeline-header">
+                <h3>Early Technical Experience</h3>
+                <span class="timeline-meta">High School & Early College · 2019 — 2022</span>
+              </header>
+              <p class="timeline-summary">
+                Laid the groundwork in programming, problem solving, and design that I now apply to larger, more complex projects.
+              </p>
+              <ul class="timeline-details">
+                <li>Completed foundational coursework and certifications in Python, cloud, and databases.</li>
+                <li>Experimented with small apps and tools to automate everyday tasks.</li>
+                <li>Explored UX, HCI, and digital creativity, shaping how I think about building for people.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================================================
          PROJECTS (Rounded Card)
          – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
@@ -463,6 +535,60 @@
       }, options);
       document.querySelectorAll('.fade-in-section').forEach(section => {
         observer.observe(section);
+      });
+    });
+
+    /******************************************************************
+     * 4b) Active state for experience timeline items
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const items = document.querySelectorAll('.timeline-item');
+      const timeline = document.querySelector('.experience-timeline');
+      if (!items.length || !timeline) return;
+
+      const activeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            const el = entry.target;
+            if (entry.isIntersecting) {
+              el.classList.add('active');
+            } else {
+              el.classList.remove('active');
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.35
+        }
+      );
+
+      items.forEach(item => activeObserver.observe(item));
+
+      // Scroll-driven spine fill using a CSS variable
+      let ticking = false;
+      const updateTimelineProgress = () => {
+        const rect = timeline.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const start = Math.max(0, vh * 0.1 - rect.top);
+        const total = rect.height + vh * 0.2;
+        let progress = start / total;
+        progress = Math.max(0, Math.min(1, progress));
+        timeline.style.setProperty('--timeline-progress', progress.toString());
+        ticking = false;
+      };
+
+      updateTimelineProgress();
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateTimelineProgress);
+          ticking = true;
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        updateTimelineProgress();
       });
     });
 

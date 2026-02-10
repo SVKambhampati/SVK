@@ -49,9 +49,9 @@ a {
   left: 0;
   width: 100%;
   height: 60px;
-  background: #000; /* solid black bar */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.6); /* subtle depth */
-  z-index: 10;
+  background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(6,12,24,0.95));
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  z-index: 20;
 }
 
 .navbar .container {
@@ -63,35 +63,66 @@ a {
 /* Logo on the left */
 .logo {
   color: #fff;
-  font-size: 1.5rem;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.logo-svk {
+  font-family: 'Blanka', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 0 8px rgba(0, 200, 255, 0.8),
+    0 0 14px rgba(0, 200, 255, 0.5);
 }
 /* Group nav-links + toggle-switch */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.1rem;
   flex-wrap: nowrap;
 }
 /* Nav-links */
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: center;
   white-space: nowrap;
 }
 .nav-links a {
   color: #fff;
   font-weight: 500;
+  font-size: 0.82rem;
+  position: relative;
   padding-bottom: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   transition: color 0.2s ease-out;
 }
 .nav-links a.nav-active {
   color: #0af;
-  border-bottom: 2px solid #0af;
 }
 .nav-links a:hover {
   color: #0af;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0af, #e460ff);
+  transition: width 0.22s ease-out;
+}
+
+.nav-links a:hover::after,
+.nav-links a.nav-active::after {
+  width: 100%;
 }
 
 /* --------------------------------------------------------------------------
@@ -99,8 +130,8 @@ a {
    -------------------------------------------------------------------------- */
 .toggle-switch {
   position: relative;
-  width: 50px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 .toggle-switch input {
   opacity: 0;
@@ -113,29 +144,32 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
-  transition: background-color 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition:
+    background-color 0.25s ease-out,
+    border-color 0.25s ease-out,
+    transform 0.2s ease-out;
 }
 .toggle-switch label::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  background: #000;
-  border-radius: 50%;
-  transition: transform 0.3s ease-out, background 0.3s ease-out;
+  content: "☾";
+  position: relative;
+  font-size: 0.9rem;
+  color: #fff;
 }
 .toggle-switch input:checked + label {
-  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 170, 255, 0.9);
 }
 .toggle-switch input:checked + label::after {
-  transform: translateX(26px);
-  background: #fff;
+  content: "☀";
+  color: #ffe066;
 }
 
 /* ========================================================================
@@ -219,11 +253,11 @@ a {
    ======================================================================== */
 .hero {
   position: relative;
-  height: 100vh; /* full viewport height only */
+  min-height: 100vh; /* full viewport height, dots extend further */
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #dotGrid {
@@ -239,15 +273,21 @@ a {
 .hero .container {
   position: relative;
   z-index: 1;
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  transform: none;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 8px;
-  padding: 4rem 1.5rem 2rem;
   padding-top: 80px; /* pushes content below navbar */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero-card {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
   text-align: center;
+  display: inline-block;
 }
 
 .hero .container h1 {
@@ -344,40 +384,31 @@ section.fade-in-section.is-visible {
   flex-wrap: nowrap; /* prevent wrapping */
   justify-content: center;
   gap: 1.5rem;
-  overflow-x: auto; /* horizontal scroll if needed */
+  overflow-x: visible; /* allow glow/shadows to spill outside */
   margin-bottom: 2rem;
   perspective: 1000px;
 }
 
-/* Glassmorphic cards with gradient outline & multicolor glow */
+/* Glassmorphic cards with soft underglow */
 .role-card {
   /* flex sizing */
   flex: 1 1 220px;    /* at least 220px wide, but will grow equally */
   max-width: 320px;   /* caps how big each card can get */
 
-  /* glass look + rounded gradient border, dark interior */
+  position: relative;
   backdrop-filter: blur(8px);
-  border-radius: 18px; /* more rounded corners */
-  border: 1px solid transparent;
-  background:
-    linear-gradient(#111, #111) padding-box,
-    linear-gradient(
-      45deg,
-      rgb(70,  90, 210)  0%,
-      rgb(215, 80, 125) 50%,
-      rgb(80, 200, 220)100%
-    ) border-box;
-  background-clip: padding-box, border-box;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(5, 7, 18, 0.98);
 
   padding: 2.25rem 1.75rem;
   text-align: center;
   color: #fff;
 
-  /* base multicolor under-glow (spills evenly around card) */
+  /* soft glow beneath card */
   box-shadow:
-    0 0 18px rgba(70,  90, 210, 0.38),
-    0 0 18px rgba(215, 80, 125, 0.38),
-    0 0 18px rgba(80, 200, 220, 0.38);
+    0 20px 40px rgba(0, 0, 0, 0.7),
+    0 0 28px rgba(0, 170, 255, 0.45);
 
   cursor: pointer;
   transition:
@@ -388,40 +419,22 @@ section.fade-in-section.is-visible {
 .role-card:hover {
   transform: translateY(-8px) scale(1.02) rotateX(6deg) rotateY(-6deg);
 
-  /* intensified glow on hover */
   box-shadow:
-    0 10px 32px rgba(70,  90, 210, 0.6),
-    0 10px 32px rgba(215, 80, 125, 0.6),
-    0 10px 32px rgba(80, 200, 220, 0.6);
+    0 26px 55px rgba(0, 0, 0, 0.85),
+    0 0 34px rgba(0, 170, 255, 0.6);
 }
 
 /* Light mode adjustments */
 body.light-mode .role-card {
-  /* slightly brighter glass + same rounded gradient border, softer glow */
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
-  border: 1px solid transparent;
-  background:
-    linear-gradient(#ffffff, #ffffff) padding-box,
-    linear-gradient(
-      45deg,
-      rgb(70,  90, 210)  0%,
-      rgb(215, 80, 125) 50%,
-      rgb(80, 200, 220)100%
-    ) border-box;
-  background-clip: padding-box, border-box;
+  background: #ffffff;
+  border-color: rgba(148, 163, 184, 0.45);
   box-shadow:
-    0 0 16px rgba(70,  90, 210, 0.28),
-    0 0 16px rgba(215, 80, 125, 0.28),
-    0 0 16px rgba(80, 200, 220, 0.28);
+    0 18px 40px rgba(148, 163, 184, 0.45);
 }
 
 body.light-mode .role-card:hover {
-  /* hover glow in light mode (symmetric) */
   box-shadow:
-    0 0 26px rgba(70,  90, 210, 0.55),
-    0 0 26px rgba(215, 80, 125, 0.55),
-    0 0 26px rgba(80, 200, 220, 0.55);
+    0 24px 55px rgba(148, 163, 184, 0.6);
 }
 
 /* ========================================================================
@@ -468,7 +481,7 @@ body.light-mode .role-card:hover {
 
 .timeline-dot {
   position: absolute;
-  left: 0.3rem;
+  left: -0.15rem; /* slightly further left */
   top: 1.4rem;
   width: 18px;
   height: 18px;
@@ -579,7 +592,6 @@ body.light-mode .role-card:hover {
   margin-bottom: 0.55rem;
   color: #ddd;
   line-height: 1.5;
-  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
 }
 
 .timeline-details {
@@ -588,21 +600,24 @@ body.light-mode .role-card:hover {
   color: #c0c8d8;
   font-size: 0.95rem;
   line-height: 1.6;
-  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+  max-height: 0; /* collapsed by default */
+  overflow: hidden;
+  transform: translateY(4px);
+  opacity: 0;
+  transition:
+    max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease-out;
 }
 
 .timeline-details li {
   list-style: disc;
 }
 
-.timeline-item:not(.active) .timeline-summary,
-.timeline-item:not(.active) .timeline-details {
-  opacity: 0.9;
-  transform: translateY(2px);
-}
-
-.timeline-item.active .timeline-summary,
-.timeline-item.active .timeline-details {
+/* Expand bullet points when user hovers or item is focused */
+.timeline-item:hover .timeline-details,
+.timeline-item:focus-within .timeline-details {
+  max-height: 600px; /* enough room for all bullets, drives smooth height animation */
   opacity: 1;
   transform: translateY(0);
 }
@@ -934,11 +949,33 @@ body.light-mode {
   color: #111;
 }
 body.light-mode .navbar {
-  background: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(90deg, rgba(255,255,255,0.96), rgba(245,247,252,0.96));
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 body.light-mode .navbar .logo,
 body.light-mode .nav-links a {
   color: #111;
+}
+
+body.light-mode .logo-svk {
+  color: #111;
+  text-shadow:
+    0 0 4px rgba(0, 0, 0, 0.12),
+    0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .toggle-switch label {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+body.light-mode .toggle-switch input:checked + label {
+  background-color: rgba(15, 23, 42, 0.06);
+  border-color: rgba(37, 99, 235, 0.9);
+}
+
+body.light-mode .toggle-switch input:checked + label::after {
+  color: #f0a500;
 }
 body.light-mode .nav-links a.nav-active {
   color: #007acc;
@@ -955,20 +992,21 @@ body.light-mode .toggle-switch label::after {
 body.light-mode .hero .container {
   position: relative;
   z-index: 1;
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  transform: none;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  padding: 4rem 1.5rem 2rem;
-  padding-top: 80px; /* keep hero text aligned with dark mode */
-  text-align: center;
+  padding-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 /* Hero text turns dark in light mode */
 body.light-mode .hero .container h1,
 body.light-mode .hero .container p {
   color: #111;
+}
+body.light-mode .hero-card {
+  background: rgba(255, 255, 255, 0.8);
 }
 body.light-mode .section-card {
   background: rgba(255, 255, 255, 0.8);
@@ -1166,7 +1204,7 @@ body.light-mode .send-btn:hover {
   }
 
   .timeline-dot {
-    left: 0.1rem;
+    left: -0.35rem; /* slightly further left on small screens */
   }
 
   .timeline-card {

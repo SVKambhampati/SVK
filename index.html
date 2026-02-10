@@ -34,10 +34,13 @@
        ============================================================ -->
   <nav class="navbar">
     <div class="container">
-      <a class="logo" href="#">Shreyas Kambhampati</a>
+      <a class="logo" href="#">
+        <span class="logo-svk">SVK</span>
+      </a>
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#about-anchor">About</a></li>
+          <li><a href="#experience-anchor">Experience</a></li>
           <li><a href="#projects-anchor">Projects</a></li>
           <li><a href="#skills-anchor">Skills</a></li>
           <li><a href="#contact-anchor">Contact</a></li>
@@ -57,8 +60,10 @@
   <header class="hero">
     <canvas id="dotGrid"></canvas>
     <div class="container">
-      <h1>Hi, I’m Shreyas Kambhampati</h1>
-      <p>Computer Science Student at Northeastern University</p>
+      <div class="hero-card">
+        <h1>Hi, I’m Shreyas Kambhampati</h1>
+        <p>Computer Science Student at Northeastern University</p>
+      </div>
     </div>
   </header>
 
@@ -101,60 +106,79 @@
         <h2>Experience</h2>
 
         <div class="experience-timeline">
-          <!-- Experience 1: Newest / Current -->
+          <!-- Newest / Current -->
           <article class="timeline-item fade-in-section">
             <div class="timeline-dot"></div>
             <div class="timeline-card">
               <header class="timeline-header">
-                <h3>Computer Science Student</h3>
-                <span class="timeline-meta">Northeastern University · 2024 — Present</span>
+                <h3>Software Engineer</h3>
+                <span class="timeline-meta">Oasis at Northeastern · Jan 2026 – Present · Boston, MA · Hybrid</span>
                 <span class="timeline-badge">Current</span>
               </header>
               <p class="timeline-summary">
-                Combining coursework, projects, and lab experience to build full‑stack applications, explore human–computer interaction, and deepen my understanding of scalable systems.
+                Building a sentiment‑driven insights platform that helps student investors understand how the market feels before they make decisions.
               </p>
               <ul class="timeline-details">
-                <li>Lead and collaborate on software projects that blend backend engineering with polished user experiences.</li>
-                <li>Apply concepts from algorithms, data structures, and systems to real‑world problems.</li>
-                <li>Work with tools like Python, Java, JavaScript, and cloud platforms to ship production‑quality code.</li>
+                <li>Aggregate high‑volume social media streams and normalize them into a unified data model for analysis.</li>
+                <li>Use natural language processing to classify posts as bullish, bearish, or neutral in real time.</li>
+                <li>Surface trends and sentiment shifts through dashboards that highlight suddenly shifting tickers or topics.</li>
               </ul>
             </div>
           </article>
 
-          <!-- Experience 2 -->
+          <!-- Research / XR -->
           <article class="timeline-item fade-in-section">
             <div class="timeline-dot"></div>
             <div class="timeline-card">
               <header class="timeline-header">
-                <h3>Software / XR Projects</h3>
-                <span class="timeline-meta">Research & Personal Projects · 2022 — 2024</span>
+                <h3>Research Assistant &amp; Lead Project Developer</h3>
+                <span class="timeline-meta">The University of Texas at Dallas · Jun 2024 – Dec 2024 · Dallas, TX · Hybrid</span>
               </header>
               <p class="timeline-summary">
-                Built immersive and data‑driven applications, from VR learning environments to recommendation systems and automation tools.
+                Focused on interactive technologies—including haptics, extended reality, and human‑computer interaction—under Dr. Jin Ryong Kim.
               </p>
               <ul class="timeline-details">
-                <li>Developed EnvisionVR to help special‑needs students visualize complex concepts in 3D.</li>
-                <li>Created MovieMind and StyleForecast to personalize recommendations using real datasets.</li>
-                <li>Automated data flows and error handling for shipping and ecommerce tooling.</li>
+                <li>Designed and implemented a haptic‑enhanced data visualization system that lets users feel changes in datasets through tactile feedback.</li>
+                <li>Built real‑time IoT spatial sync pipelines for a Metaverse platform so physical sensor data stayed aligned with virtual environments.</li>
+                <li>Led a small team from concept to prototype, defining requirements, architecture, and iteration plans for an XR research project.</li>
               </ul>
             </div>
           </article>
 
-          <!-- Experience 3: Older -->
+          <!-- LexisNexis -->
           <article class="timeline-item fade-in-section">
             <div class="timeline-dot"></div>
             <div class="timeline-card">
               <header class="timeline-header">
-                <h3>Early Technical Experience</h3>
-                <span class="timeline-meta">High School & Early College · 2019 — 2022</span>
+                <h3>Technical Communications Intern</h3>
+                <span class="timeline-meta">LexisNexis · May 2023 – Dec 2023 · Alpharetta, GA · Remote</span>
               </header>
               <p class="timeline-summary">
-                Laid the groundwork in programming, problem solving, and design that I now apply to larger, more complex projects.
+                Created technical and social content that amplified LexisNexis initiatives and internal events across multiple channels.
               </p>
               <ul class="timeline-details">
-                <li>Completed foundational coursework and certifications in Python, cloud, and databases.</li>
-                <li>Experimented with small apps and tools to automate everyday tasks.</li>
-                <li>Explored UX, HCI, and digital creativity, shaping how I think about building for people.</li>
+                <li>Managed and produced posts for corporate and internal social media to drive engagement around events and product updates.</li>
+                <li>Used Adobe Creative Cloud tools (Photoshop, Lightroom, After Effects) to design on‑brand visual assets and motion graphics.</li>
+                <li>Collaborated with technical and marketing teams to translate complex topics into clear, accessible narratives.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- DeKalb County IT -->
+          <article class="timeline-item fade-in-section">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <header class="timeline-header">
+                <h3>Software Developer Intern</h3>
+                <span class="timeline-meta">DeKalb County IT · May 2023 – Jul 2023 · Atlanta, GA</span>
+              </header>
+              <p class="timeline-summary">
+                Built a backend integration system to keep shipping addresses in sync and stop failed FedEx deliveries for county orders.
+              </p>
+              <ul class="timeline-details">
+                <li>Integrated Oracle EBS and Oracle Commerce Cloud to automatically detect and reconcile address mismatches before shipment.</li>
+                <li>Wrote PL/SQL validation scripts that cleaned and standardized address data used by downstream logistics systems.</li>
+                <li>Reduced delivery errors and manual correction work by flagging problematic orders early in the fulfillment pipeline.</li>
               </ul>
             </div>
           </article>
@@ -314,7 +338,7 @@
           <h2>Contact Me</h2>
           <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
 
-          <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+          <form class="contact-form" action="https://formspree.io/f/mwpbpblk" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -348,6 +372,9 @@
                 required
               ></textarea>
             </div>
+
+            <!-- Optional custom subject for Formspree emails -->
+            <input type="hidden" name="_subject" value="New message from svk-portfolio site" />
 
             <button type="submit" class="send-btn">Send Message</button>
           </form>
@@ -384,6 +411,7 @@
     let cw, ch, offsetX, offsetY;
     const dpr             = window.devicePixelRatio || 1;
     const NAV_HEIGHT      = 60;
+    const EXTRA_DOT_HEIGHT = 320; // extend dots below hero into top of About
     const dotRadius       = 2;
     const dotPadding      = 75;
     const mouseRadius     = 75;
@@ -395,10 +423,12 @@
     let mx = -9999, my = -9999, isDown = false;
 
     function resizeCanvas() {
+      const viewportH = window.innerHeight;
+      const totalH = viewportH + EXTRA_DOT_HEIGHT;
       cw = canvas.width  = window.innerWidth * dpr;
-      ch = canvas.height = window.innerHeight * dpr;
+      ch = canvas.height = totalH * dpr;
       canvas.style.width  = window.innerWidth + 'px';
-      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
+      canvas.style.height = (totalH - NAV_HEIGHT) + 'px';
       ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(dpr,dpr);
       updateOffset();
@@ -414,8 +444,16 @@
     function initDots() {
       dots = [];
       const w = cw / dpr, h = ch / dpr;
-      for (let y = dotRadius; y < h; y += dotRadius*2 + dotPadding) {
-        for (let x = dotRadius; x < w; x += dotRadius*2 + dotPadding) {
+      const step = dotRadius * 2 + dotPadding;
+      const cols = Math.floor((w - dotRadius * 2) / step);
+      const rows = Math.floor((h - dotRadius * 2) / step);
+      const startX = (w - (cols - 1) * step) / 2;
+      const startY = (h - (rows - 1) * step) / 2;
+
+      for (let row = 0; row < rows; row++) {
+        const y = startY + row * step;
+        for (let col = 0; col < cols; col++) {
+          const x = startX + col * step;
           dots.push({
             sx: x, sy: y,
             x: x,  y: y,
@@ -654,6 +692,48 @@
       toggle.addEventListener('change', function() {
         document.body.classList.toggle('light-mode');
       });
+    });
+
+    /******************************************************************
+     * 7) Navbar active link based on scroll (scrollspy)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+      if (!navLinks.length) return;
+
+      const sectionMap = new Map();
+      navLinks.forEach(link => {
+        const id = link.getAttribute('href').slice(1);
+        const section = document.getElementById(id);
+        if (section) {
+          sectionMap.set(section, link);
+        }
+      });
+
+      if (!sectionMap.size) return;
+
+      const clearActive = () => {
+        navLinks.forEach(l => l.classList.remove('nav-active'));
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const link = sectionMap.get(entry.target);
+              if (!link) return;
+              clearActive();
+              link.classList.add('nav-active');
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.4
+        }
+      );
+
+      sectionMap.forEach((_, section) => observer.observe(section));
     });
   </script>
 </body>

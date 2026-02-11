@@ -411,7 +411,6 @@
     let cw, ch, offsetX, offsetY;
     const dpr             = window.devicePixelRatio || 1;
     const NAV_HEIGHT      = 60;
-    const EXTRA_DOT_HEIGHT = 320; // extend dots below hero into top of About
     const dotRadius       = 2;
     const dotPadding      = 75;
     const mouseRadius     = 75;
@@ -423,12 +422,10 @@
     let mx = -9999, my = -9999, isDown = false;
 
     function resizeCanvas() {
-      const viewportH = window.innerHeight;
-      const totalH = viewportH + EXTRA_DOT_HEIGHT;
       cw = canvas.width  = window.innerWidth * dpr;
-      ch = canvas.height = totalH * dpr;
+      ch = canvas.height = window.innerHeight * dpr;
       canvas.style.width  = window.innerWidth + 'px';
-      canvas.style.height = (totalH - NAV_HEIGHT) + 'px';
+      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
       ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(dpr,dpr);
       updateOffset();

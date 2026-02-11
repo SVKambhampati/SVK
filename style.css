@@ -253,11 +253,11 @@ a {
    ======================================================================== */
 .hero {
   position: relative;
-  min-height: 100vh; /* full viewport height, dots extend further */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible;
+  overflow: hidden;
 }
 
 #dotGrid {

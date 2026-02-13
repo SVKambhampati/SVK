@@ -61,8 +61,8 @@
     <canvas id="dotGrid"></canvas>
     <div class="container">
       <div class="hero-card">
-        <h1>Hi, I’m Shreyas Kambhampati</h1>
-        <p>Computer Science Student at Northeastern University</p>
+        <h1 class="hero-title">Hi, I’m Shreyas Kambhampati</h1>
+        <p class="hero-subtitle">Computer Science Student at Northeastern University</p>
       </div>
     </div>
   </header>
@@ -82,9 +82,16 @@
 
         <div class="about-overview">
           <h2>About Me</h2>
-          <p>
-            Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold industry certifications in AWS, Python, Unity, and MySQL, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
+          <div class="about-layout">
+            <div class="about-photo-wrap">
+              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati" class="about-photo" />
+            </div>
+            <div class="about-text">
+          <p class="about-text-body">
+            Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in <span class="highlight-phrase">software engineering</span>, <span class="highlight-phrase">extended reality</span>, and <span class="highlight-phrase">digital technologies</span> that drive innovation. I hold industry certifications in <span class="highlight-phrase">AWS, Python, Unity, and MySQL</span>, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
           </p>
+            </div>
+          </div>
         </div>
         <div class="roles-grid">
           <div class="role-card"><h3>Python Certified Developer</h3></div>
@@ -398,6 +405,9 @@
     </div>
   </footer>
 
+  <!-- Back to top button -->
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
   <!-- ============================================================
        SCRIPTS
        (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
@@ -411,6 +421,7 @@
     let cw, ch, offsetX, offsetY;
     const dpr             = window.devicePixelRatio || 1;
     const NAV_HEIGHT      = 60;
+    const GAP_FILL_PX     = 120; /* extend dots into gap below hero so no black strip */
     const dotRadius       = 2;
     const dotPadding      = 75;
     const mouseRadius     = 75;
@@ -422,10 +433,12 @@
     let mx = -9999, my = -9999, isDown = false;
 
     function resizeCanvas() {
+      const vh = window.innerHeight;
+      const totalH = vh + GAP_FILL_PX;
       cw = canvas.width  = window.innerWidth * dpr;
-      ch = canvas.height = window.innerHeight * dpr;
+      ch = canvas.height = totalH * dpr;
       canvas.style.width  = window.innerWidth + 'px';
-      canvas.style.height = (window.innerHeight - NAV_HEIGHT) + 'px';
+      canvas.style.height = (totalH - NAV_HEIGHT) + 'px';
       ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(dpr,dpr);
       updateOffset();
@@ -467,6 +480,8 @@
       // Check if light-mode is active
       const isLight = document.body.classList.contains('light-mode');
 
+      const scrollParallax = window.scrollY * 0.05;
+
       dots.forEach(d => {
         const dx = d.x - mx, dy = d.y - my;
         if (isDown && dx*dx + dy*dy < mouseRadius2) {
@@ -480,7 +495,7 @@
           }
         }
         const cx = d.x - (cw / dpr) / 2;
-        const cy = d.y - (ch / dpr) / 2;
+        const cy = (d.y + scrollParallax) - (ch / dpr) / 2;
         const dist = Math.hypot(cx, cy);
         const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
         const conc = Math.pow(dist / mD, 3) * concaveStrength;
@@ -511,7 +526,7 @@
           ctx.shadowBlur = 0;
         }
         ctx.beginPath();
-        ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+        ctx.arc(d.x, d.y + scrollParallax, radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
@@ -551,6 +566,11 @@
           overlay.remove();
           hero.classList.add('intro-ready');
           svk.classList.add('glow-active');
+          // Trigger hero text reveal
+          const heroContainer = document.querySelector('.hero .container');
+          if (heroContainer) {
+            heroContainer.classList.add('hero-text-visible');
+          }
         }
       });
     });
@@ -628,11 +648,12 @@
     });
 
     /******************************************************************
-     * 4) 3D Tilt on Role Cards
+     * 4) 3D Tilt on Role Cards only
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', () => {
       const MAX_TILT = 15;
-      document.querySelectorAll('.role-card').forEach(card => {
+      const tiltCards = document.querySelectorAll('.role-card');
+      tiltCards.forEach(card => {
         card.addEventListener('mousemove', e => {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -731,6 +752,105 @@
       );
 
       sectionMap.forEach((_, section) => observer.observe(section));
+    });
+
+    /******************************************************************
+     * 8) About Me text highlight on scroll
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const about = document.querySelector('.about-overview');
+      if (!about) return;
+      const phrases = Array.from(about.querySelectorAll('.highlight-phrase'));
+      if (!phrases.length) return;
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              phrases.forEach((span, index) => {
+                setTimeout(() => span.classList.add('-active'), index * 180);
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, threshold: 0.65 }
+      );
+
+      observer.observe(about);
+    });
+
+    /******************************************************************
+     * 9) Back-to-top button
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.querySelector('.back-to-top');
+      if (!btn) return;
+
+      const toggleVisibility = () => {
+        if (window.scrollY > 400) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      };
+
+      window.addEventListener('scroll', toggleVisibility, { passive: true });
+      toggleVisibility();
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    /******************************************************************
+     * 10) Contact form AJAX + toast
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('.contact-form');
+      if (!form) return;
+
+      const status = document.createElement('div');
+      status.className = 'contact-status';
+      form.appendChild(status);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = 'Sending...';
+        status.classList.remove('success', 'error', 'sending');
+        status.classList.add('visible', 'sending');
+
+        try {
+          const data = new FormData(form);
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            form.reset();
+            status.textContent = 'Message sent!';
+            status.classList.remove('sending');
+            status.classList.add('success');
+          } else {
+            status.textContent = 'Something went wrong. Please try again.';
+            status.classList.remove('sending');
+            status.classList.add('error');
+          }
+        } catch (err) {
+          status.textContent = 'Network error. Please try again.';
+          status.classList.remove('sending');
+          status.classList.add('error');
+        }
+
+        setTimeout(() => {
+          status.classList.remove('visible', 'success', 'error');
+          status.textContent = '';
+        }, 4000);
+      });
     });
   </script>
 </body>

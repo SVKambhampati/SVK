@@ -254,10 +254,11 @@ a {
 .hero {
   position: relative;
   height: 100vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; /* center hero content vertically again */
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #dotGrid {
@@ -265,29 +266,47 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* fills full hero section */
+  height: 100%;
+  min-height: 100%;
   z-index: 0;
   display: block;
+  pointer-events: auto; /* needed so mouse interactions work */
 }
 
 .hero .container {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 900px;
   margin: 0 auto;
-  padding-top: 80px; /* pushes content below navbar */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  padding-top: 40px; /* small offset from nav, overall much lower */
+  text-align: center; /* center the hero card */
 }
 
 .hero-card {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.72);
+  border-radius: 12px;
+  padding: 1.3rem 2.3rem;
   text-align: center;
   display: inline-block;
+}
+
+.hero-title {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  white-space: nowrap; /* keep greeting on a single line */
+}
+
+.hero-subtitle {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: 0.15s;
+}
+
+.hero-text-visible .hero-title,
+.hero-text-visible .hero-subtitle {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero .container h1 {
@@ -368,10 +387,68 @@ section.fade-in-section.is-visible {
   color: #ddd;
   margin-bottom: 2rem;
 }
+.about-layout {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+.about-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-right: 0.5rem;
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(135deg, #0af, #e460ff, #0af);
+  background-size: 200% 200%;
+  animation: about-photo-border 4s ease-in-out infinite;
+  box-shadow:
+    0 0 20px rgba(0, 170, 255, 0.4),
+    0 0 40px rgba(228, 96, 255, 0.3);
+  overflow: hidden;
+  isolation: isolate;
+}
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  transition: transform 0.35s ease-out;
+}
+.about-photo-wrap:hover .about-photo {
+  transform: scale(1.03);
+}
+.about-text {
+  flex: 1;
+  min-width: 0;
+  margin-left: -0.75rem;
+}
+@keyframes about-photo-border {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 .about-overview p {
   line-height: 1.8;
   margin-bottom: 1.5rem;
   letter-spacing: 0.5px;
+}
+
+.highlight-phrase {
+  position: relative;
+  z-index: 0;
+  background-image: linear-gradient(120deg, rgba(0, 170, 255, 0.7), rgba(228, 96, 255, 0.7));
+  background-repeat: no-repeat;
+  background-size: 0% 60%;
+  background-position: 0 100%;
+  transition: background-size 0.5s ease-out, color 0.5s ease-out;
+}
+
+.highlight-phrase.-active {
+  background-size: 100% 60%;
+  color: #fff;
 }
 
 /* ========================================================================
@@ -866,6 +943,49 @@ body.light-mode .timeline-details {
   color: #ddd;
   line-height: 1.5;
 }
+.contact-status {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out, box-shadow 0.25s ease-out, background 0.25s ease-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.8),
+    0 0 18px rgba(0, 170, 255, 0.4);
+}
+.contact-status.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.contact-status.success {
+  color: #bbf7d0;
+  background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.25), rgba(15, 23, 42, 0.95));
+  border-color: rgba(34, 197, 94, 0.8);
+  box-shadow:
+    0 12px 30px rgba(22, 163, 74, 0.45),
+    0 0 20px rgba(45, 212, 191, 0.45);
+}
+.contact-status.error {
+  color: #fecaca;
+  background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.25), rgba(15, 23, 42, 0.95));
+  border-color: rgba(248, 113, 113, 0.8);
+  box-shadow:
+    0 12px 30px rgba(248, 113, 113, 0.45),
+    0 0 18px rgba(251, 113, 133, 0.45);
+}
+.contact-status.sending {
+  color: #e5e7eb;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), rgba(15, 23, 42, 0.95));
+  border-color: rgba(59, 130, 246, 0.8);
+}
 .contact-form .form-group label {
   color: #fff;
   transition: color 0.2s ease;
@@ -942,6 +1062,64 @@ body.light-mode .timeline-details {
 }
 
 /* =====================================================================================
+   22) BACK-TO-TOP BUTTON
+   ===================================================================================== */
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 170, 255, 0.7);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(0, 170, 255, 0.4);
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    background 0.2s ease-out;
+  z-index: 30;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: rgba(0, 170, 255, 0.2);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.9),
+    0 0 26px rgba(0, 170, 255, 0.7);
+}
+
+body.light-mode .back-to-top {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.15),
+    0 0 18px rgba(59, 130, 246, 0.35);
+}
+
+body.light-mode .back-to-top:hover {
+  background: rgba(239, 246, 255, 1);
+}
+
+/* =====================================================================================
    18) LIGHT-MODE OVERRIDES
    ===================================================================================== */
 body.light-mode {
@@ -990,15 +1168,7 @@ body.light-mode .toggle-switch label::after {
 
 /* Light-mode hero: simple white box, more translucent (no border) */
 body.light-mode .hero .container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding-top: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  /* inherit positioning and layout from .hero .container; only change look */
 }
 /* Hero text turns dark in light mode */
 body.light-mode .hero .container h1,
@@ -1020,6 +1190,11 @@ body.light-mode .about-overview p,
 body.light-mode .project-card p,
 body.light-mode .contact-card p {
   color: #333;
+}
+body.light-mode .about-photo-wrap {
+  box-shadow:
+    0 0 18px rgba(0, 122, 204, 0.35),
+    0 0 32px rgba(148, 51, 255, 0.25);
 }
 /* Role cards in light mode (glass + lighter) */
 body.light-mode .role-card {
@@ -1182,6 +1357,16 @@ body.light-mode .send-btn:hover {
 
   .section-card h2 {
     font-size: 1.75rem;
+  }
+
+  .about-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .about-photo-wrap {
+    width: 160px;
+    height: 160px;
   }
 
   .roles-grid {

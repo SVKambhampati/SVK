@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AddressSync Automation — Oracle EBS and Commerce Cloud integration for shipping address validation.">
+  <title>AddressSync Automation | Shreyas Kambhampati</title>
+
+  <!-- Google Fonts: Instrument Serif + Inter (same as index.html) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="bg-orbs">
+    <div class="orb1"></div>
+    <div class="orb2"></div>
+    <div class="orb3"></div>
+  </div>
+
+  <!-- Particle canvas -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- Cursor glow -->
+  <div id="cur" aria-hidden="true"></div>
+
+  <!-- Page Loader -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">SVK</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <a class="logo" href="index.html">SVK</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Say hi</a></li>
+    </ul>
+  </nav>
+
+  <!-- Project Hero -->
+  <header class="project-hero">
+    <a class="back-link" href="index.html#projects">← Back to projects</a>
+    <div class="proj-icon-wrap">📦</div>
+    <h1 class="proj-title">AddressSync Automation</h1>
+    <p class="proj-subtitle">A backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud — automatically detecting and fixing address mismatches before they cause failed deliveries.</p>
+    <div class="tags">
+      <span class="tag">Oracle EBS</span>
+      <span class="tag">Oracle Commerce Cloud</span>
+      <span class="tag">PL/SQL</span>
+      <span class="tag">API Integration</span>
+      <span class="tag">Backend</span>
+    </div>
+    <div class="proj-divider"></div>
+  </header>
+
+  <!-- Project Body -->
+  <main class="project-body">
+    <section class="proj-section">
+      <h2>The Problem</h2>
+      <p>DeKalb County's IT systems were experiencing a recurring issue: shipping addresses entered in Oracle Commerce Cloud weren't always syncing correctly with Oracle EBS, the county's core enterprise system. The mismatch caused failed FedEx deliveries, manual correction work, and operational delays. There was no automated way to catch these errors before shipment.</p>
+    </section>
+
+    <section class="proj-section">
+      <h2>The Solution</h2>
+      <p>I built a backend integration layer that automatically compares address records between Oracle EBS and Oracle Commerce Cloud at the point of order processing. When a mismatch is detected, the system flags the order and attempts reconciliation before it reaches the fulfillment pipeline — stopping the problem at the source rather than dealing with the fallout after failed delivery.</p>
+    </section>
+
+    <section class="proj-section">
+      <h2>Technologies Used</h2>
+      <ul>
+        <li>Oracle EBS — enterprise backend system holding canonical address records</li>
+        <li>Oracle Commerce Cloud — customer-facing storefront where orders originate</li>
+        <li>PL/SQL — validation scripts for address cleaning and standardization</li>
+        <li>REST API integration — real-time sync between both Oracle systems</li>
+        <li>FedEx shipping API — downstream validation for delivery address format</li>
+      </ul>
+    </section>
+
+    <section class="proj-section">
+      <h2>Impact</h2>
+      <p>The integration significantly reduced failed delivery rates and eliminated the manual correction process that the logistics team had been managing. It also surfaced a broader data quality issue in how addresses were being entered on the storefront side, leading to upstream improvements in form validation.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span class="foot-l">© 2025 Shreyas Kambhampati</span>
+    <a class="foot-logo" href="index.html">SVK</a>
+    <span class="foot-r"><a href="#">Back to top ↑</a></span>
+  </footer>
+
+  <script>
+    /******************************************************************
+     * 1) Loader fade out
+     ******************************************************************/
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          loader.classList.add('loaded');
+          setTimeout(() => loader.remove(), 500);
+        }
+      }, 1000);
+    });
+
+    /******************************************************************
+     * 2) Particle System (canvas#particles)
+     ******************************************************************/
+    (function() {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let points = [];
+
+      function resize() {
+        const w = canvas.width = window.innerWidth;
+        const h = canvas.height = window.innerHeight;
+        const count = Math.floor((w * h) / 20000);
+        points = [];
+        for (let i = 0; i < count; i++) {
+          points.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: 0.3 + Math.random() * 1.1,
+            alpha: 0.3 + Math.random() * 0.7
+          });
+        }
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        points.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          p.x = (p.x + w) % w;
+          p.y = (p.y + h) % h;
+        });
+
+        const maxDist = 90;
+        points.forEach((p, i) => {
+          points.slice(i + 1).forEach(q => {
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < maxDist) {
+              const opacity = (1 - dist / maxDist) * 0.45;
+              ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.stroke();
+            }
+          });
+        });
+
+        points.forEach(p => {
+          ctx.fillStyle = `rgba(96, 165, 250, ${p.alpha * 0.45})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      draw();
+      window.addEventListener('resize', resize);
+    })();
+
+    /******************************************************************
+     * 3) Cursor Glow (div#cur)
+     ******************************************************************/
+    (function() {
+      const cur = document.getElementById('cur');
+      if (!cur) return;
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      });
+
+      function tick() {
+        const factor = 0.1;
+        currentX += (targetX - currentX) * factor;
+        currentY += (targetY - currentY) * factor;
+        cur.style.left = currentX + 'px';
+        cur.style.top = currentY + 'px';
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /******************************************************************
+     * 4) Nav Scroll (toggle scrolled class when scrollY > 50)
+     ******************************************************************/
+    (function() {
+      const nav = document.getElementById('nav');
+      if (!nav) return;
+
+      function onScroll() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /******************************************************************
+     * 5) IntersectionObserver for .proj-section → adds .vis
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.proj-section');
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('vis');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
+      );
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>

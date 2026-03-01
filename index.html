@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shreyas Kambhampati | Portfolio</title>
+  <meta name="description" content="Shreyas Kambhampati — CS student at Northeastern University, AI concentration. Software engineer, XR researcher, and builder.">
+  <meta property="og:title" content="Shreyas Kambhampati">
+  <meta property="og:description" content="CS student at Northeastern · AI · Cloud · XR">
+  <title>Shreyas Kambhampati</title>
 
   <!-- Google Font: Plus Jakarta Sans -->
   <link
@@ -20,52 +23,69 @@
 <body>
 
   <!-- ============================================================
-       1) Intro Overlay with SVK + underline + flicker-glow
+       Page Loader (fades out on load)
        ============================================================ -->
-  <div id="intro-overlay">
-    <div class="logo-container">
-      <div class="intro-logo">SVK</div>
-      <div class="logo-underline"></div>
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">SVK</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
     </div>
   </div>
 
   <!-- ============================================================
-       2) Navbar (Semi-transparent) with Toggle Switch
+       1) Navbar
        ============================================================ -->
-  <nav class="navbar">
-    <div class="container">
-      <a class="logo" href="#">
-        <span class="logo-svk">SVK</span>
-      </a>
-      <div class="nav-right">
-        <ul class="nav-links">
-          <li><a href="#about-anchor">About</a></li>
-          <li><a href="#experience-anchor">Experience</a></li>
-          <li><a href="#projects-anchor">Projects</a></li>
-          <li><a href="#skills-anchor">Skills</a></li>
-          <li><a href="#contact-anchor">Contact</a></li>
-        </ul>
-        <!-- THEME TOGGLE SWITCH -->
-        <div class="toggle-switch">
-          <input type="checkbox" id="theme-toggle" />
-          <label for="theme-toggle"></label>
-        </div>
-      </div>
-    </div>
+  <nav id="nav">
+    <a class="logo" href="#">SVK</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" data-section="about">About</a></li>
+      <li><a href="#experience" data-section="experience">Experience</a></li>
+      <li><a href="#projects" data-section="projects">Projects</a></li>
+      <li><a href="#skills" data-section="skills">Skills</a></li>
+      <li><a href="#contact" class="nav-cta" data-section="contact">Say hi</a></li>
+    </ul>
   </nav>
 
   <!-- ============================================================
        3) Hero Section (Dot-Grid Background)
        ============================================================ -->
-  <header class="hero">
-    <canvas id="dotGrid"></canvas>
-    <div class="container">
-      <div class="hero-card">
-        <h1 class="hero-title">Hi, I’m Shreyas Kambhampati</h1>
-        <p class="hero-subtitle">Computer Science Student at Northeastern University</p>
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge rev d1">
+        <span class="dot"></span>Available for opportunities
+      </div>
+      <h1 class="hero-h rev d2">
+        Hi, I'm Shreyas —<br>
+        I build <span class="grad-word" id="typed"></span><span class="cursor-blink"></span>
+      </h1>
+      <p class="hero-sub rev d3">
+        CS student at <strong>Northeastern University</strong> concentrating in AI. I've worked across research labs, government agencies, and corporate teams — building everything from immersive XR platforms to backend systems that keep real-world operations running. Currently shipping <strong>SentimentSignal</strong>.
+      </p>
+      <div class="badges rev d4">
+        <span class="badge">Python Certified Developer</span>
+        <span class="badge">Full-Stack Engineer</span>
+        <span class="badge">AWS Cloud Practitioner</span>
+        <span class="badge">HCI Experience Architect</span>
+      </div>
+      <div class="hero-actions rev d5">
+        <a href="#projects" class="btn btn-p mag-btn">View my work</a>
+        <a href="#contact" class="btn btn-s mag-btn">Get in touch</a>
+      </div>
+      <div class="hero-strip rev d6">
+        <div class="strip-item"><span class="strip-label">Currently at</span><span class="strip-val">Oasis @ NEU</span></div>
+        <div class="strip-item"><span class="strip-label">Based in</span><span class="strip-val">Boston, MA</span></div>
+        <div class="strip-item"><span class="strip-label">Experience</span><span class="strip-val">3+ years</span></div>
+        <div class="strip-item"><span class="strip-label">Roles</span><span class="strip-val">4 industry</span></div>
       </div>
     </div>
-  </header>
+  </section>
+
+  <div class="marquee-section">
+    <div class="marquee-track" id="marquee">
+      <div class="marquee-inner" id="mInner"></div>
+      <div class="marquee-inner" id="mInner2"></div>
+    </div>
+  </div>
 
   <!-- ============================================================
        4) Main Content (All inside a single .container)
@@ -73,336 +93,241 @@
   <main class="container">
 
     <!-- ================================================
-         ABOUT ME (Rounded Card)
-         – Invisible anchor (#about-anchor) sits 124px above the <h2>
+         ABOUT ME
          ================================================ -->
-    <div class="section-card">
-      <section class="fade-in-section">
-        <div id="about-anchor" class="section-anchor"></div>
-
-        <div class="about-overview">
-          <h2>About Me</h2>
-          <div class="about-layout">
-            <div class="about-photo-wrap">
-              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati" class="about-photo" />
+    <section id="about" class="sec fade-in-section">
+      <div class="sec-inner">
+        <div class="sec-hd rev d1">
+          <span class="sec-n">01</span>
+          <h2 class="sec-t">About me</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy rev d1">
+            <p>Hi, I'm Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I've worked across research labs, government, and corporate teams, building everything from <em>immersive VR environments</em> to backend solutions that streamline data systems.</p>
+            <p>Along the way I've developed real-world experience in software engineering, extended reality, and digital technologies that drive innovation. I hold certifications in <strong>AWS</strong>, <strong>Python</strong>, <strong>Unity</strong>, and <strong>MySQL</strong>, and I'm always exploring new tools and techniques to stay ahead of the curve.</p>
+            <p>Whether I'm coding, designing, or collaborating with a team, I'm driven by the challenge of creating <strong>smart, scalable solutions that make a difference</strong>. Outside of engineering, I'm into finance, Indian cinema, badminton, and lifting.</p>
+          </div>
+          <div class="about-right rev d1">
+            <div class="photo-frame">
+              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati">
             </div>
-            <div class="about-text">
-          <p class="about-text-body">
-            Hi, I’m Shreyas — a Computer Science student at Northeastern University with a passion for turning complex ideas into impactful tech. I’ve worked across research labs, government, and corporate teams, building everything from immersive VR environments to backend solutions that streamline data systems. Along the way, I’ve developed real-world experience in <span class="highlight-phrase">software engineering</span>, <span class="highlight-phrase">extended reality</span>, and <span class="highlight-phrase">digital technologies</span> that drive innovation. I hold industry certifications in <span class="highlight-phrase">AWS, Python, Unity, and MySQL</span>, and I’m always exploring new tools and techniques to stay ahead of the curve. Whether I’m coding, designing, or collaborating with a team, I’m driven by the challenge of creating smart, scalable solutions that make a difference.
-          </p>
+            <div class="about-links">
+              <a class="alink" href="https://github.com/SVKambhampati">GitHub ↗</a>
+              <a class="alink" href="https://www.linkedin.com/in/shreyas-kambhampati/">LinkedIn ↗</a>
             </div>
           </div>
         </div>
-        <div class="roles-grid">
-          <div class="role-card"><h3>Python Certified Developer</h3></div>
-          <div class="role-card"><h3>Full-Stack Engineer</h3></div>
-          <div class="role-card"><h3>AWS Cloud Practitioner</h3></div>
-          <div class="role-card"><h3>HCI Experience Architect</h3></div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <!-- ================================================
-         EXPERIENCE (Vertical Timeline, newest → oldest)
-         – Invisible anchor (#experience-anchor) sits 124px above the <h2>
+         EXPERIENCE
          ================================================ -->
-    <div class="section-card">
-      <section class="fade-in-section">
-        <div id="experience-anchor" class="section-anchor"></div>
-
-        <h2>Experience</h2>
-
-        <div class="experience-timeline">
-          <!-- Newest / Current -->
-          <article class="timeline-item fade-in-section">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <header class="timeline-header">
-                <h3>Software Engineer</h3>
-                <span class="timeline-meta">Oasis at Northeastern · Jan 2026 – Present · Boston, MA · Hybrid</span>
-                <span class="timeline-badge">Current</span>
-              </header>
-              <p class="timeline-summary">
-                Building a sentiment‑driven insights platform that helps student investors understand how the market feels before they make decisions.
-              </p>
-              <ul class="timeline-details">
-                <li>Aggregate high‑volume social media streams and normalize them into a unified data model for analysis.</li>
-                <li>Use natural language processing to classify posts as bullish, bearish, or neutral in real time.</li>
-                <li>Surface trends and sentiment shifts through dashboards that highlight suddenly shifting tickers or topics.</li>
+    <section id="experience" class="sec fade-in-section">
+      <div class="sec-inner">
+        <div class="sec-hd rev"><span class="sec-n">02</span><h2 class="sec-t">Experience</h2></div>
+        <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-left-inner">
+              <div class="exp-period">Jan 2026 — Present</div>
+              <div class="exp-loc">Boston, MA · Hybrid</div>
+              <span class="exp-cur">Current</span>
+            </div>
+            <div>
+              <div class="exp-role">Software Engineer</div>
+              <div class="exp-co">Oasis at Northeastern</div>
+              <ul class="exp-ul">
+                <li>Building SentimentSignal — a sentiment-driven insights platform that helps student investors understand how the market feels before they make decisions.</li>
+                <li>Aggregate high-volume social media streams and normalize them into a unified data model for analysis.</li>
+                <li>Use NLP to classify posts as bullish, bearish, or neutral in real time; surface trends through dashboards highlighting suddenly shifting tickers.</li>
               </ul>
             </div>
-          </article>
+          </div>
 
-          <!-- Research / XR -->
-          <article class="timeline-item fade-in-section">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <header class="timeline-header">
-                <h3>Research Assistant &amp; Lead Project Developer</h3>
-                <span class="timeline-meta">The University of Texas at Dallas · Jun 2024 – Dec 2024 · Dallas, TX · Hybrid</span>
-              </header>
-              <p class="timeline-summary">
-                Focused on interactive technologies—including haptics, extended reality, and human‑computer interaction—under Dr. Jin Ryong Kim.
-              </p>
-              <ul class="timeline-details">
-                <li>Designed and implemented a haptic‑enhanced data visualization system that lets users feel changes in datasets through tactile feedback.</li>
-                <li>Built real‑time IoT spatial sync pipelines for a Metaverse platform so physical sensor data stayed aligned with virtual environments.</li>
-                <li>Led a small team from concept to prototype, defining requirements, architecture, and iteration plans for an XR research project.</li>
+          <div class="exp-item">
+            <div class="exp-left-inner">
+              <div class="exp-period">Jun — Dec 2024</div>
+              <div class="exp-loc">Dallas, TX · Hybrid</div>
+            </div>
+            <div>
+              <div class="exp-role">Research Assistant &amp; Lead Developer</div>
+              <div class="exp-co">University of Texas at Dallas</div>
+              <ul class="exp-ul">
+                <li>Focused on interactive technologies — haptics, extended reality, and HCI — under Dr. Jin Ryong Kim.</li>
+                <li>Designed a haptic-enhanced data visualization system that lets users feel changes in datasets through tactile feedback.</li>
+                <li>Built real-time IoT spatial sync pipelines for a Metaverse platform; led team from concept to XR prototype.</li>
               </ul>
             </div>
-          </article>
+          </div>
 
-          <!-- LexisNexis -->
-          <article class="timeline-item fade-in-section">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <header class="timeline-header">
-                <h3>Technical Communications Intern</h3>
-                <span class="timeline-meta">LexisNexis · May 2023 – Dec 2023 · Alpharetta, GA · Remote</span>
-              </header>
-              <p class="timeline-summary">
-                Created technical and social content that amplified LexisNexis initiatives and internal events across multiple channels.
-              </p>
-              <ul class="timeline-details">
-                <li>Managed and produced posts for corporate and internal social media to drive engagement around events and product updates.</li>
-                <li>Used Adobe Creative Cloud tools (Photoshop, Lightroom, After Effects) to design on‑brand visual assets and motion graphics.</li>
-                <li>Collaborated with technical and marketing teams to translate complex topics into clear, accessible narratives.</li>
+          <div class="exp-item">
+            <div class="exp-left-inner">
+              <div class="exp-period">May — Dec 2023</div>
+              <div class="exp-loc">Alpharetta, GA · Remote</div>
+            </div>
+            <div>
+              <div class="exp-role">Technical Communications Intern</div>
+              <div class="exp-co">LexisNexis</div>
+              <ul class="exp-ul">
+                <li>Created technical and social content that amplified LexisNexis initiatives across multiple channels.</li>
+                <li>Used Adobe CC — Photoshop, Lightroom, After Effects — to design on-brand visual assets and motion graphics.</li>
               </ul>
             </div>
-          </article>
+          </div>
 
-          <!-- DeKalb County IT -->
-          <article class="timeline-item fade-in-section">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <header class="timeline-header">
-                <h3>Software Developer Intern</h3>
-                <span class="timeline-meta">DeKalb County IT · May 2023 – Jul 2023 · Atlanta, GA</span>
-              </header>
-              <p class="timeline-summary">
-                Built a backend integration system to keep shipping addresses in sync and stop failed FedEx deliveries for county orders.
-              </p>
-              <ul class="timeline-details">
-                <li>Integrated Oracle EBS and Oracle Commerce Cloud to automatically detect and reconcile address mismatches before shipment.</li>
+          <div class="exp-item">
+            <div class="exp-left-inner">
+              <div class="exp-period">May — Jul 2023</div>
+              <div class="exp-loc">Atlanta, GA · On-site</div>
+            </div>
+            <div>
+              <div class="exp-role">Software Developer Intern</div>
+              <div class="exp-co">DeKalb County IT</div>
+              <ul class="exp-ul">
+                <li>Built a backend integration system to keep shipping addresses in sync and stop failed FedEx deliveries for county orders.</li>
+                <li>Integrated Oracle EBS and Commerce Cloud to automatically detect and reconcile address mismatches before shipment.</li>
                 <li>Wrote PL/SQL validation scripts that cleaned and standardized address data used by downstream logistics systems.</li>
-                <li>Reduced delivery errors and manual correction work by flagging problematic orders early in the fulfillment pipeline.</li>
               </ul>
             </div>
-          </article>
+          </div>
+
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <!-- ================================================
-         PROJECTS (Rounded Card)
+         PROJECTS
          – Invisible anchor (#projects-anchor) sits 124px above the <h2>
          ================================================ -->
-    <div class="section-card">
-      <section class="fade-in-section">
-        <div id="projects-anchor" class="section-anchor"></div>
+    <section id="projects" class="sec fade-in-section">
+      <div class="sec-inner">
+        <div class="sec-hd rev"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
+        <div class="proj-grid">
+          <a href="project-one.html" class="proj-card tilt-card">
+            <div class="proj-top"><div class="proj-icon">🥽</div><span class="proj-arr">↗</span></div>
+            <div class="proj-name">EnvisionVR</div>
+            <p class="proj-desc">A VR application built to support special-needs students with visual-spatial challenges by transforming traditional lessons into immersive 3D learning experiences — from the human body to the solar system.</p>
+            <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Meta SDK</span><span class="tag">XR</span></div>
+          </a>
 
-        <h2>Projects</h2>
-        <div class="projects-grid">
-          <article class="project-card">
-            <h3>EnvisionVR</h3>
-            <p>
-              EnvisionVR is a virtual reality application built to support special‐needs students with visual‐spatial challenges by transforming traditional lessons into immersive 3D learning experiences. From exploring the human body to navigating the solar system, the platform brings classroom concepts to life using Unity, Meta SDKs, and real‐time simulations.
-            </p>
-            <a href="project-one.html">View →</a>
-          </article>
-          <article class="project-card">
-            <h3>MovieMind</h3>
-            <p>
-              MovieMind is an intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with both content‐based and collaborative filtering, it helps users discover movies they’ll love through a smart, intuitive interface.
-            </p>
-            <a href="project-two.html">View →</a>
-          </article>
-          <article class="project-card">
-            <h3>AddressSync Automation</h3>
-            <p>
-              AddressSync Automation is a backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. It automatically detects and fixes address mismatches causing failed FedEx deliveries, reducing errors and improving operational efficiency.
-            </p>
-            <a href="project-three.html">View →</a>
-          </article>
-          <article class="project-card">
-            <h3>StyleForecast</h3>
-            <p>
-              A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user’s wardrobe. It combines weather data with user preferences to enhance daily outfit planning.
-            </p>
-            <a href="project-four.html">View →</a>
-          </article>
+          <a href="project-two.html" class="proj-card tilt-card">
+            <div class="proj-top"><div class="proj-icon">🎬</div><span class="proj-arr">↗</span></div>
+            <div class="proj-name">MovieMind</div>
+            <p class="proj-desc">An intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with content-based and collaborative filtering to help users discover movies they'll love.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Collaborative Filtering</span></div>
+          </a>
+
+          <a href="project-three.html" class="proj-card tilt-card">
+            <div class="proj-top"><div class="proj-icon">📦</div><span class="proj-arr">↗</span></div>
+            <div class="proj-name">AddressSync Automation</div>
+            <p class="proj-desc">A backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. Automatically detects and fixes address mismatches causing failed FedEx deliveries.</p>
+            <div class="tags"><span class="tag">Oracle EBS</span><span class="tag">PL/SQL</span><span class="tag">API Integration</span></div>
+          </a>
+
+          <a href="project-four.html" class="proj-card tilt-card">
+            <div class="proj-top"><div class="proj-icon">🌤️</div><span class="proj-arr">↗</span></div>
+            <div class="proj-name">StyleForecast</div>
+            <p class="proj-desc">A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user's wardrobe. Combines weather data with user preferences to make getting dressed actually easy.</p>
+            <div class="tags"><span class="tag">Flask</span><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">OpenWeatherMap</span></div>
+          </a>
+
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <!-- ================================================
-         SKILLS & TOOLS (Rounded Card)
-         – Invisible anchor (#skills-anchor) sits 124px above the <h2>
+         SKILLS &amp; TOOLS
          ================================================ -->
-    <div class="section-card">
-      <section class="fade-in-section">
-        <div id="skills-anchor" class="section-anchor"></div>
+    <section id="skills" class="sec fade-in-section">
+      <div class="sec-inner">
+        <div class="sec-hd rev"><span class="sec-n">04</span><h2 class="sec-t">Skills &amp; tools</h2></div>
+        <div class="skills-grid">
 
-        <h2>Skills &amp; Tools</h2>
-        <ul class="skills-expandable">
-          <!-- Java -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Java</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
+          <div class="sk-col">
+            <div class="sk-hd">Languages</div>
+            <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>Java</div>
+              <div class="sk-item"><span class="sk-d"></span>Python</div>
+              <div class="sk-item"><span class="sk-d"></span>JavaScript</div>
+              <div class="sk-item"><span class="sk-d"></span>C#</div>
+              <div class="sk-item"><span class="sk-d"></span>SQL / PL/SQL</div>
+              <div class="sk-item"><span class="sk-d"></span>HTML &amp; CSS</div>
             </div>
-            <div class="skill-details">
-              Built modular Java applications in both academic projects (HCI prototypes at UT Dallas) and coursework, leveraging Eclipse to structure packages, write JUnit tests, and integrate third‐party libraries.
+          </div>
+
+          <div class="sk-col">
+            <div class="sk-hd">Frameworks</div>
+            <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>Flask</div>
+              <div class="sk-item"><span class="sk-d"></span>Unity</div>
+              <div class="sk-item"><span class="sk-d"></span>Adobe CC</div>
+              <div class="sk-item"><span class="sk-d"></span>Git</div>
+              <div class="sk-item"><span class="sk-d"></span>JUnit</div>
             </div>
-          </li>
-          <!-- Python -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Python</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
+          </div>
+
+          <div class="sk-col">
+            <div class="sk-hd">Cloud &amp; Infra</div>
+            <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>AWS (Certified)</div>
+              <div class="sk-item"><span class="sk-d"></span>Azure AI</div>
+              <div class="sk-item"><span class="sk-d"></span>Oracle EBS</div>
+              <div class="sk-item"><span class="sk-d"></span>Oracle CC</div>
             </div>
-            <div class="skill-details">
-              Developed the back‐end of StyleForecast (Flask + SQLite), writing Python scripts to fetch weather data (OpenWeatherMap API), process wardrobe metadata, and recommend daily outfits. Additionally used Python in lab scripts for data visualization and haptic research.
+          </div>
+
+          <div class="sk-col">
+            <div class="sk-hd">Research &amp; XR</div>
+            <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>HCI Research</div>
+              <div class="sk-item"><span class="sk-d"></span>Haptics</div>
+              <div class="sk-item"><span class="sk-d"></span>Meta SDK</div>
+              <div class="sk-item"><span class="sk-d"></span>Spatial Computing</div>
+              <div class="sk-item"><span class="sk-d"></span>UI/UX Design</div>
             </div>
-          </li>
-          <!-- JavaScript -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">JavaScript</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
-            </div>
-            <div class="skill-details">
-              Wrote client‐side code in vanilla JavaScript for StyleForecast’s interactive UI (e.g., dynamically updating outfit suggestions without page reload). Familiar with ES6 syntax and DOM manipulation.
-            </div>
-          </li>
-          <!-- HTML & CSS -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">HTML &amp; CSS</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
-            </div>
-            <div class="skill-details">
-              Crafted responsive, mobile‐friendly layouts for StyleForecast’s front end using HTML5 semantics and CSS3 features (flexbox, grid, custom properties), ensuring consistent styling across browsers and screen sizes.
-            </div>
-          </li>
-          <!-- MySQL -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">MySQL</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
-            </div>
-            <div class="skill-details">
-              Designed and managed relational database schemas for StyleForecast (e.g., user profiles, wardrobe items, weather logs) using MySQL; wrote optimized queries for lookups and joins to support real‐time outfit recommendations.
-            </div>
-          </li>
-          <!-- C# -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">C#</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
-            </div>
-            <div class="skill-details">
-              Programmed interactive game logic, UI controllers, and shader hooks in Unity for EnvisionVR using C#—managing game objects, handling user input, and linking UI elements to underlying data models.
-            </div>
-          </li>
-          <!-- XML -->
-          <li class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">XML</span>
-              <button class="toggle-btn">
-                <span class="icon">+</span> details
-              </button>
-            </div>
-            <div class="skill-details">
-              Utilized XML for configuration and data serialization in HCI research (e.g., UI layout files, custom configuration for haptic devices). Also familiar with reading/writing XML in C# scripts within Unity.
-            </div>
-          </li>
-        </ul>
-      </section>
-    </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
     <!-- ================================================
-         CONTACT (Rounded Card)
-         – Invisible anchor (#contact-anchor) sits 124px above the <h2>
+         CONTACT
          ================================================ -->
-    <div class="section-card">
-      <section class="fade-in-section">
-        <div id="contact-anchor" class="section-anchor"></div>
+    <section id="contact" class="sec fade-in-section">
+      <div class="sec-inner">
+        <div class="sec-hd rev"><span class="sec-n">05</span><h2 class="sec-t">Get in touch</h2></div>
+        <div class="contact-grid">
 
-        <div class="contact-card">
-          <h2>Contact Me</h2>
-          <p>If you’d like to get in touch—whether it’s a project collaboration, feedback, or just to say hi—drop me a message below:</p>
+          <div class="rev">
+            <h2 class="contact-h">Let's build something together.</h2>
+            <p class="contact-p">If you'd like to get in touch — whether it's a project collaboration, an opportunity, or just to say hi — drop me a message. I'm always happy to chat.</p>
+            <div class="crow"><span class="crow-l">LinkedIn</span><a href="https://linkedin.com/in/shreyas-kambhampati" target="_blank" rel="noopener">shreyas-kambhampati ↗</a></div>
+            <div class="crow"><span class="crow-l">GitHub</span><a href="https://github.com/SVKambhampati" target="_blank" rel="noopener">SVKambhampati ↗</a></div>
+          </div>
 
-          <form class="contact-form" action="https://formspree.io/f/mwpbpblk" method="POST">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
+          <div class="rev d1">
+            <div class="form-wrap">
+              <form class="form contact-form" action="https://formspree.io/f/mwpbpblk" method="POST">
+                <div class="field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+                <div class="field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+                <div class="field"><label>Message</label><textarea name="message" placeholder="What's on your mind?" required></textarea></div>
+                <input type="hidden" name="_subject" value="New message from svk-portfolio site">
+                <button type="submit" class="btn-send mag-btn">Send message →</button>
+              </form>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Write your message…"
-                required
-              ></textarea>
-            </div>
-
-            <!-- Optional custom subject for Formspree emails -->
-            <input type="hidden" name="_subject" value="New message from svk-portfolio site" />
-
-            <button type="submit" class="send-btn">Send Message</button>
-          </form>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- ============================================================
-       5) Footer
-       ============================================================ -->
-  <footer class="footer fade-in-section">
-    <div class="container">
-      <p>📧 <a href="mailto:svkambhampati@gmail.com">svkambhampati@gmail.com</a></p>
-      <p>🔗 
-        <a href="https://www.linkedin.com/in/shreyas-kambhampati/" target="_blank">LinkedIn</a> | 
-        <a href="https://github.com/SVKambhampati" target="_blank">GitHub</a>
-      </p>
-      <p>© 2025 Shreyas Kambhampati</p>
-    </div>
+  <footer>
+    <span class="foot-l">© 2025 Shreyas Kambhampati</span>
+    <a class="foot-logo" href="#">SVK</a>
+    <span class="foot-r"><a href="#hero">Back to top ↑</a></span>
   </footer>
 
   <!-- Back to top button -->
@@ -414,9 +339,11 @@
        ============================================================ -->
   <script>
     /******************************************************************
-     * 1) Dot-Grid Canvas Animation (now respects light-mode)
+     * 1) Dot-Grid Canvas Animation (skipped if #dotGrid not present)
      ******************************************************************/
+    (function() {
     const canvas = document.getElementById('dotGrid');
+    if (!canvas) return;
     const ctx    = canvas.getContext('2d');
     let cw, ch, offsetX, offsetY;
     const dpr             = window.devicePixelRatio || 1;
@@ -553,30 +480,10 @@
       resizeCanvas();
       animate();
     };
+    })();
 
     /******************************************************************
-     * 2) Intro Overlay Removal & SVK Glow Trigger
-     ******************************************************************/
-    window.addEventListener('DOMContentLoaded', () => {
-      const overlay = document.getElementById('intro-overlay');
-      const hero    = document.querySelector('.hero');
-      const svk     = document.querySelector('.intro-logo');
-      overlay.addEventListener('animationend', e => {
-        if (e.animationName === 'overlayFade') {
-          overlay.remove();
-          hero.classList.add('intro-ready');
-          svk.classList.add('glow-active');
-          // Trigger hero text reveal
-          const heroContainer = document.querySelector('.hero .container');
-          if (heroContainer) {
-            heroContainer.classList.add('hero-text-visible');
-          }
-        }
-      });
-    });
-
-    /******************************************************************
-     * 3) Fade-In On Scroll (Intersection Observer)
+     * 2) Fade-In On Scroll (Intersection Observer)
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
       const options = { root: null, rootMargin: '0px', threshold: 0.1 };
@@ -594,57 +501,132 @@
     });
 
     /******************************************************************
-     * 4b) Active state for experience timeline items
+     * 2a) Marquee Ticker
+     ******************************************************************/
+    (function() {
+      const mInner = document.getElementById('mInner');
+      const mInner2 = document.getElementById('mInner2');
+      if (!mInner || !mInner2) return;
+      const items = [
+        { label: 'SentimentSignal', val: 'NLP · Sentiment Analysis' },
+        { label: 'EnvisionVR', val: 'Unity · Meta SDK · XR' },
+        { label: 'AWS Certified', val: 'Cloud Practitioner' },
+        { label: 'UT Dallas', val: 'HCI Research · Haptics' },
+        { label: 'Northeastern', val: 'CS · AI Concentration' },
+        { label: 'DeKalb County', val: 'Oracle EBS · PL/SQL' },
+        { label: 'LexisNexis', val: 'Adobe CC · Motion Design' },
+        { label: 'StyleForecast', val: 'Flask · Python · ML' },
+        { label: 'MovieMind', val: 'Collaborative Filtering' },
+        { label: 'Boston, MA', val: 'Open to Opportunities' }
+      ];
+      const html = items.map(it =>
+        `<div class="marquee-item"><span>${it.label}</span><span class="marquee-sep">—</span>${it.val}</div>`
+      ).join('');
+      mInner.innerHTML = html;
+      mInner2.innerHTML = html;
+    })();
+
+    /******************************************************************
+     * 2b) Typing Effect (#typed)
+     ******************************************************************/
+    (function() {
+      const el = document.getElementById('typed');
+      if (!el) return;
+      const phrases = [
+        'things that matter.',
+        'AI that helps people.',
+        'experiences that stick.',
+        'the future, one line at a time.'
+      ];
+      const typeMs = 78;
+      const deleteMs = 42;
+      const pauseMs = 2000;
+      const startDelay = 2200;
+
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function tick() {
+        const phrase = phrases[phraseIndex];
+        if (isDeleting) {
+          charIndex--;
+          el.textContent = phrase.slice(0, charIndex);
+          if (charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            setTimeout(tick, typeMs);
+          } else {
+            setTimeout(tick, deleteMs);
+          }
+        } else {
+          charIndex++;
+          el.textContent = phrase.slice(0, charIndex);
+          if (charIndex === phrase.length) {
+            isDeleting = true;
+            setTimeout(tick, pauseMs);
+          } else {
+            setTimeout(tick, typeMs);
+          }
+        }
+      }
+
+      setTimeout(() => {
+        el.textContent = '';
+        charIndex = 0;
+        isDeleting = false;
+        tick();
+      }, startDelay);
+    })();
+
+    /******************************************************************
+     * 2c) Magnetic Buttons (.mag-btn)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const btns = document.querySelectorAll('.mag-btn');
+      const factor = 0.18;
+      btns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          btn.style.transition = 'none';
+          const rect = btn.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) * factor;
+          const dy = (e.clientY - cy) * factor;
+          btn.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+          btn.style.transform = 'translate(0, 0)';
+          btn.offsetWidth; /* force reflow */
+          btn.addEventListener('transitionend', function reset() {
+            btn.style.transition = '';
+            btn.removeEventListener('transitionend', reset);
+          }, { once: true });
+        });
+      });
+    });
+
+    /******************************************************************
+     * 4b) Experience items staggered animation (.exp-item.vis)
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
-      const items = document.querySelectorAll('.timeline-item');
-      const timeline = document.querySelector('.experience-timeline');
-      if (!items.length || !timeline) return;
+      const items = document.querySelectorAll('.exp-item');
+      if (!items.length) return;
 
-      const activeObserver = new IntersectionObserver(
+      const expObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach(entry => {
-            const el = entry.target;
             if (entry.isIntersecting) {
-              el.classList.add('active');
-            } else {
-              el.classList.remove('active');
+              entry.target.classList.add('vis');
+              expObserver.unobserve(entry.target);
             }
           });
         },
-        {
-          root: null,
-          threshold: 0.35
-        }
+        { root: null, threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
       );
 
-      items.forEach(item => activeObserver.observe(item));
-
-      // Scroll-driven spine fill using a CSS variable
-      let ticking = false;
-      const updateTimelineProgress = () => {
-        const rect = timeline.getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const start = Math.max(0, vh * 0.1 - rect.top);
-        const total = rect.height + vh * 0.2;
-        let progress = start / total;
-        progress = Math.max(0, Math.min(1, progress));
-        timeline.style.setProperty('--timeline-progress', progress.toString());
-        ticking = false;
-      };
-
-      updateTimelineProgress();
-
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          window.requestAnimationFrame(updateTimelineProgress);
-          ticking = true;
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        updateTimelineProgress();
-      });
+      items.forEach(item => expObserver.observe(item));
     });
 
     /******************************************************************
@@ -673,10 +655,91 @@
     });
 
     /******************************************************************
-     * 5) Accordion Toggle for Skills & Tools
+     * 4a) 3D Tilt + Spotlight on Project Cards (.tilt-card)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.proj-card.tilt-card');
+      const tiltFactor = 10;
+      const easeOut = 'cubic-bezier(0.23, 1, 0.32, 1)';
+
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transition = 'none';
+        });
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const nx = (x / rect.width) * 100;
+          const ny = (y / rect.height) * 100;
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const dx = (x - cx) / cx;
+          const dy = (y - cy) / cy;
+          const rotateY = dx * tiltFactor;
+          const rotateX = -dy * tiltFactor;
+
+          card.style.setProperty('--mx', nx + '%');
+          card.style.setProperty('--my', ny + '%');
+          card.style.transform = `perspective(600px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(6px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transition = `transform 0.5s ${easeOut}, border-color 0.25s ease, box-shadow 0.25s ease`;
+          card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+        });
+      });
+    });
+
+    /******************************************************************
+     * 4b) Project cards scroll reveal (.proj-card.vis)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.proj-card');
+      if (!cards.length) return;
+
+      const projObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('vis');
+              projObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
+      );
+
+      cards.forEach(card => projObserver.observe(card));
+    });
+
+    /******************************************************************
+     * 4c) Skills columns scroll reveal (.sk-col.vis)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const cols = document.querySelectorAll('.sk-col');
+      if (!cols.length) return;
+
+      const skObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('vis');
+              skObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
+      );
+
+      cols.forEach(col => skObserver.observe(col));
+    });
+
+    /******************************************************************
+     * 5) Accordion Toggle (legacy - only if .toggle-btn exists)
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', () => {
       const toggles = document.querySelectorAll('.toggle-btn');
+      if (!toggles.length) return;
       toggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const listItem = btn.closest('.skill-item');
@@ -703,56 +766,61 @@
     });
 
     /******************************************************************
-     * 6) Theme Toggle (Light/Dark)
+     * 6) Theme Toggle (Light/Dark) — only if toggle exists
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
-      toggle.addEventListener('change', function() {
-        document.body.classList.toggle('light-mode');
-      });
+      if (toggle) {
+        toggle.addEventListener('change', function() {
+          document.body.classList.toggle('light-mode');
+        });
+      }
     });
 
     /******************************************************************
-     * 7) Navbar active link based on scroll (scrollspy)
+     * 7) Active section tracking (scroll-based)
      ******************************************************************/
-    document.addEventListener('DOMContentLoaded', function() {
-      const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
-      if (!navLinks.length) return;
+    (function() {
+      const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+      const sectionIds = ['about', 'experience', 'projects', 'skills', 'contact'];
+      const offset = 120;
 
-      const sectionMap = new Map();
-      navLinks.forEach(link => {
-        const id = link.getAttribute('href').slice(1);
-        const section = document.getElementById(id);
-        if (section) {
-          sectionMap.set(section, link);
+      function getSectionTop(id) {
+        const el = document.getElementById(id);
+        if (!el) return Infinity;
+        const rect = el.getBoundingClientRect();
+        return rect.top + window.scrollY;
+      }
+
+      function updateActive() {
+        const scrollY = window.scrollY;
+        let activeId = sectionIds[0];
+        for (const id of sectionIds) {
+          const top = getSectionTop(id);
+          if (top - offset <= scrollY) {
+            activeId = id;
+          }
         }
-      });
+        navLinks.forEach(link => {
+          const section = link.getAttribute('data-section');
+          link.classList.toggle('active', section === activeId);
+        });
+      }
 
-      if (!sectionMap.size) return;
-
-      const clearActive = () => {
-        navLinks.forEach(l => l.classList.remove('nav-active'));
-      };
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const link = sectionMap.get(entry.target);
-              if (!link) return;
-              clearActive();
-              link.classList.add('nav-active');
-            }
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateActive();
+            ticking = false;
           });
-        },
-        {
-          root: null,
-          threshold: 0.4
+          ticking = true;
         }
-      );
+      }
 
-      sectionMap.forEach((_, section) => observer.observe(section));
-    });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      updateActive();
+    })();
 
     /******************************************************************
      * 8) About Me text highlight on scroll
@@ -852,6 +920,139 @@
         }, 4000);
       });
     });
+
+    /******************************************************************
+     * 11) Page Loader (fade out on load)
+     ******************************************************************/
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          loader.classList.add('loaded');
+          setTimeout(() => loader.remove(), 500);
+        }
+      }, 1000);
+    });
+
+    /******************************************************************
+     * 12) Particle System (canvas#particles)
+     ******************************************************************/
+    (function() {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let points = [];
+      let animId = null;
+
+      function resize() {
+        const w = canvas.width = window.innerWidth;
+        const h = canvas.height = window.innerHeight;
+        const count = Math.floor((w * h) / 20000);
+        points = [];
+        for (let i = 0; i < count; i++) {
+          points.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: 0.3 + Math.random() * 1.1,
+            alpha: 0.3 + Math.random() * 0.7
+          });
+        }
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        points.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          p.x = (p.x + w) % w;
+          p.y = (p.y + h) % h;
+        });
+
+        const maxDist = 90;
+        points.forEach((p, i) => {
+          points.slice(i + 1).forEach(q => {
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < maxDist) {
+              const opacity = (1 - dist / maxDist) * 0.45;
+              ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.stroke();
+            }
+          });
+        });
+
+        points.forEach(p => {
+          ctx.fillStyle = `rgba(96, 165, 250, ${p.alpha * 0.45})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        animId = requestAnimationFrame(draw);
+      }
+
+      resize();
+      draw();
+      window.addEventListener('resize', () => {
+        resize();
+      });
+    })();
+
+    /******************************************************************
+     * 13) Cursor Glow (div#cur)
+     ******************************************************************/
+    (function() {
+      const cur = document.getElementById('cur');
+      if (!cur) return;
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      });
+
+      function tick() {
+        const factor = 0.1;
+        currentX += (targetX - currentX) * factor;
+        currentY += (targetY - currentY) * factor;
+        cur.style.left = currentX + 'px';
+        cur.style.top = currentY + 'px';
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /******************************************************************
+     * 14) Nav Scroll (toggle scrolled class when scrollY > 50)
+     ******************************************************************/
+    (function() {
+      const nav = document.getElementById('nav');
+      if (!nav) return;
+
+      function onScroll() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
   </script>
 </body>
 </html>

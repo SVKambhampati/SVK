@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MovieMind — ML-powered movie recommendation system using collaborative and content-based filtering.">
+  <title>MovieMind | Shreyas Kambhampati</title>
+
+  <!-- Google Fonts: Instrument Serif + Inter (same as index.html) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="bg-orbs">
+    <div class="orb1"></div>
+    <div class="orb2"></div>
+    <div class="orb3"></div>
+  </div>
+
+  <!-- Particle canvas -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- Cursor glow -->
+  <div id="cur" aria-hidden="true"></div>
+
+  <!-- Page Loader -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">SVK</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <a class="logo" href="index.html">SVK</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Say hi</a></li>
+    </ul>
+  </nav>
+
+  <!-- Project Hero -->
+  <header class="project-hero">
+    <a class="back-link" href="index.html#projects">← Back to projects</a>
+    <div class="proj-icon-wrap">🎬</div>
+    <h1 class="proj-title">MovieMind</h1>
+    <p class="proj-subtitle">An intelligent movie recommendation system that delivers personalized film suggestions using machine learning — built with both content-based and collaborative filtering.</p>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">ML</span>
+      <span class="tag">Collaborative Filtering</span>
+      <span class="tag">Content-Based Filtering</span>
+    </div>
+    <div class="proj-divider"></div>
+  </header>
+
+  <!-- Project Body -->
+  <main class="project-body">
+    <section class="proj-section">
+      <h2>Overview</h2>
+      <p>MovieMind is a machine learning-powered recommendation engine designed to help users discover films they'll genuinely love. By combining two complementary filtering techniques, it surfaces suggestions that are both personalized to individual taste and informed by broader viewing patterns.</p>
+    </section>
+
+    <section class="proj-section">
+      <h2>How It Works</h2>
+      <p>Content-based filtering analyzes movie metadata — genres, directors, cast, and plot keywords — to find films similar to ones a user has already enjoyed. Collaborative filtering identifies patterns across users with similar taste profiles to surface hidden gems the user might never have found on their own. MovieMind combines both signals for more robust, accurate recommendations.</p>
+    </section>
+
+    <section class="proj-section">
+      <h2>Technologies Used</h2>
+      <ul>
+        <li>Python — core language for data processing and model logic</li>
+        <li>scikit-learn — cosine similarity and matrix factorization</li>
+        <li>Pandas & NumPy — data wrangling and feature engineering</li>
+        <li>Flask — lightweight web server for the recommendation API</li>
+        <li>The Movies Dataset — training data source</li>
+      </ul>
+    </section>
+
+    <section class="proj-section">
+      <h2>What I Learned</h2>
+      <p>Building MovieMind deepened my understanding of how recommendation systems actually work at scale — the cold start problem, the tradeoffs between filtering approaches, and how to evaluate recommendation quality beyond simple accuracy metrics. It also gave me hands-on experience translating ML research into a working product.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span class="foot-l">© 2025 Shreyas Kambhampati</span>
+    <a class="foot-logo" href="index.html">SVK</a>
+    <span class="foot-r"><a href="#">Back to top ↑</a></span>
+  </footer>
+
+  <script>
+    /******************************************************************
+     * 1) Loader fade out
+     ******************************************************************/
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          loader.classList.add('loaded');
+          setTimeout(() => loader.remove(), 500);
+        }
+      }, 1000);
+    });
+
+    /******************************************************************
+     * 2) Particle System (canvas#particles)
+     ******************************************************************/
+    (function() {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let points = [];
+
+      function resize() {
+        const w = canvas.width = window.innerWidth;
+        const h = canvas.height = window.innerHeight;
+        const count = Math.floor((w * h) / 20000);
+        points = [];
+        for (let i = 0; i < count; i++) {
+          points.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: 0.3 + Math.random() * 1.1,
+            alpha: 0.3 + Math.random() * 0.7
+          });
+        }
+      }
+
+      function draw() {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        points.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          p.x = (p.x + w) % w;
+          p.y = (p.y + h) % h;
+        });
+
+        const maxDist = 90;
+        points.forEach((p, i) => {
+          points.slice(i + 1).forEach(q => {
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < maxDist) {
+              const opacity = (1 - dist / maxDist) * 0.45;
+              ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.stroke();
+            }
+          });
+        });
+
+        points.forEach(p => {
+          ctx.fillStyle = `rgba(96, 165, 250, ${p.alpha * 0.45})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      draw();
+      window.addEventListener('resize', resize);
+    })();
+
+    /******************************************************************
+     * 3) Cursor Glow (div#cur)
+     ******************************************************************/
+    (function() {
+      const cur = document.getElementById('cur');
+      if (!cur) return;
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      });
+
+      function tick() {
+        const factor = 0.1;
+        currentX += (targetX - currentX) * factor;
+        currentY += (targetY - currentY) * factor;
+        cur.style.left = currentX + 'px';
+        cur.style.top = currentY + 'px';
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /******************************************************************
+     * 4) Nav Scroll (toggle scrolled class when scrollY > 50)
+     ******************************************************************/
+    (function() {
+      const nav = document.getElementById('nav');
+      if (!nav) return;
+
+      function onScroll() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /******************************************************************
+     * 5) IntersectionObserver for .proj-section → adds .vis
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.proj-section');
+      if (!sections.length) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('vis');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
+      );
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>

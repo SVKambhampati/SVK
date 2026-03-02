@@ -22,6 +22,19 @@
 </head>
 <body>
 
+  <!-- Background orbs -->
+  <div class="bg-orbs">
+    <div class="orb1"></div>
+    <div class="orb2"></div>
+    <div class="orb3"></div>
+  </div>
+
+  <!-- Particle canvas -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- Cursor glow -->
+  <div id="cur" aria-hidden="true"></div>
+
   <!-- ============================================================
        Page Loader (fades out on load)
        ============================================================ -->
@@ -51,27 +64,24 @@
        ============================================================ -->
   <section id="hero">
     <div class="hero-inner">
-      <div class="hero-badge rev d1">
-        <span class="dot"></span>Available for opportunities
-      </div>
-      <h1 class="hero-h rev d2">
+      <h1 class="hero-h rev d1">
         Hi, I'm Shreyas —<br>
         I build <span class="grad-word" id="typed"></span><span class="cursor-blink"></span>
       </h1>
-      <p class="hero-sub rev d3">
-        CS student at <strong>Northeastern University</strong> concentrating in AI. I've worked across research labs, government agencies, and corporate teams — building everything from immersive XR platforms to backend systems that keep real-world operations running. Currently shipping <strong>SentimentSignal</strong>.
+      <p class="hero-sub rev d2">
+        I'm a CS student at <strong>Northeastern University</strong> concentrating in AI. I've worked across research labs, government agencies, and corporate teams — building everything from immersive XR platforms to backend systems that keep real-world operations running.
       </p>
-      <div class="badges rev d4">
+      <div class="badges rev d3">
         <span class="badge">Python Certified Developer</span>
         <span class="badge">Full-Stack Engineer</span>
         <span class="badge">AWS Cloud Practitioner</span>
         <span class="badge">HCI Experience Architect</span>
       </div>
-      <div class="hero-actions rev d5">
+      <div class="hero-actions rev d4">
         <a href="#projects" class="btn btn-p mag-btn">View my work</a>
         <a href="#contact" class="btn btn-s mag-btn">Get in touch</a>
       </div>
-      <div class="hero-strip rev d6">
+      <div class="hero-strip rev d5">
         <div class="strip-item"><span class="strip-label">Currently at</span><span class="strip-val">Oasis @ NEU</span></div>
         <div class="strip-item"><span class="strip-label">Based in</span><span class="strip-val">Boston, MA</span></div>
         <div class="strip-item"><span class="strip-label">Experience</span><span class="strip-val">3+ years</span></div>
@@ -80,10 +90,32 @@
     </div>
   </section>
 
-  <div class="marquee-section">
-    <div class="marquee-track" id="marquee">
-      <div class="marquee-inner" id="mInner"></div>
-      <div class="marquee-inner" id="mInner2"></div>
+  <div class="stats-divider">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Years of experience</span>
+      </div>
+      <div class="stat-divider-line"></div>
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Industry roles</span>
+      </div>
+      <div class="stat-divider-line"></div>
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Projects shipped</span>
+      </div>
+      <div class="stat-divider-line"></div>
+      <div class="stat-item">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Cloud certifications</span>
+      </div>
+      <div class="stat-divider-line"></div>
+      <div class="stat-item">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Research publications</span>
+      </div>
     </div>
   </div>
 
@@ -501,33 +533,7 @@
     });
 
     /******************************************************************
-     * 2a) Marquee Ticker
-     ******************************************************************/
-    (function() {
-      const mInner = document.getElementById('mInner');
-      const mInner2 = document.getElementById('mInner2');
-      if (!mInner || !mInner2) return;
-      const items = [
-        { label: 'SentimentSignal', val: 'NLP · Sentiment Analysis' },
-        { label: 'EnvisionVR', val: 'Unity · Meta SDK · XR' },
-        { label: 'AWS Certified', val: 'Cloud Practitioner' },
-        { label: 'UT Dallas', val: 'HCI Research · Haptics' },
-        { label: 'Northeastern', val: 'CS · AI Concentration' },
-        { label: 'DeKalb County', val: 'Oracle EBS · PL/SQL' },
-        { label: 'LexisNexis', val: 'Adobe CC · Motion Design' },
-        { label: 'StyleForecast', val: 'Flask · Python · ML' },
-        { label: 'MovieMind', val: 'Collaborative Filtering' },
-        { label: 'Boston, MA', val: 'Open to Opportunities' }
-      ];
-      const html = items.map(it =>
-        `<div class="marquee-item"><span>${it.label}</span><span class="marquee-sep">—</span>${it.val}</div>`
-      ).join('');
-      mInner.innerHTML = html;
-      mInner2.innerHTML = html;
-    })();
-
-    /******************************************************************
-     * 2b) Typing Effect (#typed)
+     * 2a) Typing Effect (#typed)
      ******************************************************************/
     (function() {
       const el = document.getElementById('typed');
@@ -942,11 +948,12 @@
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let points = [];
-      let animId = null;
 
       function resize() {
-        const w = canvas.width = window.innerWidth;
-        const h = canvas.height = window.innerHeight;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        canvas.width = w;
+        canvas.height = h;
         const count = Math.floor((w * h) / 20000);
         points = [];
         for (let i = 0; i < count; i++) {
@@ -964,6 +971,7 @@
       function draw() {
         const w = canvas.width;
         const h = canvas.height;
+        if (!w || !h) return;
         ctx.clearRect(0, 0, w, h);
 
         points.forEach(p => {
@@ -1000,14 +1008,20 @@
           ctx.fill();
         });
 
-        animId = requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
       }
 
-      resize();
-      draw();
-      window.addEventListener('resize', () => {
+      function init() {
         resize();
-      });
+        draw();
+      }
+
+      if (document.readyState === 'complete') {
+        init();
+      } else {
+        window.addEventListener('load', init);
+      }
+      window.addEventListener('resize', resize);
     })();
 
     /******************************************************************

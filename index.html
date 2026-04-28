@@ -16,6 +16,9 @@
 </head>
 <body>
 
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
   <!-- Aurora canvas background -->
   <canvas id="bg" aria-hidden="true"></canvas>
 
@@ -45,7 +48,31 @@
       <li><a href="#skills" data-section="skills">Skills</a></li>
       <li><a href="#contact" class="nav-cta" data-section="contact">Say hi</a></li>
     </ul>
+    <div class="nav-actions">
+      <a href="resume.pdf" class="nav-resume" target="_blank" rel="noopener">Resume ↗</a>
+      <div class="toggle-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle"></label>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile nav panel -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a></li>
+      <li><a href="#contact">Say hi</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
   <!-- ============================================================
        3) Hero Section — Cinematic full-screen intro
@@ -55,7 +82,7 @@
       <span class="live-dot"></span>CS · AI · Cloud · ML
     </div>
     <h1 class="name">
-      Shreyas<br><em>Kambhampati</em>
+      Shreyas <em>Kambhampati</em>
     </h1>
     <div class="hero-typed">
       <span id="typed-pre">building </span><span class="typed-accent" id="typed"></span><span class="cblink"></span>
@@ -144,8 +171,6 @@
             <strong>smart, scalable solutions that make a
             difference</strong>. Currently shipping
             <strong>SentimentSignal</strong>.</p>
-            <p>Outside of engineering — finance, Indian cinema,
-            badminton, lifting.</p>
           </div>
         </div>
       </div>
@@ -368,7 +393,7 @@
   </main>
 
   <footer>
-    <span class="foot-l">© 2025 Shreyas Kambhampati</span>
+    <span class="foot-l">© 2026 Shreyas Kambhampati</span>
     <a class="foot-logo" href="#">SVK</a>
     <span class="foot-r"><a href="#hero">Back to top ↑</a></span>
   </footer>
@@ -546,7 +571,38 @@
     });
 
     /******************************************************************
-     * 2a) Typing Effect (#typed) — cinematic hero
+     * 2a) Stat count-up animation
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const statNums = document.querySelectorAll('.stat-num');
+      if (!statNums.length) return;
+
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const raw = el.textContent.trim();
+          const suffix = raw.replace(/[0-9]/g, '');
+          const target = parseInt(raw, 10);
+          if (isNaN(target)) return;
+
+          const duration = 1100;
+          const startTime = performance.now();
+          (function update(now) {
+            const p = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(eased * target) + suffix;
+            if (p < 1) requestAnimationFrame(update);
+          })(startTime);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.6 });
+
+      statNums.forEach(el => obs.observe(el));
+    });
+
+    /******************************************************************
+     * 2b) Typing Effect (#typed) — cinematic hero
      ******************************************************************/
     (function() {
       const el = document.getElementById('typed');
@@ -703,7 +759,7 @@
       }
 
       function updateActive() {
-        const scrollY = window.scrollY;
+        const scrollY = window.scrollY || window.pageYOffset || document.body.scrollTop || 0;
         let activeId = sectionIds[0];
         for (const id of sectionIds) {
           const top = getSectionTop(id);
@@ -729,6 +785,7 @@
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
+      document.body.addEventListener('scroll', onScroll, { passive: true });
       updateActive();
     })();
 
@@ -978,8 +1035,10 @@
       const nav = document.getElementById('nav');
       const heroEl = document.getElementById('hero');
 
+      const progressBar = document.getElementById('scroll-progress');
+
       function onScroll() {
-        const y = window.scrollY || window.pageYOffset || 0;
+        const y = window.scrollY || window.pageYOffset || document.body.scrollTop || 0;
 
         if (nav) {
           nav.classList.toggle('scrolled', y > 50);
@@ -995,10 +1054,67 @@
           const heroEnd = window.innerHeight * 0.85;
           scrollHint.style.opacity = y > heroEnd ? '0' : '1';
         }
+
+        if (progressBar) {
+          const scrollEl = document.body.scrollHeight > window.innerHeight ? document.body : document.documentElement;
+          const docH = scrollEl.scrollHeight - scrollEl.clientHeight;
+          const scrollPos = y || scrollEl.scrollTop;
+          progressBar.style.width = (docH > 0 ? Math.min(100, (scrollPos / docH) * 100) : 0) + '%';
+        }
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
+      document.body.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+    })();
+
+    /******************************************************************
+     * 15) Mobile Nav (Hamburger)
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+      const overlay   = document.getElementById('mobile-nav-overlay');
+      const closeBtn  = document.getElementById('mobile-nav-close');
+      if (!hamburger || !mobileNav) return;
+
+      function openNav() {
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileNav.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav() {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.contains('open') ? closeNav() : openNav();
+      });
+      if (closeBtn) closeBtn.addEventListener('click', closeNav);
+      overlay.addEventListener('click', closeNav);
+      mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    });
+
+    /******************************************************************
+     * 16) Scroll Progress Bar
+     ******************************************************************/
+    (function() {
+      const bar = document.getElementById('scroll-progress');
+      if (!bar) return;
+      function updateProgress() {
+        const scrollY = window.scrollY || window.pageYOffset || document.body.scrollTop || 0;
+        const total   = (document.body.scrollHeight - window.innerHeight) || 1;
+        bar.style.width = Math.min(100, (scrollY / total) * 100) + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      document.body.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
     })();
   </script>
 </body>

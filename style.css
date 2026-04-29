@@ -228,17 +228,17 @@ main.container::before {
 }
 
 .nav-links a.nav-cta {
-  background: var(--accent);
-  border: 1px solid rgba(201, 169, 110, 0.4);
-  color: #0c0c0b;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
   padding: 0.45rem 1.1rem;
   border-radius: 8px;
   font-weight: 600;
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .nav-links a.nav-cta:hover {
-  opacity: 0.88;
-  box-shadow: 0 4px 16px rgba(201, 169, 110, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 .nav-links a.nav-cta::after {
   display: none;
@@ -303,7 +303,7 @@ main.container::before {
   align-items: flex-start;
   justify-content: center;
   text-align: left;
-  padding: 0 8%;
+  padding: 0 8% 0 13%;
   pointer-events: none;
   overflow: hidden;
 }
@@ -442,12 +442,13 @@ h1.name em {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .btn-p {
-  background: var(--accent);
+  background: #fff;
   color: #0c0c0b;
-  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 .btn-p:hover {
-  box-shadow: 0 6px 28px rgba(201, 169, 110, 0.4);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
 }
 .btn-s {
   background: rgba(255, 255, 255, 0.06);
@@ -1098,7 +1099,7 @@ h1.name em {
 }
 
 .btn-send {
-  background: var(--accent);
+  background: #fff;
   color: #0c0c0b;
   border: none;
   border-radius: 8px;
@@ -1107,12 +1108,12 @@ h1.name em {
   font-weight: 600;
   cursor: pointer;
   align-self: flex-start;
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .btn-send:hover {
-  opacity: 0.88;
+  background: rgba(255, 255, 255, 0.9);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201, 169, 110, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 /* Contact status (for Formspree AJAX feedback) */
 .contact-status {
@@ -1270,9 +1271,9 @@ body.light-mode .nav-links a.active {
   color: #111;
 }
 body.light-mode .nav-links a.nav-cta {
-  background: var(--accent);
-  border-color: rgba(201, 169, 110, 0.4);
-  color: #0c0c0b;
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #0c0c1a;
 }
 
 /* Light-mode hero */
@@ -1350,11 +1351,11 @@ body.light-mode .contact-form .field textarea {
   border-color: rgba(0, 0, 0, 0.15);
 }
 body.light-mode .btn-send {
-  background: var(--accent);
-  color: #0c0c0b;
+  background: #0c0c1a;
+  color: #fff;
 }
 body.light-mode .btn-send:hover {
-  opacity: 0.88;
+  background: #1a1a2e;
 }
 
 
@@ -1370,7 +1371,7 @@ body.light-mode .btn-send:hover {
 /* Tablet and small laptop tweaks */
 @media (max-width: 900px) {
   #hero {
-    padding: 0 6%;
+    padding: 0 6% 0 8%;
   }
   h1.name {
     white-space: normal;
@@ -1381,7 +1382,7 @@ body.light-mode .btn-send:hover {
 /* Mobile-first responsive (768px) */
 @media (max-width: 768px) {
   #hero {
-    padding: 0 5%;
+    padding: 0 5% 0 6%;
   }
   h1.name {
     white-space: normal;

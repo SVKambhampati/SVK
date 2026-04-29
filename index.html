@@ -13,6 +13,9 @@
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- HLS.js for cross-browser .m3u8 playback (Safari uses native HLS) -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js" defer></script>
 </head>
 <body>
 
@@ -63,6 +66,9 @@
        3) Hero Section — Cinematic full-screen intro
        ============================================================ -->
   <section id="hero">
+    <!-- Motion background video (HLS stream) -->
+    <video id="hero-video" autoplay muted loop playsinline aria-hidden="true"></video>
+
     <div class="hero-pre">
       CS · AI · Cloud · XR
     </div>
@@ -848,16 +854,35 @@
     });
 
     /******************************************************************
-     * 11) Page Loader (fade out on load)
+     * 11) HLS Motion Background
      ******************************************************************/
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) {
-          loader.classList.add('loaded');
-          setTimeout(() => loader.remove(), 500);
-        }
-      }, 1000);
+    document.addEventListener('DOMContentLoaded', () => {
+      const video = document.getElementById('hero-video');
+      if (!video) return;
+
+      // Respect prefers-reduced-motion
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        video.remove();
+        return;
+      }
+
+      const SRC = 'https://customer-cbeadsgr09pnsezs.cloudflarestream.com/12a9780eeb1ea015801a5f55cf2e9d3d/manifest/video.m3u8';
+
+      // Fade video in once it has enough data to play
+      video.addEventListener('canplay', () => video.classList.add('ready'), { once: true });
+
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Safari — native HLS
+        video.src = SRC;
+        video.play().catch(() => {});
+      } else if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+        const hls = new Hls({ enableWorker: true, startLevel: -1 });
+        hls.loadSource(SRC);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {});
+        });
+      }
     });
 
     /******************************************************************

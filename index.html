@@ -871,17 +871,20 @@
       // Fade video in once it has enough data to play
       video.addEventListener('canplay', () => video.classList.add('ready'), { once: true });
 
-      if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari — native HLS
-        video.src = SRC;
-        video.play().catch(() => {});
-      } else if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+      // HLS.js first (Chrome/Firefox/Edge) — Safari falls through to native HLS
+      // Note: canPlayType('application/vnd.apple.mpegurl') returns "maybe" in Chrome
+      // which is truthy, so ALWAYS check Hls.isSupported() first.
+      if (typeof Hls !== 'undefined' && Hls.isSupported()) {
         const hls = new Hls({ enableWorker: true, startLevel: -1 });
         hls.loadSource(SRC);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           video.play().catch(() => {});
         });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Safari — genuine native HLS support
+        video.src = SRC;
+        video.play().catch(() => {});
       }
     });
 
@@ -962,15 +965,13 @@
     })();
 
     /******************************************************************
-     * 13) Cursor (dot + trailing blob)
+     * 13) Cursor dot
      ******************************************************************/
     (function() {
       const dot = document.getElementById('cursor-dot');
-      const blob = document.getElementById('cursor-blob');
-      if (!dot || !blob) return;
+      if (!dot) return;
 
       let mouseX = 0, mouseY = 0;
-      let blobX = 0, blobY = 0;
       let dotX = 0, dotY = 0;
 
       document.addEventListener('mousemove', e => {
@@ -978,22 +979,19 @@
         mouseY = e.clientY;
       });
 
+      // Grow dot on interactive elements
       document.querySelectorAll(
         'a, button, .btn, .proj-card, input, textarea'
       ).forEach(el => {
         el.addEventListener('mouseenter', () => {
-          blob.style.width = '64px';
-          blob.style.height = '64px';
-          blob.style.borderColor = 'rgba(59,130,246,0.4)';
-          blob.style.background = 'rgba(59,130,246,0.06)';
-          dot.style.background = '#60a5fa';
+          dot.style.width = '10px';
+          dot.style.height = '10px';
+          dot.style.background = 'var(--accent, #c9a96e)';
         });
         el.addEventListener('mouseleave', () => {
-          blob.style.width = '40px';
-          blob.style.height = '40px';
-          blob.style.borderColor = 'rgba(255,255,255,0.15)';
-          blob.style.background = 'transparent';
-          dot.style.background = '#fff';
+          dot.style.width = '';
+          dot.style.height = '';
+          dot.style.background = '';
         });
       });
 
@@ -1002,12 +1000,6 @@
         dotY += (mouseY - dotY) * 0.85;
         dot.style.left = dotX + 'px';
         dot.style.top = dotY + 'px';
-
-        blobX += (mouseX - blobX) * 0.1;
-        blobY += (mouseY - blobY) * 0.1;
-        blob.style.left = blobX + 'px';
-        blob.style.top = blobY + 'px';
-
         requestAnimationFrame(tick);
       })();
     })();

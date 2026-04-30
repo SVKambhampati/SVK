@@ -97,8 +97,28 @@ a {
   background: rgba(255, 255, 255, 0.85);
   transform: translate(-50%, -50%);
   will-change: left, top, width, height, border-radius, background, border-color;
+  overflow: visible;
   /* animation entirely driven by JS — no CSS transitions */
 }
+
+/* I-beam serif caps — appear when cursor is in text-caret mode */
+#cursor-dot::before,
+#cursor-dot::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: inherit;
+  border-radius: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+#cursor-dot::before { top: -1px; }
+#cursor-dot::after  { bottom: -1px; }
+#cursor-dot.is-caret::before,
+#cursor-dot.is-caret::after { opacity: 1; }
 
 /* cursor blob removed */
 

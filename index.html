@@ -1049,14 +1049,27 @@
         '.back-link, .back-to-top, .foot-logo, .logo, ' +
         'button, [role="button"]';
 
+      const TXT_SEL = 'p, h1, h2, h3, h4, h5, h6, li, label, blockquote';
+
+      let caretH = 20;
+
+      function getCaretHeight(el) {
+        const cs = getComputedStyle(el);
+        const lh = parseFloat(cs.lineHeight);
+        if (!isNaN(lh) && lh > 0) return lh;
+        return parseFloat(cs.fontSize) * 1.2 || 20;
+      }
+
       document.addEventListener('mouseover', e => {
         const btn  = e.target.closest(BTN_SEL);
         const card = e.target.closest('.proj-card');
         const link = e.target.closest('a');
+        const txt  = e.target.closest(TXT_SEL);
 
         if (btn)       { hoverType = 'button'; hoverEl = btn; }
         else if (card) { hoverType = 'card';   hoverEl = card; }
         else if (link) { hoverType = 'link';   hoverEl = link; }
+        else if (txt)  { hoverType = 'text';   hoverEl = txt; caretH = getCaretHeight(txt); }
         else           { hoverType = null;      hoverEl = null; }
       });
 
@@ -1091,6 +1104,12 @@
           ta  = light ? 0.07 : 0.05;
           tba = light ? 0.28 : 0.22;
 
+        } else if (hoverType === 'text') {
+          tx = mx; ty = my;
+          tw = 2; th = caretH; tr = 1;
+          ta  = light ? 0.7 : 0.9;
+          tba = 0;
+
         } else if (hoverType === 'link') {
           tx = mx; ty = my;
           tw = 20; th = 20; tr = 999;
@@ -1122,6 +1141,7 @@
         dot.style.borderRadius = cr  + 'px';
         dot.style.background   = `rgba(${rgb},${ca.toFixed(3)})`;
         dot.style.border       = `1.5px solid rgba(${rgb},${cba.toFixed(3)})`;
+        dot.classList.toggle('is-caret', hoverType === 'text' && cw < 4);
 
         requestAnimationFrame(tick);
       })();

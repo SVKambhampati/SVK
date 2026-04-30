@@ -282,47 +282,71 @@
             <div class="sk-hd">Languages</div>
             <div class="sk-list">
               <div class="sk-item"><span class="sk-d"></span>Python</div>
+              <div class="sk-item"><span class="sk-d"></span>C++</div>
               <div class="sk-item"><span class="sk-d"></span>Java</div>
-              <div class="sk-item"><span class="sk-d"></span>JavaScript</div>
               <div class="sk-item"><span class="sk-d"></span>C#</div>
-              <div class="sk-item"><span class="sk-d"></span>SQL / PL/SQL</div>
+              <div class="sk-item"><span class="sk-d"></span>JavaScript</div>
+              <div class="sk-item"><span class="sk-d"></span>TypeScript</div>
+              <div class="sk-item"><span class="sk-d"></span>SQL</div>
+              <div class="sk-item"><span class="sk-d"></span>Bash</div>
+              <div class="sk-item"><span class="sk-d"></span>Swift</div>
             </div>
           </div>
 
           <div class="sk-col">
-            <div class="sk-hd">Frameworks &amp; Tools</div>
+            <div class="sk-hd">Frameworks &amp; Libraries</div>
             <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>PyTorch</div>
+              <div class="sk-item"><span class="sk-d"></span>TensorFlow</div>
+              <div class="sk-item"><span class="sk-d"></span>Scikit-learn</div>
+              <div class="sk-item"><span class="sk-d"></span>NumPy / Pandas</div>
+              <div class="sk-item"><span class="sk-d"></span>Matplotlib</div>
               <div class="sk-item"><span class="sk-d"></span>Flask</div>
-              <div class="sk-item"><span class="sk-d"></span>Unity</div>
-              <div class="sk-item"><span class="sk-d"></span>Git / GitHub</div>
-              <div class="sk-item"><span class="sk-d"></span>REST APIs</div>
-              <div class="sk-item"><span class="sk-d"></span>NLP Pipelines</div>
+              <div class="sk-item"><span class="sk-d"></span>React</div>
             </div>
           </div>
 
           <div class="sk-col">
             <div class="sk-hd">Cloud &amp; Infra</div>
             <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>AWS ✦ Certified</div>
-              <div class="sk-item"><span class="sk-d"></span>Azure AI Services</div>
-              <div class="sk-item"><span class="sk-d"></span>Oracle EBS</div>
-              <div class="sk-item"><span class="sk-d"></span>Oracle Commerce Cloud</div>
+              <div class="sk-item"><span class="sk-d"></span>AWS</div>
+              <div class="sk-item"><span class="sk-d"></span>Azure</div>
+              <div class="sk-item"><span class="sk-d"></span>Docker</div>
+              <div class="sk-item"><span class="sk-d"></span>Linux</div>
+              <div class="sk-item"><span class="sk-d"></span>Git / GitHub</div>
               <div class="sk-item"><span class="sk-d"></span>CI / CD</div>
+              <div class="sk-item"><span class="sk-d"></span>REST APIs</div>
             </div>
           </div>
 
           <div class="sk-col">
-            <div class="sk-hd">XR &amp; Research</div>
+            <div class="sk-hd">XR &amp; Methods</div>
             <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>Unity</div>
               <div class="sk-item"><span class="sk-d"></span>Meta XR SDK</div>
               <div class="sk-item"><span class="sk-d"></span>Haptic Systems</div>
-              <div class="sk-item"><span class="sk-d"></span>HCI Research</div>
               <div class="sk-item"><span class="sk-d"></span>Spatial Computing</div>
-              <div class="sk-item"><span class="sk-d"></span>User Studies</div>
+              <div class="sk-item"><span class="sk-d"></span>HCI Research</div>
+              <div class="sk-item"><span class="sk-d"></span>Agile / Scrum</div>
+              <div class="sk-item"><span class="sk-d"></span>Multithreading</div>
             </div>
           </div>
 
         </div>
+
+        <!-- Certifications -->
+        <div class="certs-strip">
+          <div class="certs-hd">Certifications</div>
+          <div class="certs-row">
+            <div class="cert-badge"><span class="cert-ico">☁</span>AWS Certified Cloud Practitioner</div>
+            <div class="cert-badge"><span class="cert-ico">✦</span>Python Certified Developer · PCEP-30-01</div>
+            <div class="cert-badge"><span class="cert-ico">◈</span>Microsoft Azure AI Fundamentals</div>
+            <div class="cert-badge"><span class="cert-ico">◉</span>MySQL Developer</div>
+            <div class="cert-badge"><span class="cert-ico">◈</span>Unity Game Development Specialization</div>
+            <div class="cert-badge"><span class="cert-ico">◉</span>Database for Full Stack Development</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -533,7 +557,7 @@
 
       document.querySelectorAll(
         '.sec-hd, .about-left-col, .about-copy, ' +
-        '.exp-item, .proj-card, .sk-col, ' +
+        '.exp-item, .proj-card, .sk-col, .certs-strip, ' +
         '.contact-h, .contact-p, .crow, .form-wrap'
       ).forEach(el => io.observe(el));
     });
@@ -1295,7 +1319,7 @@
       /* ── 3) Section reveals with motion spring ── */
       inView(
         '.sec-hd, .about-left-col, .about-copy, ' +
-        '.exp-item, .proj-card, .sk-col, ' +
+        '.exp-item, .proj-card, .sk-col, .certs-strip, ' +
         '.contact-h, .contact-p, .crow, .form-wrap',
         ({ target }) => {
           /* Add .vis so CSS transitions keep working as fallback,

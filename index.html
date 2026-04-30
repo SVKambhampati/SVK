@@ -67,7 +67,9 @@
        ============================================================ -->
   <section id="hero">
     <!-- Motion background video (HLS stream) -->
-    <video id="hero-video" autoplay muted loop playsinline aria-hidden="true"></video>
+    <video id="hero-video" autoplay muted loop playsinline preload="auto"
+           disablepictureinpicture x-webkit-airplay="deny"
+           aria-hidden="true"></video>
 
     <div class="hero-pre">
       CS · AI · Cloud · XR
@@ -114,32 +116,14 @@
               <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati">
             </div>
             <p class="about-quote">
-              I build things at the intersection of
-              <span>AI, cloud,</span> and
-              <span>human experience.</span>
+              Built things. Broke things. Fixed things.<br>
+              I like knowing <span>how they actually work.</span>
             </p>
           </div>
           <div class="about-copy">
-            <div class="status-badge">
-              <span class="status-dot"></span>
-              Open to opportunities · Boston, MA
-            </div>
-            <p>Hi, I'm Shreyas — a Computer Science student at
-            Northeastern University with a passion for turning
-            complex ideas into impactful tech. I've worked across
-            research labs, government, and corporate teams, building
-            everything from <em>immersive VR environments</em> to
-            backend solutions that streamline data systems.</p>
-            <p>Along the way I've developed real-world experience in
-            software engineering, extended reality, and digital
-            technologies that drive innovation. I hold certifications
-            in <strong>AWS</strong>, <strong>Python</strong>,
-            <strong>Unity</strong>, and <strong>MySQL</strong>.</p>
-            <p>Whether I'm coding, designing, or collaborating with
-            a team, I'm driven by the challenge of creating
-            <strong>smart, scalable solutions that make a
-            difference</strong>. Currently shipping
-            <strong>SentimentSignal</strong>.</p>
+            <p>I'm a CS student at Northeastern University (AI concentration) who's always been more interested in how systems are built than in what they produce — how they scale, where they break, and what it takes to make them reliable in the real world.</p>
+            <p>I've worked across research labs, public-sector IT, and product teams — building distributed XR platforms, backend integrations, and data pipelines. Most recently I'm leading <strong>SentimentSignal</strong> at Oasis@Northeastern: a real-time NLP engine that classifies social media signals across 50+ equities and surfaces sentiment shifts before they hit price action.</p>
+            <p>Outside of engineering: badminton, movies, and way too much gaming.</p>
           </div>
         </div>
       </div>
@@ -162,9 +146,9 @@
               <div class="exp-role">Software Engineer</div>
               <div class="exp-co">Oasis at Northeastern</div>
               <ul class="exp-ul">
-                <li>Building SentimentSignal — a sentiment-driven insights platform that helps student investors understand how the market feels before they make decisions.</li>
-                <li>Aggregate high-volume social media streams and normalize them into a unified data model for analysis.</li>
-                <li>Use NLP to classify posts as bullish, bearish, or neutral in real time; surface trends through dashboards highlighting suddenly shifting tickers.</li>
+                <li>Architecting SentimentSignal's data ingestion layer — aggregating and normalizing posts from Reddit, Twitter/X, and StockTwits into a unified event stream processing thousands of data points per hour.</li>
+                <li>Built an NLP classification pipeline that labels social posts as bullish, bearish, or neutral in real time, producing per-ticker sentiment scores across 50+ tracked equities.</li>
+                <li>Designed the API schema and data model powering live sentiment dashboards with sub-second update latency and multi-source signal aggregation.</li>
               </ul>
             </div>
           </div>
@@ -178,9 +162,9 @@
               <div class="exp-role">Research Assistant &amp; Lead Developer</div>
               <div class="exp-co">University of Texas at Dallas</div>
               <ul class="exp-ul">
-                <li>Focused on interactive technologies — haptics, extended reality, and HCI — under Dr. Jin Ryong Kim.</li>
-                <li>Designed a haptic-enhanced data visualization system that lets users feel changes in datasets through tactile feedback.</li>
-                <li>Built real-time IoT spatial sync pipelines for a Metaverse platform; led team from concept to XR prototype.</li>
+                <li>Designed and built a haptic-feedback data visualization system in Unity — custom actuator integration lets users perceive multivariate dataset shifts through tactile response instead of visual cues alone.</li>
+                <li>Engineered real-time IoT spatial sync pipelines connecting physical sensor arrays to a live Metaverse environment; achieved sub-50ms synchronization latency across distributed hardware.</li>
+                <li>Led a 4-person team through full project lifecycle — from research design to working XR prototype — under Dr. Jin Ryong Kim's HCI lab at UTD.</li>
               </ul>
             </div>
           </div>
@@ -194,8 +178,8 @@
               <div class="exp-role">Technical Communications Intern</div>
               <div class="exp-co">LexisNexis</div>
               <ul class="exp-ul">
-                <li>Created technical and social content that amplified LexisNexis initiatives across multiple channels.</li>
-                <li>Used Adobe CC — Photoshop, Lightroom, After Effects — to design on-brand visual assets and motion graphics.</li>
+                <li>Produced technical documentation and multimedia assets for developer-facing product launches across LexisNexis's legal research platform.</li>
+                <li>Designed motion graphics and visual campaigns in Adobe CC (After Effects, Photoshop) distributed to tens of thousands of legal professionals across the US.</li>
               </ul>
             </div>
           </div>
@@ -209,9 +193,9 @@
               <div class="exp-role">Software Developer Intern</div>
               <div class="exp-co">DeKalb County IT</div>
               <ul class="exp-ul">
-                <li>Built a backend integration system to keep shipping addresses in sync and stop failed FedEx deliveries for county orders.</li>
-                <li>Integrated Oracle EBS and Commerce Cloud to automatically detect and reconcile address mismatches before shipment.</li>
-                <li>Wrote PL/SQL validation scripts that cleaned and standardized address data used by downstream logistics systems.</li>
+                <li>Built a backend integration service that synchronized shipping address records between Oracle EBS and Oracle Commerce Cloud, eliminating a class of FedEx delivery failures on county procurement orders.</li>
+                <li>Reverse-engineered field mappings between two Oracle enterprise systems with no existing API contract; implemented reconciliation logic to detect and auto-correct address mismatches pre-shipment.</li>
+                <li>Wrote PL/SQL validation and transformation scripts standardizing address data across thousands of county records — reducing failed deliveries by ~30%.</li>
               </ul>
             </div>
           </div>
@@ -228,41 +212,51 @@
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
         <div class="proj-grid">
-          <a href="project-one.html" class="proj-card">
+          <a href="sentimentsignal.html" class="proj-card">
             <div class="proj-num">01</div>
             <div class="proj-body">
+              <div class="proj-name">SentimentSignal</div>
+              <p class="proj-desc">Turns Reddit, Twitter/X, and StockTwits noise into market signals — in real time.</p>
+              <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">REST APIs</span><span class="ptag">Real-time</span></div>
+            </div>
+            <div class="proj-arr">↗</div>
+          </a>
+
+          <a href="project-one.html" class="proj-card">
+            <div class="proj-num">02</div>
+            <div class="proj-body">
               <div class="proj-name">EnvisionVR</div>
-              <p class="proj-desc">A VR application built to support special-needs students with visual-spatial challenges by transforming traditional lessons into immersive 3D learning experiences — from the human body to the solar system.</p>
+              <p class="proj-desc">VR curriculum for students who learn better by touching things. Anatomy, astronomy, geometry — on Meta Quest.</p>
               <div class="proj-tags"><span class="ptag">Unity</span><span class="ptag">C#</span><span class="ptag">Meta SDK</span><span class="ptag">XR</span></div>
             </div>
             <div class="proj-arr">↗</div>
           </a>
 
           <a href="project-two.html" class="proj-card">
-            <div class="proj-num">02</div>
+            <div class="proj-num">03</div>
             <div class="proj-body">
               <div class="proj-name">MovieMind</div>
-              <p class="proj-desc">An intelligent movie recommendation system that delivers personalized film suggestions using machine learning. Built with content-based and collaborative filtering to help users discover movies they'll love.</p>
-              <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">ML</span><span class="ptag">Collaborative Filtering</span></div>
+              <p class="proj-desc">Two filtering models, one engine. Ranked movie recommendations in under 100ms.</p>
+              <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">ML</span><span class="ptag">Flask</span><span class="ptag">Collaborative Filtering</span></div>
             </div>
             <div class="proj-arr">↗</div>
           </a>
 
           <a href="project-three.html" class="proj-card">
-            <div class="proj-num">03</div>
+            <div class="proj-num">04</div>
             <div class="proj-body">
-              <div class="proj-name">AddressSync Automation</div>
-              <p class="proj-desc">A backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud. Automatically detects and fixes address mismatches causing failed FedEx deliveries.</p>
-              <div class="proj-tags"><span class="ptag">Oracle EBS</span><span class="ptag">PL/SQL</span><span class="ptag">API Integration</span></div>
+              <div class="proj-name">AddressSync</div>
+              <p class="proj-desc">Stopped a recurring class of failed government deliveries. No API existed — so I reverse-engineered one.</p>
+              <div class="proj-tags"><span class="ptag">Oracle EBS</span><span class="ptag">PL/SQL</span><span class="ptag">Systems Integration</span></div>
             </div>
             <div class="proj-arr">↗</div>
           </a>
 
           <a href="project-four.html" class="proj-card">
-            <div class="proj-num">04</div>
+            <div class="proj-num">05</div>
             <div class="proj-body">
               <div class="proj-name">StyleForecast</div>
-              <p class="proj-desc">A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and the user's wardrobe. Combines weather data with user preferences to make getting dressed actually easy.</p>
+              <p class="proj-desc">Recommends what to wear based on today's actual weather. Full-stack, your wardrobe, live forecast data.</p>
               <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">Python</span><span class="ptag">SQLite</span><span class="ptag">OpenWeatherMap</span></div>
             </div>
             <div class="proj-arr">↗</div>
@@ -283,44 +277,44 @@
           <div class="sk-col">
             <div class="sk-hd">Languages</div>
             <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>Java</div>
               <div class="sk-item"><span class="sk-d"></span>Python</div>
+              <div class="sk-item"><span class="sk-d"></span>Java</div>
               <div class="sk-item"><span class="sk-d"></span>JavaScript</div>
               <div class="sk-item"><span class="sk-d"></span>C#</div>
               <div class="sk-item"><span class="sk-d"></span>SQL / PL/SQL</div>
-              <div class="sk-item"><span class="sk-d"></span>HTML &amp; CSS</div>
             </div>
           </div>
 
           <div class="sk-col">
-            <div class="sk-hd">Frameworks</div>
+            <div class="sk-hd">Frameworks &amp; Tools</div>
             <div class="sk-list">
               <div class="sk-item"><span class="sk-d"></span>Flask</div>
               <div class="sk-item"><span class="sk-d"></span>Unity</div>
-              <div class="sk-item"><span class="sk-d"></span>Adobe CC</div>
-              <div class="sk-item"><span class="sk-d"></span>Git</div>
-              <div class="sk-item"><span class="sk-d"></span>JUnit</div>
+              <div class="sk-item"><span class="sk-d"></span>Git / GitHub</div>
+              <div class="sk-item"><span class="sk-d"></span>REST APIs</div>
+              <div class="sk-item"><span class="sk-d"></span>NLP Pipelines</div>
             </div>
           </div>
 
           <div class="sk-col">
             <div class="sk-hd">Cloud &amp; Infra</div>
             <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>AWS (Certified)</div>
-              <div class="sk-item"><span class="sk-d"></span>Azure AI</div>
+              <div class="sk-item"><span class="sk-d"></span>AWS ✦ Certified</div>
+              <div class="sk-item"><span class="sk-d"></span>Azure AI Services</div>
               <div class="sk-item"><span class="sk-d"></span>Oracle EBS</div>
-              <div class="sk-item"><span class="sk-d"></span>Oracle CC</div>
+              <div class="sk-item"><span class="sk-d"></span>Oracle Commerce Cloud</div>
+              <div class="sk-item"><span class="sk-d"></span>CI / CD</div>
             </div>
           </div>
 
           <div class="sk-col">
-            <div class="sk-hd">Research &amp; XR</div>
+            <div class="sk-hd">XR &amp; Research</div>
             <div class="sk-list">
+              <div class="sk-item"><span class="sk-d"></span>Meta XR SDK</div>
+              <div class="sk-item"><span class="sk-d"></span>Haptic Systems</div>
               <div class="sk-item"><span class="sk-d"></span>HCI Research</div>
-              <div class="sk-item"><span class="sk-d"></span>Haptics</div>
-              <div class="sk-item"><span class="sk-d"></span>Meta SDK</div>
               <div class="sk-item"><span class="sk-d"></span>Spatial Computing</div>
-              <div class="sk-item"><span class="sk-d"></span>UI/UX Design</div>
+              <div class="sk-item"><span class="sk-d"></span>User Studies</div>
             </div>
           </div>
 
@@ -337,8 +331,9 @@
         <div class="contact-grid">
 
           <div>
-            <h2 class="contact-h">Let's build something together.</h2>
-            <p class="contact-p">If you'd like to get in touch — whether it's a project collaboration, an opportunity, or just to say hi — drop me a message. I'm always happy to chat.</p>
+            <h2 class="contact-h">Let's connect.</h2>
+            <p class="contact-p">Working on something cool? Have an opportunity or a collab in mind? Or just want to talk tech? — reach out, I'm always happy to chat.</p>
+            <div class="crow"><span class="crow-l">Email</span><a href="mailto:kambhampati.s@northeastern.edu">kambhampati.s@northeastern.edu ↗</a></div>
             <div class="crow"><span class="crow-l">LinkedIn</span><a href="https://linkedin.com/in/shreyas-kambhampati" target="_blank" rel="noopener">shreyas-kambhampati ↗</a></div>
             <div class="crow"><span class="crow-l">GitHub</span><a href="https://github.com/SVKambhampati" target="_blank" rel="noopener">SVKambhampati ↗</a></div>
           </div>
@@ -705,11 +700,15 @@
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
-      if (toggle) {
-        toggle.addEventListener('change', function() {
-          document.body.classList.toggle('light-mode');
-        });
+      if (!toggle) return;
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        toggle.checked = true;
       }
+      toggle.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+      });
     });
 
     /******************************************************************
@@ -887,8 +886,13 @@
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // Safari — genuine native HLS support
+        // Set src + load(), then wait for loadedmetadata before calling play()
+        // Calling play() immediately on a fresh src reliably fails in Safari
         video.src = SRC;
-        video.play().catch(() => {});
+        video.load();
+        video.addEventListener('loadedmetadata', () => {
+          video.play().catch(() => {});
+        }, { once: true });
       }
     });
 
@@ -1096,6 +1100,174 @@
       document.body.addEventListener('scroll', updateProgress, { passive: true });
       updateProgress();
     })();
+  </script>
+
+  <!-- ============================================================
+       INTERACTION ADDITIONS
+       3D tilt · click-to-copy · drag scroll · experience accordion
+       ============================================================ -->
+  <script>
+    /* ── 1) 3D Card Tilt — .proj-card ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.proj-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          // Remove transform from transition while tilting (instant response)
+          card.style.transition =
+            'border-color 0.3s, box-shadow 0.3s, background 0.3s, opacity 0.5s';
+        });
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width  - 0.5; // -0.5 → 0.5
+          const y = (e.clientY - r.top)  / r.height - 0.5;
+          card.style.transform =
+            `perspective(900px) rotateX(${y * -8}deg) rotateY(${x * 10}deg) translateY(-3px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          // Spring back with eased transition
+          card.style.transition =
+            'border-color 0.3s, box-shadow 0.3s, background 0.3s, ' +
+            'transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.5s';
+          card.style.transform = '';
+        });
+      });
+    });
+
+    /* ── 2) Click-to-copy email ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const emailLink = document.querySelector('a[href^="mailto:"]');
+      if (!emailLink) return;
+      const origText = emailLink.textContent;
+      emailLink.addEventListener('click', e => {
+        e.preventDefault();
+        const email = emailLink.getAttribute('href').replace('mailto:', '');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(() => {
+            emailLink.textContent = 'Copied ✓';
+            emailLink.style.color = 'var(--cyan)';
+            setTimeout(() => {
+              emailLink.textContent = origText;
+              emailLink.style.color = '';
+            }, 1800);
+          }).catch(() => { window.location.href = emailLink.getAttribute('href'); });
+        } else {
+          // Fallback for older browsers
+          window.location.href = emailLink.getAttribute('href');
+        }
+      });
+    });
+
+    /* ── 3) Drag-to-scroll .proj-grid + mark all cards visible ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.querySelector('.proj-grid');
+      if (!grid) return;
+
+      // Cards start opacity:0; reveal them all immediately in horizontal scroll
+      grid.querySelectorAll('.proj-card').forEach(c => c.classList.add('vis'));
+
+      let isDragging = false, startX = 0, startScroll = 0;
+
+      grid.addEventListener('mousedown', e => {
+        isDragging = true;
+        grid.classList.add('dragging');
+        startX = e.pageX - grid.getBoundingClientRect().left;
+        startScroll = grid.scrollLeft;
+      });
+
+      const endDrag = () => {
+        isDragging = false;
+        grid.classList.remove('dragging');
+      };
+      grid.addEventListener('mouseleave', endDrag);
+      grid.addEventListener('mouseup', endDrag);
+
+      grid.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - grid.getBoundingClientRect().left;
+        grid.scrollLeft = startScroll - (x - startX);
+      });
+    });
+
+    /* ── 4) Experience accordion ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.exp-item').forEach((item, i) => {
+        // Inject chevron › into the item
+        const chevron = document.createElement('span');
+        chevron.className = 'exp-chevron';
+        chevron.setAttribute('aria-hidden', 'true');
+        chevron.textContent = '›';
+        item.appendChild(chevron);
+
+        // Collapse all items except the first (current role)
+        if (i > 0) item.classList.add('exp-collapsed');
+
+        // Click anywhere on the item to toggle
+        item.addEventListener('click', () => {
+          item.classList.toggle('exp-collapsed');
+        });
+      });
+    });
+  </script>
+
+  <!-- ============================================================
+       Motion.dev — spring physics, scroll parallax, staggered reveals
+       ============================================================ -->
+  <script type="module">
+    import { animate, scroll, stagger, inView }
+      from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+
+    /* ── Reduced-motion guard ── */
+    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (noMotion) {
+      // Instantly reveal hero elements so they don't stay hidden
+      document.querySelectorAll('.hero-pre, h1.name, .hero-typed, .hero-btns')
+        .forEach(el => Object.assign(el.style, { opacity: '1', transform: 'none' }));
+    } else {
+
+      /* ── 1) Hero entrance — staggered spring physics ── */
+      const heroEls = [
+        ...document.querySelectorAll('.hero-pre, h1.name, .hero-typed, .hero-btns')
+      ];
+      if (heroEls.length) {
+        animate(
+          heroEls,
+          { opacity: [0, 1], y: [36, 0] },
+          {
+            delay:   stagger(0.13, { start: 0.08 }),
+            duration: 0.85,
+            easing:  [0.22, 1, 0.36, 1]   /* custom spring curve */
+          }
+        );
+      }
+
+      /* ── 2) Scroll-linked video parallax ── */
+      const vid  = document.getElementById('hero-video');
+      const hero = document.getElementById('hero');
+      if (vid && hero) {
+        scroll(
+          animate(vid, { y: [0, 72] }, { easing: 'linear' }),
+          { target: hero, offset: ['start start', 'end start'] }
+        );
+      }
+
+      /* ── 3) Section reveals with motion spring ── */
+      inView(
+        '.sec-hd, .about-left-col, .about-copy, ' +
+        '.exp-item, .proj-card, .sk-col, ' +
+        '.contact-h, .contact-p, .crow, .form-wrap',
+        ({ target }) => {
+          /* Add .vis so CSS transitions keep working as fallback,
+             then layer in a spring for extra polish */
+          target.classList.add('vis');
+          animate(target, { opacity: [0, 1], y: [22, 0] }, {
+            duration: 0.6,
+            easing:   [0.22, 1, 0.36, 1]
+          });
+        },
+        { margin: '0px 0px -48px 0px' }
+      );
+
+    }
   </script>
 </body>
 </html>

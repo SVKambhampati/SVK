@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="EnvisionVR — VR education platform for special-needs students. Built with Unity, C#, and Meta SDK.">
   <title>EnvisionVR | Shreyas Kambhampati</title>
-
-  <!-- Google Fonts: Instrument Serif + Inter (same as index.html) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Main stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Cursor glow -->
+  <div id="cur" aria-hidden="true"></div>
 
   <!-- Background orbs -->
   <div class="bg-orbs">
@@ -26,9 +25,6 @@
 
   <!-- Particle canvas -->
   <canvas id="particles" aria-hidden="true"></canvas>
-
-  <!-- Cursor glow -->
-  <div id="cur" aria-hidden="true"></div>
 
   <!-- Page Loader -->
   <div id="loader">
@@ -41,14 +37,38 @@
   <!-- Nav -->
   <nav id="nav">
     <a class="logo" href="index.html">SVK</a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#experience">Experience</a></li>
       <li><a href="index.html#projects">Projects</a></li>
       <li><a href="index.html#skills">Skills</a></li>
       <li><a href="index.html#contact" class="nav-cta">Say hi</a></li>
     </ul>
+    <div class="nav-actions">
+      <a href="resume.pdf" class="nav-resume" target="_blank" rel="noopener">Resume ↗</a>
+      <div class="toggle-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle"></label>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile nav panel -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a></li>
+      <li><a href="index.html#contact">Say hi</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
   <!-- Project Hero -->
   <header class="project-hero">
@@ -62,6 +82,9 @@
       <span class="tag">Meta SDK</span>
       <span class="tag">XR</span>
       <span class="tag">3D Modeling</span>
+    </div>
+    <div class="proj-links">
+      <a href="https://github.com/SVKambhampati/EnvisionVR" target="_blank" rel="noopener" class="proj-link-btn">GitHub ↗</a>
     </div>
     <div class="proj-divider"></div>
   </header>
@@ -89,8 +112,8 @@
         <li>Unity — game engine powering all 3D environments and real-time simulations</li>
         <li>Meta SDKs — for headset integration and hand/controller tracking</li>
         <li>C# — application logic, UI controllers, and shader programming</li>
-        <li>Custom 3D modeling & shaders — environment art and visual effects</li>
-        <li>Real-time motion tracking & dynamic simulation</li>
+        <li>Custom 3D modeling &amp; shaders — environment art and visual effects</li>
+        <li>Real-time motion tracking &amp; dynamic simulation</li>
       </ul>
     </section>
 
@@ -102,7 +125,7 @@
 
   <!-- Footer -->
   <footer>
-    <span class="foot-l">© 2025 Shreyas Kambhampati</span>
+    <span class="foot-l">© 2026 Shreyas Kambhampati</span>
     <a class="foot-logo" href="index.html">SVK</a>
     <span class="foot-r"><a href="#">Back to top ↑</a></span>
   </footer>
@@ -122,7 +145,7 @@
     });
 
     /******************************************************************
-     * 2) Particle System (canvas#particles)
+     * 2) Particle System
      ******************************************************************/
     (function() {
       const canvas = document.getElementById('particles');
@@ -137,127 +160,132 @@
         points = [];
         for (let i = 0; i < count; i++) {
           points.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            radius: 0.3 + Math.random() * 1.1,
-            alpha: 0.3 + Math.random() * 0.7
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+            radius: 0.3 + Math.random() * 1.1, alpha: 0.3 + Math.random() * 0.7
           });
         }
       }
 
       function draw() {
-        const w = canvas.width;
-        const h = canvas.height;
+        const w = canvas.width, h = canvas.height;
         ctx.clearRect(0, 0, w, h);
-
         points.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
+          p.x += p.vx; p.y += p.vy;
           if (p.x < 0 || p.x > w) p.vx *= -1;
           if (p.y < 0 || p.y > h) p.vy *= -1;
-          p.x = (p.x + w) % w;
-          p.y = (p.y + h) % h;
+          p.x = (p.x + w) % w; p.y = (p.y + h) % h;
         });
-
         const maxDist = 90;
         points.forEach((p, i) => {
           points.slice(i + 1).forEach(q => {
-            const dx = p.x - q.x;
-            const dy = p.y - q.y;
-            const dist = Math.hypot(dx, dy);
+            const dist = Math.hypot(p.x - q.x, p.y - q.y);
             if (dist < maxDist) {
-              const opacity = (1 - dist / maxDist) * 0.45;
-              ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
+              ctx.strokeStyle = `rgba(96,165,250,${(1 - dist / maxDist) * 0.45})`;
               ctx.lineWidth = 0.5;
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              ctx.stroke();
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
             }
           });
         });
-
         points.forEach(p => {
-          ctx.fillStyle = `rgba(96, 165, 250, ${p.alpha * 0.45})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.fillStyle = `rgba(96,165,250,${p.alpha * 0.45})`;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
         });
-
         requestAnimationFrame(draw);
       }
-
-      resize();
-      draw();
+      resize(); draw();
       window.addEventListener('resize', resize);
     })();
 
     /******************************************************************
-     * 3) Cursor Glow (div#cur)
+     * 3) Cursor Glow
      ******************************************************************/
     (function() {
       const cur = document.getElementById('cur');
       if (!cur) return;
-      let targetX = 0, targetY = 0;
-      let currentX = 0, currentY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-      });
-
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
       function tick() {
-        const factor = 0.1;
-        currentX += (targetX - currentX) * factor;
-        currentY += (targetY - currentY) * factor;
-        cur.style.left = currentX + 'px';
-        cur.style.top = currentY + 'px';
+        cx += (tx - cx) * 0.1; cy += (ty - cy) * 0.1;
+        cur.style.left = cx + 'px'; cur.style.top = cy + 'px';
         requestAnimationFrame(tick);
       }
       tick();
     })();
 
     /******************************************************************
-     * 4) Nav Scroll (toggle scrolled class when scrollY > 50)
+     * 4) Theme Toggle with localStorage
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        toggle.checked = true;
+      }
+      toggle.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+      });
+    });
+
+    /******************************************************************
+     * 5) Mobile Nav
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+      const overlay   = document.getElementById('mobile-nav-overlay');
+      const closeBtn  = document.getElementById('mobile-nav-close');
+      if (!hamburger || !mobileNav) return;
+
+      function openNav() {
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileNav.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav() {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      hamburger.addEventListener('click', () => hamburger.classList.contains('open') ? closeNav() : openNav());
+      if (closeBtn) closeBtn.addEventListener('click', closeNav);
+      overlay.addEventListener('click', closeNav);
+      mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    });
+
+    /******************************************************************
+     * 6) Nav Scroll + Scroll Progress Bar
      ******************************************************************/
     (function() {
+      const bar = document.getElementById('scroll-progress');
       const nav = document.getElementById('nav');
-      if (!nav) return;
-
-      function onScroll() {
-        if (window.scrollY > 50) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
+      function update() {
+        const y = window.scrollY || window.pageYOffset || 0;
+        if (nav) nav.classList.toggle('scrolled', y > 50);
+        if (bar) {
+          const total = (document.body.scrollHeight - window.innerHeight) || 1;
+          bar.style.width = Math.min(100, (y / total) * 100) + '%';
         }
       }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      window.addEventListener('scroll', update, { passive: true });
+      update();
     })();
 
     /******************************************************************
-     * 5) IntersectionObserver for .proj-section → adds .vis
+     * 7) IntersectionObserver for .proj-section
      ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
-      const sections = document.querySelectorAll('.proj-section');
-      if (!sections.length) return;
-
       const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('vis');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { root: null, threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
+        entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); observer.unobserve(e.target); } }),
+        { threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
       );
-
-      sections.forEach(section => observer.observe(section));
+      document.querySelectorAll('.proj-section').forEach(s => observer.observe(s));
     });
   </script>
 </body>

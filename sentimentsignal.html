@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MovieMind — ML-powered movie recommendation system using collaborative and content-based filtering.">
-  <title>MovieMind | Shreyas Kambhampati</title>
+  <meta name="description" content="SentimentSignal — Real-time market sentiment engine that classifies social media signals across 50+ equities using NLP.">
+  <title>SentimentSignal | Shreyas Kambhampati</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -73,17 +73,18 @@
   <!-- Project Hero -->
   <header class="project-hero">
     <a class="back-link" href="index.html#projects">← Back to projects</a>
-    <div class="proj-icon-wrap">🎬</div>
-    <h1 class="proj-title">MovieMind</h1>
-    <p class="proj-subtitle">An intelligent movie recommendation system that delivers personalized film suggestions using machine learning — built with both content-based and collaborative filtering.</p>
+    <div class="proj-icon-wrap">📊</div>
+    <h1 class="proj-title">SentimentSignal</h1>
+    <p class="proj-subtitle">A real-time market sentiment engine that ingests social media streams, classifies posts as bullish, bearish, or neutral using an NLP pipeline, and aggregates per-ticker scores across 50+ equities.</p>
     <div class="tags">
       <span class="tag">Python</span>
-      <span class="tag">ML</span>
-      <span class="tag">Collaborative Filtering</span>
-      <span class="tag">Content-Based Filtering</span>
+      <span class="tag">NLP</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">Real-time</span>
+      <span class="tag">Data Pipelines</span>
     </div>
     <div class="proj-links">
-      <a href="https://github.com/SVKambhampati/MovieMind" target="_blank" rel="noopener" class="proj-link-btn">GitHub ↗</a>
+      <a href="https://github.com/Oasis-NEU/s26-group-11" target="_blank" rel="noopener" class="proj-link-btn">GitHub ↗</a>
     </div>
     <div class="proj-divider"></div>
   </header>
@@ -92,28 +93,38 @@
   <main class="project-body">
     <section class="proj-section">
       <h2>Overview</h2>
-      <p>MovieMind is a machine learning-powered recommendation engine designed to help users discover films they'll genuinely love. By combining two complementary filtering techniques, it surfaces suggestions that are both personalized to individual taste and informed by broader viewing patterns.</p>
+      <p>SentimentSignal is a real-time market intelligence tool built at Oasis@Northeastern. It ingests a continuous stream of social media posts from Reddit, Twitter/X, and StockTwits, runs each post through an NLP classification pipeline to label it bullish, bearish, or neutral, and aggregates the results into per-ticker sentiment scores across 50+ equities. The goal is to surface momentum shifts in market sentiment before they appear in price action.</p>
     </section>
 
     <section class="proj-section">
       <h2>How It Works</h2>
-      <p>Content-based filtering analyzes movie metadata — genres, directors, cast, and plot keywords — to find films similar to ones a user has already enjoyed. Collaborative filtering identifies patterns across users with similar taste profiles to surface hidden gems the user might never have found on their own. MovieMind combines both signals for more robust, accurate recommendations.</p>
+      <p>Posts are pulled via API streams and queued for processing. Each post is tokenized, cleaned, and passed through a fine-tuned sentiment classifier trained on financial social media data. The classifier output is weighted by source credibility and post engagement, then rolled into a sliding-window aggregation per ticker symbol. A live dashboard surfaces the current sentiment distribution and momentum trend for each tracked equity.</p>
+    </section>
+
+    <section class="proj-section">
+      <h2>Technical Decisions</h2>
+      <ul>
+        <li><strong>Multi-source ingestion:</strong> Reddit (PRAW), Twitter/X API v2, and StockTwits feed API — normalized into a common schema before hitting the pipeline.</li>
+        <li><strong>NLP classifier:</strong> Fine-tuned on FinSentiment and StockTwits labeled datasets. Outperforms vanilla VADER on finance-specific language like options slang and ticker mentions.</li>
+        <li><strong>Sliding window aggregation:</strong> Configurable time windows (15m, 1h, 4h) let users distinguish short-term noise from sustained sentiment shifts.</li>
+        <li><strong>Low-latency design:</strong> Pipeline target under 500ms from ingest to dashboard update under normal load.</li>
+      </ul>
     </section>
 
     <section class="proj-section">
       <h2>Technologies Used</h2>
       <ul>
-        <li>Python — core language for data processing and model logic</li>
-        <li>scikit-learn — cosine similarity and matrix factorization</li>
-        <li>Pandas &amp; NumPy — data wrangling and feature engineering</li>
-        <li>Flask — lightweight web server for the recommendation API</li>
-        <li>The Movies Dataset — training data source</li>
+        <li>Python — core pipeline and classifier logic</li>
+        <li>Hugging Face Transformers — fine-tuned sentiment classification model</li>
+        <li>PRAW / Twitter API v2 / StockTwits API — multi-source social data ingestion</li>
+        <li>SQLite / JSON store — ticker-level sentiment aggregation and history</li>
+        <li>Flask — lightweight dashboard API server</li>
       </ul>
     </section>
 
     <section class="proj-section">
       <h2>What I Learned</h2>
-      <p>Building MovieMind deepened my understanding of how recommendation systems actually work at scale — the cold start problem, the tradeoffs between filtering approaches, and how to evaluate recommendation quality beyond simple accuracy metrics. It also gave me hands-on experience translating ML research into a working product.</p>
+      <p>The biggest challenge was financial language. General-purpose sentiment models completely miss context like "puts printing" or "to the moon" — which meant investing in a domain-specific training set. I also learned a lot about pipeline reliability: API rate limits, partial failures, and deduplication across sources all needed explicit handling to keep the signal clean. Building this made clear how much infrastructure work lives beneath a "simple" real-time dashboard.</p>
     </section>
   </main>
 

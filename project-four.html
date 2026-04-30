@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="StyleForecast — Personalized outfit recommendations based on real-time weather and your wardrobe.">
   <title>StyleForecast | Shreyas Kambhampati</title>
-
-  <!-- Google Fonts: Instrument Serif + Inter (same as index.html) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Main stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Cursor glow -->
+  <div id="cur" aria-hidden="true"></div>
 
   <!-- Background orbs -->
   <div class="bg-orbs">
@@ -26,9 +25,6 @@
 
   <!-- Particle canvas -->
   <canvas id="particles" aria-hidden="true"></canvas>
-
-  <!-- Cursor glow -->
-  <div id="cur" aria-hidden="true"></div>
 
   <!-- Page Loader -->
   <div id="loader">
@@ -41,21 +37,45 @@
   <!-- Nav -->
   <nav id="nav">
     <a class="logo" href="index.html">SVK</a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#experience">Experience</a></li>
       <li><a href="index.html#projects">Projects</a></li>
       <li><a href="index.html#skills">Skills</a></li>
       <li><a href="index.html#contact" class="nav-cta">Say hi</a></li>
     </ul>
+    <div class="nav-actions">
+      <a href="resume.pdf" class="nav-resume" target="_blank" rel="noopener">Resume ↗</a>
+      <div class="toggle-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle"></label>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile nav panel -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a></li>
+      <li><a href="index.html#contact">Say hi</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
   <!-- Project Hero -->
   <header class="project-hero">
     <a class="back-link" href="index.html#projects">← Back to projects</a>
     <div class="proj-icon-wrap">🌤️</div>
     <h1 class="proj-title">StyleForecast</h1>
-    <p class="proj-subtitle">A personalized outfit recommendation web app that suggests daily clothing based on real-time weather and your wardrobe — making getting dressed actually easy.</p>
+    <p class="proj-subtitle">A full-stack outfit recommendation engine that fuses live weather telemetry with a user-managed wardrobe to surface ranked outfit suggestions for any conditions.</p>
     <div class="tags">
       <span class="tag">Flask</span>
       <span class="tag">Python</span>
@@ -75,184 +95,115 @@
 
     <section class="proj-section">
       <h2>How It Works</h2>
-      <p>Users build a digital wardrobe by uploading clothing items with metadata — type, color, formality level, and season suitability. Each morning, StyleForecast fetches the current forecast from the OpenWeatherMap API, runs the wardrobe through a recommendation engine that weights weather appropriateness and style preferences, and presents a ranked list of outfit options. Users can save favorites and rate suggestions to improve future recommendations.</p>
+      <p>Users build a digital wardrobe by uploading clothing items with metadata — type, color, formality level, and season suitability. StyleForecast fetches the current forecast from the OpenWeatherMap API, runs the wardrobe through a recommendation engine that weights weather appropriateness and style preferences against temperature, precipitation, and UV index, and presents a ranked list of outfit options. Users can save favorites and rate suggestions to improve future recommendations.</p>
     </section>
 
     <section class="proj-section">
       <h2>Technologies Used</h2>
       <ul>
-        <li>Python & Flask — backend logic and REST API server</li>
+        <li>Python &amp; Flask — backend logic and REST API server</li>
         <li>SQLite — lightweight database for user profiles, wardrobe items, and weather logs</li>
         <li>OpenWeatherMap API — real-time weather data by location</li>
-        <li>HTML, CSS & JavaScript — responsive frontend with dynamic outfit updates</li>
         <li>Jinja2 — server-side templating for the web interface</li>
+        <li>HTML, CSS &amp; JavaScript — responsive frontend with dynamic outfit updates</li>
       </ul>
     </section>
 
     <section class="proj-section">
       <h2>What I Learned</h2>
-      <p>StyleForecast was my first end-to-end full-stack project — from database schema design to API integration to frontend rendering. The biggest challenge was building a recommendation engine that felt genuinely useful rather than just random. It pushed me to think carefully about how to model user preferences and how small UX decisions (like showing weather context alongside suggestions) dramatically change how trustworthy a recommendation feels.</p>
+      <p>StyleForecast was my first end-to-end full-stack project — from database schema design to API integration to frontend rendering. The biggest challenge was building a recommendation engine that felt genuinely useful rather than just random. It pushed me to think carefully about how to model user preferences and how small UX decisions dramatically change how trustworthy a recommendation feels.</p>
     </section>
   </main>
 
   <!-- Footer -->
   <footer>
-    <span class="foot-l">© 2025 Shreyas Kambhampati</span>
+    <span class="foot-l">© 2026 Shreyas Kambhampati</span>
     <a class="foot-logo" href="index.html">SVK</a>
     <span class="foot-r"><a href="#">Back to top ↑</a></span>
   </footer>
 
   <script>
-    /******************************************************************
-     * 1) Loader fade out
-     ******************************************************************/
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
-        if (loader) {
-          loader.classList.add('loaded');
-          setTimeout(() => loader.remove(), 500);
-        }
+        if (loader) { loader.classList.add('loaded'); setTimeout(() => loader.remove(), 500); }
       }, 1000);
     });
 
-    /******************************************************************
-     * 2) Particle System (canvas#particles)
-     ******************************************************************/
     (function() {
       const canvas = document.getElementById('particles');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let points = [];
-
       function resize() {
-        const w = canvas.width = window.innerWidth;
-        const h = canvas.height = window.innerHeight;
+        const w = canvas.width = window.innerWidth, h = canvas.height = window.innerHeight;
         const count = Math.floor((w * h) / 20000);
         points = [];
         for (let i = 0; i < count; i++) {
-          points.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            radius: 0.3 + Math.random() * 1.1,
-            alpha: 0.3 + Math.random() * 0.7
-          });
+          points.push({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-0.5)*0.5, vy:(Math.random()-0.5)*0.5, radius:0.3+Math.random()*1.1, alpha:0.3+Math.random()*0.7 });
         }
       }
-
       function draw() {
-        const w = canvas.width;
-        const h = canvas.height;
-        ctx.clearRect(0, 0, w, h);
-
-        points.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          p.x = (p.x + w) % w;
-          p.y = (p.y + h) % h;
-        });
-
-        const maxDist = 90;
-        points.forEach((p, i) => {
-          points.slice(i + 1).forEach(q => {
-            const dx = p.x - q.x;
-            const dy = p.y - q.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < maxDist) {
-              const opacity = (1 - dist / maxDist) * 0.45;
-              ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
-              ctx.lineWidth = 0.5;
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              ctx.stroke();
-            }
-          });
-        });
-
-        points.forEach(p => {
-          ctx.fillStyle = `rgba(96, 165, 250, ${p.alpha * 0.45})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+        points.forEach(p => { p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1; p.x=(p.x+w)%w; p.y=(p.y+h)%h; });
+        const maxDist=90;
+        points.forEach((p,i) => { points.slice(i+1).forEach(q => { const d=Math.hypot(p.x-q.x,p.y-q.y); if(d<maxDist){ctx.strokeStyle=`rgba(96,165,250,${(1-d/maxDist)*0.45})`;ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}); });
+        points.forEach(p => { ctx.fillStyle=`rgba(96,165,250,${p.alpha*0.45})`;ctx.beginPath();ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);ctx.fill(); });
         requestAnimationFrame(draw);
       }
-
-      resize();
-      draw();
-      window.addEventListener('resize', resize);
+      resize(); draw(); window.addEventListener('resize', resize);
     })();
 
-    /******************************************************************
-     * 3) Cursor Glow (div#cur)
-     ******************************************************************/
     (function() {
       const cur = document.getElementById('cur');
       if (!cur) return;
-      let targetX = 0, targetY = 0;
-      let currentX = 0, currentY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-      });
-
-      function tick() {
-        const factor = 0.1;
-        currentX += (targetX - currentX) * factor;
-        currentY += (targetY - currentY) * factor;
-        cur.style.left = currentX + 'px';
-        cur.style.top = currentY + 'px';
-        requestAnimationFrame(tick);
-      }
+      let tx=0,ty=0,cx=0,cy=0;
+      document.addEventListener('mousemove', e => { tx=e.clientX; ty=e.clientY; });
+      function tick() { cx+=(tx-cx)*0.1; cy+=(ty-cy)*0.1; cur.style.left=cx+'px'; cur.style.top=cy+'px'; requestAnimationFrame(tick); }
       tick();
     })();
 
-    /******************************************************************
-     * 4) Nav Scroll (toggle scrolled class when scrollY > 50)
-     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+      if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); toggle.checked = true; }
+      toggle.addEventListener('change', function() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+      const overlay   = document.getElementById('mobile-nav-overlay');
+      const closeBtn  = document.getElementById('mobile-nav-close');
+      if (!hamburger || !mobileNav) return;
+      function openNav() { hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileNav.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+      function closeNav() { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileNav.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow=''; }
+      hamburger.addEventListener('click', () => hamburger.classList.contains('open') ? closeNav() : openNav());
+      if (closeBtn) closeBtn.addEventListener('click', closeNav);
+      overlay.addEventListener('click', closeNav);
+      mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    });
+
     (function() {
-      const nav = document.getElementById('nav');
-      if (!nav) return;
-
-      function onScroll() {
-        if (window.scrollY > 50) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
+      const bar = document.getElementById('scroll-progress'), nav = document.getElementById('nav');
+      function update() {
+        const y = window.scrollY||0;
+        if (nav) nav.classList.toggle('scrolled', y>50);
+        if (bar) bar.style.width = Math.min(100,(y/((document.body.scrollHeight-window.innerHeight)||1))*100)+'%';
       }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      window.addEventListener('scroll', update, { passive: true }); update();
     })();
 
-    /******************************************************************
-     * 5) IntersectionObserver for .proj-section → adds .vis
-     ******************************************************************/
     document.addEventListener('DOMContentLoaded', function() {
-      const sections = document.querySelectorAll('.proj-section');
-      if (!sections.length) return;
-
       const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('vis');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { root: null, threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
+        entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); observer.unobserve(e.target); } }),
+        { threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
       );
-
-      sections.forEach(section => observer.observe(section));
+      document.querySelectorAll('.proj-section').forEach(s => observer.observe(s));
     });
   </script>
 </body>

@@ -1070,6 +1070,7 @@ h1.name em {
 .sk-row:nth-child(2) { transition-delay: 0.07s; }
 .sk-row:nth-child(3) { transition-delay: 0.14s; }
 .sk-row:nth-child(4) { transition-delay: 0.21s; }
+.sk-row:nth-child(5) { transition-delay: 0.28s; }
 
 .sk-row-meta {
   display: flex;
@@ -1116,16 +1117,19 @@ h1.name em {
 .sk-row:nth-child(2) .sk-row-name { color: #a78bfa; }
 .sk-row:nth-child(3) .sk-row-name { color: #34d399; }
 .sk-row:nth-child(4) .sk-row-name { color: #22d3ee; }
+.sk-row:nth-child(5) .sk-row-name { color: #c9a96e; }
 
-.sk-row:nth-child(1) .sk-row-count::before { content: '— '; }
-.sk-row:nth-child(2) .sk-row-count::before { content: '— '; }
-.sk-row:nth-child(3) .sk-row-count::before { content: '— '; }
-.sk-row:nth-child(4) .sk-row-count::before { content: '— '; }
+.sk-row:nth-child(1) .sk-row-count::before,
+.sk-row:nth-child(2) .sk-row-count::before,
+.sk-row:nth-child(3) .sk-row-count::before,
+.sk-row:nth-child(4) .sk-row-count::before,
+.sk-row:nth-child(5) .sk-row-count::before { content: '— '; }
 
 .sk-row:nth-child(1) .sk-tag:hover { background: rgba(96, 165, 250, 0.12); border-color: rgba(96, 165, 250, 0.35); color: var(--text); }
 .sk-row:nth-child(2) .sk-tag:hover { background: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.35); color: var(--text); }
 .sk-row:nth-child(3) .sk-tag:hover { background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.35); color: var(--text); }
 .sk-row:nth-child(4) .sk-tag:hover { background: rgba(34, 211, 238, 0.12); border-color: rgba(34, 211, 238, 0.35); color: var(--text); }
+.sk-row:nth-child(5) .sk-tag:hover { background: rgba(201, 169, 110, 0.12); border-color: rgba(201, 169, 110, 0.4); color: var(--text); }
 
 /* ========================================================================
    16) CONTACT SECTION
@@ -1487,6 +1491,7 @@ body.light-mode .sk-row:nth-child(1) .sk-tag:hover { background: rgba(59,130,246
 body.light-mode .sk-row:nth-child(2) .sk-tag:hover { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.3); color: #111; }
 body.light-mode .sk-row:nth-child(3) .sk-tag:hover { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3); color: #111; }
 body.light-mode .sk-row:nth-child(4) .sk-tag:hover { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.3); color: #111; }
+body.light-mode .sk-row:nth-child(5) .sk-tag:hover { background: rgba(180,130,60,0.08); border-color: rgba(180,130,60,0.3); color: #111; }
 body.light-mode .contact-h {
   color: #111;
 }

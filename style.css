@@ -599,11 +599,16 @@ h1.name em {
 .exp-item { transform: translateY(28px); }
 .proj-card { transform: translateY(20px) scale(0.98); }
 .sec-hd.vis, .about-left-col.vis, .about-copy.vis,
-.exp-item.vis, .proj-card.vis, .sk-col.vis,
+.exp-item.vis, .sk-col.vis,
 .contact-h.vis, .contact-p.vis, .crow.vis,
 .form-wrap.vis {
   opacity: 1;
   transform: none;
+}
+/* Carousel: revealed cards default to dimmed/scaled-down inactive state */
+.proj-card.vis {
+  opacity: 0.45;
+  transform: scale(0.9);
 }
 .about-copy { transition-delay: 0.15s; }
 .exp-item:nth-child(2) { transition-delay: 0.1s; }
@@ -915,7 +920,8 @@ h1.name em {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-bottom: 0.5rem;
+  padding-block: 1.75rem;            /* room for scale overflow */
+  padding-inline: calc(50% - 210px); /* center first / last card */
   cursor: grab;
   -webkit-overflow-scrolling: touch;
 }
@@ -931,8 +937,8 @@ h1.name em {
   min-width: 420px;
   max-width: 420px;
   flex-shrink: 0;
-  scroll-snap-align: start;
-  align-self: stretch;
+  scroll-snap-align: center;
+  align-self: center;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   backdrop-filter: blur(32px) saturate(160%);
@@ -944,8 +950,9 @@ h1.name em {
   overflow: hidden;
   opacity: 0;
   transform: translateY(16px);
-  transition: border-color 0.3s, box-shadow 0.3s,
-              background 0.3s, transform 0.3s, opacity 0.5s ease-out;
+  transition: opacity 0.45s ease,
+              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease, box-shadow 0.35s ease, background 0.3s ease;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 4px 24px rgba(0, 0, 0, 0.2);
@@ -2238,6 +2245,52 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 .sk-col:nth-child(2) .sk-item:hover { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.3); color: var(--text); }
 .sk-col:nth-child(3) .sk-item:hover { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--text); }
 .sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
+
+/* ── Carousel: active (centred) card ── */
+.proj-card.proj-card--active {
+  opacity: 1;
+  transform: scale(1.04);
+  border-color: rgba(201, 169, 110, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 0 0 1px rgba(201, 169, 110, 0.14),
+    0 24px 64px rgba(0, 0, 0, 0.4),
+    0 0 48px rgba(59, 130, 246, 0.09);
+}
+
+/* Carousel wrapper + nav arrows */
+.proj-carousel-wrap {
+  position: relative;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--text2);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s ease, border-color 0.2s ease,
+              color 0.2s ease, opacity 0.25s ease;
+}
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(201, 169, 110, 0.5);
+  color: var(--text);
+}
+.carousel-btn--prev { left: -1.5rem; }
+.carousel-btn--next { right: -1.5rem; }
+.carousel-btn:disabled { opacity: 0.15; pointer-events: none; }
 
 /* Project cards — number becomes gradient on hover */
 .proj-card:hover .proj-num {

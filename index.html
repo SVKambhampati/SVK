@@ -276,59 +276,71 @@
     <section id="skills" class="sec">
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">04</span><h2 class="sec-t">Skills &amp; tools</h2></div>
-        <div class="skills-grid">
+        <div class="sk-rows">
 
-          <div class="sk-col">
-            <div class="sk-hd">Languages</div>
-            <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>Python</div>
-              <div class="sk-item"><span class="sk-d"></span>C++</div>
-              <div class="sk-item"><span class="sk-d"></span>Java</div>
-              <div class="sk-item"><span class="sk-d"></span>C#</div>
-              <div class="sk-item"><span class="sk-d"></span>JavaScript</div>
-              <div class="sk-item"><span class="sk-d"></span>TypeScript</div>
-              <div class="sk-item"><span class="sk-d"></span>SQL</div>
-              <div class="sk-item"><span class="sk-d"></span>Bash</div>
-              <div class="sk-item"><span class="sk-d"></span>Swift</div>
+          <div class="sk-row">
+            <div class="sk-row-meta">
+              <span class="sk-row-name">Languages</span>
+              <span class="sk-row-count">9</span>
+            </div>
+            <div class="sk-row-tags">
+              <span class="sk-tag">Python</span>
+              <span class="sk-tag">C++</span>
+              <span class="sk-tag">Java</span>
+              <span class="sk-tag">C#</span>
+              <span class="sk-tag">JavaScript</span>
+              <span class="sk-tag">TypeScript</span>
+              <span class="sk-tag">SQL</span>
+              <span class="sk-tag">Bash</span>
+              <span class="sk-tag">Swift</span>
             </div>
           </div>
 
-          <div class="sk-col">
-            <div class="sk-hd">Frameworks &amp; Libraries</div>
-            <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>PyTorch</div>
-              <div class="sk-item"><span class="sk-d"></span>TensorFlow</div>
-              <div class="sk-item"><span class="sk-d"></span>Scikit-learn</div>
-              <div class="sk-item"><span class="sk-d"></span>NumPy / Pandas</div>
-              <div class="sk-item"><span class="sk-d"></span>Matplotlib</div>
-              <div class="sk-item"><span class="sk-d"></span>Flask</div>
-              <div class="sk-item"><span class="sk-d"></span>React</div>
+          <div class="sk-row">
+            <div class="sk-row-meta">
+              <span class="sk-row-name">Frameworks &amp; Libraries</span>
+              <span class="sk-row-count">7</span>
+            </div>
+            <div class="sk-row-tags">
+              <span class="sk-tag">PyTorch</span>
+              <span class="sk-tag">TensorFlow</span>
+              <span class="sk-tag">Scikit-learn</span>
+              <span class="sk-tag">NumPy / Pandas</span>
+              <span class="sk-tag">Matplotlib</span>
+              <span class="sk-tag">Flask</span>
+              <span class="sk-tag">React</span>
             </div>
           </div>
 
-          <div class="sk-col">
-            <div class="sk-hd">Cloud &amp; Infra</div>
-            <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>AWS</div>
-              <div class="sk-item"><span class="sk-d"></span>Azure</div>
-              <div class="sk-item"><span class="sk-d"></span>Docker</div>
-              <div class="sk-item"><span class="sk-d"></span>Linux</div>
-              <div class="sk-item"><span class="sk-d"></span>Git / GitHub</div>
-              <div class="sk-item"><span class="sk-d"></span>CI / CD</div>
-              <div class="sk-item"><span class="sk-d"></span>REST APIs</div>
+          <div class="sk-row">
+            <div class="sk-row-meta">
+              <span class="sk-row-name">Cloud &amp; Infra</span>
+              <span class="sk-row-count">7</span>
+            </div>
+            <div class="sk-row-tags">
+              <span class="sk-tag">AWS</span>
+              <span class="sk-tag">Azure</span>
+              <span class="sk-tag">Docker</span>
+              <span class="sk-tag">Linux</span>
+              <span class="sk-tag">Git / GitHub</span>
+              <span class="sk-tag">CI / CD</span>
+              <span class="sk-tag">REST APIs</span>
             </div>
           </div>
 
-          <div class="sk-col">
-            <div class="sk-hd">XR &amp; Methods</div>
-            <div class="sk-list">
-              <div class="sk-item"><span class="sk-d"></span>Unity</div>
-              <div class="sk-item"><span class="sk-d"></span>Meta XR SDK</div>
-              <div class="sk-item"><span class="sk-d"></span>Haptic Systems</div>
-              <div class="sk-item"><span class="sk-d"></span>Spatial Computing</div>
-              <div class="sk-item"><span class="sk-d"></span>HCI Research</div>
-              <div class="sk-item"><span class="sk-d"></span>Agile / Scrum</div>
-              <div class="sk-item"><span class="sk-d"></span>Multithreading</div>
+          <div class="sk-row">
+            <div class="sk-row-meta">
+              <span class="sk-row-name">XR &amp; Methods</span>
+              <span class="sk-row-count">7</span>
+            </div>
+            <div class="sk-row-tags">
+              <span class="sk-tag">Unity</span>
+              <span class="sk-tag">Meta XR SDK</span>
+              <span class="sk-tag">Haptic Systems</span>
+              <span class="sk-tag">Spatial Computing</span>
+              <span class="sk-tag">HCI Research</span>
+              <span class="sk-tag">Agile / Scrum</span>
+              <span class="sk-tag">Multithreading</span>
             </div>
           </div>
 
@@ -557,7 +569,7 @@
 
       document.querySelectorAll(
         '.sec-hd, .about-left-col, .about-copy, ' +
-        '.exp-item, .proj-card, .sk-col, .certs-strip, ' +
+        '.exp-item, .proj-card, .sk-row, .certs-strip,' +
         '.contact-h, .contact-p, .crow, .form-wrap'
       ).forEach(el => io.observe(el));
     });
@@ -1319,7 +1331,7 @@
       /* ── 3) Section reveals with motion spring ── */
       inView(
         '.sec-hd, .about-left-col, .about-copy, ' +
-        '.exp-item, .proj-card, .sk-col, .certs-strip, ' +
+        '.exp-item, .proj-card, .sk-row, .certs-strip,' +
         '.contact-h, .contact-p, .crow, .form-wrap',
         ({ target }) => {
           /* Add .vis so CSS transitions keep working as fallback,

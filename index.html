@@ -1015,41 +1015,114 @@
     })();
 
     /******************************************************************
-     * 13) Cursor dot
+     * 13) iOS-style cursor — morphing dot with magnetic button snap
      ******************************************************************/
     (function() {
       const dot = document.getElementById('cursor-dot');
       if (!dot) return;
 
-      let mouseX = 0, mouseY = 0;
-      let dotX = 0, dotY = 0;
+      /* ── interpolated state ── */
+      let cx = -200, cy = -200; // position
+      let cw = 10,   ch = 10;   // size
+      let cr = 999;              // border-radius
+      let ca = 0.85;             // fill alpha
+      let cba = 0;               // border alpha
 
-      document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+      /* ── targets ── */
+      let tx = cx, ty = cy, tw = 10, th = 10, tr = 999, ta = 0.85, tba = 0;
+
+      let mx = -200, my = -200; // raw mouse
+      let hoverType = null;
+      let hoverEl   = null;
+
+      function lerp(a, b, n) { return a + (b - a) * n; }
+      function isLight()     { return document.body.classList.contains('light-mode'); }
+
+      /* ── mouse tracking ── */
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      document.addEventListener('mouseleave', () => { mx = -300; my = -300; });
+
+      /* ── element classification (event delegation — works for dynamic elements) ── */
+      const BTN_SEL =
+        '.btn, .mag-btn, .btn-send, .nav-cta, .nav-resume, ' +
+        '.carousel-btn, .proj-link-btn, .sk-tag, .cert-badge, ' +
+        '.back-link, .back-to-top, .foot-logo, .logo, ' +
+        'button, [role="button"]';
+
+      document.addEventListener('mouseover', e => {
+        const btn  = e.target.closest(BTN_SEL);
+        const card = e.target.closest('.proj-card');
+        const link = e.target.closest('a');
+
+        if (btn)       { hoverType = 'button'; hoverEl = btn; }
+        else if (card) { hoverType = 'card';   hoverEl = card; }
+        else if (link) { hoverType = 'link';   hoverEl = link; }
+        else           { hoverType = null;      hoverEl = null; }
       });
 
-      // Grow dot on interactive elements
-      document.querySelectorAll(
-        'a, button, .btn, .proj-card, input, textarea'
-      ).forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          dot.style.width = '10px';
-          dot.style.height = '10px';
-          dot.style.background = 'var(--accent, #c9a96e)';
-        });
-        el.addEventListener('mouseleave', () => {
-          dot.style.width = '';
-          dot.style.height = '';
-          dot.style.background = '';
-        });
+      document.addEventListener('mouseout', e => {
+        const to = e.relatedTarget;
+        if (!to || to === document.documentElement) {
+          hoverType = null; hoverEl = null;
+        }
       });
 
+      /* ── press feedback ── */
+      let pressing = false;
+      document.addEventListener('mousedown', () => { pressing = true; });
+      document.addEventListener('mouseup',   () => { pressing = false; });
+
+      /* ── animation loop ── */
       (function tick() {
-        dotX += (mouseX - dotX) * 0.85;
-        dotY += (mouseY - dotY) * 0.85;
-        dot.style.left = dotX + 'px';
-        dot.style.top = dotY + 'px';
+        const light    = isLight();
+        const posSpeed = hoverType === 'button' ? 0.2 : 0.11;
+        const szSpeed  = 0.14;
+
+        if (hoverType === 'button' && hoverEl) {
+          /* Morph + snap to button */
+          const rect = hoverEl.getBoundingClientRect();
+          const pad  = 7;
+          tx = rect.left + rect.width  / 2;
+          ty = rect.top  + rect.height / 2;
+          tw = rect.width  + pad * 2;
+          th = rect.height + pad * 2;
+          const br = parseFloat(getComputedStyle(hoverEl).borderRadius) || 10;
+          tr  = Math.min(br + pad, (th) / 2);
+          ta  = light ? 0.07 : 0.05;
+          tba = light ? 0.28 : 0.22;
+
+        } else if (hoverType === 'link') {
+          tx = mx; ty = my;
+          tw = 20; th = 20; tr = 999;
+          ta  = light ? 0.12 : 0.45;
+          tba = 0;
+
+        } else {
+          tx = mx; ty = my;
+          tw = pressing ? 7 : 10;
+          th = pressing ? 7 : 10;
+          tr = 999;
+          ta  = light ? 0.55 : 0.85;
+          tba = 0;
+        }
+
+        cx  = lerp(cx,  tx,  posSpeed);
+        cy  = lerp(cy,  ty,  posSpeed);
+        cw  = lerp(cw,  tw,  szSpeed);
+        ch  = lerp(ch,  th,  szSpeed);
+        cr  = lerp(cr,  tr,  szSpeed);
+        ca  = lerp(ca,  ta,  szSpeed);
+        cba = lerp(cba, tba, szSpeed);
+
+        const rgb    = light ? '0,0,0' : '255,255,255';
+        dot.style.left         = cx  + 'px';
+        dot.style.top          = cy  + 'px';
+        dot.style.width        = cw  + 'px';
+        dot.style.height       = ch  + 'px';
+        dot.style.borderRadius = cr  + 'px';
+        dot.style.background   = `rgba(${rgb},${ca.toFixed(3)})`;
+        dot.style.border       = `1.5px solid rgba(${rgb},${cba.toFixed(3)})`;
+
         requestAnimationFrame(tick);
       })();
     })();

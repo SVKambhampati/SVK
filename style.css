@@ -88,15 +88,16 @@ a {
    -------------------------------------------------------------------------- */
 #cursor-dot {
   position: fixed;
-  width: 5px;
-  height: 5px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
+  border-radius: 999px;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.85);
   transform: translate(-50%, -50%);
-  will-change: left, top;
-  transition: width 0.15s, height 0.15s, background 0.15s;
+  will-change: left, top, width, height, border-radius, background, border-color;
+  /* animation entirely driven by JS — no CSS transitions */
 }
 
 /* cursor blob removed */
@@ -2056,10 +2057,7 @@ body.light-mode .btn-send:hover {
    LIGHT MODE — element-specific fixes (variables handle most, these handle the rest)
    ===================================================================================== */
 
-/* Cursor — dark in light mode so it's visible */
-body.light-mode #cursor-dot {
-  background: rgba(0, 0, 0, 0.75);
-}
+/* Cursor — JS handles color per mode; no CSS override needed */
 }
 
 /* Video is hidden in light mode — rich gradient takes over */

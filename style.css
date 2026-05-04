@@ -1038,10 +1038,11 @@ h1.name em {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-block: 1.5rem;
-  padding-inline: calc(50% - 222px); /* center first/last — half of 445px featured */
+  padding-inline-start: 0;
+  padding-inline-end: calc(100% - 205px); /* let last thumbnail scroll to left edge */
   cursor: grab;
   -webkit-overflow-scrolling: touch;
-  align-items: center;
+  align-items: stretch;
 }
 .proj-grid::-webkit-scrollbar { display: none; }
 .proj-grid.dragging { cursor: grabbing !important; }
@@ -1054,8 +1055,7 @@ h1.name em {
   width: 205px;
   height: 260px;
   flex-shrink: 0;
-  scroll-snap-align: center;
-  align-self: center;
+  scroll-snap-align: start;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   backdrop-filter: blur(32px) saturate(160%);
@@ -1117,15 +1117,6 @@ h1.name em {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
 
-.proj-num {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 2.25rem;
-  color: var(--text3);
-  font-weight: 400;
-  line-height: 1;
-}
-
 .proj-name {
   font-size: 1rem;
   font-weight: 700;
@@ -1133,32 +1124,20 @@ h1.name em {
   letter-spacing: -0.01em;
   margin-bottom: 0.3rem;
 }
-/* Desc container — fixed height, both variants overlap */
-.proj-desc-wrap {
-  position: relative;
+/* Description — single element in normal flow; text swapped by JS */
+.proj-desc {
   flex: 1;
-  overflow: hidden;
-  margin-bottom: 0.45rem;
-}
-.proj-desc,
-.proj-desc-tech {
-  position: absolute;
-  inset: 0;
+  min-height: 0;
   font-size: 0.79rem;
   color: var(--text2);
   line-height: 1.55;
-  transition: opacity 0.35s ease;
+  margin-bottom: 0.45rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 6;
+  transition: opacity 0.22s ease;
 }
-/* short desc: visible on thumbnails */
-.proj-desc { opacity: 1; }
-/* tech desc: hidden on thumbnails, revealed on featured */
-.proj-desc-tech { opacity: 0; }
-.proj-card--feat .proj-desc { opacity: 0; }
-.proj-card--feat .proj-desc-tech { opacity: 1; }
 .proj-tags {
   display: flex;
   flex-wrap: wrap;
@@ -2416,7 +2395,7 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
   color: var(--cyan);
 }
 
-/* Number: small italic label, only on featured */
+/* Number: small italic label, only on featured (display:none so it takes no space) */
 .proj-num {
   font-family: var(--serif);
   font-style: italic;
@@ -2424,12 +2403,11 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
   color: var(--text3);
   font-weight: 400;
   line-height: 1;
-  opacity: 0;
+  display: none;
   margin-bottom: 0.3rem;
   flex-shrink: 0;
-  transition: opacity 0.3s ease;
 }
-.proj-card--feat .proj-num { opacity: 1; }
+.proj-card--feat .proj-num { display: block; }
 
 /* Carousel wrapper + nav arrows */
 .proj-carousel-wrap {

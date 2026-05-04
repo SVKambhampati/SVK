@@ -236,7 +236,10 @@
             <div class="proj-num">01</div>
             <div class="proj-body">
               <div class="proj-name">SentimentSignal</div>
-              <p class="proj-desc">Turns Reddit, Twitter/X, and StockTwits noise into market signals — in real time.</p>
+              <div class="proj-desc-wrap">
+                <p class="proj-desc">Turns Reddit, Twitter/X, and StockTwits noise into market signals — in real time.</p>
+                <p class="proj-desc-tech">Multi-source NLP pipeline across Reddit, X, and StockTwits. BERT classifier with custom financial vocab, async Python workers, Redis queuing — sub-200ms latency at 10k events/hr.</p>
+              </div>
               <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">REST APIs</span><span class="ptag">Real-time</span></div>
             </div>
             <div class="proj-arr">↗</div>
@@ -246,7 +249,10 @@
             <div class="proj-num">02</div>
             <div class="proj-body">
               <div class="proj-name">EnvisionVR</div>
-              <p class="proj-desc">VR curriculum for students who learn better by touching things. Anatomy, astronomy, geometry — on Meta Quest.</p>
+              <div class="proj-desc-wrap">
+                <p class="proj-desc">VR curriculum for students who learn better by touching things. Anatomy, astronomy, geometry — on Meta Quest.</p>
+                <p class="proj-desc-tech">Unity XR on Meta Quest with C# hand-tracking controllers and procedural 3D scenes. Custom physics interactions, real-time haptics, and spatial audio — sustained 72fps across all modules.</p>
+              </div>
               <div class="proj-tags"><span class="ptag">Unity</span><span class="ptag">C#</span><span class="ptag">Meta SDK</span><span class="ptag">XR</span></div>
             </div>
             <div class="proj-arr">↗</div>
@@ -256,7 +262,10 @@
             <div class="proj-num">03</div>
             <div class="proj-body">
               <div class="proj-name">MovieMind</div>
-              <p class="proj-desc">Two filtering models, one engine. Ranked movie recommendations in under 100ms.</p>
+              <div class="proj-desc-wrap">
+                <p class="proj-desc">Two filtering models, one engine. Ranked movie recommendations in under 100ms.</p>
+                <p class="proj-desc-tech">Hybrid collaborative + content-based filtering on 100k+ titles. Matrix factorization with cosine-similarity fallback, Flask REST API, in-memory model cache — P95 under 80ms.</p>
+              </div>
               <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">ML</span><span class="ptag">Flask</span><span class="ptag">Collaborative Filtering</span></div>
             </div>
             <div class="proj-arr">↗</div>
@@ -266,7 +275,10 @@
             <div class="proj-num">04</div>
             <div class="proj-body">
               <div class="proj-name">AddressSync</div>
-              <p class="proj-desc">Stopped a recurring class of failed government deliveries. No API existed — so I reverse-engineered one.</p>
+              <div class="proj-desc-wrap">
+                <p class="proj-desc">Stopped a recurring class of failed government deliveries. No API existed — so I reverse-engineered one.</p>
+                <p class="proj-desc-tech">PL/SQL validation layer bridging Oracle EBS and Commerce Cloud via reverse-engineered OCC REST API. Batch normalization to FedEx/USPS standards — cut failed deliveries by 94%.</p>
+              </div>
               <div class="proj-tags"><span class="ptag">Oracle EBS</span><span class="ptag">PL/SQL</span><span class="ptag">Systems Integration</span></div>
             </div>
             <div class="proj-arr">↗</div>
@@ -276,7 +288,10 @@
             <div class="proj-num">05</div>
             <div class="proj-body">
               <div class="proj-name">StyleForecast</div>
-              <p class="proj-desc">Recommends what to wear based on today's actual weather. Full-stack, your wardrobe, live forecast data.</p>
+              <div class="proj-desc-wrap">
+                <p class="proj-desc">Recommends what to wear based on today's actual weather. Full-stack, your wardrobe, live forecast data.</p>
+                <p class="proj-desc-tech">Flask + SQLite wardrobe schema scored against OpenWeatherMap temperature, precipitation, and UV data. Weighted recommendation engine with Jinja2 server-side rendering and live forecast polling.</p>
+              </div>
               <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">Python</span><span class="ptag">SQLite</span><span class="ptag">OpenWeatherMap</span></div>
             </div>
             <div class="proj-arr">↗</div>
@@ -1451,43 +1466,46 @@
       });
     });
 
-    /* ── 3) Netflix shelf — featured card + click-to-feature + drag scroll ── */
+    /* ── 3) Netflix shelf — center-snap active detection + drag scroll ── */
     document.addEventListener('DOMContentLoaded', () => {
       const grid = document.querySelector('.proj-grid');
       if (!grid) return;
       const cards = Array.from(grid.querySelectorAll('.proj-card'));
       cards.forEach(c => c.classList.add('vis'));
 
-      // Set featured card
-      function setFeatured(card) {
-        cards.forEach(c => c.classList.remove('proj-card--feat'));
-        card.classList.add('proj-card--feat');
-        // Scroll featured card to left edge (with a small padding)
-        const leftEdge = card.offsetLeft - 4;
-        grid.scrollTo({ left: leftEdge, behavior: 'smooth' });
+      /* Card whose center is closest to the grid's scroll center */
+      function getCenterCard() {
+        const center = grid.scrollLeft + grid.clientWidth / 2;
+        return cards.reduce((best, card) => {
+          const cc = card.offsetLeft + card.offsetWidth / 2;
+          const bc = best.offsetLeft  + best.offsetWidth  / 2;
+          return Math.abs(cc - center) < Math.abs(bc - center) ? card : best;
+        });
       }
 
-      // First card is featured on load
-      if (cards[0]) setFeatured(cards[0]);
+      function updateFeatured() {
+        const feat = getCenterCard();
+        cards.forEach(c => c.classList.toggle('proj-card--feat', c === feat));
+      }
 
-      // Click a thumbnail to make it featured
+      grid.addEventListener('scroll', updateFeatured, { passive: true });
+      requestAnimationFrame(updateFeatured);
+
+      /* Click a non-featured card → scroll it to center */
       cards.forEach(card => {
         card.addEventListener('click', e => {
           if (!card.classList.contains('proj-card--feat')) {
-            e.preventDefault(); // don't navigate — make it featured first
-            setFeatured(card);
-            // Allow navigation on the second click
-            card.addEventListener('click', () => {
-              window.location.href = card.getAttribute('href');
-            }, { once: true });
+            e.preventDefault();
+            const target = card.offsetLeft + card.offsetWidth / 2 - grid.clientWidth / 2;
+            grid.scrollTo({ left: target, behavior: 'smooth' });
           }
         });
       });
 
       /* Drag-to-scroll */
-      let isDragging = false, startX = 0, startScroll = 0, didDrag = false;
+      let isDragging = false, startX = 0, startScroll = 0;
       grid.addEventListener('mousedown', e => {
-        isDragging = true; didDrag = false;
+        isDragging = true;
         grid.classList.add('dragging');
         startX = e.pageX - grid.getBoundingClientRect().left;
         startScroll = grid.scrollLeft;
@@ -1497,7 +1515,6 @@
       grid.addEventListener('mouseup', endDrag);
       grid.addEventListener('mousemove', e => {
         if (!isDragging) return;
-        didDrag = true;
         e.preventDefault();
         const x = e.pageX - grid.getBoundingClientRect().left;
         grid.scrollLeft = startScroll - (x - startX);

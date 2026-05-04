@@ -1038,7 +1038,7 @@ h1.name em {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-block: 1.5rem;
-  padding-inline: 0;
+  padding-inline: calc(50% - 222px); /* center first/last — half of 445px featured */
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   align-items: center;
@@ -1046,17 +1046,15 @@ h1.name em {
 .proj-grid::-webkit-scrollbar { display: none; }
 .proj-grid.dragging { cursor: grabbing !important; }
 
-/* ── Thumbnail card (default) ── */
 .proj-card {
+  /* base layout — all cards flex-column, same fixed height */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 0.6rem;
-  padding: 1.25rem 1.5rem;
-  min-width: 210px;
-  max-width: 210px;
+  padding: 1.2rem 1.4rem;
+  width: 205px;
+  height: 158px;
   flex-shrink: 0;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   align-self: center;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
@@ -1069,12 +1067,20 @@ h1.name em {
   overflow: hidden;
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.45s ease,
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.45s ease,
               transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.3s ease, box-shadow 0.35s ease, background 0.3s ease;
+              border-color 0.35s ease, box-shadow 0.35s ease, background 0.3s ease;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.proj-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* allow flex shrinking */
 }
 .proj-card::after {
   content: '';
@@ -1127,24 +1133,32 @@ h1.name em {
   letter-spacing: -0.01em;
   margin-bottom: 0.3rem;
 }
-.proj-desc {
-  font-size: 0.85rem;
-  color: var(--text2);
-  line-height: 1.65;
-  max-width: 420px;
-  max-height: 0;
+/* Desc container — fixed height, both variants overlap */
+.proj-desc-wrap {
+  position: relative;
+  flex: 1;
   overflow: hidden;
-  opacity: 0;
-  margin: 0;
-  transition: max-height 0.45s cubic-bezier(0.22,1,0.36,1),
-              opacity 0.3s ease,
-              margin 0.3s ease;
+  margin-bottom: 0.45rem;
 }
-.proj-card--feat .proj-desc {
-  max-height: 8rem;
-  opacity: 1;
-  margin-bottom: 0.6rem;
+.proj-desc,
+.proj-desc-tech {
+  position: absolute;
+  inset: 0;
+  font-size: 0.79rem;
+  color: var(--text2);
+  line-height: 1.55;
+  transition: opacity 0.35s ease;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
+/* short desc: visible on thumbnails */
+.proj-desc { opacity: 1; }
+/* tech desc: hidden on thumbnails, revealed on featured */
+.proj-desc-tech { opacity: 0; }
+.proj-card--feat .proj-desc { opacity: 0; }
+.proj-card--feat .proj-desc-tech { opacity: 1; }
 .proj-tags {
   display: flex;
   flex-wrap: wrap;
@@ -2378,38 +2392,44 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 .sk-col:nth-child(3) .sk-item:hover { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--text); }
 .sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
 
-/* ── Carousel: active (centred) card ── */
-/* ── Featured (Netflix hero) card ── */
+/* ── Featured (center-snapped) card ── */
 .proj-card--feat {
-  min-width: 460px;
-  max-width: 460px;
-  display: grid;
-  grid-template-columns: 56px 1fr auto;
-  align-items: center;
-  gap: 1.75rem;
-  padding: 1.75rem 2rem;
+  width: 445px;
   border-color: rgba(201, 169, 110, 0.28);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
     0 0 0 1px rgba(201, 169, 110, 0.12),
     0 20px 60px rgba(0, 0, 0, 0.38),
     0 0 40px rgba(59, 130, 246, 0.08);
-  transition: min-width 0.5s cubic-bezier(0.22,1,0.36,1),
-              max-width 0.5s cubic-bezier(0.22,1,0.36,1),
-              border-color 0.4s ease,
-              box-shadow 0.4s ease,
-              padding 0.4s ease;
 }
 
-/* Hide number + arrow on thumbnail cards; show them on featured */
-.proj-num, .proj-arr { transition: opacity 0.3s ease; }
-.proj-card:not(.proj-card--feat) .proj-num,
-.proj-card:not(.proj-card--feat) .proj-arr { opacity: 0; width: 0; overflow: hidden; padding: 0; margin: 0; }
-
-/* Thumbnail cards: slightly more compact name */
-.proj-card:not(.proj-card--feat) .proj-name {
-  font-size: 0.9rem;
+/* Arrow: absolute top-right, only visible on featured */
+.proj-arr {
+  position: absolute;
+  top: 1.1rem; right: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.25s ease, color 0.25s ease;
 }
+.proj-card--feat .proj-arr { opacity: 1; }
+.proj-card--feat:hover .proj-arr {
+  transform: translate(3px, -3px);
+  color: var(--cyan);
+}
+
+/* Number: small italic label, only on featured */
+.proj-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.75rem;
+  color: var(--text3);
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0;
+  margin-bottom: 0.3rem;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+.proj-card--feat .proj-num { opacity: 1; }
 
 /* Carousel wrapper + nav arrows */
 .proj-carousel-wrap {

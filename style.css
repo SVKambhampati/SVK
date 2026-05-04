@@ -1034,16 +1034,12 @@ h1.name em {
   display: flex;
   flex-direction: row;
   gap: 0.75rem;
-  overflow-x: auto;
-  scrollbar-width: none;
   padding-block: 1.5rem;
-  padding-inline: calc(50% - 222px); /* center first/last featured card */
-  cursor: default;
-  -webkit-overflow-scrolling: touch;
-  align-items: center;
+  will-change: transform;
+  /* animation injected by JS after measuring card widths */
 }
-.proj-grid::-webkit-scrollbar { display: none; }
-.proj-grid.dragging { cursor: grabbing !important; }
+/* Pause the CSS animation when hovering */
+.proj-grid.carousel-paused { animation-play-state: paused !important; }
 
 .proj-card {
   /* base layout — all cards flex-column, same fixed height */
@@ -1064,9 +1060,8 @@ h1.name em {
   overflow: hidden;
   opacity: 0;
   transform: translateY(16px);
-  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
               opacity 0.45s ease,
-              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
               border-color 0.35s ease, box-shadow 0.35s ease, background 0.3s ease;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -2369,34 +2364,17 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 .sk-col:nth-child(3) .sk-item:hover { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--text); }
 .sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
 
-/* ── Featured (auto-carousel active) card ── */
+/* ── Featured card — scale-lift, no width change (keeps animation layout stable) ── */
 .proj-card--feat {
-  width: 445px;
-  border-color: rgba(201, 169, 110, 0.28);
+  transform: scale(1.06) translateY(-5px);
+  z-index: 2;
+  border-color: rgba(201, 169, 110, 0.5);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 0 0 1px rgba(201, 169, 110, 0.12),
-    0 20px 60px rgba(0, 0, 0, 0.38),
-    0 0 40px rgba(59, 130, 246, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 0 1px rgba(201, 169, 110, 0.25),
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(59, 130, 246, 0.18);
 }
-
-/* Progress bar: sweeps across bottom of featured card over DURATION */
-.proj-progress {
-  position: absolute;
-  bottom: 0; left: 0;
-  height: 2px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--cyan));
-  border-radius: 0 0 18px 18px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.proj-card--feat .proj-progress { opacity: 1; }
-.proj-progress.ticking {
-  animation: prog-tick 3.5s linear forwards;
-}
-@keyframes prog-tick { from { width: 0%; } to { width: 100%; } }
 
 /* Arrow: absolute top-right, only visible on featured */
 .proj-arr {
@@ -2425,9 +2403,14 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 }
 .proj-card--feat .proj-num { display: block; }
 
-/* Carousel wrapper + nav arrows */
+/* Carousel wrapper — clips track, fades edges */
 .proj-carousel-wrap {
   position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0px, black 80px, black calc(100% - 80px), transparent 100%);
+  mask-image: linear-gradient(to right,
+    transparent 0px, black 80px, black calc(100% - 80px), transparent 100%);
 }
 .carousel-btn {
   position: absolute;

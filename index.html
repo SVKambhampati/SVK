@@ -1518,15 +1518,29 @@
       function unfeature() {
         if (!currentFeat) return;
         currentFeat.classList.remove('proj-card--feat');
-        setDesc(currentFeat, 'short');
+        /* Reset desc immediately (no fade) so it's ready for next hover */
+        const desc = currentFeat.querySelector('.proj-desc');
+        if (desc) { desc.style.opacity = '1'; desc.textContent = desc.dataset.short || ''; }
         currentFeat = null;
       }
 
-      /* Pause on grid enter; un-feature + resume on grid leave */
-      wrap.addEventListener('mouseenter', () => grid.classList.add('carousel-paused'));
+      /* Pause on grid enter; collapse + wait for transition, then resume */
+      let isInWrap  = false;
+      let resumeTimer = null;
+
+      wrap.addEventListener('mouseenter', () => {
+        isInWrap = true;
+        clearTimeout(resumeTimer);
+        grid.classList.add('carousel-paused');
+      });
+
       wrap.addEventListener('mouseleave', () => {
-        unfeature();
-        grid.classList.remove('carousel-paused');
+        isInWrap = false;
+        unfeature(); /* starts the collapse CSS transition */
+        /* Wait for the width transition to finish before resuming animation */
+        resumeTimer = setTimeout(() => {
+          if (!isInWrap) grid.classList.remove('carousel-paused');
+        }, 450); /* matches width transition duration (0.42 s + small buffer) */
       });
 
       /* Feature whichever card the cursor is over */

@@ -462,59 +462,45 @@
         const scale = Math.min(nr.width / lr.width, nr.height / lr.height);
 
         logoEl.style.transformOrigin = 'center center';
-        logoEl.style.transition      = 'transform 0.72s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease 0.3s';
+        logoEl.style.transition      = 'transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease 0.2s';
         logoEl.style.transform       = `translate(${dx}px,${dy}px) scale(${scale})`;
         logoEl.style.opacity         = '0';
 
         // Fade the overlay backdrop
-        setTimeout(() => loader.classList.add('fade-out'), 320);
+        setTimeout(() => loader.classList.add('fade-out'), 180);
 
         // Remove loader DOM node
-        setTimeout(() => loader.remove(), 900);
+        setTimeout(() => loader.remove(), 650);
 
         // Kick off hero entrance
         setTimeout(() => {
           window._heroReady = true;
           document.dispatchEvent(new CustomEvent('hero-ready'));
-        }, 550);
+        }, 360);
       }
 
       window.addEventListener('load', () => {
         const elapsed   = performance.now() - loaderStart;
-        const remaining = Math.max(0, 1150 - elapsed);
+        const remaining = Math.max(0, 700 - elapsed);
         setTimeout(fly, remaining);
       });
     })();
 
     /******************************************************************
-     * 0b) Name Scramble — fires on hero-ready
+     * 0b) Name Char-Rise — staggered letter entrance on hero-ready
      ******************************************************************/
     document.addEventListener('hero-ready', () => {
-      const nameEl = document.querySelector('h1.name');
-      if (!nameEl) return;
-      const full    = nameEl.textContent.trim();   // "Shreyas Kambhampati"
-      const spaceAt = full.indexOf(' ');
-      const CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      const DUR     = 780;
-      let startTs   = null;
-
-      function frame(ts) {
-        if (!startTs) startTs = ts;
-        const p       = Math.min((ts - startTs) / DUR, 1);
-        const eased   = 1 - Math.pow(1 - p, 2.5);
-        const revealed = Math.floor(eased * full.length);
-        let first = '', second = '';
-        for (let i = 0; i < full.length; i++) {
-          const c = full[i] === ' ' ? ' '
-                  : i < revealed    ? full[i]
-                  : CHARS[Math.floor(Math.random() * 26)];
-          if (i <= spaceAt) first += c; else second += c;
-        }
-        nameEl.innerHTML = first + ' <em>' + second + '</em>';
-        if (p < 1) requestAnimationFrame(frame);
-        else nameEl.innerHTML = 'Shreyas <em>Kambhampati</em>';
+      const el = document.querySelector('h1.name');
+      if (!el) return;
+      const first = 'Shreyas';
+      const last  = 'Kambhampati';
+      function wrap(text, offset) {
+        return text.split('').map((c, i) =>
+          `<span class="nc" style="--i:${i + offset}">${c}</span>`
+        ).join('');
       }
-      requestAnimationFrame(frame);
+      el.style.opacity = '1'; // reveal container; spans handle their own entrance
+      el.innerHTML = wrap(first, 0) + ' <em>' + wrap(last, first.length + 1) + '</em>';
     });
 
     /******************************************************************
@@ -1264,8 +1250,8 @@
       /* ── animation loop ── */
       (function tick() {
         const light    = isLight();
-        const posSpeed = hoverType === 'button' ? 0.2 : 0.11;
-        const szSpeed  = 0.14;
+        const posSpeed = hoverType === 'button' ? 0.3 : 0.2;
+        const szSpeed  = 0.22;
 
         if (hoverType === 'button' && hoverEl) {
           /* Morph + snap to button */
@@ -1568,14 +1554,17 @@
     /* ── Reduced-motion guard ── */
     const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (noMotion) {
-      // Instantly reveal hero elements so they don't stay hidden
-      document.querySelectorAll('.hero-pre, h1.name, .hero-typed, .hero-btns')
+      // Instantly reveal hero elements — bypass loader and all animations
+      document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
         .forEach(el => Object.assign(el.style, { opacity: '1', transform: 'none' }));
+      const nm = document.querySelector('h1.name');
+      if (nm) { nm.style.opacity = '1'; }
     } else {
 
       /* ── 1) Hero entrance — delayed to sync with loader fly-out ── */
       const heroEls = [
-        ...document.querySelectorAll('.hero-pre, h1.name, .hero-typed, .hero-btns')
+        // h1.name is handled separately via per-character char-rise animation
+        ...document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
       ];
       if (heroEls.length) {
         // Wait for the hero-ready event (fired by loader JS) before animating

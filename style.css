@@ -137,7 +137,96 @@ body::after {
   background-repeat: repeat;
 }
 
-/* Loader removed */
+/* --------------------------------------------------------------------------
+   Site Loader — SVK logo flies to nav on completion
+   -------------------------------------------------------------------------- */
+#site-loader {
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1.75rem;
+  background: #0c0c0b;
+  transition: opacity 0.55s ease;
+}
+#site-loader.fade-out { opacity: 0; pointer-events: none; }
+#loader-logo {
+  font-family: 'Blanka', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 5.5rem);
+  color: #efefed;
+  letter-spacing: 0.18em;
+  will-change: transform, opacity;
+}
+#loader-bar {
+  width: 140px; height: 1px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  border-radius: 1px;
+}
+#loader-fill {
+  height: 100%; width: 0%;
+  background: var(--accent);
+  animation: loader-fill-anim 1.15s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes loader-fill-anim {
+  0%   { width: 0%; }
+  60%  { width: 70%; }
+  100% { width: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   Aurora background canvas — lives behind everything
+   -------------------------------------------------------------------------- */
+canvas#bg {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Atmosphere orbs — shift color per section
+   -------------------------------------------------------------------------- */
+#atm-orbs {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1; overflow: hidden;
+}
+.atm-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.13;
+  transition: background 2.2s ease;
+}
+#atm-a {
+  width: 70vw; height: 70vw;
+  top: -25%; left: -15%;
+  background: #1e4fc8;
+}
+#atm-b {
+  width: 55vw; height: 55vw;
+  bottom: -25%; right: -15%;
+  background: #0ea5e9;
+}
+
+/* --------------------------------------------------------------------------
+   Section heading shimmer sweep
+   -------------------------------------------------------------------------- */
+.sec-hd { position: relative; }
+.sec-t   { position: relative; overflow: hidden; }
+.sec-t::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 -100%;
+  width: 55%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-15deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.sec-hd.vis .sec-t::after {
+  animation: shimmer-sweep 1.1s 0.25s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes shimmer-sweep {
+  0%   { left: -100%; opacity: 1; }
+  100% { left: 160%;  opacity: 1; }
+}
 
 /* --------------------------------------------------------------------------
    Project page background — particle canvas + ambient orbs
@@ -833,6 +922,8 @@ h1.name em {
     var(--border2) 15%,
     var(--border2) 85%,
     transparent);
+  transform: scaleY(var(--line-p, 0));
+  transform-origin: top;
 }
 
 .exp-item {

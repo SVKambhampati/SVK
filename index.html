@@ -19,8 +19,25 @@
 </head>
 <body>
 
+  <!-- ============================================================
+       Site Loader — SVK flies to nav logo on completion
+       ============================================================ -->
+  <div id="site-loader" aria-hidden="true">
+    <div id="loader-logo">SVK</div>
+    <div id="loader-bar"><div id="loader-fill"></div></div>
+  </div>
+
   <!-- Scroll progress bar -->
   <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Aurora background canvas -->
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <!-- Section atmosphere orbs -->
+  <div id="atm-orbs" aria-hidden="true">
+    <div class="atm-orb" id="atm-a"></div>
+    <div class="atm-orb" id="atm-b"></div>
+  </div>
 
   <div id="cursor-dot"></div>
 
@@ -349,12 +366,13 @@
           <div class="sk-row">
             <div class="sk-row-meta">
               <span class="sk-row-name">Certifications</span>
-              <span class="sk-row-count">6</span>
+              <span class="sk-row-count">7</span>
             </div>
             <div class="sk-row-tags">
               <span class="sk-tag">AWS Cloud Practitioner</span>
+              <span class="sk-tag">Azure Fundamentals · AZ-900</span>
+              <span class="sk-tag">Azure AI Fundamentals · AI-900</span>
               <span class="sk-tag">Python Certified Developer · PCEP-30-01</span>
-              <span class="sk-tag">Azure AI Fundamentals</span>
               <span class="sk-tag">MySQL Developer</span>
               <span class="sk-tag">Unity Game Dev Specialization</span>
               <span class="sk-tag">Database for Full Stack Dev</span>
@@ -414,6 +432,162 @@
        (dot-grid animation, overlay removal, fade-in, tilt, accordion, toggle)
        ============================================================ -->
   <script>
+    /******************************************************************
+     * 0) Loader → Hero Continuity
+     *    SVK logo flies from center to nav position, then hero reveals
+     ******************************************************************/
+    (function() {
+      const loader   = document.getElementById('site-loader');
+      const logoEl   = document.getElementById('loader-logo');
+      if (!loader) return;
+
+      const loaderStart = performance.now();
+
+      function fly() {
+        const navLogo = document.querySelector('nav .logo');
+        if (!logoEl || !navLogo) {
+          loader.classList.add('fade-out');
+          setTimeout(() => loader.remove(), 600);
+          window._heroReady = true;
+          document.dispatchEvent(new CustomEvent('hero-ready'));
+          return;
+        }
+
+        const lr = logoEl.getBoundingClientRect();
+        const nr = navLogo.getBoundingClientRect();
+
+        // Center-to-center translate + scale
+        const dx    = (nr.left + nr.width  / 2) - (lr.left + lr.width  / 2);
+        const dy    = (nr.top  + nr.height / 2) - (lr.top  + lr.height / 2);
+        const scale = Math.min(nr.width / lr.width, nr.height / lr.height);
+
+        logoEl.style.transformOrigin = 'center center';
+        logoEl.style.transition      = 'transform 0.72s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease 0.3s';
+        logoEl.style.transform       = `translate(${dx}px,${dy}px) scale(${scale})`;
+        logoEl.style.opacity         = '0';
+
+        // Fade the overlay backdrop
+        setTimeout(() => loader.classList.add('fade-out'), 320);
+
+        // Remove loader DOM node
+        setTimeout(() => loader.remove(), 900);
+
+        // Kick off hero entrance
+        setTimeout(() => {
+          window._heroReady = true;
+          document.dispatchEvent(new CustomEvent('hero-ready'));
+        }, 550);
+      }
+
+      window.addEventListener('load', () => {
+        const elapsed   = performance.now() - loaderStart;
+        const remaining = Math.max(0, 1150 - elapsed);
+        setTimeout(fly, remaining);
+      });
+    })();
+
+    /******************************************************************
+     * 0b) Name Scramble — fires on hero-ready
+     ******************************************************************/
+    document.addEventListener('hero-ready', () => {
+      const nameEl = document.querySelector('h1.name');
+      if (!nameEl) return;
+      const full    = nameEl.textContent.trim();   // "Shreyas Kambhampati"
+      const spaceAt = full.indexOf(' ');
+      const CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const DUR     = 780;
+      let startTs   = null;
+
+      function frame(ts) {
+        if (!startTs) startTs = ts;
+        const p       = Math.min((ts - startTs) / DUR, 1);
+        const eased   = 1 - Math.pow(1 - p, 2.5);
+        const revealed = Math.floor(eased * full.length);
+        let first = '', second = '';
+        for (let i = 0; i < full.length; i++) {
+          const c = full[i] === ' ' ? ' '
+                  : i < revealed    ? full[i]
+                  : CHARS[Math.floor(Math.random() * 26)];
+          if (i <= spaceAt) first += c; else second += c;
+        }
+        nameEl.innerHTML = first + ' <em>' + second + '</em>';
+        if (p < 1) requestAnimationFrame(frame);
+        else nameEl.innerHTML = 'Shreyas <em>Kambhampati</em>';
+      }
+      requestAnimationFrame(frame);
+    });
+
+    /******************************************************************
+     * 0c) Section Atmosphere — shifts orb colors per active section
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const orbA = document.getElementById('atm-a');
+      const orbB = document.getElementById('atm-b');
+      if (!orbA || !orbB) return;
+
+      const palette = {
+        hero:       { a: '#1e4fc8', b: '#0ea5e9' },
+        about:      { a: '#1e40af', b: '#6366f1' },
+        experience: { a: '#065f46', b: '#0284c7' },
+        projects:   { a: '#5b21b6', b: '#1d4ed8' },
+        skills:     { a: '#92400e', b: '#b45309' },
+        contact:    { a: '#0e7490', b: '#4f46e5' },
+      };
+
+      function setAtm(id) {
+        const c = palette[id] || palette.hero;
+        orbA.style.background = c.a;
+        orbB.style.background = c.b;
+      }
+
+      setAtm('hero');
+
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) setAtm(e.target.id); });
+      }, { threshold: 0.3 });
+
+      ['hero','about','experience','projects','skills','contact']
+        .forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+    });
+
+    /******************************************************************
+     * 0d) Scroll-Velocity Tilt — subtle page tilt on fast scroll
+     ******************************************************************/
+    (function() {
+      const main = document.querySelector('main.container');
+      if (!main) return;
+      let lastY = 0, vel = 0, tilt = 0;
+      window.addEventListener('scroll', () => {
+        vel = window.scrollY - lastY;
+        lastY = window.scrollY;
+      }, { passive: true });
+      (function tick() {
+        const target = Math.max(-1.2, Math.min(1.2, vel * 0.1));
+        tilt += (target - tilt) * 0.1;
+        vel  *= 0.8;
+        if (Math.abs(tilt) > 0.004)
+          main.style.transform = `perspective(1400px) rotateX(${tilt.toFixed(3)}deg)`;
+        else
+          main.style.transform = '';
+        requestAnimationFrame(tick);
+      })();
+    })();
+
+    /******************************************************************
+     * 0e) Experience Timeline — left border draws as you scroll
+     ******************************************************************/
+    document.addEventListener('DOMContentLoaded', () => {
+      const inner = document.querySelector('#experience .sec-inner');
+      if (!inner) return;
+      function update() {
+        const r = inner.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, (window.innerHeight * 0.65 - r.top) / r.height));
+        inner.style.setProperty('--line-p', p);
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    });
+
     /******************************************************************
      * 1) Dot-Grid Canvas Animation (skipped if #dotGrid not present)
      ******************************************************************/
@@ -1399,20 +1573,28 @@
         .forEach(el => Object.assign(el.style, { opacity: '1', transform: 'none' }));
     } else {
 
-      /* ── 1) Hero entrance — staggered spring physics ── */
+      /* ── 1) Hero entrance — delayed to sync with loader fly-out ── */
       const heroEls = [
         ...document.querySelectorAll('.hero-pre, h1.name, .hero-typed, .hero-btns')
       ];
       if (heroEls.length) {
-        animate(
-          heroEls,
-          { opacity: [0, 1], y: [36, 0] },
-          {
-            delay:   stagger(0.13, { start: 0.08 }),
-            duration: 0.85,
-            easing:  [0.22, 1, 0.36, 1]   /* custom spring curve */
-          }
-        );
+        // Wait for the hero-ready event (fired by loader JS) before animating
+        function runHeroAnim() {
+          animate(
+            heroEls,
+            { opacity: [0, 1], y: [40, 0], filter: ['blur(6px)', 'blur(0px)'] },
+            {
+              delay:    stagger(0.12, { start: 0.05 }),
+              duration: 0.9,
+              easing:   [0.22, 1, 0.36, 1]
+            }
+          );
+        }
+        if (window._heroReady) {
+          runHeroAnim();
+        } else {
+          document.addEventListener('hero-ready', runHeroAnim, { once: true });
+        }
       }
 
       /* ── 2) Scroll-linked video parallax ── */
@@ -1425,19 +1607,17 @@
         );
       }
 
-      /* ── 3) Section reveals with motion spring ── */
+      /* ── 3) Section reveals — with rotation + blur snap for personality ── */
       inView(
         '.sec-hd, .about-left-col, .about-copy, ' +
         '.exp-item, .proj-card, .sk-row, .certs-strip,' +
         '.contact-h, .contact-p, .crow, .form-wrap',
         ({ target }) => {
-          /* Add .vis so CSS transitions keep working as fallback,
-             then layer in a spring for extra polish */
           target.classList.add('vis');
-          animate(target, { opacity: [0, 1], y: [22, 0] }, {
-            duration: 0.6,
-            easing:   [0.22, 1, 0.36, 1]
-          });
+          animate(target,
+            { opacity: [0, 1], y: [24, 0], rotate: [-0.8, 0], filter: ['blur(3px)', 'blur(0px)'] },
+            { duration: 0.65, easing: [0.22, 1, 0.36, 1] }
+          );
         },
         { margin: '0px 0px -48px 0px' }
       );

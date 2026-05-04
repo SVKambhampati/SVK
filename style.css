@@ -1035,14 +1035,12 @@ h1.name em {
   flex-direction: row;
   gap: 0.75rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-block: 1.5rem;
-  padding-inline-start: 0;
-  padding-inline-end: calc(100% - 205px); /* let last thumbnail scroll to left edge */
-  cursor: grab;
+  padding-inline: calc(50% - 222px); /* center first/last featured card */
+  cursor: default;
   -webkit-overflow-scrolling: touch;
-  align-items: stretch;
+  align-items: center;
 }
 .proj-grid::-webkit-scrollbar { display: none; }
 .proj-grid.dragging { cursor: grabbing !important; }
@@ -1055,7 +1053,6 @@ h1.name em {
   width: 205px;
   height: 260px;
   flex-shrink: 0;
-  scroll-snap-align: start;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   backdrop-filter: blur(32px) saturate(160%);
@@ -1099,6 +1096,7 @@ h1.name em {
   opacity: 1;
   transform: none;
 }
+.proj-card { cursor: pointer; }
 .proj-card:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.16);
@@ -2371,7 +2369,7 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 .sk-col:nth-child(3) .sk-item:hover { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--text); }
 .sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
 
-/* ── Featured (center-snapped) card ── */
+/* ── Featured (auto-carousel active) card ── */
 .proj-card--feat {
   width: 445px;
   border-color: rgba(201, 169, 110, 0.28);
@@ -2381,6 +2379,24 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
     0 20px 60px rgba(0, 0, 0, 0.38),
     0 0 40px rgba(59, 130, 246, 0.08);
 }
+
+/* Progress bar: sweeps across bottom of featured card over DURATION */
+.proj-progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  border-radius: 0 0 18px 18px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.proj-card--feat .proj-progress { opacity: 1; }
+.proj-progress.ticking {
+  animation: prog-tick 3.5s linear forwards;
+}
+@keyframes prog-tick { from { width: 0%; } to { width: 100%; } }
 
 /* Arrow: absolute top-right, only visible on featured */
 .proj-arr {

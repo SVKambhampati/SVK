@@ -242,6 +242,7 @@
               <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">REST APIs</span><span class="ptag">Real-time</span></div>
             </div>
             <div class="proj-arr">↗</div>
+            <div class="proj-progress" aria-hidden="true"></div>
           </a>
 
           <a href="project-one.html" class="proj-card">
@@ -254,6 +255,7 @@
               <div class="proj-tags"><span class="ptag">Unity</span><span class="ptag">C#</span><span class="ptag">Meta SDK</span><span class="ptag">XR</span></div>
             </div>
             <div class="proj-arr">↗</div>
+            <div class="proj-progress" aria-hidden="true"></div>
           </a>
 
           <a href="project-two.html" class="proj-card">
@@ -266,6 +268,7 @@
               <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">ML</span><span class="ptag">Flask</span><span class="ptag">Collaborative Filtering</span></div>
             </div>
             <div class="proj-arr">↗</div>
+            <div class="proj-progress" aria-hidden="true"></div>
           </a>
 
           <a href="project-three.html" class="proj-card">
@@ -278,6 +281,7 @@
               <div class="proj-tags"><span class="ptag">Oracle EBS</span><span class="ptag">PL/SQL</span><span class="ptag">Systems Integration</span></div>
             </div>
             <div class="proj-arr">↗</div>
+            <div class="proj-progress" aria-hidden="true"></div>
           </a>
 
           <a href="project-four.html" class="proj-card">
@@ -290,6 +294,7 @@
               <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">Python</span><span class="ptag">SQLite</span><span class="ptag">OpenWeatherMap</span></div>
             </div>
             <div class="proj-arr">↗</div>
+            <div class="proj-progress" aria-hidden="true"></div>
           </a>
 
           </div><!-- /.proj-grid -->
@@ -1461,16 +1466,20 @@
       });
     });
 
-    /* ── 3) Netflix shelf — left-start snap, text-swap, drag scroll ── */
+    /* ── 3) Auto-carousel — cycles every 3.5 s, pauses on hover ── */
     document.addEventListener('DOMContentLoaded', () => {
       const grid = document.querySelector('.proj-grid');
       if (!grid) return;
       const cards = Array.from(grid.querySelectorAll('.proj-card'));
       cards.forEach(c => c.classList.add('vis'));
 
+      const DURATION = 3500; // ms between auto-advances
+      let featIdx    = 0;
       let currentFeat = null;
+      let autoTimer  = null;
+      let scrollTimer = null;
 
-      /* Crossfade description text between short and technical */
+      /* Crossfade description text */
       function setDesc(card, type, immediate) {
         const desc = card.querySelector('.proj-desc');
         if (!desc) return;
@@ -1481,52 +1490,80 @@
         setTimeout(() => { desc.textContent = next; desc.style.opacity = '1'; }, 220);
       }
 
-      /* Card whose left edge is closest to the grid's visible left edge */
-      function getLeftCard() {
-        const gLeft = grid.getBoundingClientRect().left;
-        return cards.reduce((best, card) => {
-          const cDist = Math.abs(card.getBoundingClientRect().left - gLeft);
-          const bDist = Math.abs(best.getBoundingClientRect().left - gLeft);
-          return cDist < bDist ? card : best;
-        });
+      /* Smooth-scroll so featured card is horizontally centred */
+      function scrollToFeatured(card) {
+        const gRect = grid.getBoundingClientRect();
+        const cRect = card.getBoundingClientRect();
+        const cardScrollPos = cRect.left - gRect.left + grid.scrollLeft;
+        const target = cardScrollPos + 222 - grid.clientWidth / 2; /* 222 = half of 445px */
+        grid.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
       }
 
-      function updateFeatured() {
-        const feat = getLeftCard();
-        if (feat === currentFeat) return;
+      /* Start the progress-bar sweep on a card */
+      function startProgress(card) {
+        const bar = card ? card.querySelector('.proj-progress') : null;
+        if (!bar) return;
+        bar.classList.remove('ticking');
+        void bar.offsetWidth; /* reflow resets animation */
+        bar.classList.add('ticking');
+      }
+      function stopProgress(card) {
+        const bar = card ? card.querySelector('.proj-progress') : null;
+        if (bar) bar.classList.remove('ticking');
+      }
+
+      /* Make card[idx] the featured card */
+      function setFeatured(idx, immediate) {
+        const card = cards[idx];
+        if (card === currentFeat) return;
+        clearTimeout(scrollTimer);
         if (currentFeat) {
           currentFeat.classList.remove('proj-card--feat');
-          setDesc(currentFeat, 'short');
+          setDesc(currentFeat, 'short', immediate);
+          stopProgress(currentFeat);
         }
-        feat.classList.add('proj-card--feat');
-        setDesc(feat, 'tech');
-        currentFeat = feat;
+        card.classList.add('proj-card--feat');
+        setDesc(card, 'tech', immediate);
+        if (autoTimer) startProgress(card); /* only tick when auto is running */
+        currentFeat = card;
+        featIdx = idx;
+        /* Scroll after the CSS width transition finishes (0.5 s) */
+        scrollTimer = setTimeout(() => scrollToFeatured(card), immediate ? 0 : 520);
       }
 
-      /* Initialise: first card is featured immediately, no fade */
-      requestAnimationFrame(() => {
-        const first = cards[0];
-        first.classList.add('proj-card--feat');
-        setDesc(first, 'tech', true);
-        currentFeat = first;
+      function advance() { setFeatured((featIdx + 1) % cards.length, false); }
+
+      function startAuto() {
+        if (autoTimer) return;
+        autoTimer = setInterval(advance, DURATION);
+        startProgress(currentFeat); /* bar starts when auto resumes */
+      }
+      function stopAuto() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+        stopProgress(currentFeat); /* bar clears when paused */
+      }
+
+      /* Init */
+      requestAnimationFrame(() => { setFeatured(0, true); startAuto(); });
+
+      /* Pause on cursor enter, resume on leave */
+      grid.addEventListener('mouseenter', stopAuto);
+      grid.addEventListener('mouseleave', startAuto);
+
+      /* Hovering a specific card features it immediately */
+      cards.forEach((card, i) => {
+        card.addEventListener('mouseenter', () => setFeatured(i, false));
       });
 
-      grid.addEventListener('scroll', updateFeatured, { passive: true });
-
-      /* Click a non-featured card → scroll it to the left edge */
+      /* Prevent navigation on non-featured click */
       cards.forEach(card => {
         card.addEventListener('click', e => {
-          if (!card.classList.contains('proj-card--feat')) {
-            e.preventDefault();
-            const scrollTo = card.getBoundingClientRect().left
-                           - grid.getBoundingClientRect().left
-                           + grid.scrollLeft;
-            grid.scrollTo({ left: scrollTo, behavior: 'smooth' });
-          }
+          if (!card.classList.contains('proj-card--feat')) e.preventDefault();
         });
       });
 
-      /* Drag-to-scroll */
+      /* Drag-to-scroll (just for manual peeking) */
       let isDragging = false, startX = 0, startScroll = 0;
       grid.addEventListener('mousedown', e => {
         isDragging = true;
@@ -1535,7 +1572,6 @@
         startScroll = grid.scrollLeft;
       });
       const endDrag = () => { isDragging = false; grid.classList.remove('dragging'); };
-      grid.addEventListener('mouseleave', endDrag);
       grid.addEventListener('mouseup', endDrag);
       grid.addEventListener('mousemove', e => {
         if (!isDragging) return;

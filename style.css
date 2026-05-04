@@ -579,12 +579,8 @@ h1.name em {
 /* Staggered char-rise — each letter animates in individually */
 .nc {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(5px);
-  animation: char-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: char-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(var(--i) * 32ms + 30ms);
-  animation-fill-mode: backwards;
 }
 @keyframes char-rise {
   to { opacity: 1; transform: translateY(0); filter: blur(0px); }
@@ -725,10 +721,9 @@ h1.name em {
   opacity: 1;
   transform: none;
 }
-/* Carousel: revealed cards default to dimmed/scaled-down inactive state */
 .proj-card.vis {
-  opacity: 0.45;
-  transform: scale(0.9);
+  opacity: 1;
+  transform: none;
 }
 .about-copy { transition-delay: 0.15s; }
 .exp-item:nth-child(2) { transition-delay: 0.1s; }
@@ -1038,28 +1033,30 @@ h1.name em {
 .proj-grid {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.75rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-block: 1.75rem;            /* room for scale overflow */
-  padding-inline: calc(50% - 210px); /* center first / last card */
+  padding-block: 1.5rem;
+  padding-inline: 0;
   cursor: grab;
   -webkit-overflow-scrolling: touch;
+  align-items: center;
 }
 .proj-grid::-webkit-scrollbar { display: none; }
 .proj-grid.dragging { cursor: grabbing !important; }
 
+/* ── Thumbnail card (default) ── */
 .proj-card {
-  display: grid;
-  grid-template-columns: 60px 1fr auto;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.75rem 2rem;
-  min-width: 420px;
-  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 1.25rem 1.5rem;
+  min-width: 210px;
+  max-width: 210px;
   flex-shrink: 0;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   align-self: center;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
@@ -1134,8 +1131,19 @@ h1.name em {
   font-size: 0.85rem;
   color: var(--text2);
   line-height: 1.65;
-  margin-bottom: 0.75rem;
-  max-width: 580px;
+  max-width: 420px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin: 0;
+  transition: max-height 0.45s cubic-bezier(0.22,1,0.36,1),
+              opacity 0.3s ease,
+              margin 0.3s ease;
+}
+.proj-card--feat .proj-desc {
+  max-height: 8rem;
+  opacity: 1;
+  margin-bottom: 0.6rem;
 }
 .proj-tags {
   display: flex;
@@ -2371,15 +2379,36 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 .sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
 
 /* ── Carousel: active (centred) card ── */
-.proj-card.proj-card--active {
-  opacity: 1;
-  transform: scale(1.04);
-  border-color: rgba(201, 169, 110, 0.32);
+/* ── Featured (Netflix hero) card ── */
+.proj-card--feat {
+  min-width: 460px;
+  max-width: 460px;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1.75rem 2rem;
+  border-color: rgba(201, 169, 110, 0.28);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 0 0 1px rgba(201, 169, 110, 0.14),
-    0 24px 64px rgba(0, 0, 0, 0.4),
-    0 0 48px rgba(59, 130, 246, 0.09);
+    0 0 0 1px rgba(201, 169, 110, 0.12),
+    0 20px 60px rgba(0, 0, 0, 0.38),
+    0 0 40px rgba(59, 130, 246, 0.08);
+  transition: min-width 0.5s cubic-bezier(0.22,1,0.36,1),
+              max-width 0.5s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease,
+              padding 0.4s ease;
+}
+
+/* Hide number + arrow on thumbnail cards; show them on featured */
+.proj-num, .proj-arr { transition: opacity 0.3s ease; }
+.proj-card:not(.proj-card--feat) .proj-num,
+.proj-card:not(.proj-card--feat) .proj-arr { opacity: 0; width: 0; overflow: hidden; padding: 0; margin: 0; }
+
+/* Thumbnail cards: slightly more compact name */
+.proj-card:not(.proj-card--feat) .proj-name {
+  font-size: 0.9rem;
 }
 
 /* Carousel wrapper + nav arrows */

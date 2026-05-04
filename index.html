@@ -231,7 +231,6 @@
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
         <div class="proj-carousel-wrap">
-          <button class="carousel-btn carousel-btn--prev" aria-label="Previous project">‹</button>
           <div class="proj-grid">
           <a href="sentimentsignal.html" class="proj-card">
             <div class="proj-num">01</div>
@@ -284,7 +283,6 @@
           </a>
 
           </div><!-- /.proj-grid -->
-          <button class="carousel-btn carousel-btn--next" aria-label="Next project">›</button>
         </div><!-- /.proj-carousel-wrap -->
       </div>
     </section>
@@ -1408,12 +1406,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.proj-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
-          if (!card.classList.contains('proj-card--active')) return;
+          if (!card.classList.contains('proj-card--feat')) return;
           card.style.transition =
             'border-color 0.3s, box-shadow 0.35s, background 0.3s, opacity 0.45s';
         });
         card.addEventListener('mousemove', e => {
-          if (!card.classList.contains('proj-card--active')) return;
+          if (!card.classList.contains('proj-card--feat')) return;
           const r = card.getBoundingClientRect();
           const x = (e.clientX - r.left) / r.width  - 0.5;
           const y = (e.clientY - r.top)  / r.height - 0.5;
@@ -1453,61 +1451,43 @@
       });
     });
 
-    /* ── 3) Carousel — active detection + nav arrows + drag scroll ── */
+    /* ── 3) Netflix shelf — featured card + click-to-feature + drag scroll ── */
     document.addEventListener('DOMContentLoaded', () => {
-      const grid    = document.querySelector('.proj-grid');
-      const prevBtn = document.querySelector('.carousel-btn--prev');
-      const nextBtn = document.querySelector('.carousel-btn--next');
+      const grid = document.querySelector('.proj-grid');
       if (!grid) return;
-
       const cards = Array.from(grid.querySelectorAll('.proj-card'));
-
-      // Reveal all cards immediately; carousel manages opacity/scale from here
       cards.forEach(c => c.classList.add('vis'));
 
-      /* Find the card whose centre is closest to the grid's scroll centre */
-      function getActiveCard() {
-        const centre = grid.scrollLeft + grid.clientWidth / 2;
-        return cards.reduce((best, card) => {
-          const cardCentre = card.offsetLeft + card.offsetWidth / 2;
-          const bestCentre = best.offsetLeft  + best.offsetWidth  / 2;
-          return Math.abs(cardCentre - centre) < Math.abs(bestCentre - centre)
-            ? card : best;
+      // Set featured card
+      function setFeatured(card) {
+        cards.forEach(c => c.classList.remove('proj-card--feat'));
+        card.classList.add('proj-card--feat');
+        // Scroll featured card to left edge (with a small padding)
+        const leftEdge = card.offsetLeft - 4;
+        grid.scrollTo({ left: leftEdge, behavior: 'smooth' });
+      }
+
+      // First card is featured on load
+      if (cards[0]) setFeatured(cards[0]);
+
+      // Click a thumbnail to make it featured
+      cards.forEach(card => {
+        card.addEventListener('click', e => {
+          if (!card.classList.contains('proj-card--feat')) {
+            e.preventDefault(); // don't navigate — make it featured first
+            setFeatured(card);
+            // Allow navigation on the second click
+            card.addEventListener('click', () => {
+              window.location.href = card.getAttribute('href');
+            }, { once: true });
+          }
         });
-      }
-
-      function updateActive() {
-        const active = getActiveCard();
-        cards.forEach(c => c.classList.toggle('proj-card--active', c === active));
-        if (prevBtn) prevBtn.disabled = (active === cards[0]);
-        if (nextBtn) nextBtn.disabled = (active === cards[cards.length - 1]);
-      }
-
-      function scrollToCard(card) {
-        grid.scrollTo({
-          left: card.offsetLeft + card.offsetWidth / 2 - grid.clientWidth / 2,
-          behavior: 'smooth'
-        });
-      }
-
-      if (prevBtn) prevBtn.addEventListener('click', () => {
-        const idx = cards.indexOf(getActiveCard());
-        if (idx > 0) scrollToCard(cards[idx - 1]);
       });
-      if (nextBtn) nextBtn.addEventListener('click', () => {
-        const idx = cards.indexOf(getActiveCard());
-        if (idx < cards.length - 1) scrollToCard(cards[idx + 1]);
-      });
-
-      grid.addEventListener('scroll', updateActive, { passive: true });
-
-      // Init on next frame so card offsets are settled after layout
-      requestAnimationFrame(updateActive);
 
       /* Drag-to-scroll */
-      let isDragging = false, startX = 0, startScroll = 0;
+      let isDragging = false, startX = 0, startScroll = 0, didDrag = false;
       grid.addEventListener('mousedown', e => {
-        isDragging = true;
+        isDragging = true; didDrag = false;
         grid.classList.add('dragging');
         startX = e.pageX - grid.getBoundingClientRect().left;
         startScroll = grid.scrollLeft;
@@ -1517,6 +1497,7 @@
       grid.addEventListener('mouseup', endDrag);
       grid.addEventListener('mousemove', e => {
         if (!isDragging) return;
+        didDrag = true;
         e.preventDefault();
         const x = e.pageX - grid.getBoundingClientRect().left;
         grid.scrollLeft = startScroll - (x - startX);

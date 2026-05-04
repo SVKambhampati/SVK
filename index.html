@@ -6,7 +6,18 @@
   <meta name="description" content="Shreyas Kambhampati — CS student at Northeastern University, AI concentration. Software engineer, XR researcher, and builder.">
   <meta property="og:title" content="Shreyas Kambhampati">
   <meta property="og:description" content="CS student at Northeastern · AI · Cloud · XR">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svkambhampati.vercel.app/">
+  <meta property="og:image" content="https://svkambhampati.vercel.app/icons/etc/shreyas.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shreyas Kambhampati — CS · AI · Cloud · XR">
+  <meta name="twitter:description" content="CS student at Northeastern University, AI concentration. Software engineer, XR researcher, and builder.">
+  <meta name="twitter:image" content="https://svkambhampati.vercel.app/icons/etc/shreyas.png">
   <title>Shreyas Kambhampati</title>
+
+  <!-- Preconnect to external origins for faster resource loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://stream.mux.com">
 
   <!-- Blanka Font for Intro Logo -->
   <link rel="stylesheet" href="blanka.css" />
@@ -130,7 +141,7 @@
         <div class="about-grid">
           <div class="about-left-col">
             <div class="photo-frame">
-              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati">
+              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati" width="1007" height="1000" loading="eager">
             </div>
             <p class="about-quote">
               Built things. Broke things. Fixed things.<br>
@@ -232,7 +243,8 @@
         <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
         <div class="proj-carousel-wrap">
           <div class="proj-grid">
-          <div class="proj-card" data-href="sentimentsignal.html" tabindex="0" role="article">
+          <div class="proj-card proj-card--has-thumb" data-href="sentimentsignal.html" tabindex="0" role="article">
+            <img class="proj-thumb" src="img/thumb-sentimentsignal.jpg" alt="SentimentSignal dashboard preview" width="140" height="84" loading="lazy">
             <div class="proj-num">01</div>
             <div class="proj-body">
               <div class="proj-name">SentimentSignal</div>
@@ -240,6 +252,11 @@
                  data-short="Turns Reddit, Twitter/X, and StockTwits noise into market signals — in real time."
                  data-tech="Multi-source NLP pipeline across Reddit, X, and StockTwits. BERT classifier with custom financial vocab, async Python workers, Redis queuing — sub-200ms latency at 10k events/hr.">Turns Reddit, Twitter/X, and StockTwits noise into market signals — in real time.</p>
               <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">REST APIs</span><span class="ptag">Real-time</span></div>
+              <div class="proj-stats">
+                <span class="proj-stat">50+ equities</span>
+                <span class="proj-stat">&lt;500ms</span>
+                <span class="proj-stat">3 sources</span>
+              </div>
               <a href="https://sentimentsignal.vercel.app" target="_blank" rel="noopener noreferrer" class="proj-link">sentimentsignal.vercel.app ↗</a>
             </div>
             <div class="proj-arr">↗</div>
@@ -253,11 +270,17 @@
                  data-short="VR curriculum for students who learn better by touching things. Anatomy, astronomy, geometry — on Meta Quest."
                  data-tech="Unity XR on Meta Quest with C# hand-tracking controllers and procedural 3D scenes. Custom physics interactions, real-time haptics, and spatial audio — sustained 72fps across all modules.">VR curriculum for students who learn better by touching things. Anatomy, astronomy, geometry — on Meta Quest.</p>
               <div class="proj-tags"><span class="ptag">Unity</span><span class="ptag">C#</span><span class="ptag">Meta SDK</span><span class="ptag">XR</span></div>
+              <div class="proj-stats">
+                <span class="proj-stat">72fps stable</span>
+                <span class="proj-stat">3 modules</span>
+                <span class="proj-stat">Meta Quest</span>
+              </div>
             </div>
             <div class="proj-arr">↗</div>
           </div>
 
-          <div class="proj-card" data-href="project-two.html" tabindex="0" role="article">
+          <div class="proj-card proj-card--has-thumb" data-href="project-two.html" tabindex="0" role="article">
+            <img class="proj-thumb" src="img/thumb-moviemind.jpg" alt="MovieMind app preview" width="140" height="84" loading="lazy">
             <div class="proj-num">03</div>
             <div class="proj-body">
               <div class="proj-name">MovieMind</div>
@@ -265,6 +288,11 @@
                  data-short="Two filtering models, one engine. Ranked movie recommendations in under 100ms."
                  data-tech="Hybrid collaborative + content-based filtering on 100k+ titles. Matrix factorization with cosine-similarity fallback, Flask REST API, in-memory model cache — P95 under 80ms.">Two filtering models, one engine. Ranked movie recommendations in under 100ms.</p>
               <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">ML</span><span class="ptag">Flask</span><span class="ptag">Collaborative Filtering</span></div>
+              <div class="proj-stats">
+                <span class="proj-stat">100k+ titles</span>
+                <span class="proj-stat">P95 &lt;80ms</span>
+                <span class="proj-stat">2 filters</span>
+              </div>
               <a href="https://movimind.vercel.app" target="_blank" rel="noopener noreferrer" class="proj-link">movimind.vercel.app ↗</a>
             </div>
             <div class="proj-arr">↗</div>
@@ -278,11 +306,17 @@
                  data-short="Stopped a recurring class of failed government deliveries. No API existed — so I reverse-engineered one."
                  data-tech="PL/SQL validation layer bridging Oracle EBS and Commerce Cloud via reverse-engineered OCC REST API. Batch normalization to FedEx/USPS standards — cut failed deliveries by 94%.">Stopped a recurring class of failed government deliveries. No API existed — so I reverse-engineered one.</p>
               <div class="proj-tags"><span class="ptag">Oracle EBS</span><span class="ptag">PL/SQL</span><span class="ptag">Systems Integration</span></div>
+              <div class="proj-stats">
+                <span class="proj-stat">−94% failures</span>
+                <span class="proj-stat">2 Oracle systems</span>
+                <span class="proj-stat">PL/SQL</span>
+              </div>
             </div>
             <div class="proj-arr">↗</div>
           </div>
 
-          <div class="proj-card" data-href="project-four.html" tabindex="0" role="article">
+          <div class="proj-card proj-card--has-thumb" data-href="project-four.html" tabindex="0" role="article">
+            <img class="proj-thumb" src="img/thumb-styleforecast.jpg" alt="StyleForecast app preview" width="140" height="84" loading="lazy">
             <div class="proj-num">05</div>
             <div class="proj-body">
               <div class="proj-name">StyleForecast</div>
@@ -290,6 +324,11 @@
                  data-short="Recommends what to wear based on today's actual weather. Full-stack, your wardrobe, live forecast data."
                  data-tech="Flask + SQLite wardrobe schema scored against OpenWeatherMap temperature, precipitation, and UV data. Weighted recommendation engine with Jinja2 server-side rendering and live forecast polling.">Recommends what to wear based on today's actual weather. Full-stack, your wardrobe, live forecast data.</p>
               <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">Python</span><span class="ptag">SQLite</span><span class="ptag">OpenWeatherMap</span></div>
+              <div class="proj-stats">
+                <span class="proj-stat">live forecast</span>
+                <span class="proj-stat">5 weather params</span>
+                <span class="proj-stat">full-stack</span>
+              </div>
               <a href="https://thestyleforecast.vercel.app" target="_blank" rel="noopener noreferrer" class="proj-link">thestyleforecast.vercel.app ↗</a>
             </div>
             <div class="proj-arr">↗</div>
@@ -1569,6 +1608,67 @@
           }
         });
       });
+
+      /* ── Touch / Swipe support for mobile ── */
+      let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+
+      wrap.addEventListener('touchstart', e => {
+        if (e.touches.length !== 1) return;
+        touchStartX   = e.touches[0].clientX;
+        touchStartY   = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        clearTimeout(resumeTimer);
+        grid.classList.add('carousel-paused');
+      }, { passive: true });
+
+      wrap.addEventListener('touchend', e => {
+        if (e.changedTouches.length !== 1) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const dt = Date.now() - touchStartTime;
+        const isHorizSwipe = Math.abs(dx) > 48 &&
+                             Math.abs(dx) > Math.abs(dy) * 1.5 &&
+                             dt < 350;
+
+        if (isHorizSwipe) {
+          /* Swipe — dismiss and resume */
+          unfeature();
+          resumeTimer = setTimeout(() => {
+            if (!isInWrap) grid.classList.remove('carousel-paused');
+          }, 450);
+        } else {
+          /* Tap — feature card, or navigate on second tap */
+          const el = document.elementFromPoint(
+            e.changedTouches[0].clientX,
+            e.changedTouches[0].clientY
+          );
+          const tappedCard = el?.closest('.proj-card:not(.proj-card--clone)');
+          if (tappedCard) {
+            if (currentFeat === tappedCard) {
+              if (e.target.closest('.proj-link')) return; /* let the link handle it */
+              const href = tappedCard.dataset.href;
+              if (href) window.location.href = href;
+            } else {
+              feature(tappedCard);
+            }
+          } else {
+            unfeature();
+            resumeTimer = setTimeout(() => {
+              grid.classList.remove('carousel-paused');
+            }, 450);
+          }
+        }
+      }, { passive: true });
+
+      /* Dismiss featured card when touching outside the carousel */
+      document.addEventListener('touchstart', e => {
+        if (currentFeat && !wrap.contains(e.target)) {
+          unfeature();
+          resumeTimer = setTimeout(() => {
+            grid.classList.remove('carousel-paused');
+          }, 450);
+        }
+      }, { passive: true });
     });
 
     /* ── 4) Experience accordion ── */

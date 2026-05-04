@@ -2457,6 +2457,66 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 }
 .proj-card--feat .proj-num { display: block; }
 
+/* ── Thumbnail preview — fades into top-right corner on expansion ── */
+.proj-thumb {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 140px;
+  height: 84px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  opacity: 0;
+  transform: scale(0.88) translateX(8px);
+  transition: opacity 0.35s ease 0.12s,
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+  pointer-events: none;
+}
+.proj-card--feat .proj-thumb {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+/* Push card body left to clear the thumbnail */
+.proj-card--feat.proj-card--has-thumb {
+  padding-right: 10.5rem;
+}
+
+/* ── Stats row — key metrics, visible only on expansion ── */
+.proj-stats {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.28s ease 0.18s,
+              transform 0.28s ease 0.18s;
+  pointer-events: none;
+}
+.proj-card--feat .proj-stats {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.proj-stat {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(201, 169, 110, 0.08);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+  white-space: nowrap;
+}
+
 /* Carousel wrapper — clips track, fades edges */
 .proj-carousel-wrap {
   position: relative;

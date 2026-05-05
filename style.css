@@ -206,23 +206,29 @@ canvas#bg {
 }
 
 /* --------------------------------------------------------------------------
-   Section heading shimmer sweep
+   Section heading — accent bar draws in under the title on scroll
    -------------------------------------------------------------------------- */
-.sec-t { position: relative; overflow: hidden; }
+.sec-t { position: relative; }
 .sec-t::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
-  transform: translateX(-200%);
+  bottom: -7px;
+  left: 0;
+  width: 2.6rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
   pointer-events: none;
+  opacity: 0;
 }
 .sec-hd.vis .sec-t::after {
-  animation: shimmer-sweep 0.75s 0.15s ease-out forwards;
+  animation: heading-bar 0.55s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-@keyframes shimmer-sweep {
-  from { transform: translateX(-200%); }
-  to   { transform: translateX(300%); }
+@keyframes heading-bar {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
 }
 
 /* --------------------------------------------------------------------------

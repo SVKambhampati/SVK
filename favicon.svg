@@ -1,29 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <defs>
+    <style>
+      @font-face {
+        font-family: 'Blanka';
+        src: url('data:font/woff2;base64,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') format('woff2');
+      }
+    </style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111110"/>
+      <stop offset="100%" stop-color="#0c0c0b"/>
+    </linearGradient>
     <linearGradient id="border-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#3b82f6"/>
+      <stop offset="0%" stop-color="#3b82f6"/>
       <stop offset="100%" stop-color="#22d3ee"/>
     </linearGradient>
     <linearGradient id="text-grad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#3b82f6"/>
+      <stop offset="0%" stop-color="#3b82f6"/>
       <stop offset="100%" stop-color="#22d3ee"/>
     </linearGradient>
   </defs>
-
-  <!-- Background -->
-  <rect width="32" height="32" rx="7" fill="#0c0c0b"/>
-
-  <!-- Gradient border -->
-  <rect width="32" height="32" rx="7" fill="none"
-        stroke="url(#border-grad)" stroke-width="1.5" opacity="0.7"/>
-
-  <!-- SVK — italic serif, gradient fill -->
-  <text x="16" y="22"
-        text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif"
-        font-style="italic"
-        font-size="14"
-        font-weight="700"
-        fill="url(#text-grad)"
-        letter-spacing="-0.5">SVK</text>
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+  <rect width="32" height="32" rx="7" fill="none" stroke="url(#border-grad)" stroke-width="1.5" opacity="0.7"/>
+  <text x="16" y="21.5" text-anchor="middle"
+        font-family="Blanka, sans-serif"
+        font-size="13.5" fill="url(#text-grad)" letter-spacing="0">SVK</text>
 </svg>

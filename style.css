@@ -1046,8 +1046,8 @@ h1.name em {
   display: flex;
   flex-direction: column;
   padding: 1.2rem 1.4rem;
-  width: 205px;
-  height: 260px;
+  width: 248px;
+  height: 300px;
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
@@ -2467,7 +2467,7 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 
 /* ── Featured card — expands horizontally when carousel is paused on hover ── */
 .proj-card--feat {
-  width: 420px;
+  width: 480px;
   transform: translateY(-4px);
   z-index: 2;
   border-color: rgba(201, 169, 110, 0.48);

@@ -1538,14 +1538,20 @@
 
       /* ── Hover: pause animation, feature the hovered card ── */
       let currentFeat = null;
+      let descTimer   = null; /* in-flight text-swap timer — must be cancelled on unfeature */
 
       function setDesc(card, type) {
         const desc = card.querySelector('.proj-desc');
         if (!desc) return;
         const next = type === 'tech' ? (desc.dataset.tech || '') : (desc.dataset.short || '');
         if (desc.textContent.trim() === next.trim()) return;
+        clearTimeout(descTimer);            /* cancel any pending swap */
         desc.style.opacity = '0';
-        setTimeout(() => { desc.textContent = next; desc.style.opacity = '1'; }, 200);
+        descTimer = setTimeout(() => {
+          desc.textContent  = next;
+          desc.style.opacity = '1';
+          descTimer = null;
+        }, 200);
       }
 
       function feature(card) {
@@ -1561,8 +1567,9 @@
 
       function unfeature() {
         if (!currentFeat) return;
+        clearTimeout(descTimer);            /* stop any in-flight tech-text fade */
+        descTimer = null;
         currentFeat.classList.remove('proj-card--feat');
-        /* Reset desc immediately (no fade) so it's ready for next hover */
         const desc = currentFeat.querySelector('.proj-desc');
         if (desc) { desc.style.opacity = '1'; desc.textContent = desc.dataset.short || ''; }
         currentFeat = null;

@@ -1538,40 +1538,47 @@
 
       /* ── Hover: pause animation, feature the hovered card ── */
       let currentFeat = null;
-      let descTimer   = null; /* in-flight text-swap timer — must be cancelled on unfeature */
 
-      function setDesc(card, type) {
+      /* Reset a card's desc instantly — no animation, cancels any pending timer */
+      function resetDesc(card) {
         const desc = card.querySelector('.proj-desc');
         if (!desc) return;
-        const next = type === 'tech' ? (desc.dataset.tech || '') : (desc.dataset.short || '');
+        clearTimeout(desc._swapTimer);
+        desc._swapTimer   = null;
+        desc.style.opacity = '1';
+        desc.textContent   = desc.dataset.short || '';
+      }
+
+      /* Fade-swap the desc to tech text — each card owns its own timer */
+      function showTechDesc(card) {
+        const desc = card.querySelector('.proj-desc');
+        if (!desc) return;
+        const next = desc.dataset.tech || '';
         if (desc.textContent.trim() === next.trim()) return;
-        clearTimeout(descTimer);            /* cancel any pending swap */
+        clearTimeout(desc._swapTimer);
         desc.style.opacity = '0';
-        descTimer = setTimeout(() => {
-          desc.textContent  = next;
+        desc._swapTimer = setTimeout(() => {
+          desc.textContent   = next;
           desc.style.opacity = '1';
-          descTimer = null;
-        }, 200);
+          desc._swapTimer    = null;
+        }, 180);
       }
 
       function feature(card) {
         if (currentFeat === card) return;
         if (currentFeat) {
           currentFeat.classList.remove('proj-card--feat');
-          setDesc(currentFeat, 'short');
+          resetDesc(currentFeat);     /* instant — no timer conflict */
         }
         card.classList.add('proj-card--feat');
-        setDesc(card, 'tech');
+        showTechDesc(card);
         currentFeat = card;
       }
 
       function unfeature() {
         if (!currentFeat) return;
-        clearTimeout(descTimer);            /* stop any in-flight tech-text fade */
-        descTimer = null;
         currentFeat.classList.remove('proj-card--feat');
-        const desc = currentFeat.querySelector('.proj-desc');
-        if (desc) { desc.style.opacity = '1'; desc.textContent = desc.dataset.short || ''; }
+        resetDesc(currentFeat);
         currentFeat = null;
       }
 

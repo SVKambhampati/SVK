@@ -1853,57 +1853,60 @@ body.light-mode .btn-send:hover {
 .proj-links {
   display: flex;
   gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .proj-link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  font-size: 0.78rem;
+  gap: 0.45rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  padding: 0.45rem 0.9rem;
+  padding: 0.55rem 1.1rem;
   border-radius: 8px;
   border: 1px solid var(--border2);
   background: var(--glass);
   color: var(--text2);
   text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease,
+              box-shadow 0.2s ease;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
-
 .proj-link-btn:hover {
   border-color: rgba(59, 130, 246, 0.4);
   color: var(--text);
   background: var(--glass2);
 }
 
-/* Live site variant — prominent, green-accented */
+/* Live site variant — solid green primary CTA */
 .proj-link-btn--live {
-  border-color: rgba(74, 222, 128, 0.35);
-  background: rgba(74, 222, 128, 0.07);
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.38);
   color: #4ade80;
   font-weight: 600;
 }
 .proj-link-btn--live:hover {
-  border-color: rgba(74, 222, 128, 0.7);
-  background: rgba(74, 222, 128, 0.14);
+  background: rgba(74, 222, 128, 0.18);
+  border-color: rgba(74, 222, 128, 0.65);
   color: #86efac;
+  box-shadow: 0 0 18px rgba(74, 222, 128, 0.12);
 }
 
-/* Pulsing dot */
+/* Pulsing status dot */
 .live-dot {
   display: inline-block;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #4ade80;
-  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
-  animation: livePulse 2.2s ease infinite;
   flex-shrink: 0;
+  animation: livePulse 2.4s ease infinite;
 }
 @keyframes livePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.55); }
   50%       { box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
 }
 
@@ -1911,21 +1914,66 @@ body.light-mode .btn-send:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  margin-bottom: 0; /* spacing handled by .proj-links margin-top */
 }
 .project-hero .tag {
-  font-size: 0.67rem;
+  font-size: 0.68rem;
   font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.28rem 0.6rem;
+  border-radius: 5px;
   border: 1px solid var(--border);
   background: var(--glass);
   color: var(--text2);
+  letter-spacing: 0.01em;
 }
 .project-hero .proj-divider {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, var(--blue), var(--cyan), transparent);
   margin-top: 3rem;
+}
+
+/* ── Browser-frame screenshot preview on project detail pages ── */
+.proj-preview {
+  max-width: 860px;
+  margin: 0 auto 3.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 24px 72px rgba(0, 0, 0, 0.55);
+}
+.proj-preview-bar {
+  height: 34px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.proj-preview-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.proj-preview-dot:nth-child(1) { background: rgba(255, 97, 89, 0.7); }
+.proj-preview-dot:nth-child(2) { background: rgba(255, 191, 44, 0.7); }
+.proj-preview-dot:nth-child(3) { background: rgba(74, 222, 128, 0.7); }
+.proj-preview-address {
+  flex: 1;
+  text-align: center;
+  font-size: 0.63rem;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.proj-preview img {
+  width: 100%;
+  display: block;
 }
 
 .project-body {

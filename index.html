@@ -1568,9 +1568,30 @@
         currentFeat = null;
       }
 
+      /* ── Shared helper: snap animation to an arbitrary translateX ── */
+      function setCarouselTx(tx) {
+        /* Wrap tx into the [-loopPx, 0) range */
+        tx = ((tx % -loopPx) - loopPx) % -loopPx;
+        if (tx > 0) tx -= loopPx;
+        const elapsed = (Math.abs(tx) / loopPx) * totalMs;
+        grid.style.animation = 'none';
+        grid.style.transform  = `translateX(${tx}px)`;
+        grid.offsetWidth;                                   /* force reflow */
+        grid.style.transform  = '';
+        grid.style.animation  = `carousel-slide ${totalMs}ms linear infinite`;
+        grid.style.animationDelay = `-${elapsed}ms`;
+      }
+
+      function getCurrentTx() {
+        return new DOMMatrix(window.getComputedStyle(grid).transform).m41;
+      }
+
       /* Pause on grid enter; collapse + wait for transition, then resume */
-      let isInWrap  = false;
+      let isInWrap    = false;
+      let isDragging  = false;
       let resumeTimer = null;
+
+      wrap.style.cursor = 'grab';
 
       wrap.addEventListener('mouseenter', () => {
         isInWrap = true;
@@ -1580,11 +1601,12 @@
 
       wrap.addEventListener('mouseleave', () => {
         isInWrap = false;
-        unfeature(); /* starts the collapse CSS transition */
-        /* Wait for the width transition to finish before resuming animation */
-        resumeTimer = setTimeout(() => {
-          if (!isInWrap) grid.classList.remove('carousel-paused');
-        }, 450); /* matches width transition duration (0.42 s + small buffer) */
+        if (!isDragging) {
+          unfeature();
+          resumeTimer = setTimeout(() => {
+            if (!isInWrap) grid.classList.remove('carousel-paused');
+          }, 450);
+        }
       });
 
       /* Feature whichever card the cursor is over */
@@ -1669,6 +1691,66 @@
           }, 450);
         }
       }, { passive: true });
+
+      /* ── Mouse drag to scroll ── */
+      let dragStartX  = 0;
+      let dragStartTx = 0;
+      let didDrag     = false;
+
+      wrap.addEventListener('mousedown', e => {
+        if (e.button !== 0) return;
+        isDragging  = true;
+        didDrag     = false;
+        dragStartX  = e.clientX;
+        clearTimeout(resumeTimer);
+        grid.classList.add('carousel-paused');
+        dragStartTx = getCurrentTx();
+        /* Freeze animation so we can drive transform manually */
+        grid.style.animation = 'none';
+        grid.style.transform = `translateX(${dragStartTx}px)`;
+        grid.style.userSelect = 'none';
+        wrap.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const dx = e.clientX - dragStartX;
+        if (Math.abs(dx) > 4) didDrag = true;
+        if (didDrag) grid.style.transform = `translateX(${dragStartTx + dx}px)`;
+      });
+
+      /* Suppress click after a real drag so cards don't navigate */
+      wrap.addEventListener('click', e => {
+        if (didDrag) { e.stopPropagation(); e.preventDefault(); didDrag = false; }
+      }, true);
+
+      document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrap.style.cursor = isInWrap ? 'grab' : '';
+        grid.style.userSelect = '';
+        setCarouselTx(getCurrentTx());   /* snap animation to dragged position */
+        grid.classList.add('carousel-paused');
+        unfeature();
+        resumeTimer = setTimeout(() => {
+          if (!isInWrap) grid.classList.remove('carousel-paused');
+        }, 450);
+      });
+
+      /* ── Wheel to scroll ── */
+      wrap.addEventListener('wheel', e => {
+        /* Only take horizontal wheel, or vertical when cursor is in the wrap */
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.5
+          ? e.deltaX : e.deltaY;
+        e.preventDefault();
+        clearTimeout(resumeTimer);
+        grid.classList.add('carousel-paused');
+        setCarouselTx(getCurrentTx() - delta * 0.9);
+        grid.classList.add('carousel-paused');   /* ensure still paused post-snap */
+        resumeTimer = setTimeout(() => {
+          if (!isInWrap) grid.classList.remove('carousel-paused');
+        }, 900);
+      }, { passive: false });
     });
 
     /* ── 4) Experience accordion ── */

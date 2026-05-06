@@ -1566,9 +1566,7 @@ body.light-mode {
   background:  #f2f2f6;
   color:       #0c0c1a;
 }
-/* Light mode — hide all dark canvas/orb backgrounds */
-html:has(body.light-mode) { background: #f2f2f6; }
-body.light-mode canvas#bg    { display: none; }
+/* Light mode — suppress dark overlay layers (aurora canvas handles its own bg) */
 body.light-mode #atm-orbs    { display: none; }
 body.light-mode .bg-orbs .orb1,
 body.light-mode .bg-orbs .orb2,

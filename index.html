@@ -1201,45 +1201,92 @@
       ];
 
       let t = 0;
+      const lightBlobs = [
+        { x: 0.2,  y: 0.2,  r: 0.55, rgb: [59, 130, 246],  phase: 0   },
+        { x: 0.75, y: 0.3,  r: 0.48, rgb: [34, 211, 238],  phase: 2.1 },
+        { x: 0.5,  y: 0.75, r: 0.52, rgb: [99, 102, 241],  phase: 4.2 },
+      ];
+
       function draw() {
         t += 0.008;
         ctx.clearRect(0, 0, W, H);
 
-        // deep background
-        const bgGrad = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.8);
-        bgGrad.addColorStop(0, 'rgba(8,8,28,1)');
-        bgGrad.addColorStop(1, 'rgba(4,4,13,1)');
-        ctx.fillStyle = bgGrad;
-        ctx.fillRect(0, 0, W, H);
+        const light = document.body.classList.contains('light-mode');
 
-        // aurora blobs
-        blobs.forEach(b => {
-          const px = b.x + Math.sin(t * 0.7 + b.phase) * 0.18 + (mx - 0.5) * 0.06;
-          const py = b.y + Math.cos(t * 0.55 + b.phase) * 0.14 + (my - 0.5) * 0.04;
-          const x = px * W;
-          const y = py * H;
-          const r = b.r * Math.min(W, H) * 0.75;
-          const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-          const [rr, gg, bb] = b.rgb;
-          g.addColorStop(0,  `rgba(${rr},${gg},${bb},0.18)`);
-          g.addColorStop(0.4, `rgba(${rr},${gg},${bb},0.07)`);
-          g.addColorStop(1,  `rgba(${rr},${gg},${bb},0)`);
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fill();
-        });
+        if (light) {
+          // light background
+          const bgGrad = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.9);
+          bgGrad.addColorStop(0, 'rgba(242,242,246,1)');
+          bgGrad.addColorStop(1, 'rgba(232,232,239,1)');
+          ctx.fillStyle = bgGrad;
+          ctx.fillRect(0, 0, W, H);
 
-        // subtle dot grid reacting to mouse
-        const gs = 52;
-        for (let gx = gs / 2; gx < W; gx += gs) {
-          for (let gy = gs / 2; gy < H; gy += gs) {
-            const dist = Math.hypot(gx - mx * W, gy - my * H);
-            const alpha = Math.max(0, 0.018 - dist / 40000) + 0.008;
-            ctx.fillStyle = `rgba(96,165,250,${alpha})`;
+          // light aurora blobs — same motion, pastel colors
+          lightBlobs.forEach(b => {
+            const px = b.x + Math.sin(t * 0.7 + b.phase) * 0.18 + (mx - 0.5) * 0.06;
+            const py = b.y + Math.cos(t * 0.55 + b.phase) * 0.14 + (my - 0.5) * 0.04;
+            const x = px * W, y = py * H;
+            const r = b.r * Math.min(W, H) * 0.75;
+            const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+            const [rr, gg, bb] = b.rgb;
+            g.addColorStop(0,   `rgba(${rr},${gg},${bb},0.1)`);
+            g.addColorStop(0.4, `rgba(${rr},${gg},${bb},0.04)`);
+            g.addColorStop(1,   `rgba(${rr},${gg},${bb},0)`);
+            ctx.fillStyle = g;
             ctx.beginPath();
-            ctx.arc(gx, gy, 0.8, 0, Math.PI * 2);
+            ctx.arc(x, y, r, 0, Math.PI * 2);
             ctx.fill();
+          });
+
+          // dot grid — darker dots on light bg
+          const gs = 52;
+          for (let gx = gs / 2; gx < W; gx += gs) {
+            for (let gy = gs / 2; gy < H; gy += gs) {
+              const dist = Math.hypot(gx - mx * W, gy - my * H);
+              const alpha = Math.max(0, 0.022 - dist / 38000) + 0.01;
+              ctx.fillStyle = `rgba(59,130,246,${alpha})`;
+              ctx.beginPath();
+              ctx.arc(gx, gy, 0.8, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+
+        } else {
+          // dark background
+          const bgGrad = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.8);
+          bgGrad.addColorStop(0, 'rgba(8,8,28,1)');
+          bgGrad.addColorStop(1, 'rgba(4,4,13,1)');
+          ctx.fillStyle = bgGrad;
+          ctx.fillRect(0, 0, W, H);
+
+          // aurora blobs
+          blobs.forEach(b => {
+            const px = b.x + Math.sin(t * 0.7 + b.phase) * 0.18 + (mx - 0.5) * 0.06;
+            const py = b.y + Math.cos(t * 0.55 + b.phase) * 0.14 + (my - 0.5) * 0.04;
+            const x = px * W, y = py * H;
+            const r = b.r * Math.min(W, H) * 0.75;
+            const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+            const [rr, gg, bb] = b.rgb;
+            g.addColorStop(0,   `rgba(${rr},${gg},${bb},0.18)`);
+            g.addColorStop(0.4, `rgba(${rr},${gg},${bb},0.07)`);
+            g.addColorStop(1,   `rgba(${rr},${gg},${bb},0)`);
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          // subtle dot grid reacting to mouse
+          const gs = 52;
+          for (let gx = gs / 2; gx < W; gx += gs) {
+            for (let gy = gs / 2; gy < H; gy += gs) {
+              const dist = Math.hypot(gx - mx * W, gy - my * H);
+              const alpha = Math.max(0, 0.018 - dist / 40000) + 0.008;
+              ctx.fillStyle = `rgba(96,165,250,${alpha})`;
+              ctx.beginPath();
+              ctx.arc(gx, gy, 0.8, 0, Math.PI * 2);
+              ctx.fill();
+            }
           }
         }
 

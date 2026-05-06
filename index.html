@@ -246,8 +246,7 @@
     <section id="projects" class="sec">
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
-        <div class="proj-carousel-wrap">
-          <div class="proj-grid">
+        <div class="proj-grid">
           <div class="proj-card proj-card--has-thumb" data-href="sentimentsignal.html" tabindex="0" role="article">
             <img class="proj-thumb" src="img/thumb-sentimentsignal.jpg" alt="SentimentSignal dashboard preview" width="140" height="84" loading="lazy">
             <div class="proj-num">01</div>
@@ -357,7 +356,6 @@
           </div>
 
           </div><!-- /.proj-grid -->
-        </div><!-- /.proj-carousel-wrap -->
       </div>
     </section>
 
@@ -1326,7 +1324,7 @@
       /* ── element classification (event delegation — works for dynamic elements) ── */
       const BTN_SEL =
         '.btn, .mag-btn, .btn-send, .nav-cta, .nav-resume, ' +
-        '.carousel-btn, .proj-link-btn, .sk-tag, .cert-badge, ' +
+        '.proj-link-btn, .sk-tag, .cert-badge, ' +
         '.back-link, .back-to-top, .foot-logo, .logo, ' +
         'button, [role="button"]';
 
@@ -1574,51 +1572,25 @@
       });
     });
 
-    /* ── 3) Seamless infinite carousel — CSS animation loop, hover to pause ── */
+    /* ── 3) Project grid — hover to reveal details, click to navigate ── */
     document.addEventListener('DOMContentLoaded', () => {
-      const wrap = document.querySelector('.proj-carousel-wrap');
       const grid = document.querySelector('.proj-grid');
-      if (!grid || !wrap) return;
+      if (!grid) return;
 
-      /* ── Clone all original cards for seamless looping ── */
-      const origCards = Array.from(grid.querySelectorAll('.proj-card'));
-      origCards.forEach(c => c.classList.add('vis'));
+      const cards = Array.from(grid.querySelectorAll('.proj-card'));
+      cards.forEach(c => c.classList.add('vis'));
 
-      origCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        clone.classList.add('proj-card--clone');
-        clone.setAttribute('aria-hidden', 'true');
-        clone.setAttribute('tabindex', '-1');
-        grid.appendChild(clone);
-      });
-
-      /* ── Inject the CSS @keyframes with the exact loop distance ── */
-      const cardW  = origCards[0].offsetWidth;
-      const gapPx  = parseFloat(getComputedStyle(grid).gap) || 12;
-      /* Loop distance = one full set: n cards × (cardW + gap) */
-      const loopPx = origCards.length * (cardW + gapPx);
-      const totalMs = origCards.length * 4000; /* 4 s per card */
-
-      const ks = document.createElement('style');
-      ks.textContent =
-        `@keyframes carousel-slide { to { transform: translateX(-${loopPx}px); } }` +
-        `.proj-grid { animation: carousel-slide ${totalMs}ms linear infinite; }`;
-      document.head.appendChild(ks);
-
-      /* ── Hover: pause animation, feature the hovered card ── */
       let currentFeat = null;
 
-      /* Reset a card's desc instantly — no animation, cancels any pending timer */
       function resetDesc(card) {
         const desc = card.querySelector('.proj-desc');
         if (!desc) return;
         clearTimeout(desc._swapTimer);
-        desc._swapTimer   = null;
+        desc._swapTimer    = null;
         desc.style.opacity = '1';
         desc.textContent   = desc.dataset.short || '';
       }
 
-      /* Fade-swap the desc to tech text — each card owns its own timer */
       function showTechDesc(card) {
         const desc = card.querySelector('.proj-desc');
         if (!desc) return;
@@ -1630,15 +1602,12 @@
           desc.textContent   = next;
           desc.style.opacity = '1';
           desc._swapTimer    = null;
-        }, 180);
+        }, 160);
       }
 
       function feature(card) {
         if (currentFeat === card) return;
-        if (currentFeat) {
-          currentFeat.classList.remove('proj-card--feat');
-          resetDesc(currentFeat);     /* instant — no timer conflict */
-        }
+        if (currentFeat) { currentFeat.classList.remove('proj-card--feat'); resetDesc(currentFeat); }
         card.classList.add('proj-card--feat');
         showTechDesc(card);
         currentFeat = card;
@@ -1651,60 +1620,16 @@
         currentFeat = null;
       }
 
-      /* ── Shared helper: snap animation to an arbitrary translateX ── */
-      function setCarouselTx(tx) {
-        /* Wrap tx into the [-loopPx, 0) range */
-        tx = ((tx % -loopPx) - loopPx) % -loopPx;
-        if (tx > 0) tx -= loopPx;
-        const elapsed = (Math.abs(tx) / loopPx) * totalMs;
-        grid.style.animation = 'none';
-        grid.style.transform  = `translateX(${tx}px)`;
-        grid.offsetWidth;                                   /* force reflow */
-        grid.style.transform  = '';
-        grid.style.animation  = `carousel-slide ${totalMs}ms linear infinite`;
-        grid.style.animationDelay = `-${elapsed}ms`;
-      }
-
-      function getCurrentTx() {
-        return new DOMMatrix(window.getComputedStyle(grid).transform).m41;
-      }
-
-      /* Pause on grid enter; collapse + wait for transition, then resume */
-      let isInWrap    = false;
-      let isDragging  = false;
-      let resumeTimer = null;
-
-      wrap.style.cursor = 'grab';
-
-      wrap.addEventListener('mouseenter', () => {
-        isInWrap = true;
-        clearTimeout(resumeTimer);
-        grid.classList.add('carousel-paused');
-      });
-
-      wrap.addEventListener('mouseleave', () => {
-        isInWrap = false;
-        if (!isDragging) {
-          unfeature();
-          resumeTimer = setTimeout(() => {
-            if (!isInWrap) grid.classList.remove('carousel-paused');
-          }, 450);
-        }
-      });
-
-      /* Feature whichever card the cursor is over */
-      const allCards = Array.from(grid.querySelectorAll('.proj-card'));
-      allCards.forEach(card => {
+      cards.forEach(card => {
         card.addEventListener('mouseenter', () => feature(card));
+        card.addEventListener('mouseleave', () => unfeature());
 
-        /* Navigate to project page on click (skip if clicking the live-site link) */
         card.addEventListener('click', e => {
-          if (e.target.closest('.proj-link')) return; /* let the <a> handle it */
+          if (e.target.closest('.proj-link')) return;
           const href = card.dataset.href;
           if (href) window.location.href = href;
         });
 
-        /* Keyboard: Enter / Space also navigates */
         card.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -1712,128 +1637,24 @@
             if (href) window.location.href = href;
           }
         });
-      });
 
-      /* ── Touch / Swipe support for mobile ── */
-      let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
-
-      wrap.addEventListener('touchstart', e => {
-        if (e.touches.length !== 1) return;
-        touchStartX   = e.touches[0].clientX;
-        touchStartY   = e.touches[0].clientY;
-        touchStartTime = Date.now();
-        clearTimeout(resumeTimer);
-        grid.classList.add('carousel-paused');
-      }, { passive: true });
-
-      wrap.addEventListener('touchend', e => {
-        if (e.changedTouches.length !== 1) return;
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        const dt = Date.now() - touchStartTime;
-        const isHorizSwipe = Math.abs(dx) > 48 &&
-                             Math.abs(dx) > Math.abs(dy) * 1.5 &&
-                             dt < 350;
-
-        if (isHorizSwipe) {
-          /* Swipe — dismiss and resume */
-          unfeature();
-          resumeTimer = setTimeout(() => {
-            if (!isInWrap) grid.classList.remove('carousel-paused');
-          }, 450);
-        } else {
-          /* Tap — feature card, or navigate on second tap */
-          const el = document.elementFromPoint(
-            e.changedTouches[0].clientX,
-            e.changedTouches[0].clientY
-          );
-          const tappedCard = el?.closest('.proj-card:not(.proj-card--clone)');
-          if (tappedCard) {
-            if (currentFeat === tappedCard) {
-              if (e.target.closest('.proj-link')) return; /* let the link handle it */
-              const href = tappedCard.dataset.href;
-              if (href) window.location.href = href;
-            } else {
-              feature(tappedCard);
-            }
+        /* Touch: first tap = feature, second tap = navigate */
+        card.addEventListener('touchend', e => {
+          if (e.target.closest('.proj-link')) return;
+          if (currentFeat === card) {
+            const href = card.dataset.href;
+            if (href) window.location.href = href;
           } else {
-            unfeature();
-            resumeTimer = setTimeout(() => {
-              grid.classList.remove('carousel-paused');
-            }, 450);
+            e.preventDefault();
+            feature(card);
           }
-        }
-      }, { passive: true });
+        }, { passive: false });
+      });
 
-      /* Dismiss featured card when touching outside the carousel */
+      /* Dismiss on outside tap */
       document.addEventListener('touchstart', e => {
-        if (currentFeat && !wrap.contains(e.target)) {
-          unfeature();
-          resumeTimer = setTimeout(() => {
-            grid.classList.remove('carousel-paused');
-          }, 450);
-        }
+        if (currentFeat && !currentFeat.contains(e.target)) unfeature();
       }, { passive: true });
-
-      /* ── Mouse drag to scroll ── */
-      let dragStartX  = 0;
-      let dragStartTx = 0;
-      let didDrag     = false;
-
-      wrap.addEventListener('mousedown', e => {
-        if (e.button !== 0) return;
-        isDragging  = true;
-        didDrag     = false;
-        dragStartX  = e.clientX;
-        clearTimeout(resumeTimer);
-        grid.classList.add('carousel-paused');
-        dragStartTx = getCurrentTx();
-        /* Freeze animation so we can drive transform manually */
-        grid.style.animation = 'none';
-        grid.style.transform = `translateX(${dragStartTx}px)`;
-        grid.style.userSelect = 'none';
-        wrap.style.cursor = 'grabbing';
-      });
-
-      document.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        const dx = e.clientX - dragStartX;
-        if (Math.abs(dx) > 4) didDrag = true;
-        if (didDrag) grid.style.transform = `translateX(${dragStartTx + dx}px)`;
-      });
-
-      /* Suppress click after a real drag so cards don't navigate */
-      wrap.addEventListener('click', e => {
-        if (didDrag) { e.stopPropagation(); e.preventDefault(); didDrag = false; }
-      }, true);
-
-      document.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        wrap.style.cursor = isInWrap ? 'grab' : '';
-        grid.style.userSelect = '';
-        setCarouselTx(getCurrentTx());   /* snap animation to dragged position */
-        grid.classList.add('carousel-paused');
-        unfeature();
-        resumeTimer = setTimeout(() => {
-          if (!isInWrap) grid.classList.remove('carousel-paused');
-        }, 450);
-      });
-
-      /* ── Wheel to scroll ── */
-      wrap.addEventListener('wheel', e => {
-        /* Only take horizontal wheel, or vertical when cursor is in the wrap */
-        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.5
-          ? e.deltaX : e.deltaY;
-        e.preventDefault();
-        clearTimeout(resumeTimer);
-        grid.classList.add('carousel-paused');
-        setCarouselTx(getCurrentTx() - delta * 0.9);
-        grid.classList.add('carousel-paused');   /* ensure still paused post-snap */
-        resumeTimer = setTimeout(() => {
-          if (!isInWrap) grid.classList.remove('carousel-paused');
-        }, 900);
-      }, { passive: false });
     });
 
     /* ── 4) Experience accordion ── */

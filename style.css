@@ -1037,24 +1037,17 @@ h1.name em {
    14) PROJECT CARDS (.proj-grid + .proj-card)
    ======================================================================== */
 .proj-grid {
-  display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
-  padding-block: 1.5rem;
-  will-change: transform;
-  /* animation injected by JS after measuring card widths */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-block: 0.5rem;
 }
-/* Pause the CSS animation when hovering */
-.proj-grid.carousel-paused { animation-play-state: paused !important; }
 
 .proj-card {
-  /* base layout — all cards flex-column, same fixed height */
   display: flex;
   flex-direction: column;
-  padding: 1.2rem 1.4rem;
-  width: 248px;
-  height: 300px;
-  flex-shrink: 0;
+  padding: 1.35rem 1.5rem;
+  min-height: 240px;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   backdrop-filter: blur(32px) saturate(160%);
@@ -1618,9 +1611,15 @@ body.light-mode .proj-card {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 20px rgba(0,0,0,0.06);
 }
 body.light-mode .proj-card:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 16px 48px rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 16px 48px rgba(0,0,0,0.1);
 }
+body.light-mode .proj-card--feat {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 24px 64px rgba(0,0,0,0.12), 0 0 48px rgba(59,130,246,0.1);
+}
+body.light-mode .proj-arr { color: #aaa; }
+body.light-mode .proj-card--feat .proj-arr { color: #3b82f6; }
 body.light-mode .proj-name {
   color: #111;
 }
@@ -2478,33 +2477,32 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 .sk-col:nth-child(3) .sk-item:hover { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--text); }
 .sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
 
-/* ── Featured card — expands horizontally when carousel is paused on hover ── */
+/* ── Featured card — lifts and glows on hover, no layout shift ── */
 .proj-card--feat {
-  width: 480px;
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   z-index: 2;
-  border-color: rgba(201, 169, 110, 0.48);
+  border-color: rgba(59, 130, 246, 0.5);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 0 0 1px rgba(201, 169, 110, 0.22),
-    0 24px 64px rgba(0, 0, 0, 0.52),
-    0 0 60px rgba(59, 130, 246, 0.16);
+    0 0 0 1px rgba(59, 130, 246, 0.18),
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    0 0 48px rgba(59, 130, 246, 0.14);
 }
 
-/* Arrow: absolute top-right, only visible on featured */
+/* Arrow: always visible, top-right */
 .proj-arr {
   position: absolute;
   top: 1.1rem; right: 1.25rem;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.25s ease, color 0.25s ease;
+  opacity: 0.35;
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
 }
 .proj-card--feat .proj-arr { opacity: 1; }
-.proj-card--feat:hover .proj-arr {
+.proj-card--feat .proj-arr {
   transform: translate(3px, -3px);
   color: var(--cyan);
 }
 
-/* Number: small italic label, only on featured (display:none so it takes no space) */
+/* Number: small italic label, always shown */
 .proj-num {
   font-family: var(--serif);
   font-style: italic;
@@ -2512,11 +2510,10 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
   color: var(--text3);
   font-weight: 400;
   line-height: 1;
-  display: none;
+  display: block;
   margin-bottom: 0.3rem;
   flex-shrink: 0;
 }
-.proj-card--feat .proj-num { display: block; }
 
 /* ── Thumbnail preview — fades into top-right corner on expansion ── */
 .proj-thumb {
@@ -2544,7 +2541,7 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 }
 /* Push card body left to clear the thumbnail */
 .proj-card--feat.proj-card--has-thumb {
-  padding-right: 10.5rem;
+  padding-right: 9.5rem;
 }
 
 /* ── Stats row — key metrics, visible only on expansion ── */
@@ -2578,44 +2575,13 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
   white-space: nowrap;
 }
 
-/* Carousel wrapper — clips track, fades edges */
-.proj-carousel-wrap {
-  position: relative;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right,
-    transparent 0px, black 80px, black calc(100% - 80px), transparent 100%);
-  mask-image: linear-gradient(to right,
-    transparent 0px, black 80px, black calc(100% - 80px), transparent 100%);
+/* Grid responsive breakpoints */
+@media (max-width: 900px) {
+  .proj-grid { grid-template-columns: repeat(2, 1fr); }
 }
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid var(--border2);
-  background: rgba(255, 255, 255, 0.04);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  color: var(--text2);
-  font-size: 1.5rem;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: background 0.2s ease, border-color 0.2s ease,
-              color 0.2s ease, opacity 0.25s ease;
+@media (max-width: 560px) {
+  .proj-grid { grid-template-columns: 1fr; gap: 0.75rem; }
 }
-.carousel-btn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(201, 169, 110, 0.5);
-  color: var(--text);
-}
-.carousel-btn--prev { left: -1.5rem; }
-.carousel-btn--next { right: -1.5rem; }
-.carousel-btn:disabled { opacity: 0.15; pointer-events: none; }
 
 /* Project cards — number becomes gradient on hover */
 .proj-card:hover .proj-num {

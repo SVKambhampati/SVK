@@ -1566,13 +1566,14 @@ body.light-mode {
   background:  #f2f2f6;
   color:       #0c0c1a;
 }
-/* Light mode — fix html root background + hide dark orbs */
+/* Light mode — hide all dark canvas/orb backgrounds */
 html:has(body.light-mode) { background: #f2f2f6; }
-body.light-mode #atm-orbs { display: none; }
+body.light-mode canvas#bg    { display: none; }
+body.light-mode #atm-orbs    { display: none; }
 body.light-mode .bg-orbs .orb1,
 body.light-mode .bg-orbs .orb2,
 body.light-mode .bg-orbs .orb3 { opacity: 0.04; }
-body.light-mode canvas#particles { opacity: 0.25; }
+body.light-mode canvas#particles { opacity: 0.2; }
 
 body.light-mode #nav.scrolled {
   background: rgba(255, 255, 255, 0.9);

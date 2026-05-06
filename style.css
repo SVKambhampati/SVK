@@ -1566,7 +1566,8 @@ body.light-mode {
   background:  #f2f2f6;
   color:       #0c0c1a;
 }
-/* Hide dark atmosphere orbs + dim particles in light mode */
+/* Light mode — fix html root background + hide dark orbs */
+html:has(body.light-mode) { background: #f2f2f6; }
 body.light-mode #atm-orbs { display: none; }
 body.light-mode .bg-orbs .orb1,
 body.light-mode .bg-orbs .orb2,

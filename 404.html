@@ -2,32 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="shortcut icon" href="favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AddressSync Automation — Oracle EBS and Commerce Cloud integration for shipping address validation.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://svkambhampati.vercel.app/project-three.html">
-  <meta property="og:title" content="AddressSync Automation | Shreyas Kambhampati">
-  <meta property="og:description" content="PL/SQL integration bridging Oracle EBS and Commerce Cloud — reverse-engineered REST API, batch normalization, −94% failed deliveries for DeKalb County.">
-  <meta property="og:image" content="https://svkambhampati.vercel.app/icons/etc/shreyas.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AddressSync Automation | Shreyas Kambhampati">
-  <meta name="twitter:description" content="PL/SQL integration layer that cut government delivery failures by 94% — no API existed, so I reverse-engineered one.">
-  <meta name="twitter:image" content="https://svkambhampati.vercel.app/icons/etc/shreyas.png">
-  <title>AddressSync Automation | Shreyas Kambhampati</title>
+  <title>404 — Page Not Found | SVK</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .notfound {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .notfound-code {
+      font-family: 'Blanka', sans-serif;
+      font-size: clamp(6rem, 20vw, 14rem);
+      color: var(--text);
+      letter-spacing: 0.12em;
+      line-height: 1;
+      background: linear-gradient(135deg, #3b82f6, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    .notfound-msg {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--text2);
+      margin-bottom: 0.75rem;
+    }
+    .notfound-sub {
+      font-size: 0.9rem;
+      color: var(--text3);
+      margin-bottom: 2.5rem;
+      max-width: 360px;
+    }
+    .notfound-links {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Scroll progress bar -->
-  <div id="scroll-progress" aria-hidden="true"></div>
 
   <!-- Cursor glow -->
   <div id="cur" aria-hidden="true"></div>
@@ -41,14 +70,6 @@
 
   <!-- Particle canvas -->
   <canvas id="particles" aria-hidden="true"></canvas>
-
-  <!-- Page Loader -->
-  <div id="loader">
-    <div class="loader-inner">
-      <div class="loader-logo">SVK</div>
-      <div class="loader-bar"><div class="loader-fill"></div></div>
-    </div>
-  </div>
 
   <!-- Nav -->
   <nav id="nav">
@@ -72,7 +93,7 @@
     </div>
   </nav>
 
-  <!-- Mobile nav panel -->
+  <!-- Mobile nav -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
     <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
     <ul>
@@ -86,80 +107,23 @@
   </nav>
   <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
-  <!-- Project Hero -->
-  <header class="project-hero">
-    <a class="back-link" href="index.html#projects">← Back to projects</a>
-    <div class="proj-icon-wrap">📦</div>
-    <h1 class="proj-title">AddressSync Automation</h1>
-    <p class="proj-subtitle">A backend integration tool that ensures accurate shipping data between Oracle EBS and Oracle Commerce Cloud — automatically detecting and fixing address mismatches before they cause failed deliveries.</p>
-    <div class="tags">
-      <span class="tag">Oracle EBS</span>
-      <span class="tag">Oracle Commerce Cloud</span>
-      <span class="tag">PL/SQL</span>
-      <span class="tag">API Integration</span>
-      <span class="tag">Backend</span>
+  <main class="notfound">
+    <div class="notfound-code">404</div>
+    <p class="notfound-msg">Nothing here.</p>
+    <p class="notfound-sub">The page you're looking for doesn't exist or was moved.</p>
+    <div class="notfound-links">
+      <a href="index.html" class="btn btn-p">← Back home</a>
+      <a href="index.html#projects" class="btn btn-s">View projects</a>
     </div>
-    <div class="proj-links">
-      <a href="https://github.com/SVKambhampati/DeKalb-FTP-Process" target="_blank" rel="noopener" class="proj-link-btn">GitHub ↗</a>
-    </div>
-    <div class="proj-divider"></div>
-  </header>
-
-  <!-- Project Body -->
-  <main class="project-body">
-    <section class="proj-section">
-      <h2>The Problem</h2>
-      <p>DeKalb County's IT systems were experiencing a recurring issue: shipping addresses entered in Oracle Commerce Cloud weren't always syncing correctly with Oracle EBS, the county's core enterprise system. The mismatch caused failed FedEx deliveries, manual correction work, and operational delays. There was no automated way to catch these errors before shipment.</p>
-    </section>
-
-    <section class="proj-section">
-      <h2>The Solution</h2>
-      <p>I built a backend integration layer that automatically compares address records between Oracle EBS and Oracle Commerce Cloud at the point of order processing. When a mismatch is detected, the system flags the order and attempts reconciliation before it reaches the fulfillment pipeline — stopping the problem at the source rather than dealing with the fallout after failed delivery.</p>
-    </section>
-
-    <section class="proj-section">
-      <h2>Technologies Used</h2>
-      <ul>
-        <li>Oracle EBS — enterprise backend system holding canonical address records</li>
-        <li>Oracle Commerce Cloud — customer-facing storefront where orders originate</li>
-        <li>PL/SQL — validation scripts for address cleaning and standardization</li>
-        <li>REST API integration — real-time sync between both Oracle systems</li>
-        <li>FedEx shipping API — downstream validation for delivery address format</li>
-      </ul>
-    </section>
-
-    <section class="proj-section">
-      <h2>Impact</h2>
-      <p>The integration significantly reduced failed delivery rates and eliminated the manual correction process that the logistics team had been managing. It also surfaced a broader data quality issue in how addresses were being entered on the storefront side, leading to upstream improvements in form validation.</p>
-    </section>
-
-    <nav class="proj-nav" aria-label="Project navigation">
-      <a class="proj-nav-link proj-nav-link--prev" href="project-two.html">
-        <span class="proj-nav-label">← Previous</span>
-        <span class="proj-nav-title">MovieMind</span>
-      </a>
-      <a class="proj-nav-link proj-nav-link--next" href="project-four.html">
-        <span class="proj-nav-label">Next →</span>
-        <span class="proj-nav-title">StyleForecast</span>
-      </a>
-    </nav>
   </main>
 
-  <!-- Footer -->
   <footer>
     <span class="foot-l">© 2026 Shreyas Kambhampati</span>
     <a class="foot-logo" href="index.html">SVK</a>
-    <span class="foot-r"><a href="#">Back to top ↑</a></span>
+    <span class="foot-r"><a href="index.html">Back home ↑</a></span>
   </footer>
 
   <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) { loader.classList.add('loaded'); setTimeout(() => loader.remove(), 500); }
-      }, 1000);
-    });
-
     (function() {
       const canvas = document.getElementById('particles');
       if (!canvas) return;
@@ -219,22 +183,10 @@
     });
 
     (function() {
-      const bar = document.getElementById('scroll-progress'), nav = document.getElementById('nav');
-      function update() {
-        const y = window.scrollY||0;
-        if (nav) nav.classList.toggle('scrolled', y>50);
-        if (bar) bar.style.width = Math.min(100,(y/((document.body.scrollHeight-window.innerHeight)||1))*100)+'%';
-      }
+      const nav = document.getElementById('nav');
+      function update() { if (nav) nav.classList.toggle('scrolled', (window.scrollY||0) > 50); }
       window.addEventListener('scroll', update, { passive: true }); update();
     })();
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const observer = new IntersectionObserver(
-        entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); observer.unobserve(e.target); } }),
-        { threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
-      );
-      document.querySelectorAll('.proj-section').forEach(s => observer.observe(s));
-    });
   </script>
 </body>
 </html>

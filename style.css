@@ -131,7 +131,7 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9997;
-  opacity: 0.03;
+  opacity: 0.055;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 150px 150px;
   background-repeat: repeat;
@@ -170,6 +170,44 @@ body::after {
   0%   { width: 0%; }
   60%  { width: 70%; }
   100% { width: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   Project page loaders — #loader (class-based) used on all sub-pages
+   -------------------------------------------------------------------------- */
+#loader {
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1.75rem;
+  background: #0c0c0b;
+  transition: opacity 0.5s ease;
+}
+#loader.loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+.loader-inner .loader-logo {
+  font-family: 'Blanka', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 5.5rem);
+  color: #efefed;
+  letter-spacing: 0.18em;
+}
+.loader-inner .loader-bar {
+  width: 140px; height: 1px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  border-radius: 1px;
+}
+.loader-inner .loader-fill {
+  height: 100%; width: 0%;
+  background: var(--accent);
+  animation: loader-fill-anim 0.68s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 /* --------------------------------------------------------------------------
@@ -402,6 +440,7 @@ main.container::before {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--text);
+  font-style: italic;
 }
 .nav-links a:hover::after,
 .nav-links a.active::after {
@@ -543,7 +582,8 @@ main.container::before {
 .hero-pre,
 h1.name,
 .hero-typed,
-.hero-btns {
+.hero-btns,
+.hero-avail {
   position: relative;
   z-index: 2;
 }
@@ -626,6 +666,22 @@ h1.name em {
   gap: 0.75rem;
   justify-content: flex-start;
   pointer-events: all;
+  opacity: 0; /* motion.dev animates this in */
+}
+
+/* Hero availability badge */
+.hero-avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4ade80;
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 2;
   opacity: 0; /* motion.dev animates this in */
 }
 
@@ -1111,6 +1167,16 @@ h1.name em {
     0 0 0 1px rgba(59, 130, 246, 0.1),
     0 20px 56px rgba(0, 0, 0, 0.44),
     0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+/* Dim non-featured cards when one is hovered — Calvin Harris influence */
+.proj-grid:has(.proj-card--feat) .proj-card:not(.proj-card--feat) {
+  opacity: 0.42;
+  filter: saturate(0.6);
+  transition: opacity 0.35s ease, filter 0.35s ease,
+              transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.32s ease, box-shadow 0.32s ease,
+              background 0.32s ease;
 }
 
 .proj-body {
@@ -2092,6 +2158,49 @@ body.light-mode .btn-send:hover {
 }
 
 /* =====================================================================================
+   PROJECT PREV/NEXT NAVIGATION
+   ===================================================================================== */
+.proj-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 0 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin-top: 3.5rem;
+  gap: 1rem;
+}
+.proj-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: var(--text2);
+  transition: color 0.22s;
+  max-width: 46%;
+}
+.proj-nav-link:hover { color: var(--text); }
+.proj-nav-link--next { align-items: flex-end; text-align: right; }
+.proj-nav-label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+.proj-nav-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: inherit;
+  transition: background 0.22s;
+}
+.proj-nav-link:hover .proj-nav-title {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =====================================================================================
    SCROLL PROGRESS BAR
    ===================================================================================== */
 #scroll-progress {
@@ -2336,6 +2445,8 @@ body.light-mode h1.name em {
 }
 body.light-mode .hero-pre  { color: rgba(0, 0, 0, 0.52); }
 body.light-mode .hero-typed { color: rgba(0, 0, 0, 0.58); }
+body.light-mode .hero-avail { color: #16a34a; }
+body.light-mode .hero-avail .status-dot { background: #16a34a; box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45); }
 /* Primary button — solid dark in light mode (glass is invisible on white) */
 body.light-mode .btn-p {
   background: #111128;

@@ -24,9 +24,6 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://stream.mux.com">
 
-  <!-- Blanka Font for Intro Logo -->
-  <link rel="stylesheet" href="blanka.css" />
-
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
@@ -116,6 +113,10 @@
     <div class="hero-btns">
       <a href="#projects" class="btn btn-p mag-btn">View my work</a>
       <a href="#contact" class="btn btn-s mag-btn">Get in touch</a>
+    </div>
+    <div class="hero-avail">
+      <span class="status-dot"></span>
+      Open to new roles · May 2026
     </div>
   </section>
 
@@ -478,6 +479,7 @@
                 <div class="field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
                 <div class="field"><label>Message</label><textarea name="message" placeholder="What's on your mind?" required></textarea></div>
                 <input type="hidden" name="_subject" value="New message from svk-portfolio site">
+                <input type="hidden" name="_cc" value="svkambhampati@gmail.com">
                 <button type="submit" class="btn-send mag-btn">Send message →</button>
               </form>
             </div>
@@ -1690,7 +1692,7 @@
     const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (noMotion) {
       // Instantly reveal hero elements — bypass loader and all animations
-      document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
+      document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns, .hero-avail')
         .forEach(el => Object.assign(el.style, { opacity: '1', transform: 'none' }));
       const nm = document.querySelector('h1.name');
       if (nm) { nm.style.opacity = '1'; }
@@ -1699,7 +1701,7 @@
       /* ── 1) Hero entrance — delayed to sync with loader fly-out ── */
       const heroEls = [
         // h1.name is handled separately via per-character char-rise animation
-        ...document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
+        ...document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns, .hero-avail')
       ];
       if (heroEls.length) {
         // Wait for the hero-ready event (fired by loader JS) before animating

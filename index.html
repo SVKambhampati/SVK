@@ -114,10 +114,6 @@
       <a href="#projects" class="btn btn-p mag-btn">View my work</a>
       <a href="#contact" class="btn btn-s mag-btn">Get in touch</a>
     </div>
-    <div class="hero-avail">
-      <span class="status-dot"></span>
-      Open to new roles · May 2026
-    </div>
   </section>
 
   <div id="spacer" style="height: 85vh;"></div>
@@ -490,6 +486,13 @@
     </section>
 
   </main>
+
+  <!-- Big footer CTA -->
+  <section class="closing-cta" aria-label="Contact call to action">
+    <p class="closing-kicker">Based in Boston &mdash; open to everywhere</p>
+    <h2 class="closing-heading">Let's build something<em>.</em></h2>
+    <a href="mailto:kambhampati.s@northeastern.edu" class="closing-email">kambhampati.s@northeastern.edu</a>
+  </section>
 
   <footer>
     <span class="foot-l">© 2026 Shreyas Kambhampati</span>
@@ -1692,7 +1695,7 @@
     const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (noMotion) {
       // Instantly reveal hero elements — bypass loader and all animations
-      document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns, .hero-avail')
+      document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
         .forEach(el => Object.assign(el.style, { opacity: '1', transform: 'none' }));
       const nm = document.querySelector('h1.name');
       if (nm) { nm.style.opacity = '1'; }
@@ -1701,7 +1704,7 @@
       /* ── 1) Hero entrance — delayed to sync with loader fly-out ── */
       const heroEls = [
         // h1.name is handled separately via per-character char-rise animation
-        ...document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns, .hero-avail')
+        ...document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
       ];
       if (heroEls.length) {
         // Wait for the hero-ready event (fired by loader JS) before animating

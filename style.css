@@ -582,8 +582,7 @@ main.container::before {
 .hero-pre,
 h1.name,
 .hero-typed,
-.hero-btns,
-.hero-avail {
+.hero-btns {
   position: relative;
   z-index: 2;
 }
@@ -594,12 +593,12 @@ h1.name,
 }
 
 .hero-pre {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--text3);
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
   opacity: 0; /* motion.dev animates this in */
 }
 
@@ -669,21 +668,6 @@ h1.name em {
   opacity: 0; /* motion.dev animates this in */
 }
 
-/* Hero availability badge */
-.hero-avail {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.48rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4ade80;
-  margin-top: 1.5rem;
-  position: relative;
-  z-index: 2;
-  opacity: 0; /* motion.dev animates this in */
-}
 
 .btn {
   display: inline-block;
@@ -739,7 +723,7 @@ h1.name em {
   overflow: hidden;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 0.9rem 0;
+  padding: 1.1rem 0;
   position: relative;
   z-index: 20;
   background: var(--bg);
@@ -747,14 +731,14 @@ h1.name em {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 35s linear infinite;
+  animation: marquee 40s linear infinite;
   will-change: transform;
 }
 .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
 .marquee-content {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text3);
   white-space: nowrap;
@@ -853,27 +837,25 @@ h1.name em {
 .sec-hd {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 4rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  gap: 0.65rem;
+  margin-bottom: 4.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
 }
 .sec-n {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text3);
 }
 .sec-t {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.6rem, 5.5vw, 4.5rem);
   color: var(--text);
   line-height: 1;
+  letter-spacing: -0.025em;
 }
 
 .about-grid {
@@ -1521,6 +1503,61 @@ h1.name em {
 /* =====================================================================================
    17) FOOTER
    ===================================================================================== */
+/* =====================================================================================
+   CLOSING CTA — big editorial statement before footer
+   ===================================================================================== */
+.closing-cta {
+  text-align: center;
+  padding: 9rem 5% 8rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.closing-kicker {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 1.75rem;
+}
+.closing-heading {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(3.5rem, 9vw, 9rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+}
+.closing-heading em {
+  font-style: normal;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing-email {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text2);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 0.2rem;
+  transition: color 0.22s, border-color 0.22s;
+}
+.closing-email:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+body.light-mode .closing-heading { color: #0c0c0b; }
+body.light-mode .closing-email { color: rgba(12,12,11,0.6); border-color: rgba(0,0,0,0.15); }
+body.light-mode .closing-email:hover { color: #0c0c0b; border-color: rgba(0,0,0,0.4); }
+
 footer {
   border-top: 1px solid var(--border);
   padding: 1.4rem 5%;
@@ -2445,8 +2482,6 @@ body.light-mode h1.name em {
 }
 body.light-mode .hero-pre  { color: rgba(0, 0, 0, 0.52); }
 body.light-mode .hero-typed { color: rgba(0, 0, 0, 0.58); }
-body.light-mode .hero-avail { color: #16a34a; }
-body.light-mode .hero-avail .status-dot { background: #16a34a; box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45); }
 /* Primary button — solid dark in light mode (glass is invisible on white) */
 body.light-mode .btn-p {
   background: #111128;

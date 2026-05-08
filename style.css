@@ -1513,6 +1513,18 @@ h1.name em {
   position: relative;
   overflow: hidden;
 }
+.closing-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  background-repeat: repeat;
+  z-index: 0;
+}
+.closing-cta > * { position: relative; z-index: 1; }
 .closing-kicker {
   font-size: 0.67rem;
   font-weight: 600;
@@ -1573,8 +1585,12 @@ footer {
 }
 .foot-l,
 .foot-r {
+  flex: 1;
   font-size: 0.76rem;
   color: var(--text3);
+}
+.foot-r {
+  text-align: right;
 }
 .foot-logo {
   font-family: var(--serif);

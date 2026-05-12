@@ -215,7 +215,7 @@
       if (!cur) return;
       let tx=0,ty=0,cx=0,cy=0;
       document.addEventListener('mousemove', e => { tx=e.clientX; ty=e.clientY; });
-      function tick() { cx+=(tx-cx)*0.1; cy+=(ty-cy)*0.1; cur.style.left=cx+'px'; cur.style.top=cy+'px'; requestAnimationFrame(tick); }
+      function tick() { cx+=(tx-cx)*0.45; cy+=(ty-cy)*0.45; cur.style.left=cx+'px'; cur.style.top=cy+'px'; requestAnimationFrame(tick); }
       tick();
     })();
 

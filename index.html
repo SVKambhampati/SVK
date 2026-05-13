@@ -46,9 +46,6 @@
   <!-- Aurora background canvas (dark mode) -->
   <canvas id="bg" aria-hidden="true"></canvas>
 
-  <!-- Vanta waves background (light mode) -->
-  <div id="vanta-bg" aria-hidden="true"></div>
-
   <!-- Section atmosphere orbs -->
   <div id="atm-orbs" aria-hidden="true">
     <div class="atm-orb" id="atm-a"></div>
@@ -99,10 +96,13 @@
        3) Hero Section — Cinematic full-screen intro
        ============================================================ -->
   <section id="hero">
-    <!-- Motion background video (HLS stream) -->
+    <!-- Motion background video (HLS stream, dark mode) -->
     <video id="hero-video" autoplay muted loop playsinline preload="auto"
            disablepictureinpicture x-webkit-airplay="deny"
            aria-hidden="true"></video>
+
+    <!-- Vanta waves (light mode hero background) -->
+    <div id="vanta-bg" aria-hidden="true"></div>
 
     <div class="hero-pre">
       CS · AI · Cloud · XR

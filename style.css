@@ -1702,7 +1702,7 @@ body.light-mode {
   --text:      #0c0c1a;
   --text2:     #4a4a66;
   --text3:     #9494ae;
-  background:  #f2f2f6;
+  background:  transparent; /* Vanta canvas is the background */
   color:       #0c0c1a;
 }
 /* Light mode — suppress dark overlay layers (aurora canvas handles its own bg) */
@@ -2491,10 +2491,10 @@ body.light-mode #hero-video {
   display: none;
 }
 body.light-mode #hero::after {
+  /* Only subtle colour tints — Vanta waves show through from below */
   background:
-    radial-gradient(ellipse 90% 55% at 68% 22%, rgba(99, 102, 241, 0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 75% at 8%  88%, rgba(59, 130, 246, 0.06) 0%, transparent 58%),
-    linear-gradient(145deg, #e4e5f5 0%, #ebeaf8 30%, #f3f3fc 65%, #f8f8fd 100%);
+    radial-gradient(ellipse 90% 55% at 68% 22%, rgba(99, 102, 241, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 75% at 8%  88%, rgba(59, 130, 246, 0.04) 0%, transparent 58%);
 }
 
 /* Hero */

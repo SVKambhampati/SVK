@@ -511,6 +511,16 @@
        ============================================================ -->
   <script>
     /******************************************************************
+     * -1) Disable hero video immediately in light mode
+     ******************************************************************/
+    (function() {
+      if (localStorage.getItem('theme') === 'light') {
+        const v = document.getElementById('hero-video');
+        if (v) { v.removeAttribute('autoplay'); v.pause(); v.src = ''; v.load(); }
+      }
+    })();
+
+    /******************************************************************
      * 0) Loader → Hero Continuity
      *    SVK logo flies from center to nav position, then hero reveals
      ******************************************************************/
@@ -948,20 +958,29 @@
       if (_vantaInst) { _vantaInst.destroy(); _vantaInst = null; }
     }
 
+    const heroVideo = document.getElementById('hero-video');
+    function pauseVideo() {
+      if (heroVideo && !heroVideo.paused) { heroVideo.pause(); heroVideo.currentTime = 0; }
+    }
+    function playVideo() {
+      if (heroVideo) heroVideo.play().catch(() => {});
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
       if (!toggle) return;
       if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-mode');
         toggle.checked = true;
-        // Scripts may not be loaded yet — wait for them
+        pauseVideo();
         window.addEventListener('vanta-ready', initVanta, { once: true });
       }
       toggle.addEventListener('change', function() {
         document.body.classList.toggle('light-mode');
         const isLight = document.body.classList.contains('light-mode');
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        if (isLight) initVanta(); else destroyVanta();
+        if (isLight) { pauseVideo(); initVanta(); }
+        else          { playVideo();  destroyVanta(); }
       });
     });
 

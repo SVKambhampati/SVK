@@ -514,7 +514,8 @@
      * -1) Disable hero video immediately in light mode
      ******************************************************************/
     (function() {
-      if (localStorage.getItem('theme') === 'light') {
+      // sessionStorage: dark mode on every fresh tab
+      if (sessionStorage.getItem('theme') === 'light') {
         const v = document.getElementById('hero-video');
         if (v) { v.removeAttribute('autoplay'); v.pause(); v.src = ''; v.load(); }
       }
@@ -939,19 +940,38 @@
     /******************************************************************
      * 6) Theme Toggle (Light/Dark) — only if toggle exists
      ******************************************************************/
-    let _vantaInst = null;
+    let _vantaInst = null, _vantaLoading = false;
+
+    function loadVantaScripts(cb) {
+      if (window.VANTA) { cb(); return; }
+      if (_vantaLoading) { window.addEventListener('vanta-ready', cb, { once: true }); return; }
+      _vantaLoading = true;
+      const s3 = document.createElement('script');
+      s3.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+      s3.onload = function() {
+        const sv = document.createElement('script');
+        sv.src = 'https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js';
+        sv.onload = function() { _vantaLoading = false; window.dispatchEvent(new Event('vanta-ready')); cb(); };
+        document.head.appendChild(sv);
+      };
+      document.head.appendChild(s3);
+    }
+
     function initVanta() {
-      if (_vantaInst || !window.VANTA) return;
-      _vantaInst = VANTA.WAVES({
-        el: '#vanta-bg',
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200,
-        minWidth: 200,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x8c8c8c
+      if (_vantaInst) return;
+      loadVantaScripts(function() {
+        if (_vantaInst) return;
+        _vantaInst = VANTA.WAVES({
+          el: '#vanta-bg',
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200,
+          minWidth: 200,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x8c8c8c
+        });
       });
     }
     function destroyVanta() {
@@ -969,16 +989,17 @@
     document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
       if (!toggle) return;
-      if (localStorage.getItem('theme') === 'light') {
+      // sessionStorage resets every new tab — site always opens dark
+      if (sessionStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-mode');
         toggle.checked = true;
         pauseVideo();
-        window.addEventListener('vanta-ready', initVanta, { once: true });
+        initVanta();
       }
       toggle.addEventListener('change', function() {
         document.body.classList.toggle('light-mode');
         const isLight = document.body.classList.contains('light-mode');
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        sessionStorage.setItem('theme', isLight ? 'light' : 'dark');
         if (isLight) { pauseVideo(); initVanta(); }
         else          { playVideo();  destroyVanta(); }
       });
@@ -1661,10 +1682,6 @@
       });
     });
   </script>
-
-  <!-- Three.js + Vanta Waves (light mode background) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js" onload="window.dispatchEvent(new Event('vanta-ready'))"></script>
 
   <!-- ============================================================
        Motion.dev — spring physics, scroll parallax, staggered reveals

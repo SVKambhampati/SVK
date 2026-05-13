@@ -43,8 +43,11 @@
   <!-- Scroll progress bar -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Aurora background canvas -->
+  <!-- Aurora background canvas (dark mode) -->
   <canvas id="bg" aria-hidden="true"></canvas>
+
+  <!-- Vanta waves background (light mode) -->
+  <div id="vanta-bg" aria-hidden="true"></div>
 
   <!-- Section atmosphere orbs -->
   <div id="atm-orbs" aria-hidden="true">
@@ -926,16 +929,39 @@
     /******************************************************************
      * 6) Theme Toggle (Light/Dark) — only if toggle exists
      ******************************************************************/
+    let _vantaInst = null;
+    function initVanta() {
+      if (_vantaInst || !window.VANTA) return;
+      _vantaInst = VANTA.WAVES({
+        el: '#vanta-bg',
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x8c8c8c
+      });
+    }
+    function destroyVanta() {
+      if (_vantaInst) { _vantaInst.destroy(); _vantaInst = null; }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
       if (!toggle) return;
       if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-mode');
         toggle.checked = true;
+        // Scripts may not be loaded yet — wait for them
+        window.addEventListener('vanta-ready', initVanta, { once: true });
       }
       toggle.addEventListener('change', function() {
         document.body.classList.toggle('light-mode');
-        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        const isLight = document.body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        if (isLight) initVanta(); else destroyVanta();
       });
     });
 
@@ -1616,6 +1642,10 @@
       });
     });
   </script>
+
+  <!-- Three.js + Vanta Waves (light mode background) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js" onload="window.dispatchEvent(new Event('vanta-ready'))"></script>
 
   <!-- ============================================================
        Motion.dev — spring physics, scroll parallax, staggered reveals

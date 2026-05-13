@@ -646,9 +646,18 @@ h1.name em {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.hero-word {
-  transition: opacity 0.7s ease;
-  opacity: 0;
+.cblink {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  background: var(--cyan);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: cursorBlink 0.75s step-end infinite;
+}
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-btns {

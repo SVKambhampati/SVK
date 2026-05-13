@@ -108,7 +108,7 @@
       Shreyas <em>Kambhampati</em>
     </h1>
     <div class="hero-typed">
-      <span id="typed-pre">building </span><span class="typed-accent" id="typed"></span><span class="cblink"></span>
+      <span class="typed-pre">building </span><span class="typed-accent hero-word" id="hero-word"></span>
     </div>
     <div class="hero-btns">
       <a href="#projects" class="btn btn-p mag-btn">View my work</a>
@@ -846,37 +846,23 @@
     });
 
     /******************************************************************
-     * 2b) Typing Effect (#typed) — cinematic hero
+     * 2b) Word crossfade (#hero-word)
      ******************************************************************/
     (function() {
-      const el = document.getElementById('typed');
+      const el = document.getElementById('hero-word');
       if (!el) return;
-      const phrases = [
-        'things that matter.',
-        'AI that helps people.',
-        'experiences that stick.',
-        'the future.'
-      ];
-      let wi = 0, ci = 0, del = false;
-      function type() {
-        const w = phrases[wi];
-        if (!del) {
-          el.textContent = w.slice(0, ++ci);
-          if (ci === w.length) {
-            del = true;
-            setTimeout(type, 2200);
-            return;
-          }
-        } else {
-          el.textContent = w.slice(0, --ci);
-          if (ci === 0) {
-            del = false;
-            wi = (wi + 1) % phrases.length;
-          }
-        }
-        setTimeout(type, del ? 38 : 85);
-      }
-      setTimeout(type, 1400);
+      const words = ['systems', 'pipelines', 'experiences', 'interfaces'];
+      let idx = 0;
+      el.textContent = words[0];
+      el.style.opacity = '1';
+      setInterval(() => {
+        el.style.opacity = '0';
+        setTimeout(() => {
+          idx = (idx + 1) % words.length;
+          el.textContent = words[idx];
+          el.style.opacity = '1';
+        }, 700);
+      }, 3200);
     })();
 
     /******************************************************************

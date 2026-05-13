@@ -1508,7 +1508,12 @@ h1.name em {
    ===================================================================================== */
 .closing-cta {
   text-align: center;
-  padding: 16rem 5% 14rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 5%;
   border-top: 1px solid var(--border);
   position: relative;
   overflow: hidden;

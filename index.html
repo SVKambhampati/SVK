@@ -462,6 +462,7 @@
         <span class="sec-n">05</span>
         <h2 class="closing-heading">Let's build something<em>.</em></h2>
         <p class="closing-kicker">Based in Boston &mdash; open to everywhere</p>
+        <p class="closing-sub">Open to full-time roles, collaborations, and anything that solves a hard problem. If you've got something interesting in mind — I'd love to hear it.</p>
       </div>
 
       <div class="contact-body">
@@ -1669,6 +1670,126 @@
         item.addEventListener('click', () => {
           item.classList.toggle('exp-collapsed');
         });
+      });
+    });
+  </script>
+
+  <!-- ============================================================
+       GSAP + ScrollTrigger
+       ============================================================ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- ============================================================
+       Mo.js — burst / particle effects
+       ============================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/@mojs/core" defer></script>
+
+  <!-- ============================================================
+       GSAP animations (ScrollTrigger-based)
+       ============================================================ -->
+  <script>
+    window.addEventListener('load', function () {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Helper: skips animation if element already past trigger point */
+      function revealOnScroll(targets, fromVars, toVars, triggerEl, start) {
+        start = start || 'top 88%';
+        gsap.fromTo(targets, fromVars, Object.assign({
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: triggerEl || (Array.isArray(targets) ? targets[0] : targets),
+            start: start,
+            once: true
+          }
+        }, toVars));
+      }
+
+      /* ── 1) Closing heading — scale + fade rise ── */
+      const heading = document.querySelector('.closing-heading');
+      if (heading) {
+        revealOnScroll(
+          heading,
+          { opacity: 0, y: 32, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out' },
+          heading, 'top 90%'
+        );
+      }
+
+      /* ── 2) Kicker + sub fade up, staggered ── */
+      const subEls = document.querySelectorAll('.closing-kicker, .closing-sub');
+      if (subEls.length) {
+        revealOnScroll(
+          subEls,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', stagger: 0.12 },
+          subEls[0], 'top 92%'
+        );
+      }
+
+      /* ── 3) Contact rows stagger in from left ── */
+      const rows = document.querySelectorAll('.crow');
+      if (rows.length) {
+        revealOnScroll(
+          rows,
+          { opacity: 0, x: -20 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.09 },
+          rows[0], 'top 92%'
+        );
+      }
+
+      /* ── 4) Form card fade up ── */
+      const formWrap = document.querySelector('.form-wrap');
+      if (formWrap) {
+        revealOnScroll(
+          formWrap,
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+          formWrap, 'top 92%'
+        );
+      }
+    });
+  </script>
+
+  <!-- ============================================================
+       Mo.js — send button burst
+       ============================================================ -->
+  <script>
+    window.addEventListener('load', function () {
+      if (!window.mojs) return;
+
+      const btn = document.querySelector('.btn-send');
+      if (!btn) return;
+
+      const burst = new mojs.Burst({
+        parent: btn,
+        radius:   { 0: 60 },
+        count:    8,
+        children: {
+          shape:     'circle',
+          radius:    { 4: 0 },
+          fill:      ['#3b82f6', '#22d3ee', '#c9a96e', '#a78bfa'],
+          duration:  700,
+          easing:    mojs.easing.expo.out
+        }
+      });
+
+      const scaleAnim = new mojs.Html({
+        el:       btn,
+        scale:    { 1: 0.92, easing: 'sin.in' },
+        duration: 120,
+        isForce3d: true
+      }).then({
+        scale:    { 0.92: 1, easing: mojs.easing.elastic.out },
+        duration: 500
+      });
+
+      btn.addEventListener('click', function (e) {
+        burst.generate().replay();
+        scaleAnim.replay();
       });
     });
   </script>

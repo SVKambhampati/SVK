@@ -1123,6 +1123,12 @@
             status.textContent = 'Message sent!';
             status.classList.remove('sending');
             status.classList.add('success');
+            // Mo.js confetti on success
+            if (typeof window.fireConfetti === 'function') {
+              var sb = form.querySelector('.btn-send');
+              var origin = sb ? sb.getBoundingClientRect() : null;
+              window.fireConfetti(origin ? { x: origin.left + origin.width / 2, y: origin.top + origin.height / 2 } : null);
+            }
           } else {
             status.textContent = 'Something went wrong. Please try again.';
             status.classList.remove('sending');
@@ -1686,7 +1692,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@mojs/core" defer></script>
 
   <!-- ============================================================
-       GSAP animations (ScrollTrigger-based)
+       GSAP — all scroll + interaction animations
        ============================================================ -->
   <script>
     window.addEventListener('load', function () {
@@ -1694,103 +1700,274 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       gsap.registerPlugin(ScrollTrigger);
+      // Ensure GSAP reads from the html element (window.scrollY), not body
+      ScrollTrigger.normalizeScroll(false);
 
-      /* Helper: skips animation if element already past trigger point */
-      function revealOnScroll(targets, fromVars, toVars, triggerEl, start) {
-        start = start || 'top 88%';
-        gsap.fromTo(targets, fromVars, Object.assign({
+      /* ── Util: reveal without hiding element if already past trigger ── */
+      function reveal(targets, from, to, trigger, start) {
+        gsap.fromTo(targets, from, Object.assign({ immediateRender: false,
+          scrollTrigger: { trigger: trigger || (Array.isArray(targets) ? targets[0] : targets),
+            start: start || 'top 88%', once: true }
+        }, to));
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         CONTACT SECTION
+         ════════════════════════════════════════════════════════════ */
+      var closingH = document.querySelector('.closing-heading');
+      if (closingH) reveal(closingH, { opacity: 0, y: 32, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out' }, closingH, 'top 90%');
+
+      var subEls = document.querySelectorAll('.closing-kicker, .closing-sub');
+      if (subEls.length) reveal(subEls, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', stagger: 0.12 }, subEls[0], 'top 92%');
+
+      var crowRows = document.querySelectorAll('.crow');
+      if (crowRows.length) reveal(crowRows, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.09 }, crowRows[0], 'top 92%');
+
+      var fw = document.querySelector('.form-wrap');
+      if (fw) reveal(fw, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, fw, 'top 92%');
+
+      /* ════════════════════════════════════════════════════════════
+         1) SCRUB PARALLAX on section headings
+         ════════════════════════════════════════════════════════════ */
+      gsap.utils.toArray('.sec-t').forEach(function (el) {
+        gsap.fromTo(el, { y: 0 }, {
+          y: -38, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1.8 }
+        });
+      });
+
+      /* ════════════════════════════════════════════════════════════
+         2) HORIZONTAL PROJECT CARD SCROLL (desktop ≥ 900px)
+         ════════════════════════════════════════════════════════════ */
+      if (window.innerWidth >= 900) {
+        var projSection = document.getElementById('projects');
+        var projGrid = projSection && projSection.querySelector('.proj-grid');
+        if (projGrid) {
+          // Force all cards visible (inView won't fire off-screen in horiz mode)
+          projGrid.querySelectorAll('.proj-card').forEach(function (c) { c.classList.add('vis'); });
+
+          // Wrap in overflow container
+          var outer = document.createElement('div');
+          outer.className = 'proj-horiz-outer';
+          projGrid.parentNode.insertBefore(outer, projGrid);
+          outer.appendChild(projGrid);
+          projGrid.classList.add('proj-grid--horiz');
+
+          // Two rAFs to let the browser paint the new flex layout
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              var totalX = projGrid.scrollWidth - outer.offsetWidth;
+              if (totalX > 10) {
+                gsap.to(projGrid, {
+                  x: -totalX,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: projSection,
+                    start: 'top 12%',
+                    end: function () { return '+=' + (totalX + 120); },
+                    scrub: 1,
+                    pin: true,
+                    pinType: 'transform',
+                    anticipatePin: 1
+                  }
+                });
+              }
+            });
+          });
+        }
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         3) COUNTER ROLL-UP on skill row counts
+         ════════════════════════════════════════════════════════════ */
+      gsap.utils.toArray('.sk-row-count').forEach(function (el) {
+        var target = parseInt(el.textContent.trim(), 10);
+        if (isNaN(target)) return;
+        var proxy = { val: 0 };
+        gsap.to(proxy, {
+          val: target, duration: 1.4, ease: 'power2.out', immediateRender: false,
+          onUpdate: function () { el.textContent = Math.round(proxy.val); },
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+        });
+      });
+
+      /* ════════════════════════════════════════════════════════════
+         4) ATMOSPHERE ORB COLOR MORPH between sections
+         ════════════════════════════════════════════════════════════ */
+      var atmA = document.getElementById('atm-a');
+      var atmB = document.getElementById('atm-b');
+      if (atmA && atmB) {
+        var orbDefs = [
+          { id: 'about',      a: '#b45309', b: '#1e4fc8' },
+          { id: 'experience', a: '#4f46e5', b: '#0891b2' },
+          { id: 'projects',   a: '#1e4fc8', b: '#6d28d9' },
+          { id: 'skills',     a: '#0891b2', b: '#047857' },
+          { id: 'contact',    a: '#1e4fc8', b: '#0ea5e9' }
+        ];
+        var prevA = '#1e4fc8', prevB = '#0ea5e9';
+        orbDefs.forEach(function (s, i) {
+          var el = document.getElementById(s.id);
+          if (!el) return;
+          var pa = prevA, pb = prevB;
+          ScrollTrigger.create({
+            trigger: el, start: 'top center',
+            onEnter:     function () { atmA.style.background = s.a;  atmB.style.background = s.b; },
+            onLeaveBack: function () { atmA.style.background = pa;    atmB.style.background = pb; }
+          });
+          prevA = s.a; prevB = s.b;
+        });
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         5) SECTION NUMBER SCALE POP
+         ════════════════════════════════════════════════════════════ */
+      gsap.utils.toArray('.sec-n').forEach(function (el) {
+        gsap.fromTo(el, { scale: 0.45, opacity: 0 }, {
+          scale: 1, opacity: 1, duration: 0.55, ease: 'back.out(3)',
           immediateRender: false,
-          scrollTrigger: {
-            trigger: triggerEl || (Array.isArray(targets) ? targets[0] : targets),
-            start: start,
-            once: true
-          }
-        }, toVars));
-      }
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+        });
+      });
 
-      /* ── 1) Closing heading — scale + fade rise ── */
-      const heading = document.querySelector('.closing-heading');
-      if (heading) {
-        revealOnScroll(
-          heading,
-          { opacity: 0, y: 32, scale: 0.97 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out' },
-          heading, 'top 90%'
-        );
-      }
+      /* ════════════════════════════════════════════════════════════
+         6) MAGNETIC BUTTONS — cursor attraction
+         ════════════════════════════════════════════════════════════ */
+      document.querySelectorAll('.mag-btn, .btn-send, .btn').forEach(function (btn) {
+        var str = 0.3;
+        btn.addEventListener('mousemove', function (e) {
+          var r = btn.getBoundingClientRect();
+          gsap.to(btn, {
+            x: (e.clientX - r.left - r.width  / 2) * str,
+            y: (e.clientY - r.top  - r.height / 2) * str,
+            duration: 0.35, ease: 'power2.out', overwrite: 'auto'
+          });
+        });
+        btn.addEventListener('mouseleave', function () {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+        });
+      });
 
-      /* ── 2) Kicker + sub fade up, staggered ── */
-      const subEls = document.querySelectorAll('.closing-kicker, .closing-sub');
-      if (subEls.length) {
-        revealOnScroll(
-          subEls,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', stagger: 0.12 },
-          subEls[0], 'top 92%'
-        );
-      }
+      /* ════════════════════════════════════════════════════════════
+         7) PROJECT CARD 3D TILT on hover
+         ════════════════════════════════════════════════════════════ */
+      document.querySelectorAll('.proj-card').forEach(function (card) {
+        var tilt = 8;
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          var dx = (e.clientX - r.left) / r.width  - 0.5;
+          var dy = (e.clientY - r.top)  / r.height - 0.5;
+          gsap.to(card, {
+            rotateX: -dy * tilt * 2, rotateY: dx * tilt * 2,
+            transformPerspective: 900,
+            duration: 0.4, ease: 'power2.out', overwrite: 'auto'
+          });
+        });
+        card.addEventListener('mouseleave', function () {
+          gsap.to(card, {
+            rotateX: 0, rotateY: 0,
+            duration: 0.7, ease: 'elastic.out(1, 0.45)', overwrite: 'auto'
+          });
+        });
+      });
 
-      /* ── 3) Contact rows stagger in from left ── */
-      const rows = document.querySelectorAll('.crow');
-      if (rows.length) {
-        revealOnScroll(
-          rows,
-          { opacity: 0, x: -20 },
-          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.09 },
-          rows[0], 'top 92%'
-        );
-      }
-
-      /* ── 4) Form card fade up ── */
-      const formWrap = document.querySelector('.form-wrap');
-      if (formWrap) {
-        revealOnScroll(
-          formWrap,
-          { opacity: 0, y: 28 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          formWrap, 'top 92%'
-        );
-      }
     });
   </script>
 
   <!-- ============================================================
-       Mo.js — send button burst
+       Mo.js — all particle / burst effects
        ============================================================ -->
   <script>
     window.addEventListener('load', function () {
       if (!window.mojs) return;
 
-      const btn = document.querySelector('.btn-send');
-      if (!btn) return;
+      /* ════════════════════════════════════════════════════════════
+         8) SEND BUTTON burst + scale bounce
+         ════════════════════════════════════════════════════════════ */
+      var sendBtn = document.querySelector('.btn-send');
+      if (sendBtn) {
+        var sendBurst = new mojs.Burst({
+          parent: sendBtn, radius: { 0: 65 }, count: 9,
+          children: { shape: 'circle', radius: { 5: 0 },
+            fill: ['#3b82f6', '#22d3ee', '#c9a96e', '#a78bfa', '#10b981'],
+            duration: 720, easing: mojs.easing.expo.out }
+        });
+        var sendScale = new mojs.Html({ el: sendBtn,
+          scale: { 1: 0.9, easing: 'sin.in' }, duration: 110, isForce3d: true
+        }).then({ scale: { 0.9: 1, easing: mojs.easing.elastic.out }, duration: 520 });
+        sendBtn.addEventListener('click', function () {
+          sendBurst.generate().replay();
+          sendScale.replay();
+        });
+      }
 
-      const burst = new mojs.Burst({
-        parent: btn,
-        radius:   { 0: 60 },
-        count:    8,
-        children: {
-          shape:     'circle',
-          radius:    { 4: 0 },
-          fill:      ['#3b82f6', '#22d3ee', '#c9a96e', '#a78bfa'],
-          duration:  700,
-          easing:    mojs.easing.expo.out
+      /* ════════════════════════════════════════════════════════════
+         9) NAV LOGO spark on click
+         ════════════════════════════════════════════════════════════ */
+      var logoEl = document.querySelector('nav .logo');
+      if (logoEl) {
+        var logoBurst = new mojs.Burst({
+          parent: logoEl, radius: { 0: 60 }, count: 12,
+          children: { shape: 'line', radius: { 9: 0 },
+            stroke: ['#3b82f6', '#22d3ee', '#c9a96e', '#a78bfa', '#ffffff'],
+            strokeWidth: 2, duration: 780, easing: mojs.easing.expo.out }
+        });
+        logoEl.addEventListener('click', function () { logoBurst.generate().replay(); });
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         10) FORM SUCCESS confetti (exposed as window.fireConfetti)
+         ════════════════════════════════════════════════════════════ */
+      window.fireConfetti = function (origin) {
+        var cx = origin ? origin.x : window.innerWidth  / 2;
+        var cy = origin ? origin.y : window.innerHeight / 2;
+        var palette = ['#3b82f6', '#22d3ee', '#c9a96e', '#a78bfa', '#10b981', '#f59e0b', '#ef4444'];
+        // 5 burst clusters fanning out
+        for (var i = 0; i < 5; i++) {
+          (function (idx) {
+            var angle = -90 + (idx - 2) * 35;
+            new mojs.Burst({
+              left: cx, top: cy,
+              radius:  { 0: 100 + idx * 25 },
+              count:   10,
+              angle:   { [angle - 25]: angle + 25 },
+              children: {
+                shape:    'circle',
+                radius:   { 6: 0 },
+                fill:     palette[idx % palette.length],
+                duration: 900 + idx * 80,
+                delay:    idx * 55,
+                easing:   mojs.easing.expo.out
+              }
+            }).generate().replay();
+          })(i);
         }
-      });
+      };
 
-      const scaleAnim = new mojs.Html({
-        el:       btn,
-        scale:    { 1: 0.92, easing: 'sin.in' },
-        duration: 120,
-        isForce3d: true
-      }).then({
-        scale:    { 0.92: 1, easing: mojs.easing.elastic.out },
-        duration: 500
-      });
+      /* ════════════════════════════════════════════════════════════
+         11) SKILL TAG PULSE — tiny burst as each tag enters view
+         ════════════════════════════════════════════════════════════ */
+      var tagObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          tagObs.unobserve(entry.target);
+          var el = entry.target;
+          // Build burst lazily so we don't create 40 objects up front
+          new mojs.Burst({
+            parent:  el,
+            radius:  { 0: 28 },
+            count:   5,
+            children: {
+              shape:    'circle',
+              radius:   { 3: 0 },
+              fill:     ['#3b82f6', '#22d3ee', '#c9a96e'],
+              duration: 520,
+              easing:   mojs.easing.expo.out
+            }
+          }).replay();
+        });
+      }, { threshold: 0.85, rootMargin: '0px 0px -20px 0px' });
 
-      btn.addEventListener('click', function (e) {
-        burst.generate().replay();
-        scaleAnim.replay();
-      });
+      document.querySelectorAll('.sk-tag').forEach(function (t) { tagObs.observe(t); });
     });
   </script>
 

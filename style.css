@@ -64,13 +64,23 @@ html::-webkit-scrollbar-thumb {
   background: var(--accent);
   color: #0c0c0b;
 }
-html, body {
+html {
   height: 100%;
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
+  /* html is the scroll container — keeps window.scrollY accurate for GSAP */
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  /* visible: body never becomes a scroll container, no x-clip needed here */
+  overflow: visible;
   -webkit-font-smoothing: antialiased;
 }
 ul {
@@ -1083,6 +1093,27 @@ h1.name em {
 /* ========================================================================
    14) PROJECT CARDS (.proj-grid + .proj-card)
    ======================================================================== */
+/* Horizontal scroll container (added by GSAP on desktop) */
+.proj-horiz-outer {
+  overflow: hidden;
+  position: relative;
+  /* bleed slightly past sec-inner to hint scrollability */
+  margin-right: -2rem;
+  padding-right: 2rem;
+}
+/* Horizontal flex layout (class added by GSAP JS) */
+.proj-grid--horiz {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  will-change: transform;
+}
+.proj-grid--horiz .proj-card {
+  width: clamp(250px, 26vw, 310px) !important;
+  flex-shrink: 0 !important;
+  min-height: 320px !important;
+}
+
 .proj-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1107,8 +1138,9 @@ h1.name em {
   cursor: pointer;
   opacity: 0;
   transform: translateY(16px);
-  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 0.4s ease,
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: opacity 0.4s ease,
               border-color 0.32s ease,
               box-shadow 0.32s ease,
               background 0.32s ease;

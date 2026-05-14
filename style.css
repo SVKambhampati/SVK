@@ -64,23 +64,12 @@ html::-webkit-scrollbar-thumb {
   background: var(--accent);
   color: #0c0c0b;
 }
-html {
+html, body {
   height: 100%;
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  /* html is the scroll container — keeps window.scrollY accurate for GSAP */
   overflow-x: hidden;
-  overflow-y: scroll;
-  -webkit-font-smoothing: antialiased;
-}
-body {
-  min-height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  /* visible: body never becomes a scroll container, no x-clip needed here */
-  overflow: visible;
   -webkit-font-smoothing: antialiased;
 }
 ul {
@@ -1093,26 +1082,6 @@ h1.name em {
 /* ========================================================================
    14) PROJECT CARDS (.proj-grid + .proj-card)
    ======================================================================== */
-/* Horizontal scroll container (added by GSAP on desktop) */
-.proj-horiz-outer {
-  overflow: hidden;
-  position: relative;
-  /* bleed slightly past sec-inner to hint scrollability */
-  margin-right: -2rem;
-  padding-right: 2rem;
-}
-/* Horizontal flex layout (class added by GSAP JS) */
-.proj-grid--horiz {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  width: max-content !important;
-  will-change: transform;
-}
-.proj-grid--horiz .proj-card {
-  width: clamp(250px, 26vw, 310px) !important;
-  flex-shrink: 0 !important;
-  min-height: 320px !important;
-}
 
 .proj-grid {
   display: grid;
@@ -1603,12 +1572,13 @@ body.light-mode .closing-sub { color: rgba(12,12,11,0.55); }
 .closing-heading {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(3.5rem, 9vw, 9rem);
+  font-size: clamp(2.4rem, 5.5vw, 6rem);
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.03em;
   color: var(--text);
   margin-bottom: 1rem;
+  white-space: nowrap;
 }
 .closing-heading em {
   font-style: normal;

@@ -1737,44 +1737,17 @@
       });
 
       /* ════════════════════════════════════════════════════════════
-         2) HORIZONTAL PROJECT CARD SCROLL (desktop ≥ 900px)
+         2) PROJECT CARDS — stagger fade-in on scroll enter
          ════════════════════════════════════════════════════════════ */
-      if (window.innerWidth >= 900) {
-        var projSection = document.getElementById('projects');
-        var projGrid = projSection && projSection.querySelector('.proj-grid');
-        if (projGrid) {
-          // Force all cards visible (inView won't fire off-screen in horiz mode)
-          projGrid.querySelectorAll('.proj-card').forEach(function (c) { c.classList.add('vis'); });
-
-          // Wrap in overflow container
-          var outer = document.createElement('div');
-          outer.className = 'proj-horiz-outer';
-          projGrid.parentNode.insertBefore(outer, projGrid);
-          outer.appendChild(projGrid);
-          projGrid.classList.add('proj-grid--horiz');
-
-          // Two rAFs to let the browser paint the new flex layout
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              var totalX = projGrid.scrollWidth - outer.offsetWidth;
-              if (totalX > 10) {
-                gsap.to(projGrid, {
-                  x: -totalX,
-                  ease: 'none',
-                  scrollTrigger: {
-                    trigger: projSection,
-                    start: 'top 12%',
-                    end: function () { return '+=' + (totalX + 120); },
-                    scrub: 1,
-                    pin: true,
-                    pinType: 'transform',
-                    anticipatePin: 1
-                  }
-                });
-              }
-            });
-          });
-        }
+      var projCards = document.querySelectorAll('.proj-card');
+      if (projCards.length) {
+        gsap.fromTo(projCards,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.08,
+            immediateRender: false,
+            scrollTrigger: { trigger: projCards[0], start: 'top 88%', once: true }
+          }
+        );
       }
 
       /* ════════════════════════════════════════════════════════════

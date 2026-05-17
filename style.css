@@ -1651,10 +1651,11 @@ body.light-mode .closing-kicker { color: rgba(12,12,11,0.42); }
 .closing-heading {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1.75rem, 4.5vw, 3.75rem);
+  font-size: clamp(3rem, 8vw, 7.5rem);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1;
   letter-spacing: -0.03em;
+  white-space: nowrap;
   color: var(--text);
   margin-bottom: 1.25rem;
 }
@@ -2019,7 +2020,8 @@ body.light-mode .btn-send:hover {
 
   /* Contact heading — allow wrap + scale down on small screens */
   .closing-heading {
-    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    white-space: normal;
+    font-size: clamp(2rem, 9vw, 4rem);
     letter-spacing: -0.02em;
   }
 }

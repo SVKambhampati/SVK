@@ -42,8 +42,11 @@
   <!-- Particle canvas -->
   <canvas id="particles" aria-hidden="true"></canvas>
 
+  <!-- Page curtain overlay — animates between pages -->
+  <div id="page-curtain" aria-hidden="true"></div>
+
   <!-- Page Loader -->
-  <div id="loader">
+  <div id="loader" class="curtain-loader">
     <div class="loader-inner">
       <div class="loader-logo">SVK</div>
       <div class="loader-bar"><div class="loader-fill"></div></div>
@@ -156,8 +159,8 @@
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
-        if (loader) { loader.classList.add('loaded'); setTimeout(() => loader.remove(), 500); }
-      }, 1000);
+        if (loader) { loader.classList.add('loaded'); setTimeout(() => loader.remove(), 620); }
+      }, 700);
     });
 
     (function() {
@@ -235,6 +238,30 @@
       );
       document.querySelectorAll('.proj-section').forEach(s => observer.observe(s));
     });
+  </script>
+
+  <script>
+  (function () {
+    var curtain = document.getElementById('page-curtain');
+    function goTo(href) {
+      if (!curtain || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.location.href = href; return;
+      }
+      curtain.classList.remove('curtain-out');
+      void curtain.offsetWidth;
+      curtain.classList.add('curtain-in');
+      setTimeout(function () { window.location.href = href; }, 450);
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (!a || a.target === '_blank') return;
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      if (!/\.html($|\?)/.test(href)) return;
+      e.preventDefault();
+      goTo(href);
+    }, true);
+  }());
   </script>
 </body>
 </html>

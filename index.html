@@ -54,6 +54,9 @@
 
   <div id="cursor-dot"></div>
 
+  <!-- Page curtain overlay — animates between pages -->
+  <div id="page-curtain" aria-hidden="true"></div>
+
   <!-- ============================================================
        1) Navbar
        ============================================================ -->
@@ -65,6 +68,7 @@
       <li><a href="#projects" data-section="projects">Projects</a></li>
       <li><a href="#skills" data-section="skills">Skills</a></li>
       <li><a href="#contact" class="nav-cta" data-section="contact">Say hi</a></li>
+      <div id="nav-indicator" aria-hidden="true"></div>
     </ul>
     <div class="nav-actions">
       <a href="resume.pdf" class="nav-resume" target="_blank" rel="noopener">Resume ↗</a>
@@ -153,11 +157,11 @@
             </p>
           </div>
           <div class="about-copy">
-            <p>My name is Shreyas, and I'm a Computer Science and AI student at Northeastern University.</p>
-            <p>I've been into building things for as long as I can remember. It started with LEGO and random tech I could get my hands on, then shifted into coding once I realized I could actually create systems instead of just use them. Since then, I've been pretty locked in on technology, especially areas like machine learning, AI, and systems that operate at scale.</p>
-            <p>Over time, I've worked across a mix of environments including research labs, public-sector IT, and product-focused teams. That's given me exposure to everything from XR systems and real-time platforms to backend integrations and data pipelines. I've also built out my own projects, ranging from ML-based recommendation systems to real-time sentiment analysis tools, focusing on making them practical and usable rather than just theoretical.</p>
-            <p>Alongside that, I've picked up industry certifications in areas like cloud and development, and I spend a lot of time building and experimenting outside of class to keep pushing my skills.</p>
-            <p>I'm generally interested in solving real problems through technology, whether that's through AI, backend systems, or anything in between. Outside of that, I'm into badminton, movies, and gaming.</p>
+            <p>I'm Shreyas, a Computer Science and AI student at Northeastern University.</p>
+            <p>I build systems across AI, cloud technologies, backend infrastructure, and real-time applications. My work spans research labs, public-sector IT, and product-focused engineering teams, with experience in XR systems, data pipelines, and large-scale backend integrations.</p>
+            <p>I've also built projects in machine learning and real-time analytics, including recommendation systems and sentiment analysis tools, with a focus on practical deployment and usability.</p>
+            <p>Outside of coursework, I work on cloud and development certifications and continue building independent projects to deepen my experience in systems and AI.</p>
+            <p>Outside of tech, I enjoy badminton, movies, and gaming.</p>
           </div>
         </div>
       </div>
@@ -172,7 +176,7 @@
         <div class="exp-list">
           <div class="exp-item">
             <div class="exp-left-inner">
-              <div class="exp-period">Jan 2026 — Present</div>
+              <div class="exp-period">April 2026 — Present</div>
               <div class="exp-loc">Boston, MA · Hybrid</div>
               <span class="exp-cur">Current</span>
             </div>
@@ -246,7 +250,7 @@
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
         <div class="proj-grid">
-          <div class="proj-card proj-card--has-thumb" data-href="sentimentsignal.html" tabindex="0" role="article">
+          <div class="proj-card proj-card--span2 proj-card--has-thumb" data-href="sentimentsignal.html" tabindex="0" role="article">
             <img class="proj-thumb" src="img/thumb-sentimentsignal.jpg" alt="SentimentSignal dashboard preview" width="140" height="84" loading="lazy">
             <div class="proj-num">01</div>
             <div class="proj-body">
@@ -337,7 +341,7 @@
             <div class="proj-arr">↗</div>
           </div>
 
-          <div class="proj-card proj-card--has-thumb" data-href="cloudops.html" tabindex="0" role="article">
+          <div class="proj-card proj-card--wide" data-href="cloudops.html" tabindex="0" role="article">
             <div class="proj-num">06</div>
             <div class="proj-body">
               <div class="proj-name">CloudOps Monitor</div>
@@ -461,8 +465,8 @@
       <div class="contact-statement">
         <span class="sec-n">05</span>
         <h2 class="closing-heading">Let's build something<em>.</em></h2>
-        <p class="closing-kicker">Based in Boston &mdash; open to everywhere</p>
-        <p class="closing-sub">Open to full-time roles, collaborations, and anything that solves a hard problem. If you've got something interesting in mind — I'd love to hear it.</p>
+        <p class="closing-kicker">Based in Atlanta &amp; Boston</p>
+        <p class="closing-sub">Let's connect if you're working on something cool — or if you just want to talk tech, opportunities, or anything else.</p>
       </div>
 
       <div class="contact-body">
@@ -632,170 +636,11 @@
       update();
     });
 
-    /******************************************************************
-     * 1) Dot-Grid Canvas Animation (skipped if #dotGrid not present)
-     ******************************************************************/
-    (function() {
-    const canvas = document.getElementById('dotGrid');
-    if (!canvas) return;
-    const ctx    = canvas.getContext('2d');
-    let cw, ch, offsetX, offsetY;
-    const dpr             = window.devicePixelRatio || 1;
-    const NAV_HEIGHT      = 60;
-    const GAP_FILL_PX     = 120; /* extend dots into gap below hero so no black strip */
-    const dotRadius       = 2;
-    const dotPadding      = 75;
-    const mouseRadius     = 75;
-    const mouseRadius2    = mouseRadius * mouseRadius;
-    const concaveStrength = 10;
-    const twinkleFreq     = 0.002;
-    const twinkleChance   = 0.4;
-    let dots   = [];
-    let mx = -9999, my = -9999, isDown = false;
-
-    function resizeCanvas() {
-      const vh = window.innerHeight;
-      const totalH = vh + GAP_FILL_PX;
-      cw = canvas.width  = window.innerWidth * dpr;
-      ch = canvas.height = totalH * dpr;
-      canvas.style.width  = window.innerWidth + 'px';
-      canvas.style.height = (totalH - NAV_HEIGHT) + 'px';
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.scale(dpr,dpr);
-      updateOffset();
-      initDots();
-    }
-
-    function updateOffset() {
-      const rect = canvas.getBoundingClientRect();
-      offsetX = rect.left;
-      offsetY = rect.top;
-    }
-
-    function initDots() {
-      dots = [];
-      const w = cw / dpr, h = ch / dpr;
-      const step = dotRadius * 2 + dotPadding;
-      const cols = Math.floor((w - dotRadius * 2) / step);
-      const rows = Math.floor((h - dotRadius * 2) / step);
-      const startX = (w - (cols - 1) * step) / 2;
-      const startY = (h - (rows - 1) * step) / 2;
-
-      for (let row = 0; row < rows; row++) {
-        const y = startY + row * step;
-        for (let col = 0; col < cols; col++) {
-          const x = startX + col * step;
-          dots.push({
-            sx: x, sy: y,
-            x: x,  y: y,
-            tw: Math.random() < twinkleChance
-          });
-        }
-      }
-    }
-
-    function draw() {
-      const t = Date.now();
-      ctx.clearRect(0,0,cw,ch);
-
-      // Check if light-mode is active
-      const isLight = document.body.classList.contains('light-mode');
-
-      const scrollParallax = window.scrollY * 0.05;
-
-      dots.forEach(d => {
-        const dx = d.x - mx, dy = d.y - my;
-        if (isDown && dx*dx + dy*dy < mouseRadius2) {
-          d.x += dx / 30;
-          d.y += dy / 30;
-        } else {
-          const dx0 = d.x - d.sx, dy0 = d.y - d.sy;
-          if (dx0 || dy0) {
-            d.x -= dx0 / 20;
-            d.y -= dy0 / 20;
-          }
-        }
-        const cx = d.x - (cw / dpr) / 2;
-        const cy = (d.y + scrollParallax) - (ch / dpr) / 2;
-        const dist = Math.hypot(cx, cy);
-        const mD   = Math.hypot((cw / dpr) / 2, (ch / dpr) / 2);
-        const conc = Math.pow(dist / mD, 3) * concaveStrength;
-        const inter = (dx*dx + dy*dy < mouseRadius2)
-          ? (1 - Math.sqrt(dx*dx + dy*dy) / mouseRadius) * 3
-          : 0;
-        const radius = dotRadius + conc + inter;
-        let alpha = 1;
-        if (d.tw) {
-          const tw = Math.abs(Math.sin(t * twinkleFreq + d.sx * 0.01));
-          alpha = 0.7 + tw * 0.3;
-        }
-        ctx.globalAlpha = alpha;
-
-        // If twinkle, always blue; otherwise white or black in light-mode
-        if (d.tw) {
-          ctx.fillStyle = `rgba(0,200,255,${alpha})`;
-        } else if (isLight) {
-          ctx.fillStyle = `rgba(0,0,0,${alpha})`;   // black dots in light-mode
-        } else {
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`; // white dots by default
-        }
-
-        if (inter > 0) {
-          ctx.shadowBlur  = 40;
-          ctx.shadowColor = 'rgba(0,240,255,0.7)';
-        } else {
-          ctx.shadowBlur = 0;
-        }
-        ctx.beginPath();
-        ctx.arc(d.x, d.y + scrollParallax, radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-      });
-    }
-
-    function animate() {
-      draw();
-      requestAnimationFrame(animate);
-    }
-
-    canvas.onmousemove = e => {
-      isDown = true;
-      mx = e.clientX - offsetX;
-      my = e.clientY - offsetY;
-    };
-    canvas.onmouseout = () => {
-      isDown = false;
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('scroll', updateOffset);
-    window.onload = () => {
-      resizeCanvas();
-      animate();
-    };
-    })();
+    /* dotGrid canvas removed — element (#dotGrid) is absent from DOM */
 
     /******************************************************************
      * 2) Scroll Reveal (unified Intersection Observer)
      ******************************************************************/
-    document.addEventListener('DOMContentLoaded', () => {
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('vis');
-            io.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll(
-        '.sec-hd, .about-left-col, .about-copy, ' +
-        '.exp-item, .proj-card, .sk-row, .certs-strip,' +
-        '.contact-h, .contact-p, .crow, .form-wrap'
-      ).forEach(el => io.observe(el));
-    });
-
     /******************************************************************
      * 2a) Stat count-up animation
      ******************************************************************/
@@ -854,33 +699,7 @@
       setTimeout(type, 1400);
     })();
 
-    /******************************************************************
-     * 2c) Magnetic Buttons (.mag-btn)
-     ******************************************************************/
-    document.addEventListener('DOMContentLoaded', () => {
-      const btns = document.querySelectorAll('.mag-btn');
-      const factor = 0.18;
-      btns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-          btn.style.transition = 'none';
-          const rect = btn.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = (e.clientX - cx) * factor;
-          const dy = (e.clientY - cy) * factor;
-          btn.style.transform = `translate(${dx}px, ${dy}px)`;
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
-          btn.style.transform = 'translate(0, 0)';
-          btn.offsetWidth; /* force reflow */
-          btn.addEventListener('transitionend', function reset() {
-            btn.style.transition = '';
-            btn.removeEventListener('transitionend', reset);
-          }, { once: true });
-        });
-      });
-    });
+    /* Vanilla magnetic button removed — GSAP version (section D below) handles this */
 
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.proj-card').forEach(card => {
@@ -894,39 +713,7 @@
       });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-    });
-
-    /******************************************************************
-     * 5) Accordion Toggle (legacy - only if .toggle-btn exists)
-     ******************************************************************/
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggles = document.querySelectorAll('.toggle-btn');
-      if (!toggles.length) return;
-      toggles.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const listItem = btn.closest('.skill-item');
-          const details  = listItem.querySelector('.skill-details');
-          // Toggle `.open` class
-          if (listItem.classList.contains('open')) {
-            listItem.classList.remove('open');
-            btn.innerHTML = '<span class="icon">+</span> details';
-            details.style.maxHeight = '0px';
-            details.style.opacity   = '0';
-          } else {
-            listItem.classList.add('open');
-            btn.innerHTML = '<span class="icon">−</span> details';
-            details.style.maxHeight = details.scrollHeight + 'px';
-            details.style.opacity   = '1';
-            // bounce icon
-            const newIcon = btn.querySelector('.icon');
-            newIcon.style.animation = 'none';
-            newIcon.offsetWidth; // force reflow
-            newIcon.style.animation = 'icon-bounce 0.3s ease-out forwards';
-          }
-        });
-      });
-    });
+    /* Empty stub + legacy accordion (.toggle-btn absent from DOM) — removed */
 
     /******************************************************************
      * 6) Theme Toggle (Light/Dark) — only if toggle exists
@@ -1011,6 +798,10 @@
         return rect.top + window.scrollY;
       }
 
+      // Nav indicator — positioned here so it shares the same rAF loop as the nav links
+      const indicator   = document.getElementById('nav-indicator');
+      const navLinksEl  = document.getElementById('nav-links');
+
       function updateActive() {
         const scrollY = window.scrollY || window.pageYOffset || document.body.scrollTop || 0;
         let activeId = sectionIds[0];
@@ -1024,6 +815,21 @@
           const section = link.getAttribute('data-section');
           link.classList.toggle('active', section === activeId);
         });
+        // Indicator: update inline — no event bus needed
+        if (indicator && navLinksEl) {
+          if (scrollY < window.innerHeight * 0.6) {
+            indicator.classList.remove('visible');
+          } else {
+            const activeLink = navLinksEl.querySelector('a[data-section="' + activeId + '"]');
+            if (activeLink) {
+              const nr = navLinksEl.getBoundingClientRect();
+              const lr = activeLink.getBoundingClientRect();
+              indicator.style.left  = (lr.left - nr.left) + 'px';
+              indicator.style.width = lr.width + 'px';
+              indicator.classList.add('visible');
+            }
+          }
+        }
       }
 
       let ticking = false;
@@ -1040,33 +846,24 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       document.body.addEventListener('scroll', onScroll, { passive: true });
       updateActive();
+
+      // Hover preview — snaps indicator to hovered link, resets on leave via updateActive
+      if (navLinksEl) {
+        navLinksEl.querySelectorAll('a[data-section]').forEach(function (a) {
+          a.addEventListener('mouseenter', function () {
+            if (!indicator) return;
+            var nr = navLinksEl.getBoundingClientRect();
+            var lr = a.getBoundingClientRect();
+            indicator.style.left  = (lr.left - nr.left) + 'px';
+            indicator.style.width = lr.width + 'px';
+            indicator.classList.add('visible');
+          });
+          a.addEventListener('mouseleave', updateActive);
+        });
+      }
     })();
 
-    /******************************************************************
-     * 8) About Me text highlight on scroll
-     ******************************************************************/
-    document.addEventListener('DOMContentLoaded', function() {
-      const about = document.querySelector('.about-overview');
-      if (!about) return;
-      const phrases = Array.from(about.querySelectorAll('.highlight-phrase'));
-      if (!phrases.length) return;
-
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              phrases.forEach((span, index) => {
-                setTimeout(() => span.classList.add('-active'), index * 180);
-              });
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { root: null, threshold: 0.65 }
-      );
-
-      observer.observe(about);
-    });
+    /* About text highlight-phrase IO — removed (.about-overview absent from DOM) */
 
     /******************************************************************
      * 9) Back-to-top button
@@ -1473,10 +1270,8 @@
         }
 
         if (progressBar) {
-          const scrollEl = document.body.scrollHeight > window.innerHeight ? document.body : document.documentElement;
-          const docH = scrollEl.scrollHeight - scrollEl.clientHeight;
-          const scrollPos = y || scrollEl.scrollTop;
-          progressBar.style.width = (docH > 0 ? Math.min(100, (scrollPos / docH) * 100) : 0) + '%';
+          const maxScroll = document.body.scrollHeight - window.innerHeight;
+          progressBar.style.width = (maxScroll > 0 ? Math.min(100, (y / maxScroll) * 100) : 0) + '%';
         }
       }
 
@@ -1629,14 +1424,14 @@
         card.addEventListener('click', e => {
           if (e.target.closest('.proj-link')) return;
           const href = card.dataset.href;
-          if (href) window.location.href = href;
+          if (href) window._goTo(href);
         });
 
         card.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             const href = card.dataset.href;
-            if (href) window.location.href = href;
+            if (href) window._goTo(href);
           }
         });
 
@@ -1645,7 +1440,7 @@
           if (e.target.closest('.proj-link')) return;
           if (currentFeat === card) {
             const href = card.dataset.href;
-            if (href) window.location.href = href;
+            if (href) window._goTo(href);
           } else {
             e.preventDefault();
             feature(card);
@@ -1681,6 +1476,43 @@
   </script>
 
   <!-- ============================================================
+       Scroll reveals — IntersectionObserver + CSS transitions
+       (no dependency on GSAP or scroll position reading)
+       ============================================================ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Instantly reveal everything for users who prefer no motion
+        document.querySelectorAll(
+          '.sec-hd, .about-left-col, .about-copy, .exp-item, ' +
+          '.sk-row, .crow, .form-wrap, ' +
+          '.closing-heading, .closing-kicker, .closing-sub, .proj-card'
+        ).forEach(function (el) {
+          el.classList.add('vis');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('vis');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll(
+        '.sec-hd, .about-left-col, .about-copy, .exp-item, ' +
+        '.sk-row, .crow, .form-wrap, ' +
+        '.closing-heading, .closing-kicker, .closing-sub'
+      ).forEach(function (el) { io.observe(el); });
+    });
+  </script>
+
+  <!-- ============================================================
        GSAP + ScrollTrigger
        ============================================================ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -1692,7 +1524,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@mojs/core" defer></script>
 
   <!-- ============================================================
-       GSAP — all scroll + interaction animations
+       GSAP — comprehensive Apple-style scroll + interaction suite
        ============================================================ -->
   <script>
     window.addEventListener('load', function () {
@@ -1700,113 +1532,82 @@
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       gsap.registerPlugin(ScrollTrigger);
-      // Ensure GSAP reads from the html element (window.scrollY), not body
       ScrollTrigger.normalizeScroll(false);
 
-      /* ── Util: reveal without hiding element if already past trigger ── */
-      function reveal(targets, from, to, trigger, start) {
-        gsap.fromTo(targets, from, Object.assign({ immediateRender: false,
-          scrollTrigger: { trigger: trigger || (Array.isArray(targets) ? targets[0] : targets),
-            start: start || 'top 88%', once: true }
-        }, to));
+      /* ════════════════════════════════════════════════════════════
+         A) HERO SCROLL-OUT — multi-layer parallax depth
+             Each element exits at a different speed and blur,
+             creating a convincing depth-of-field scroll-out.
+         ════════════════════════════════════════════════════════════ */
+      var spacerEl = document.getElementById('spacer');
+      if (spacerEl) {
+        var heroScrollCfg = { trigger: spacerEl, scrub: 0.8 };
+        // Pre-line exits fastest / furthest — most "in front"
+        gsap.fromTo('.hero-pre',
+          { y: 0, opacity: 1, filter: 'blur(0px)' },
+          { y: -110, opacity: 0, filter: 'blur(16px)', ease: 'none', immediateRender: false,
+            scrollTrigger: { ...heroScrollCfg, start: 'top top', end: '55% top' } });
+        // Name exits slightly slower
+        gsap.fromTo('h1.name',
+          { y: 0, opacity: 1, filter: 'blur(0px)' },
+          { y: -70, opacity: 0, filter: 'blur(12px)', ease: 'none', immediateRender: false,
+            scrollTrigger: { ...heroScrollCfg, start: '5% top', end: '75% top' } });
+        // Typed text — middle layer
+        gsap.fromTo('.hero-typed',
+          { y: 0, opacity: 1, filter: 'blur(0px)' },
+          { y: -50, opacity: 0, filter: 'blur(10px)', ease: 'none', immediateRender: false,
+            scrollTrigger: { ...heroScrollCfg, start: '12% top', end: '88% top' } });
+        // Buttons exit last / slowest — "furthest away"
+        gsap.fromTo('.hero-btns',
+          { y: 0, opacity: 1, filter: 'blur(0px)' },
+          { y: -30, opacity: 0, filter: 'blur(8px)', ease: 'none', immediateRender: false,
+            scrollTrigger: { ...heroScrollCfg, start: '20% top', end: 'bottom top' } });
       }
 
       /* ════════════════════════════════════════════════════════════
-         CONTACT SECTION
+         B) PROJECT CARDS — IO-triggered GSAP stagger (no ScrollTrigger)
          ════════════════════════════════════════════════════════════ */
-      var closingH = document.querySelector('.closing-heading');
-      if (closingH) reveal(closingH, { opacity: 0, y: 32, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out' }, closingH, 'top 90%');
-
-      var subEls = document.querySelectorAll('.closing-kicker, .closing-sub');
-      if (subEls.length) reveal(subEls, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', stagger: 0.12 }, subEls[0], 'top 92%');
-
-      var crowRows = document.querySelectorAll('.crow');
-      if (crowRows.length) reveal(crowRows, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.09 }, crowRows[0], 'top 92%');
-
-      var fw = document.querySelector('.form-wrap');
-      if (fw) reveal(fw, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, fw, 'top 92%');
+      (function () {
+        var firstCard = document.querySelector('.proj-card');
+        if (!firstCard) return;
+        var done = false;
+        new IntersectionObserver(function (entries, obs) {
+          if (!entries[0].isIntersecting || done) return;
+          done = true;
+          obs.disconnect();
+          var cards = document.querySelectorAll('.proj-card');
+          gsap.set(cards, { opacity: 0, y: 26, scale: 0.97 });
+          gsap.to(cards, { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: 'power2.out', stagger: 0.1 });
+        }, { threshold: 0.1 }).observe(firstCard);
+      })();
 
       /* ════════════════════════════════════════════════════════════
-         1) SCRUB PARALLAX on section headings
+         C) COUNTERS — IO-triggered GSAP number roll-up
          ════════════════════════════════════════════════════════════ */
-      gsap.utils.toArray('.sec-t').forEach(function (el) {
-        gsap.fromTo(el, { y: 0 }, {
-          y: -38, ease: 'none',
-          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1.8 }
-        });
-      });
-
-      /* ════════════════════════════════════════════════════════════
-         2) PROJECT CARDS — stagger fade-in on scroll enter
-         ════════════════════════════════════════════════════════════ */
-      var projCards = document.querySelectorAll('.proj-card');
-      if (projCards.length) {
-        gsap.fromTo(projCards,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.08,
-            immediateRender: false,
-            scrollTrigger: { trigger: projCards[0], start: 'top 88%', once: true }
-          }
-        );
-      }
-
-      /* ════════════════════════════════════════════════════════════
-         3) COUNTER ROLL-UP on skill row counts
-         ════════════════════════════════════════════════════════════ */
-      gsap.utils.toArray('.sk-row-count').forEach(function (el) {
-        var target = parseInt(el.textContent.trim(), 10);
-        if (isNaN(target)) return;
-        var proxy = { val: 0 };
-        gsap.to(proxy, {
-          val: target, duration: 1.4, ease: 'power2.out', immediateRender: false,
-          onUpdate: function () { el.textContent = Math.round(proxy.val); },
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-        });
-      });
-
-      /* ════════════════════════════════════════════════════════════
-         4) ATMOSPHERE ORB COLOR MORPH between sections
-         ════════════════════════════════════════════════════════════ */
-      var atmA = document.getElementById('atm-a');
-      var atmB = document.getElementById('atm-b');
-      if (atmA && atmB) {
-        var orbDefs = [
-          { id: 'about',      a: '#b45309', b: '#1e4fc8' },
-          { id: 'experience', a: '#4f46e5', b: '#0891b2' },
-          { id: 'projects',   a: '#1e4fc8', b: '#6d28d9' },
-          { id: 'skills',     a: '#0891b2', b: '#047857' },
-          { id: 'contact',    a: '#1e4fc8', b: '#0ea5e9' }
-        ];
-        var prevA = '#1e4fc8', prevB = '#0ea5e9';
-        orbDefs.forEach(function (s, i) {
-          var el = document.getElementById(s.id);
-          if (!el) return;
-          var pa = prevA, pb = prevB;
-          ScrollTrigger.create({
-            trigger: el, start: 'top center',
-            onEnter:     function () { atmA.style.background = s.a;  atmB.style.background = s.b; },
-            onLeaveBack: function () { atmA.style.background = pa;    atmB.style.background = pb; }
+      document.querySelectorAll('.proj-stat, .sk-row-count').forEach(function (el) {
+        var raw = el.textContent.trim();
+        var m = raw.match(/(\d+)/);
+        if (!m) return;
+        var target = parseInt(m[1], 10);
+        var before = raw.slice(0, raw.indexOf(m[1]));
+        var after  = raw.slice(raw.indexOf(m[1]) + m[1].length);
+        var done = false;
+        new IntersectionObserver(function (entries, obs) {
+          if (!entries[0].isIntersecting || done) return;
+          done = true; obs.disconnect();
+          var proxy = { val: 0 };
+          gsap.to(proxy, {
+            val: target, duration: 1.4, ease: 'power2.out',
+            onUpdate: function () { el.textContent = before + Math.round(proxy.val) + after; }
           });
-          prevA = s.a; prevB = s.b;
-        });
-      }
-
-      /* ════════════════════════════════════════════════════════════
-         5) SECTION NUMBER SCALE POP
-         ════════════════════════════════════════════════════════════ */
-      gsap.utils.toArray('.sec-n').forEach(function (el) {
-        gsap.fromTo(el, { scale: 0.45, opacity: 0 }, {
-          scale: 1, opacity: 1, duration: 0.55, ease: 'back.out(3)',
-          immediateRender: false,
-          scrollTrigger: { trigger: el, start: 'top 88%', once: true }
-        });
+        }, { threshold: 0.5 }).observe(el);
       });
 
       /* ════════════════════════════════════════════════════════════
-         6) MAGNETIC BUTTONS — cursor attraction
+         D) MAGNETIC BUTTONS — gentle cursor attraction + spring snap
          ════════════════════════════════════════════════════════════ */
       document.querySelectorAll('.mag-btn, .btn-send, .btn').forEach(function (btn) {
-        var str = 0.3;
+        var str = 0.28;
         btn.addEventListener('mousemove', function (e) {
           var r = btn.getBoundingClientRect();
           gsap.to(btn, {
@@ -1816,15 +1617,16 @@
           });
         });
         btn.addEventListener('mouseleave', function () {
-          gsap.to(btn, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+          /* power3.out instead of elastic — restrained, no bouncing */
+          gsap.to(btn, { x: 0, y: 0, duration: 0.55, ease: 'power3.out', overwrite: 'auto' });
         });
       });
 
       /* ════════════════════════════════════════════════════════════
-         7) PROJECT CARD 3D TILT on hover
+         I) PROJECT CARD 3D TILT — restrained, crisp snap-back
          ════════════════════════════════════════════════════════════ */
       document.querySelectorAll('.proj-card').forEach(function (card) {
-        var tilt = 8;
+        var tilt = 6; /* reduced from 8° — subtler depth hint */
         card.addEventListener('mousemove', function (e) {
           var r = card.getBoundingClientRect();
           var dx = (e.clientX - r.left) / r.width  - 0.5;
@@ -1836,9 +1638,10 @@
           });
         });
         card.addEventListener('mouseleave', function () {
+          /* power3.out instead of elastic — matches brand restraint */
           gsap.to(card, {
             rotateX: 0, rotateY: 0,
-            duration: 0.7, ease: 'elastic.out(1, 0.45)', overwrite: 'auto'
+            duration: 0.55, ease: 'power3.out', overwrite: 'auto'
           });
         });
       });
@@ -1874,20 +1677,6 @@
       }
 
       /* ════════════════════════════════════════════════════════════
-         9) NAV LOGO spark on click
-         ════════════════════════════════════════════════════════════ */
-      var logoEl = document.querySelector('nav .logo');
-      if (logoEl) {
-        var logoBurst = new mojs.Burst({
-          parent: logoEl, radius: { 0: 60 }, count: 12,
-          children: { shape: 'line', radius: { 9: 0 },
-            stroke: ['#3b82f6', '#22d3ee', '#c9a96e', '#a78bfa', '#ffffff'],
-            strokeWidth: 2, duration: 780, easing: mojs.easing.expo.out }
-        });
-        logoEl.addEventListener('click', function () { logoBurst.generate().replay(); });
-      }
-
-      /* ════════════════════════════════════════════════════════════
          10) FORM SUCCESS confetti (exposed as window.fireConfetti)
          ════════════════════════════════════════════════════════════ */
       window.fireConfetti = function (origin) {
@@ -1916,31 +1705,8 @@
         }
       };
 
-      /* ════════════════════════════════════════════════════════════
-         11) SKILL TAG PULSE — tiny burst as each tag enters view
-         ════════════════════════════════════════════════════════════ */
-      var tagObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          tagObs.unobserve(entry.target);
-          var el = entry.target;
-          // Build burst lazily so we don't create 40 objects up front
-          new mojs.Burst({
-            parent:  el,
-            radius:  { 0: 28 },
-            count:   5,
-            children: {
-              shape:    'circle',
-              radius:   { 3: 0 },
-              fill:     ['#3b82f6', '#22d3ee', '#c9a96e'],
-              duration: 520,
-              easing:   mojs.easing.expo.out
-            }
-          }).replay();
-        });
-      }, { threshold: 0.85, rootMargin: '0px 0px -20px 0px' });
-
-      document.querySelectorAll('.sk-tag').forEach(function (t) { tagObs.observe(t); });
+      /* Skill-tag burst on scroll-entry removed — 40+ concurrent bursts = animation overload.
+         Hover transform (translateY -1px / scale 1.02) provides sufficient tactile feedback. */
     });
   </script>
 
@@ -1948,7 +1714,7 @@
        Motion.dev — spring physics, scroll parallax, staggered reveals
        ============================================================ -->
   <script type="module">
-    import { animate, scroll, stagger, inView }
+    import { animate, scroll, stagger }
       from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
 
     /* ── Reduced-motion guard ── */
@@ -1969,7 +1735,7 @@
       if (heroEls.length) {
         // Wait for the hero-ready event (fired by loader JS) before animating
         function runHeroAnim() {
-          animate(
+          const anim = animate(
             heroEls,
             { opacity: [0, 1], y: [40, 0], filter: ['blur(6px)', 'blur(0px)'] },
             {
@@ -1978,6 +1744,16 @@
               easing:   [0.22, 1, 0.36, 1]
             }
           );
+          // Motion.dev uses WAAPI fill:"none" by default — elements revert to CSS
+          // opacity:0 when the animation completes. Lock them visible with inline
+          // style so they stay up in both dark and light mode.
+          anim.finished.then(() => {
+            heroEls.forEach(el => {
+              el.style.opacity = '1';
+              el.style.transform = '';
+              el.style.filter = '';
+            });
+          });
         }
         if (window._heroReady) {
           runHeroAnim();
@@ -1996,22 +1772,103 @@
         );
       }
 
-      /* ── 3) Section reveals — with rotation + blur snap for personality ── */
-      inView(
-        '.sec-hd, .about-left-col, .about-copy, ' +
-        '.exp-item, .proj-card, .sk-row, .certs-strip,' +
-        '.contact-h, .contact-p, .crow, .form-wrap',
-        ({ target }) => {
-          target.classList.add('vis');
-          animate(target,
-            { opacity: [0, 1], y: [24, 0], rotate: [-0.8, 0], filter: ['blur(3px)', 'blur(0px)'] },
-            { duration: 0.65, easing: [0.22, 1, 0.36, 1] }
-          );
-        },
-        { margin: '0px 0px -48px 0px' }
-      );
-
     }
+  </script>
+
+  <!-- ============================================================
+       MOTION POLISH — page transitions · nav indicator · word reveal
+       ============================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Page curtain transition ─────────────────────────────────── */
+    var curtain = document.getElementById('page-curtain');
+
+    // Navigate via curtain wipe. Exported as window._goTo for card handlers.
+    function goTo(href) {
+      if (!curtain || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.location.href = href;
+        return;
+      }
+      curtain.classList.remove('curtain-out');
+      void curtain.offsetWidth; // force reflow to restart animation
+      curtain.classList.add('curtain-in');
+      setTimeout(function () {
+        window.location.href = href;
+      }, 450);
+    }
+    window._goTo = goTo;
+
+    // Intercept all internal .html anchor clicks (proj-link buttons, etc.)
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (!a) return;
+      if (a.target === '_blank') return;          // new-tab links — leave alone
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#') return; // hash anchors — leave alone
+      if (href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      if (!/\.html($|\?)/.test(href)) return;      // non-HTML pages — leave alone
+      e.preventDefault();
+      goTo(href);
+    }, true); // capture phase so we beat other listeners
+
+    // Nothing needed on arrival — the site-loader already handles entry reveal.
+    // The curtain is only used for exits (wipes before navigating away).
+
+    /* Nav indicator — merged into section 7 updateActive() above */
+
+    /* ── Closing-heading word reveal ─────────────────────────────── */
+    (function () {
+      var heading = document.querySelector('.closing-heading');
+      if (!heading) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Parse child nodes: text → split into words, elements (em) → attached to last word
+      var children = Array.from(heading.childNodes);
+      heading.innerHTML = '';
+
+      var wraps = [];
+
+      children.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          var words = node.textContent.trim().split(/\s+/);
+          words.forEach(function (word) {
+            var wrap  = document.createElement('span');
+            var inner = document.createElement('span');
+            wrap.className  = 'word-wrap';
+            inner.className = 'word-inner';
+            inner.textContent = word;
+            wrap.appendChild(inner);
+            heading.appendChild(wrap);
+            wraps.push({ wrap: wrap, inner: inner });
+          });
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          // Attach <em>.</em> suffix to the last word (no gap before period)
+          if (wraps.length) {
+            wraps[wraps.length - 1].inner.appendChild(node.cloneNode(true));
+          }
+        }
+      });
+
+      // Stagger delays
+      wraps.forEach(function (w, i) {
+        w.inner.style.transitionDelay = (i * 0.1) + 's';
+      });
+
+      // Observe and trigger
+      var revealIO = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            heading.classList.add('words-revealed');
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      revealIO.observe(heading);
+    }());
+
+  }());
   </script>
 </body>
 </html>

@@ -157,11 +157,10 @@
             </p>
           </div>
           <div class="about-copy">
-            <p>I'm Shreyas, a Computer Science and AI student at Northeastern University.</p>
-            <p>I build systems across AI, cloud technologies, backend infrastructure, and real-time applications. My work spans research labs, public-sector IT, and product-focused engineering teams, with experience in XR systems, data pipelines, and large-scale backend integrations.</p>
-            <p>I've also built projects in machine learning and real-time analytics, including recommendation systems and sentiment analysis tools, with a focus on practical deployment and usability.</p>
-            <p>Outside of coursework, I work on cloud and development certifications and continue building independent projects to deepen my experience in systems and AI.</p>
-            <p>Outside of tech, I enjoy badminton, movies, and gaming.</p>
+            <p>My name is Shreyas, and I'm a Computer Science and AI student at Northeastern University.</p>
+            <p>I've always been focused on building systems. That started with early experiments in hardware and simple programs, and evolved into software work in machine learning, backend systems, and real-time applications.</p>
+            <p>I've worked across research environments, public-sector IT, and product teams, with experience spanning XR systems, data pipelines, and scalable backend integrations. I also build independent projects, including ML-based recommendation systems and real-time analysis tools, with an emphasis on usability and performance.</p>
+            <p>I'm interested in systems that solve real problems through AI and infrastructure design. Outside of engineering, I spend time on badminton, movies, and gaming.</p>
           </div>
         </div>
       </div>
@@ -574,6 +573,10 @@
      * 0b) Name Char-Rise — staggered letter entrance on hero-ready
      ******************************************************************/
     document.addEventListener('hero-ready', () => {
+      // Add class so CSS hero-rise animations fire on hero elements
+      const heroEl = document.getElementById('hero');
+      if (heroEl) heroEl.classList.add('hero-revealed');
+
       const el = document.querySelector('h1.name');
       if (!el) return;
       const first = 'Shreyas';
@@ -1711,67 +1714,25 @@
   </script>
 
   <!-- ============================================================
-       Motion.dev — spring physics, scroll parallax, staggered reveals
+       Motion.dev — scroll-linked video parallax only
+       Hero entrance is handled by CSS (#hero.hero-revealed keyframes)
+       so it has no CDN dependency and can't be killed by a version bump.
        ============================================================ -->
   <script type="module">
-    import { animate, scroll, stagger }
-      from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+    import { animate, scroll }
+      from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
 
-    /* ── Reduced-motion guard ── */
-    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (noMotion) {
-      // Instantly reveal hero elements — bypass loader and all animations
-      document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
-        .forEach(el => Object.assign(el.style, { opacity: '1', transform: 'none' }));
-      const nm = document.querySelector('h1.name');
-      if (nm) { nm.style.opacity = '1'; }
-    } else {
-
-      /* ── 1) Hero entrance — delayed to sync with loader fly-out ── */
-      const heroEls = [
-        // h1.name is handled separately via per-character char-rise animation
-        ...document.querySelectorAll('.hero-pre, .hero-typed, .hero-btns')
-      ];
-      if (heroEls.length) {
-        // Wait for the hero-ready event (fired by loader JS) before animating
-        function runHeroAnim() {
-          const anim = animate(
-            heroEls,
-            { opacity: [0, 1], y: [40, 0], filter: ['blur(6px)', 'blur(0px)'] },
-            {
-              delay:    stagger(0.12, { start: 0.05 }),
-              duration: 0.9,
-              easing:   [0.22, 1, 0.36, 1]
-            }
-          );
-          // Motion.dev uses WAAPI fill:"none" by default — elements revert to CSS
-          // opacity:0 when the animation completes. Lock them visible with inline
-          // style so they stay up in both dark and light mode.
-          anim.finished.then(() => {
-            heroEls.forEach(el => {
-              el.style.opacity = '1';
-              el.style.transform = '';
-              el.style.filter = '';
-            });
-          });
-        }
-        if (window._heroReady) {
-          runHeroAnim();
-        } else {
-          document.addEventListener('hero-ready', runHeroAnim, { once: true });
-        }
-      }
-
-      /* ── 2) Scroll-linked video parallax ── */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const vid  = document.getElementById('hero-video');
       const hero = document.getElementById('hero');
       if (vid && hero) {
-        scroll(
-          animate(vid, { y: [0, 72] }, { easing: 'linear' }),
-          { target: hero, offset: ['start start', 'end start'] }
-        );
+        try {
+          scroll(
+            animate(vid, { y: [0, 72] }, { easing: 'linear' }),
+            { target: hero, offset: ['start start', 'end start'] }
+          );
+        } catch (e) { /* API version mismatch — video parallax gracefully skipped */ }
       }
-
     }
   </script>
 

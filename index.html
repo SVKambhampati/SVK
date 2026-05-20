@@ -1322,7 +1322,7 @@
        3D tilt · click-to-copy · drag scroll · experience accordion
        ============================================================ -->
   <script>
-    /* ── 1) 3D Card Tilt — active .proj-card only ── */
+    /* ── 1) 3D Card Tilt + liquid glass specular tracking ── */
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.proj-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
@@ -1331,14 +1331,20 @@
             'border-color 0.3s, box-shadow 0.35s, background 0.3s, opacity 0.45s';
         });
         card.addEventListener('mousemove', e => {
-          if (!card.classList.contains('proj-card--feat')) return;
           const r = card.getBoundingClientRect();
+          /* Specular follows cursor on every card */
+          card.style.setProperty('--mx', ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%');
+          card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
+          /* Tilt only for featured card */
+          if (!card.classList.contains('proj-card--feat')) return;
           const x = (e.clientX - r.left) / r.width  - 0.5;
           const y = (e.clientY - r.top)  / r.height - 0.5;
           card.style.transform =
             `perspective(900px) rotateX(${y * -8}deg) rotateY(${x * 10}deg) scale(1.04) translateY(-3px)`;
         });
         card.addEventListener('mouseleave', () => {
+          card.style.removeProperty('--mx');
+          card.style.removeProperty('--my');
           card.style.transition =
             'opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1), ' +
             'border-color 0.3s, box-shadow 0.35s, background 0.3s';

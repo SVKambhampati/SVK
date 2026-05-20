@@ -1095,11 +1095,12 @@ h1.name em {
   flex-direction: column;
   padding: 1.6rem 1.7rem 1.5rem;
   min-height: 300px;
-  background: rgba(255, 255, 255, 0.03);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
+  /* Liquid glass base */
+  background: rgba(255, 255, 255, 0.055);
+  -webkit-backdrop-filter: blur(36px) saturate(200%) brightness(1.06);
+  backdrop-filter: blur(36px) saturate(200%) brightness(1.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
   text-decoration: none;
   color: inherit;
   position: relative;
@@ -1107,53 +1108,77 @@ h1.name em {
   cursor: pointer;
   transform-style: preserve-3d;
   will-change: transform, opacity;
-  transition: border-color 0.32s ease,
-              box-shadow 0.32s ease,
-              background 0.32s ease;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.22);
+  isolation: isolate;
+  transition: border-color 0.38s ease,
+              box-shadow 0.38s ease,
+              background 0.38s ease;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 28px rgba(0, 0, 0, 0.28);
 }
 
-/* Gradient top accent line */
+/* Lift card children above pseudo-layers */
+.proj-card > * { position: relative; z-index: 1; }
+
+/* ── Back: iridescent liquid layer ──────────────────────── */
 .proj-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(59, 130, 246, 0.55) 35%,
-    rgba(34, 211, 238, 0.55) 65%,
-    transparent 100%);
-  opacity: 0.5;
-  transition: opacity 0.32s ease;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 200deg at 20% 115%,
+    rgba(99,  102, 241, 0.55),
+    rgba(59,  130, 246, 0.60),
+    rgba(34,  211, 238, 0.50),
+    rgba(52,  211, 153, 0.30),
+    rgba(167, 139, 250, 0.55),
+    rgba(236,  72, 153, 0.35),
+    rgba(99,  102, 241, 0.55)
+  );
+  filter: blur(28px) hue-rotate(0deg);
+  opacity: 0.28;
+  animation: liquidFlow 12s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
 }
-.proj-card--feat::before { opacity: 1; }
+.proj-card--feat::before { opacity: 0.62; }
 
-/* Mouse-follow inner glow */
+@keyframes liquidFlow {
+  to { filter: blur(28px) hue-rotate(360deg); }
+}
+
+/* ── Front: glass specular + top gloss ──────────────────── */
 .proj-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    380px circle at var(--mx, 50%) var(--my, 30%),
-    rgba(59, 130, 246, 0.08), transparent 60%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
   border-radius: inherit;
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.14) 0%, transparent 28%),
+    radial-gradient(
+      320px circle at var(--mx, 50%) var(--my, -10%),
+      rgba(255, 255, 255, 0.16),
+      transparent 65%
+    );
+  pointer-events: none;
+  z-index: 2;
 }
-.proj-card--feat::after { opacity: 1; }
 
 .proj-card--feat {
   transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(59, 130, 246, 0.38);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.30);
   box-shadow:
-    inset 3px 0 0 rgba(59, 130, 246, 0.55),
-    0 0 0 1px rgba(59, 130, 246, 0.1),
-    0 20px 56px rgba(0, 0, 0, 0.44),
-    0 0 40px rgba(59, 130, 246, 0.1);
+    inset 0 2px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.07),
+    inset 1px 0 0 rgba(255, 255, 255, 0.10),
+    inset -1px 0 0 rgba(255, 255, 255, 0.07),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 24px 64px rgba(0, 0, 0, 0.48),
+    0 0 60px rgba(120, 80, 255, 0.14);
 }
 
 /* Dim non-featured cards when one is hovered */
@@ -1867,19 +1892,25 @@ body.light-mode .proj-desc,
 body.light-mode .contact-p {
   color: #333;
 }
-/* PROJECT CARDS */
+/* PROJECT CARDS — liquid glass light mode */
 body.light-mode .proj-card {
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(0, 0, 0, 0.07);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-}
-body.light-mode .proj-card--feat {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(59, 130, 246, 0.45);
+  background: rgba(255, 255, 255, 0.48);
+  border-color: rgba(255, 255, 255, 0.85);
   box-shadow:
-    inset 3px 0 0 rgba(59, 130, 246, 0.5),
-    0 20px 56px rgba(0, 0, 0, 0.1),
-    0 0 40px rgba(59, 130, 246, 0.08);
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.4),
+    0 4px 20px rgba(0, 0, 0, 0.07);
+}
+body.light-mode .proj-card::before { opacity: 0.14; }
+body.light-mode .proj-card--feat::before { opacity: 0.30; }
+body.light-mode .proj-card--feat {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5),
+    0 20px 56px rgba(0, 0, 0, 0.10),
+    0 0 50px rgba(120, 80, 255, 0.07);
 }
 body.light-mode .proj-name { color: #0c0c1a; }
 body.light-mode .proj-card--feat .proj-name {

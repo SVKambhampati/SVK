@@ -1576,6 +1576,9 @@ h1.name em {
   overflow: hidden;
   padding-top: 5rem;
   padding-bottom: 5rem;
+  /* Full-bleed breakout from max-width container */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   /* Calvin Harris — rich dark gradient base */
   background:
     radial-gradient(ellipse 90% 55% at 50% -5%,  rgba(120, 38, 210, 0.55) 0%, transparent 65%),

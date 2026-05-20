@@ -642,8 +642,9 @@ h1.name em {
 }
 
 .hero-typed {
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--font);
+  font-style: normal;
+  font-weight: 300;
   font-size: clamp(1rem, 1.8vw, 1.5rem);
   color: var(--text2);
   margin-bottom: 2.5rem;

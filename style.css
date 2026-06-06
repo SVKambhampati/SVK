@@ -1050,13 +1050,16 @@ h1.name em {
 .exp-co {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 0.95rem;
-  display: inline-block;
-  margin-bottom: 0.75rem;
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 0.6rem;
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.1;
 }
 
 .exp-ul {
@@ -2108,13 +2111,19 @@ body.light-mode .btn-send:hover {
   /* Experience stacks on mobile */
   .exp-item {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
-    padding: 1.5rem 0;
+    gap: 1rem;
+    padding: 1.5rem 1.1rem;
+    margin-bottom: 0.6rem;
   }
-
   .exp-left-inner {
-    order: -1;
+    order: 1; /* date/location after the role on mobile */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
   }
+  .exp-left-inner > div { margin-bottom: 0; }
+  .exp-item > div:not(.exp-left-inner) { order: 0; }
 
   .sk-row {
     grid-template-columns: 120px 1fr;
@@ -2213,8 +2222,8 @@ h1.name {
 
   /* Experience bullets */
   .exp-ul li { font-size: 0.81rem; line-height: 1.65; }
-  .exp-role { font-size: 1rem; }
-  .exp-co   { font-size: 0.82rem; }
+  .exp-role  { font-size: 0.9rem; }
+  .exp-co    { font-size: 1.25rem; }
 
   /* Project cards — round corners down slightly, pause heavy animation */
   .proj-card { border-radius: 16px; }

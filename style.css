@@ -2128,6 +2128,136 @@ body.light-mode .btn-send:hover {
 }
 
 /* =====================================================================================
+   MOBILE OPTIMIZATION — comprehensive pass
+   ===================================================================================== */
+
+/* Prevent iOS Safari auto-hyphenation on the name (causes mid-word breaks) */
+h1.name {
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* Disable custom cursor on touch devices */
+@media (hover: none) {
+  * { cursor: auto !important; }
+  #cur { display: none !important; }
+}
+
+/* ── 768px — tablet ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Reduce global section spacing */
+  .sec { padding: 3.5rem 5%; }
+
+  /* Hero — symmetric padding, push content to lower third */
+  #hero {
+    padding: 0 6%;
+    justify-content: flex-end;
+    padding-bottom: 14vh;
+  }
+  /* Tone down the left-heavy overlay so right side of frame isn't washed out */
+  #hero::after {
+    background:
+      linear-gradient(to bottom,
+        rgba(12,12,11,0.6) 0%,
+        rgba(12,12,11,0.2) 35%,
+        rgba(12,12,11,0.55) 80%,
+        rgba(12,12,11,0.88) 100%),
+      linear-gradient(to right,
+        rgba(12,12,11,0.25) 0%,
+        transparent 100%);
+  }
+  .hero-pre { margin-bottom: 1rem; }
+  .hero-typed { margin-bottom: 2rem; }
+
+  /* Touch-friendly buttons */
+  .btn { min-height: 50px; }
+
+  /* Dim non-featured cards: skip on 1-col layout */
+  .proj-grid:has(.proj-card--feat) .proj-card:not(.proj-card--feat) {
+    opacity: 0.55;
+  }
+}
+
+/* ── 560px — phone ──────────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .sec { padding: 3rem 5%; }
+
+  /* Hero */
+  #hero {
+    padding: 0 5%;
+    padding-bottom: 11vh;
+  }
+  h1.name {
+    font-size: clamp(2.4rem, 11.5vw, 4rem);
+    hyphens: none;
+    -webkit-hyphens: none;
+    word-break: keep-all;
+    line-height: 0.95;
+  }
+  .hero-pre { margin-bottom: 0.75rem; }
+  .hero-typed { margin-bottom: 1.5rem; }
+  /* Stack buttons vertically, full width */
+  .hero-btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: min(100%, 280px);
+  }
+  .hero-btns .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* About */
+  .about-copy p { font-size: 0.9rem; line-height: 1.75; }
+
+  /* Experience bullets */
+  .exp-ul li { font-size: 0.81rem; line-height: 1.65; }
+  .exp-role { font-size: 1rem; }
+  .exp-co   { font-size: 0.82rem; }
+
+  /* Project cards — round corners down slightly, pause heavy animation */
+  .proj-card { border-radius: 16px; }
+  .proj-card::before { animation-play-state: paused; }
+
+  /* Skills */
+  .sk-tag { font-size: 0.72rem; padding: 0.3rem 0.65rem; }
+
+  /* Contact */
+  .closing-heading { margin-bottom: 0.75rem; }
+
+  /* Scroll-to-top button */
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    font-size: 0.85rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1.5rem 5%;
+  }
+  .foot-l, .foot-r { width: 100%; text-align: center; }
+}
+
+/* ── 390px — small phone ────────────────────────────────────────────── */
+@media (max-width: 390px) {
+  h1.name {
+    font-size: clamp(2rem, 10.5vw, 3rem);
+  }
+  .sec { padding: 2.5rem 4.5%; }
+  #hero { padding-bottom: 10vh; }
+
+  /* Nav */
+  #nav { padding: 0 1rem; }
+}
+
+/* =====================================================================================
    22) PROJECT PAGE TEMPLATE (.project-hero, .project-body, .proj-section)
    ===================================================================================== */
 .project-hero {

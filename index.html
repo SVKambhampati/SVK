@@ -99,7 +99,7 @@
        ============================================================ -->
   <section id="hero">
     <!-- Motion background video (HLS stream, dark mode) -->
-    <video id="hero-video" autoplay muted loop playsinline preload="auto"
+    <video id="hero-video" autoplay muted loop playsinline webkit-playsinline preload="auto"
            disablepictureinpicture x-webkit-airplay="deny"
            aria-hidden="true"></video>
 
@@ -150,9 +150,6 @@
             <div class="photo-frame">
               <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati" width="1007" height="1000" loading="eager">
             </div>
-            <p class="about-quote">
-              I'm more interested in <span>why it works</span><br>than that it works.
-            </p>
           </div>
           <div class="about-copy">
             <p>My name is Shreyas, and I'm a Computer Science and AI student at Northeastern University.</p>
@@ -171,6 +168,21 @@
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">02</span><h2 class="sec-t">Experience</h2></div>
         <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-left-inner">
+              <div class="exp-period">June 2026 — Present</div>
+              <div class="exp-loc">Boston, MA · Hybrid</div>
+              <span class="exp-cur">Current</span>
+            </div>
+            <div>
+              <div class="exp-role">Software Engineering Intern</div>
+              <div class="exp-co">John Hancock / Manulife</div>
+              <ul class="exp-ul">
+                <li>Cloud Engineering &amp; FinOps — designing and optimizing cloud infrastructure with a focus on cost visibility and resource efficiency across distributed systems.</li>
+              </ul>
+            </div>
+          </div>
+
           <div class="exp-item">
             <div class="exp-left-inner">
               <div class="exp-period">Jan 2026 — April 2026</div>
@@ -973,14 +985,17 @@
           video.play().catch(() => {});
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari — genuine native HLS support
-        // Set src + load(), then wait for loadedmetadata before calling play()
-        // Calling play() immediately on a fresh src reliably fails in Safari
+        // Safari / iOS — native HLS support
+        // Set muted programmatically (iOS requires this, not just the attribute)
+        // then call play() immediately — muted+playsinline autoplays without gesture
+        video.muted = true;
         video.src = SRC;
         video.load();
-        video.addEventListener('loadedmetadata', () => {
-          video.play().catch(() => {});
-        }, { once: true });
+        video.play().catch(() => {
+          // Fallback: retry on first user interaction
+          const retry = () => { video.play().catch(() => {}); document.removeEventListener('touchstart', retry); };
+          document.addEventListener('touchstart', retry, { once: true });
+        });
       }
     });
 

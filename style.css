@@ -985,10 +985,10 @@ h1.name em {
 .exp-item {
   position: relative;
   display: grid;
-  grid-template-columns: 175px 1fr;
-  gap: 3rem;
+  grid-template-columns: 155px 1fr;  /* tighter left col */
+  gap: 2rem;                          /* was 3rem — less disconnect */
   padding: 1.75rem 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.1rem;              /* was 0.75rem — more breathing room */
   background: rgba(255, 255, 255, 0.025);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   backdrop-filter: blur(20px) saturate(140%);
@@ -997,20 +997,25 @@ h1.name em {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.09),
     0 4px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   will-change: transform, opacity;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.28s ease,
+              box-shadow   0.28s ease,
+              transform    0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .exp-item:hover {
-  border-color: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.30);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 8px 32px rgba(59, 130, 246, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 12px 36px rgba(59, 130, 246, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 .exp-item::before {
   content: '';
   position: absolute;
   left: -2.85rem;
-  top: 2.75rem;
+  top: 1.75rem;                       /* was 2.75rem — aligns with card top */
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -1029,37 +1034,38 @@ h1.name em {
   margin-bottom: 0.2rem;
 }
 .exp-cur {
-  display: inline-block;
-  font-size: 0.64rem;
+  position: absolute;
+  top: 1.1rem;
+  right: 1.25rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cyan);
   background: var(--cyan-dim);
   border: 1px solid rgba(34, 211, 238, 0.2);
   border-radius: 4px;
-  padding: 0.2rem 0.5rem;
-  margin-top: 0.5rem;
+  padding: 0.18rem 0.5rem;
 }
 
 .exp-role {
-  font-size: 0.975rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
 }
 .exp-co {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.45rem;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font);    /* sans-serif — drop italic */
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   display: block;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
   background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.1;
 }
 
 .exp-ul {
@@ -2222,8 +2228,8 @@ h1.name {
 
   /* Experience bullets */
   .exp-ul li { font-size: 0.81rem; line-height: 1.65; }
-  .exp-role  { font-size: 0.9rem; }
-  .exp-co    { font-size: 1.25rem; }
+  .exp-role  { font-size: 0.95rem; }
+  .exp-co    { font-size: 0.78rem; }
 
   /* Project cards — round corners down slightly, pause heavy animation */
   .proj-card { border-radius: 16px; }

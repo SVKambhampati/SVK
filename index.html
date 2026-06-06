@@ -957,6 +957,13 @@
       const video = document.getElementById('hero-video');
       if (!video) return;
 
+      // Skip on touch/mobile — native play button overlays are unavoidable
+      // and the particle canvas already provides a great mobile background
+      if (window.matchMedia('(hover: none)').matches || navigator.maxTouchPoints > 0) {
+        video.remove();
+        return;
+      }
+
       // Respect prefers-reduced-motion
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         video.remove();
@@ -965,12 +972,9 @@
 
       const SRC = 'https://stream.mux.com/9JXDljEVWYwWu01PUkAemafDugK89o01BR6zqJ3aS9u00A.m3u8';
 
-      // Fade video in once it has enough data to play
-      video.addEventListener('canplay', () => video.classList.add('ready'), { once: true });
+      // Only reveal once actually playing — prevents showing a paused frame with overlay
+      video.addEventListener('playing', () => video.classList.add('ready'), { once: true });
 
-      // HLS.js first (Chrome/Firefox/Edge) — Safari falls through to native HLS
-      // Note: canPlayType('application/vnd.apple.mpegurl') returns "maybe" in Chrome
-      // which is truthy, so ALWAYS check Hls.isSupported() first.
       if (typeof Hls !== 'undefined' && Hls.isSupported()) {
         const hls = new Hls({ enableWorker: true, startLevel: -1 });
         hls.loadSource(SRC);
@@ -979,17 +983,13 @@
           video.play().catch(() => {});
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari / iOS — native HLS support
-        // Set muted programmatically (iOS requires this, not just the attribute)
-        // then call play() immediately — muted+playsinline autoplays without gesture
+        // Desktop Safari — native HLS
         video.muted = true;
         video.src = SRC;
         video.load();
-        video.play().catch(() => {
-          // Fallback: retry on first user interaction
-          const retry = () => { video.play().catch(() => {}); document.removeEventListener('touchstart', retry); };
-          document.addEventListener('touchstart', retry, { once: true });
-        });
+        video.addEventListener('loadedmetadata', () => {
+          video.play().catch(() => {});
+        }, { once: true });
       }
     });
 

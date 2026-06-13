@@ -26,7 +26,7 @@
   --text2:     rgba(239, 239, 237, 0.48);
   --text3:     rgba(239, 239, 237, 0.22);
   --serif:     'Instrument Serif', Georgia, serif;
-  --sans:      'DM Sans', system-ui, sans-serif;
+  --sans:      'DM Sans', system-ui, -apple-system, sans-serif;
   --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -642,7 +642,7 @@ h1.name em {
 }
 
 .hero-typed {
-  font-family: var(--font);
+  font-family: var(--sans);
   font-style: normal;
   font-weight: 300;
   font-size: clamp(1rem, 1.8vw, 1.5rem);
@@ -900,20 +900,6 @@ h1.name em {
   object-fit: cover;
   display: block;
 }
-.about-quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-  line-height: 1.55;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-.about-quote span {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -948,7 +934,6 @@ h1.name em {
   color: var(--text2);
   line-height: 1.9;
   margin-bottom: 1rem;
-  will-change: transform, opacity, filter;
 }
 .about-copy p:last-child { margin: 0; }
 .about-copy strong { color: var(--text); font-weight: 600; }
@@ -1014,7 +999,7 @@ h1.name em {
 .exp-item::before {
   content: '';
   position: absolute;
-  left: -2.85rem;
+  left: -2.4rem;
   top: 1.75rem;                       /* was 2.75rem — aligns with card top */
   width: 7px;
   height: 7px;
@@ -1035,8 +1020,8 @@ h1.name em {
 }
 .exp-cur {
   position: absolute;
-  top: 1.1rem;
-  right: 1.25rem;
+  top: 1.2rem;
+  right: 3.5rem; /* sits left of the chevron at right: 1.5rem */
   font-size: 0.6rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1055,7 +1040,7 @@ h1.name em {
   margin-bottom: 0.3rem;
 }
 .exp-co {
-  font-family: var(--font);    /* sans-serif — drop italic */
+  font-family: var(--sans);    /* sans-serif — drop italic */
   font-style: normal;
   font-size: 0.82rem;
   font-weight: 500;
@@ -1411,12 +1396,6 @@ h1.name em {
 /* ========================================================================
    16) CONTACT SECTION
    ======================================================================== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-}
-
 .contact-h {
   font-family: var(--serif);
   font-style: italic;
@@ -1539,7 +1518,8 @@ h1.name em {
 }
 .contact-form .field input:focus,
 .contact-form .field textarea:focus {
-  outline: none;
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
   border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   background: rgba(59, 130, 246, 0.04);
@@ -2041,14 +2021,6 @@ body.light-mode .btn-send:hover {
     flex-shrink: 0;
     aspect-ratio: unset;
   }
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
   #nav .nav-links {
     display: none;
   }
@@ -2136,10 +2108,6 @@ body.light-mode .btn-send:hover {
     gap: 1.25rem;
   }
 
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
 }
 
 /* =====================================================================================
@@ -2666,6 +2634,7 @@ h1.name {
   right: 0;
   width: min(300px, 82vw);
   height: 100vh;
+  height: 100dvh;
   background: rgba(6, 6, 18, 0.98);
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
@@ -2790,7 +2759,6 @@ h1.name {
    ===================================================================================== */
 
 /* Cursor — JS handles color per mode; no CSS override needed */
-}
 
 /* Video is hidden in light mode — rich gradient takes over */
 body.light-mode #hero-video {
@@ -2881,7 +2849,6 @@ body.light-mode .nav-resume:hover {
 }
 
 /* About */
-body.light-mode .about-quote { color: #0c0c1a; }
 body.light-mode .about-copy p { color: #4a4a66; }
 body.light-mode .about-copy strong { color: #0c0c1a; }
 body.light-mode .about-copy em { color: var(--blue); }
@@ -2993,6 +2960,7 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
   font-size: 1rem;
   color: var(--text3);
   opacity: 0.3;
+  z-index: 3; /* above ::after specular layer (z-index: 2) */
   transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
 }
 .proj-card--feat .proj-arr {
@@ -3091,23 +3059,6 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
   50%       { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
 }
 
-/* About — decorative large quotation mark */
-.about-quote {
-  position: relative;
-}
-.about-quote::before {
-  content: '\201C';
-  position: absolute;
-  top: -1.75rem;
-  left: -0.25rem;
-  font-family: var(--serif);
-  font-size: 6rem;
-  line-height: 1;
-  color: rgba(59, 130, 246, 0.1);
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-}
 
 /* =====================================================================================
    EXPERIENCE ACCORDION
@@ -3259,6 +3210,15 @@ body.light-mode .certs-strip { border-top-color: rgba(0,0,0,0.1); }
      ✗ Duplicate magnetic button vanilla JS (removed — GSAP handles it)
      ✗ Dead canvas dotGrid (removed — element absent from DOM)
    ======================================================================== */
+
+/* Global reduced-motion safety net — catches anything not individually handled */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 /* ── Page Curtain Transition ───────────────────────────────────────────── */
 #page-curtain {

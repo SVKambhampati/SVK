@@ -9,18 +9,20 @@
   <link rel="shortcut icon" href="favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Shreyas Kambhampati — CS student at Northeastern University, AI concentration. Software engineer, XR researcher, and builder.">
-  <meta property="og:title" content="Shreyas Kambhampati">
-  <meta property="og:description" content="CS student at Northeastern · AI · Cloud · XR">
+  <meta property="og:title" content="Shreyas Kambhampati — Software Engineer">
+  <meta property="og:description" content="CS student at Northeastern building at the intersection of AI, cloud, and full-stack systems.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://svkambhampati.vercel.app/">
+  <meta property="og:url" content="https://svkambhampati.vercel.app">
   <meta property="og:image" content="https://svkambhampati.vercel.app/icons/etc/shreyas.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Shreyas Kambhampati — CS · AI · Cloud · XR">
-  <meta name="twitter:description" content="CS student at Northeastern University, AI concentration. Software engineer, XR researcher, and builder.">
+  <meta name="twitter:title" content="Shreyas Kambhampati — Software Engineer">
+  <meta name="twitter:description" content="CS student at Northeastern building at the intersection of AI, cloud, and full-stack systems.">
   <meta name="twitter:image" content="https://svkambhampati.vercel.app/icons/etc/shreyas.png">
-  <title>Shreyas Kambhampati</title>
+  <title>Shreyas Kambhampati — Software Engineer</title>
 
   <!-- Preconnect to external origins for faster resource loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://stream.mux.com">
 
@@ -60,7 +62,7 @@
   <!-- ============================================================
        1) Navbar
        ============================================================ -->
-  <nav id="nav">
+  <nav id="nav" aria-label="Main navigation">
     <a class="logo" href="#">SVK</a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#about" data-section="about">About</a></li>
@@ -68,14 +70,14 @@
       <li><a href="#projects" data-section="projects">Projects</a></li>
       <li><a href="#skills" data-section="skills">Skills</a></li>
       <li><a href="#contact" class="nav-cta" data-section="contact">Say hi</a></li>
-      <div id="nav-indicator" aria-hidden="true"></div>
+      <li id="nav-indicator" aria-hidden="true" role="presentation"></li>
     </ul>
     <div class="nav-actions">
 <div class="toggle-switch">
         <input type="checkbox" id="theme-toggle">
         <label for="theme-toggle"></label>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -83,7 +85,7 @@
 
   <!-- Mobile nav panel -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">✕</button>
+    <button class="mobile-nav-close" id="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -148,7 +150,7 @@
         <div class="about-grid">
           <div class="about-left-col">
             <div class="photo-frame">
-              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati" width="1007" height="1000" loading="eager">
+              <img src="icons/etc/shreyas.png" alt="Shreyas Kambhampati" width="1007" height="1000" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="about-copy">
@@ -258,8 +260,8 @@
       <div class="sec-inner">
         <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">Projects</h2></div>
         <div class="proj-grid">
-          <div class="proj-card proj-card--span2 proj-card--has-thumb" data-href="sentimentsignal.html" tabindex="0" role="article">
-            <img class="proj-thumb" src="img/thumb-sentimentsignal.jpg" alt="SentimentSignal dashboard preview" width="140" height="84" loading="lazy">
+          <div class="proj-card proj-card--span2" data-href="sentimentsignal.html" tabindex="0" role="article">
+            <img class="proj-thumb" src="img/thumb-sentimentsignal.jpg" alt="SentimentSignal dashboard preview" width="140" height="84" loading="lazy" decoding="async">
             <div class="proj-num">01</div>
             <div class="proj-body">
               <div class="proj-name">SentimentSignal</div>
@@ -292,8 +294,7 @@
             <div class="proj-arr">↗</div>
           </div>
 
-          <div class="proj-card proj-card--has-thumb" data-href="project-two.html" tabindex="0" role="article">
-            <img class="proj-thumb" src="img/thumb-moviemind.jpg" alt="MovieMind app preview" width="140" height="84" loading="lazy">
+          <div class="proj-card" data-href="project-two.html" tabindex="0" role="article">
             <div class="proj-num">03</div>
             <div class="proj-body">
               <div class="proj-name">MovieMind</div>
@@ -326,8 +327,7 @@
             <div class="proj-arr">↗</div>
           </div>
 
-          <div class="proj-card proj-card--has-thumb" data-href="project-four.html" tabindex="0" role="article">
-            <img class="proj-thumb" src="img/thumb-styleforecast.jpg" alt="StyleForecast app preview" width="140" height="84" loading="lazy">
+          <div class="proj-card" data-href="project-four.html" tabindex="0" role="article">
             <div class="proj-num">05</div>
             <div class="proj-body">
               <div class="proj-name">StyleForecast</div>
@@ -500,7 +500,7 @@
   </footer>
 
   <!-- Back to top button -->
-  <button class="back-to-top" aria-label="Back to top">↑</button>
+  <button class="back-to-top" type="button" aria-label="Back to top">↑</button>
 
   <!-- ============================================================
        SCRIPTS
@@ -819,7 +819,13 @@
         }
         navLinks.forEach(link => {
           const section = link.getAttribute('data-section');
-          link.classList.toggle('active', section === activeId);
+          const isActive = section === activeId;
+          link.classList.toggle('active', isActive);
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
         });
         // Indicator: update inline — no event bus needed
         if (indicator && navLinksEl) {
@@ -991,6 +997,17 @@
           video.play().catch(() => {});
         }, { once: true });
       }
+
+      // Pause video when tab is hidden; resume when visible — saves resources
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          if (!video.paused) video.pause();
+        } else {
+          if (video.paused && document.body.classList.contains('light-mode') === false) {
+            video.play().catch(() => {});
+          }
+        }
+      });
     });
 
     /******************************************************************
@@ -1007,7 +1024,13 @@
         H = canvas.height = innerHeight;
       }
       resize();
-      window.addEventListener('resize', resize);
+
+      // Debounce resize — avoid thrashing on every pixel of drag
+      let _resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(_resizeTimer);
+        _resizeTimer = setTimeout(resize, 150);
+      });
 
       let mx = 0.5, my = 0.5;
       document.addEventListener('mousemove', e => {
@@ -1022,6 +1045,11 @@
       ];
 
       let t = 0;
+      let _auroraPaused = false;
+      document.addEventListener('visibilitychange', function() {
+        _auroraPaused = document.hidden;
+        if (!_auroraPaused) draw(); // resume rAF when tab becomes visible
+      });
       const lightBlobs = [
         { x: 0.2,  y: 0.2,  r: 0.55, rgb: [59, 130, 246],  phase: 0   },
         { x: 0.75, y: 0.3,  r: 0.48, rgb: [34, 211, 238],  phase: 2.1 },
@@ -1029,6 +1057,7 @@
       ];
 
       function draw() {
+        if (_auroraPaused) return;
         t += 0.008;
         ctx.clearRect(0, 0, W, H);
 
@@ -1320,6 +1349,26 @@
       if (closeBtn) closeBtn.addEventListener('click', closeNav);
       overlay.addEventListener('click', closeNav);
       mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+      // Focus trap: keep Tab focus inside the mobile nav while it's open
+      mobileNav.addEventListener('keydown', function(e) {
+        if (!mobileNav.classList.contains('open')) return;
+        if (e.key !== 'Tab') {
+          if (e.key === 'Escape') closeNav();
+          return;
+        }
+        const focusable = Array.from(mobileNav.querySelectorAll(
+          'a[href], button, [tabindex]:not([tabindex="-1"])'
+        )).filter(el => !el.disabled);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last  = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        }
+      });
     });
 
   </script>
@@ -1546,6 +1595,7 @@
       if (!window.gsap || !window.ScrollTrigger) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+      try {
       gsap.registerPlugin(ScrollTrigger);
       ScrollTrigger.normalizeScroll(false);
 
@@ -1661,6 +1711,7 @@
         });
       });
 
+      } catch (e) { /* GSAP/ScrollTrigger setup failed — animations gracefully skipped */ }
     });
   </script>
 

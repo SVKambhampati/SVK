@@ -1641,8 +1641,11 @@
           done = true;
           obs.disconnect();
           var cards = document.querySelectorAll('.proj-card');
-          gsap.set(cards, { opacity: 0, y: 26, scale: 0.97 });
-          gsap.to(cards, { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: 'power2.out', stagger: 0.1 });
+          // Cards are already visible via .proj-card.vis CSS rule (added at DOMContentLoaded).
+          // Only animate the transform entrance so there's no opacity flash.
+          gsap.fromTo(cards,
+            { y: 26, scale: 0.97 },
+            { y: 0, scale: 1, duration: 0.65, ease: 'power2.out', stagger: 0.1 });
         }, { threshold: 0.1 }).observe(firstCard);
       })();
 

@@ -803,8 +803,9 @@ h1.name em {
   opacity: 1;
   transform: none;
 }
-/* Project cards: GSAP-only reveal (tilt uses transform — no CSS transition) */
-.proj-card { opacity: 0; }
+/* Project cards: GSAP-preferred reveal; CSS vis class is the fallback */
+.proj-card { opacity: 0; transition: opacity 0.65s ease; }
+.proj-card.vis { opacity: 1; }
 /* Stagger delays */
 .crow:nth-child(2)    { transition-delay: 0.08s; }
 .crow:nth-child(3)    { transition-delay: 0.16s; }

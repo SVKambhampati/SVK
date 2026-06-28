@@ -1130,9 +1130,9 @@ h1.name em {
   /* faint corner tints — just enough to tint the rim highlight */
   background:
     radial-gradient(ellipse 180% 130% at 4% 96%,
-      rgba(99, 102, 241, 0.07) 0%, transparent 45%),
+      rgba(99, 102, 241, 0.04) 0%, transparent 45%),
     radial-gradient(ellipse 160% 110% at 96% 4%,
-      rgba(34, 211, 238, 0.06) 0%, transparent 42%),
+      rgba(34, 211, 238, 0.03) 0%, transparent 42%),
     transparent;
   filter: url(#glass-r);
 }

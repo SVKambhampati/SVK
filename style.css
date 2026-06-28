@@ -1123,31 +1123,27 @@ h1.name em {
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  /* backdrop-filter captures real background content so the displacement map
+     refracts it like actual glass rather than smearing colored blobs */
+  -webkit-backdrop-filter: blur(0px) brightness(1.08) saturate(1.5);
+  backdrop-filter: blur(0px) brightness(1.08) saturate(1.5);
+  /* faint corner tints — just enough to tint the rim highlight */
   background:
-    radial-gradient(ellipse 170% 120% at 4% 96%,
-      rgba(99, 102, 241, 0.25) 0%,
-      rgba(99, 102, 241, 0.06) 30%,
-      transparent 52%),
-    radial-gradient(ellipse 150% 105% at 96% 4%,
-      rgba(34, 211, 238, 0.22) 0%,
-      rgba(34, 211, 238, 0.05) 28%,
-      transparent 48%),
-    radial-gradient(ellipse 120% 80% at 50% 110%,
-      rgba(59, 130, 246, 0.12) 0%,
-      transparent 45%),
+    radial-gradient(ellipse 180% 130% at 4% 96%,
+      rgba(99, 102, 241, 0.07) 0%, transparent 45%),
+    radial-gradient(ellipse 160% 110% at 96% 4%,
+      rgba(34, 211, 238, 0.06) 0%, transparent 42%),
     transparent;
   filter: url(#glass-r);
 }
 body.light-mode .glass-bd {
+  -webkit-backdrop-filter: blur(0px) brightness(1.05) saturate(1.3);
+  backdrop-filter: blur(0px) brightness(1.05) saturate(1.3);
   background:
-    radial-gradient(ellipse 170% 120% at 4% 96%,
-      rgba(59, 130, 246, 0.18) 0%,
-      rgba(59, 130, 246, 0.04) 30%,
-      transparent 52%),
-    radial-gradient(ellipse 150% 105% at 96% 4%,
-      rgba(34, 211, 238, 0.15) 0%,
-      rgba(34, 211, 238, 0.03) 28%,
-      transparent 48%),
+    radial-gradient(ellipse 180% 130% at 4% 96%,
+      rgba(59, 130, 246, 0.05) 0%, transparent 45%),
+    radial-gradient(ellipse 160% 110% at 96% 4%,
+      rgba(34, 211, 238, 0.04) 0%, transparent 42%),
     transparent;
 }
 @media (prefers-reduced-transparency: reduce) {

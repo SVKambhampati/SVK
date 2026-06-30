@@ -1802,84 +1802,14 @@
     }
   </script>
 
-  <!-- Glass refraction effect on project cards -->
+  <!-- Glass backdrop overlay on project cards -->
   <script>
   (function () {
-    var SZ   = 256;
-    var GAIN = 0.70;
-    var SC   = 160;
-
-    function clamp(v) { return Math.max(0, Math.min(255, Math.round(v))); }
-
-    var canvas = document.createElement('canvas');
-    canvas.width = canvas.height = SZ;
-    var ctx = canvas.getContext('2d');
-    var id  = ctx.createImageData(SZ, SZ);
-    var d   = id.data;
-
-    for (var row = 0; row < SZ; row++) {
-      for (var col = 0; col < SZ; col++) {
-        var fx = (col / SZ) * 2 - 1;
-        var fy = (row / SZ) * 2 - 1;
-        var dist = Math.sqrt(fx * fx + fy * fy);
-        var R   = 0.82;
-        var sdf = (R - dist) / R;
-        var i4  = (row * SZ + col) * 4;
-        if (sdf <= 0) { d[i4] = d[i4+1] = 128; d[i4+2] = 0; d[i4+3] = 255; continue; }
-        var RIM = 0.22;
-        var t   = Math.max(0, Math.min(1, (RIM - sdf) / RIM));
-        var bend = 0;
-        if (t > 0) {
-          var slope  = Math.pow(t, 3) / (Math.pow(1 - Math.pow(1 - t, 4), 0.75) + 1e-9);
-          var thetaI = Math.atan(slope * 1.7);
-          var sinTT  = Math.sin(thetaI) / 1.5;
-          if (sinTT <= 1) bend = Math.sin(thetaI - Math.asin(sinTT));
-        }
-        var len = Math.sqrt(fx * fx + fy * fy) || 1e-9;
-        d[i4]     = clamp(128 + (-fx / len) * bend * GAIN * 128);
-        d[i4 + 1] = clamp(128 + (-fy / len) * bend * GAIN * 128);
-        d[i4 + 2] = t > 0 ? clamp(Math.pow(t * (1 - t * 0.55), 1.25) * 380) : 0;
-        d[i4 + 3] = 255;
-      }
-    }
-    ctx.putImageData(id, 0, 0);
-
-    canvas.toBlob(function (blob) {
-      var url = URL.createObjectURL(blob);
-      var NS  = 'http://www.w3.org/2000/svg';
-      var XNS = 'http://www.w3.org/1999/xlink';
-      var svgEl = document.createElementNS(NS, 'svg');
-      svgEl.setAttribute('aria-hidden', 'true');
-      svgEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
-      var defs   = document.createElementNS(NS, 'defs');
-      var filter = document.createElementNS(NS, 'filter');
-      filter.setAttribute('id', 'glass-r');
-      filter.setAttribute('x', '-8%'); filter.setAttribute('y', '-8%');
-      filter.setAttribute('width', '116%'); filter.setAttribute('height', '116%');
-      filter.setAttribute('color-interpolation-filters', 'sRGB');
-      var feImg = document.createElementNS(NS, 'feImage');
-      feImg.setAttribute('href', url);
-      feImg.setAttributeNS(XNS, 'xlink:href', url);
-      feImg.setAttribute('width', '100%'); feImg.setAttribute('height', '100%');
-      feImg.setAttribute('preserveAspectRatio', 'none');
-      feImg.setAttribute('result', 'm');
-      var feBlur = document.createElementNS(NS, 'feGaussianBlur');
-      feBlur.setAttribute('in', 'm');
-      feBlur.setAttribute('stdDeviation', '8');
-      feBlur.setAttribute('result', 'mb');
-      var feDM = document.createElementNS(NS, 'feDisplacementMap');
-      feDM.setAttribute('in', 'SourceGraphic'); feDM.setAttribute('in2', 'mb');
-      feDM.setAttribute('scale', String(SC));
-      feDM.setAttribute('xChannelSelector', 'R'); feDM.setAttribute('yChannelSelector', 'G');
-      filter.appendChild(feImg); filter.appendChild(feBlur); filter.appendChild(feDM);
-      defs.appendChild(filter); svgEl.appendChild(defs);
-      document.body.appendChild(svgEl);
-      document.querySelectorAll('.proj-card').forEach(function (card) {
-        var bd = document.createElement('div');
-        bd.className = 'glass-bd';
-        card.insertBefore(bd, card.firstChild);
-      });
-    }, 'image/png');
+    document.querySelectorAll('.proj-card').forEach(function (card) {
+      var bd = document.createElement('div');
+      bd.className = 'glass-bd';
+      card.insertBefore(bd, card.firstChild);
+    });
   }());
   </script>
 

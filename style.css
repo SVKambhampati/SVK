@@ -1113,8 +1113,8 @@ h1.name em {
     0 4px 28px rgba(0, 0, 0, 0.28);
 }
 
-/* Lift card children above pseudo-layers (glass-bd stays at z-index 0) */
-.proj-card > *:not(.glass-bd) { position: relative; z-index: 1; }
+/* Lift card children above pseudo-layers; glass-bd overrides back to absolute below */
+.proj-card > * { position: relative; z-index: 1; }
 
 .glass-bd {
   position: absolute;
@@ -1186,7 +1186,6 @@ body.light-mode .glass-bd {
   inset: 0;
   border-radius: inherit;
   background:
-    linear-gradient(160deg, rgba(255,255,255,0.14) 0%, transparent 28%),
     radial-gradient(
       320px circle at var(--mx, 50%) var(--my, -10%),
       rgba(255, 255, 255, 0.16),
@@ -2989,14 +2988,7 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
 
 /* ── Arrow — top-right, fades in on hover ── */
 .proj-arr {
-  position: absolute;
-  top: 1.1rem;
-  right: 1.2rem;
-  font-size: 1rem;
-  color: var(--text3);
-  opacity: 0.3;
-  z-index: 3; /* above ::after specular layer (z-index: 2) */
-  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+  display: none;
 }
 .proj-card--feat .proj-arr {
   opacity: 1;

@@ -1821,8 +1821,8 @@
       for (var col = 0; col < SZ; col++) {
         var fx = (col / SZ) * 2 - 1;
         var fy = (row / SZ) * 2 - 1;
-        var dist = Math.pow(Math.pow(Math.abs(fx), 4) + Math.pow(Math.abs(fy), 4), 0.25);
-        var R   = 0.86;
+        var dist = Math.sqrt(fx * fx + fy * fy);
+        var R   = 0.82;
         var sdf = (R - dist) / R;
         var i4  = (row * SZ + col) * 4;
         if (sdf <= 0) { d[i4] = d[i4+1] = 128; d[i4+2] = 0; d[i4+3] = 255; continue; }
@@ -1863,11 +1863,15 @@
       feImg.setAttribute('width', '100%'); feImg.setAttribute('height', '100%');
       feImg.setAttribute('preserveAspectRatio', 'none');
       feImg.setAttribute('result', 'm');
+      var feBlur = document.createElementNS(NS, 'feGaussianBlur');
+      feBlur.setAttribute('in', 'm');
+      feBlur.setAttribute('stdDeviation', '8');
+      feBlur.setAttribute('result', 'mb');
       var feDM = document.createElementNS(NS, 'feDisplacementMap');
-      feDM.setAttribute('in', 'SourceGraphic'); feDM.setAttribute('in2', 'm');
+      feDM.setAttribute('in', 'SourceGraphic'); feDM.setAttribute('in2', 'mb');
       feDM.setAttribute('scale', String(SC));
       feDM.setAttribute('xChannelSelector', 'R'); feDM.setAttribute('yChannelSelector', 'G');
-      filter.appendChild(feImg); filter.appendChild(feDM);
+      filter.appendChild(feImg); filter.appendChild(feBlur); filter.appendChild(feDM);
       defs.appendChild(filter); svgEl.appendChild(defs);
       document.body.appendChild(svgEl);
       document.querySelectorAll('.proj-card').forEach(function (card) {

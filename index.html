@@ -494,7 +494,7 @@
   </main>
 
   <footer>
-    <span class="foot-l">© 2026 Shreyas Kambhampati</span>
+    <span class="foot-l">© <span id="footer-year">2026</span> Shreyas Kambhampati</span>
     <a class="foot-logo" href="#">SVK</a>
     <span class="foot-r"></span>
   </footer>
@@ -511,8 +511,7 @@
      * -1) Disable hero video immediately in light mode
      ******************************************************************/
     (function() {
-      // sessionStorage: dark mode on every fresh tab
-      if (sessionStorage.getItem('theme') === 'light') {
+      if (localStorage.getItem('theme') === 'light') {
         const v = document.getElementById('hero-video');
         if (v) { v.removeAttribute('autoplay'); v.pause(); v.src = ''; v.load(); }
       }
@@ -642,7 +641,6 @@
       update();
     });
 
-    /* dotGrid canvas removed — element (#dotGrid) is absent from DOM */
 
     /******************************************************************
      * 2) Scroll Reveal (unified Intersection Observer)
@@ -705,7 +703,6 @@
       setTimeout(type, 1400);
     })();
 
-    /* Vanilla magnetic button removed — GSAP version (section D below) handles this */
 
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.proj-card').forEach(card => {
@@ -719,7 +716,6 @@
       });
     });
 
-    /* Empty stub + legacy accordion (.toggle-btn absent from DOM) — removed */
 
     /******************************************************************
      * 6) Theme Toggle (Light/Dark) — only if toggle exists
@@ -767,14 +763,13 @@
       if (heroVideo && !heroVideo.paused) { heroVideo.pause(); heroVideo.currentTime = 0; }
     }
     function playVideo() {
-      if (heroVideo) heroVideo.play().catch(() => {});
+      if (heroVideo) heroVideo.play().catch(e => console.warn('Hero video autoplay blocked:', e));
     }
 
     document.addEventListener('DOMContentLoaded', function() {
       const toggle = document.getElementById('theme-toggle');
       if (!toggle) return;
-      // sessionStorage resets every new tab — site always opens dark
-      if (sessionStorage.getItem('theme') === 'light') {
+      if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light-mode');
         toggle.checked = true;
         pauseVideo();
@@ -783,7 +778,7 @@
       toggle.addEventListener('change', function() {
         document.body.classList.toggle('light-mode');
         const isLight = document.body.classList.contains('light-mode');
-        sessionStorage.setItem('theme', isLight ? 'light' : 'dark');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
         if (isLight) { pauseVideo(); initVanta(); }
         else          { playVideo();  destroyVanta(); }
       });
@@ -875,7 +870,6 @@
       }
     })();
 
-    /* About text highlight-phrase IO — removed (.about-overview absent from DOM) */
 
     /******************************************************************
      * 9) Back-to-top button
@@ -986,7 +980,7 @@
         hls.loadSource(SRC);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          video.play().catch(() => {});
+          video.play().catch(e => console.warn('HLS video autoplay blocked:', e));
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // Desktop Safari — native HLS
@@ -994,7 +988,7 @@
         video.src = SRC;
         video.load();
         video.addEventListener('loadedmetadata', () => {
-          video.play().catch(() => {});
+          video.play().catch(e => console.warn('HLS video autoplay blocked:', e));
         }, { once: true });
       }
 
@@ -1004,7 +998,7 @@
           if (!video.paused) video.pause();
         } else {
           if (video.paused && document.body.classList.contains('light-mode') === false) {
-            video.play().catch(() => {});
+            video.play().catch(e => console.warn('Video resume blocked:', e));
           }
         }
       });
@@ -1774,8 +1768,6 @@
         }
       };
 
-      /* Skill-tag burst on scroll-entry removed — 40+ concurrent bursts = animation overload.
-         Hover transform (translateY -1px / scale 1.02) provides sufficient tactile feedback. */
     });
   </script>
 
@@ -1908,5 +1900,6 @@
 
   }());
   </script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

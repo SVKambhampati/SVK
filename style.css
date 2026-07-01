@@ -1941,8 +1941,6 @@ body.light-mode .proj-card--feat .proj-name {
 body.light-mode .proj-desc { color: #444; }
 body.light-mode .proj-num { color: #aaa; }
 body.light-mode .proj-card--feat .proj-num { color: #3b82f6; }
-body.light-mode .proj-arr { color: #ccc; }
-body.light-mode .proj-card--feat .proj-arr { color: #3b82f6; }
 body.light-mode .proj-card .ptag {
   color: #666;
   border-color: rgba(0, 0, 0, 0.1);
@@ -2965,31 +2963,9 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
    DESIGN POLISH
    ===================================================================================== */
 
-/* Skills — per-category colored top accent + hover glow */
-.sk-col:nth-child(1)::before { background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent); }
-.sk-col:nth-child(2)::before { background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent); }
-.sk-col:nth-child(3)::before { background: linear-gradient(90deg, transparent, rgba(34,211,238,0.3), transparent); }
-.sk-col:nth-child(4)::before { background: linear-gradient(90deg, transparent, rgba(74,222,128,0.3), transparent); }
-
-.sk-col:nth-child(1):hover { box-shadow: 0 4px 28px rgba(59,130,246,0.14); border-color: rgba(59,130,246,0.28); }
-.sk-col:nth-child(2):hover { box-shadow: 0 4px 28px rgba(139,92,246,0.14); border-color: rgba(139,92,246,0.28); }
-.sk-col:nth-child(3):hover { box-shadow: 0 4px 28px rgba(34,211,238,0.14); border-color: rgba(34,211,238,0.28); }
-.sk-col:nth-child(4):hover { box-shadow: 0 4px 28px rgba(74,222,128,0.14); border-color: rgba(74,222,128,0.28); }
-
-/* Skills — pill hover colors per category */
-.sk-col:nth-child(1) .sk-item:hover { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); color: var(--text); }
-.sk-col:nth-child(2) .sk-item:hover { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.3); color: var(--text); }
-.sk-col:nth-child(3) .sk-item:hover { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--text); }
-.sk-col:nth-child(4) .sk-item:hover { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--text); }
-
-/* ── Arrow — top-right, fades in on hover ── */
+/* ── Arrow — hidden (cards are fully clickable via data-href) ── */
 .proj-arr {
   display: none;
-}
-.proj-card--feat .proj-arr {
-  opacity: 1;
-  color: var(--cyan);
-  transform: translate(2px, -2px);
 }
 
 /* ── Number label ── */
@@ -3126,17 +3102,6 @@ body.light-mode .mobile-nav-overlay { background: rgba(0,0,0,0.35); }
    Colored dots, colored column headers, category-matched hover states
    ===================================================================================== */
 
-/* Dot color per category (matches the column glow color) */
-.sk-col:nth-child(1) .sk-d { background: rgba(59, 130, 246, 0.55); }
-.sk-col:nth-child(2) .sk-d { background: rgba(139, 92, 246, 0.55); }
-.sk-col:nth-child(3) .sk-d { background: rgba(34, 211, 238, 0.55); }
-.sk-col:nth-child(4) .sk-d { background: rgba(74, 222, 128, 0.55); }
-
-/* On hover the dot brightens to full color */
-.sk-col:nth-child(1) .sk-item:hover .sk-d { background: #3b82f6; }
-.sk-col:nth-child(2) .sk-item:hover .sk-d { background: #8b5cf6; }
-.sk-col:nth-child(3) .sk-item:hover .sk-d { background: #22d3ee; }
-.sk-col:nth-child(4) .sk-item:hover .sk-d { background: #4ade80; }
 
 /* Column header inherits category color */
 .sk-col:nth-child(1) .sk-hd { color: rgba(59, 130, 246, 0.75); border-bottom-color: rgba(59, 130, 246, 0.2); }
